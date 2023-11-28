@@ -9,21 +9,25 @@
 /* Begin PBXBuildFile section */
 		448FF7202B15F90200B3CA1D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448FF71F2B15F90200B3CA1D /* AppDelegate.swift */; };
 		448FF7222B15F90200B3CA1D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448FF7212B15F90200B3CA1D /* SceneDelegate.swift */; };
-		448FF7242B15F90200B3CA1D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448FF7232B15F90200B3CA1D /* ViewController.swift */; };
 		448FF7272B15F90200B3CA1D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 448FF7252B15F90200B3CA1D /* Main.storyboard */; };
 		448FF7292B15F90400B3CA1D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 448FF7282B15F90400B3CA1D /* Assets.xcassets */; };
 		448FF72C2B15F90400B3CA1D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 448FF72A2B15F90400B3CA1D /* LaunchScreen.storyboard */; };
+		448FF7392B16049500B3CA1D /* Admin.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 448FF7382B16049500B3CA1D /* Admin.storyboard */; };
+		448FF73B2B1604A100B3CA1D /* Lab.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 448FF73A2B1604A100B3CA1D /* Lab.storyboard */; };
+		448FF73D2B1604A600B3CA1D /* Patient.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 448FF73C2B1604A600B3CA1D /* Patient.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		448FF71C2B15F90200B3CA1D /* Mokhtabri.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Mokhtabri.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		448FF71F2B15F90200B3CA1D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		448FF7212B15F90200B3CA1D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		448FF7232B15F90200B3CA1D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		448FF7262B15F90200B3CA1D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		448FF7282B15F90400B3CA1D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		448FF72B2B15F90400B3CA1D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		448FF72D2B15F90400B3CA1D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		448FF7382B16049500B3CA1D /* Admin.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Admin.storyboard; sourceTree = "<group>"; };
+		448FF73A2B1604A100B3CA1D /* Lab.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Lab.storyboard; sourceTree = "<group>"; };
+		448FF73C2B1604A600B3CA1D /* Patient.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Patient.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,15 +60,57 @@
 		448FF71E2B15F90200B3CA1D /* Mokhtabri */ = {
 			isa = PBXGroup;
 			children = (
+				448FF7372B16043900B3CA1D /* Delegates */,
+				448FF7362B16042F00B3CA1D /* Models */,
+				448FF7352B16042900B3CA1D /* Helpers */,
+				448FF7342B16042100B3CA1D /* Storyboards */,
+				448FF7332B16040B00B3CA1D /* Controllers */,
 				448FF71F2B15F90200B3CA1D /* AppDelegate.swift */,
 				448FF7212B15F90200B3CA1D /* SceneDelegate.swift */,
-				448FF7232B15F90200B3CA1D /* ViewController.swift */,
-				448FF7252B15F90200B3CA1D /* Main.storyboard */,
 				448FF7282B15F90400B3CA1D /* Assets.xcassets */,
-				448FF72A2B15F90400B3CA1D /* LaunchScreen.storyboard */,
 				448FF72D2B15F90400B3CA1D /* Info.plist */,
 			);
 			path = Mokhtabri;
+			sourceTree = "<group>";
+		};
+		448FF7332B16040B00B3CA1D /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		448FF7342B16042100B3CA1D /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				448FF7252B15F90200B3CA1D /* Main.storyboard */,
+				448FF72A2B15F90400B3CA1D /* LaunchScreen.storyboard */,
+				448FF7382B16049500B3CA1D /* Admin.storyboard */,
+				448FF73A2B1604A100B3CA1D /* Lab.storyboard */,
+				448FF73C2B1604A600B3CA1D /* Patient.storyboard */,
+			);
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		448FF7352B16042900B3CA1D /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		448FF7362B16042F00B3CA1D /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		448FF7372B16043900B3CA1D /* Delegates */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Delegates;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -125,8 +171,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				448FF7392B16049500B3CA1D /* Admin.storyboard in Resources */,
 				448FF72C2B15F90400B3CA1D /* LaunchScreen.storyboard in Resources */,
 				448FF7292B15F90400B3CA1D /* Assets.xcassets in Resources */,
+				448FF73B2B1604A100B3CA1D /* Lab.storyboard in Resources */,
+				448FF73D2B1604A600B3CA1D /* Patient.storyboard in Resources */,
 				448FF7272B15F90200B3CA1D /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -138,7 +187,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				448FF7242B15F90200B3CA1D /* ViewController.swift in Sources */,
 				448FF7202B15F90200B3CA1D /* AppDelegate.swift in Sources */,
 				448FF7222B15F90200B3CA1D /* SceneDelegate.swift in Sources */,
 			);
