@@ -7,9 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		443CE4BC2B1DAD8B0024D74B /* AdminViewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443CE4BB2B1DAD8B0024D74B /* AdminViewTableViewCell.swift */; };
 		4461122F2B1D90C7002F815C /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4461122E2B1D90C7002F815C /* LoginViewController.swift */; };
 		446112312B1D99CF002F815C /* MedicalService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446112302B1D99CF002F815C /* MedicalService.swift */; };
 		446112332B1D9B5B002F815C /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446112322B1D9B5B002F815C /* Category.swift */; };
+		446112352B1DABB0002F815C /* AdminViewTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446112342B1DABB0002F815C /* AdminViewTableViewController.swift */; };
 		446C06722B1C92DB006A6A5E /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446C06712B1C92DB006A6A5E /* User.swift */; };
 		446C06742B1C92E3006A6A5E /* Patient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446C06732B1C92E3006A6A5E /* Patient.swift */; };
 		446C06762B1C92EE006A6A5E /* Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446C06752B1C92EE006A6A5E /* Test.swift */; };
@@ -25,12 +27,15 @@
 		448FF7392B16049500B3CA1D /* Admin.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 448FF7382B16049500B3CA1D /* Admin.storyboard */; };
 		448FF73B2B1604A100B3CA1D /* Lab.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 448FF73A2B1604A100B3CA1D /* Lab.storyboard */; };
 		448FF73D2B1604A600B3CA1D /* Patient.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 448FF73C2B1604A600B3CA1D /* Patient.storyboard */; };
+		44F198D72B1DE2B400EDEA0B /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 44F198D62B1DE2B400EDEA0B /* Colors.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		443CE4BB2B1DAD8B0024D74B /* AdminViewTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminViewTableViewCell.swift; sourceTree = "<group>"; };
 		4461122E2B1D90C7002F815C /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		446112302B1D99CF002F815C /* MedicalService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicalService.swift; sourceTree = "<group>"; };
 		446112322B1D9B5B002F815C /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
+		446112342B1DABB0002F815C /* AdminViewTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminViewTableViewController.swift; sourceTree = "<group>"; };
 		446C06712B1C92DB006A6A5E /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		446C06732B1C92E3006A6A5E /* Patient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Patient.swift; sourceTree = "<group>"; };
 		446C06752B1C92EE006A6A5E /* Test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Test.swift; sourceTree = "<group>"; };
@@ -48,6 +53,7 @@
 		448FF7382B16049500B3CA1D /* Admin.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Admin.storyboard; sourceTree = "<group>"; };
 		448FF73A2B1604A100B3CA1D /* Lab.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Lab.storyboard; sourceTree = "<group>"; };
 		448FF73C2B1604A600B3CA1D /* Patient.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Patient.storyboard; sourceTree = "<group>"; };
+		44F198D62B1DE2B400EDEA0B /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +67,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		443CE4BD2B1DADFA0024D74B /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				443CE4BB2B1DAD8B0024D74B /* AdminViewTableViewCell.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		448FF7132B15F90200B3CA1D = {
 			isa = PBXGroup;
 			children = (
@@ -80,6 +94,7 @@
 		448FF71E2B15F90200B3CA1D /* Mokhtabri */ = {
 			isa = PBXGroup;
 			children = (
+				443CE4BD2B1DADFA0024D74B /* Views */,
 				448FF7372B16043900B3CA1D /* Delegates */,
 				448FF7362B16042F00B3CA1D /* Models */,
 				448FF7352B16042900B3CA1D /* Helpers */,
@@ -97,6 +112,7 @@
 			isa = PBXGroup;
 			children = (
 				4461122E2B1D90C7002F815C /* LoginViewController.swift */,
+				446112342B1DABB0002F815C /* AdminViewTableViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -117,6 +133,7 @@
 			isa = PBXGroup;
 			children = (
 				446C067D2B1C9528006A6A5E /* enums.swift */,
+				44F198D62B1DE2B400EDEA0B /* Colors.xcassets */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -207,6 +224,7 @@
 				448FF73B2B1604A100B3CA1D /* Lab.storyboard in Resources */,
 				448FF73D2B1604A600B3CA1D /* Patient.storyboard in Resources */,
 				448FF7272B15F90200B3CA1D /* Main.storyboard in Resources */,
+				44F198D72B1DE2B400EDEA0B /* Colors.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -225,7 +243,9 @@
 				446C067C2B1C930D006A6A5E /* MedicalFacility.swift in Sources */,
 				448FF7222B15F90200B3CA1D /* SceneDelegate.swift in Sources */,
 				446C067E2B1C9528006A6A5E /* enums.swift in Sources */,
+				446112352B1DABB0002F815C /* AdminViewTableViewController.swift in Sources */,
 				4461122F2B1D90C7002F815C /* LoginViewController.swift in Sources */,
+				443CE4BC2B1DAD8B0024D74B /* AdminViewTableViewCell.swift in Sources */,
 				446112312B1D99CF002F815C /* MedicalService.swift in Sources */,
 				446C06722B1C92DB006A6A5E /* User.swift in Sources */,
 				446112332B1D9B5B002F815C /* Category.swift in Sources */,
@@ -378,8 +398,9 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Mokhtabri/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UILaunchStoryboardName = "";
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UIStatusBarStyle = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -405,8 +426,9 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Mokhtabri/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UILaunchStoryboardName = "";
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UIStatusBarStyle = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
