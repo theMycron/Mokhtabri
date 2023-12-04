@@ -7,18 +7,18 @@
 
 import Foundation
 
-enum Gender {
-    case male, female
+enum Gender: String {
+    case male = "Male", female = "Female"
 }
 
-enum FacilityType {
-    case lab, hospital
+enum FacilityType: String {
+    case lab = "Lab", hospital = "Hospital"
 }
 
 enum UserType {
     case patient, lab, admin
 }
 
-enum BookingStatus {
-    case booked, completed, cancelled
+enum BookingStatus: String {
+    case booked = "Booked", completed = "Completed", cancelled = "Cancelled"
 }
