@@ -27,6 +27,7 @@
 		448FF7392B16049500B3CA1D /* Admin.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 448FF7382B16049500B3CA1D /* Admin.storyboard */; };
 		448FF73B2B1604A100B3CA1D /* Lab.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 448FF73A2B1604A100B3CA1D /* Lab.storyboard */; };
 		448FF73D2B1604A600B3CA1D /* Patient.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 448FF73C2B1604A600B3CA1D /* Patient.storyboard */; };
+		44F198D72B1DE2B400EDEA0B /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 44F198D62B1DE2B400EDEA0B /* Colors.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -52,6 +53,7 @@
 		448FF7382B16049500B3CA1D /* Admin.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Admin.storyboard; sourceTree = "<group>"; };
 		448FF73A2B1604A100B3CA1D /* Lab.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Lab.storyboard; sourceTree = "<group>"; };
 		448FF73C2B1604A600B3CA1D /* Patient.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Patient.storyboard; sourceTree = "<group>"; };
+		44F198D62B1DE2B400EDEA0B /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -131,6 +133,7 @@
 			isa = PBXGroup;
 			children = (
 				446C067D2B1C9528006A6A5E /* enums.swift */,
+				44F198D62B1DE2B400EDEA0B /* Colors.xcassets */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -221,6 +224,7 @@
 				448FF73B2B1604A100B3CA1D /* Lab.storyboard in Resources */,
 				448FF73D2B1604A600B3CA1D /* Patient.storyboard in Resources */,
 				448FF7272B15F90200B3CA1D /* Main.storyboard in Resources */,
+				44F198D72B1DE2B400EDEA0B /* Colors.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -394,8 +398,9 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Mokhtabri/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Admin;
+				INFOPLIST_KEY_UILaunchStoryboardName = "";
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UIStatusBarStyle = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -421,8 +426,9 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Mokhtabri/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Admin;
+				INFOPLIST_KEY_UILaunchStoryboardName = "";
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UIStatusBarStyle = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (

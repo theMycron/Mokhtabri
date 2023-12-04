@@ -31,15 +31,19 @@ class AdminViewTableViewController: UITableViewController {
         return 1
     }
 
-    /*
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "AdminViewCell", for: indexPath)
 
         // Configure the cell...
 
         return cell
     }
-    */
+    
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+            return 0
+        }
+    
 
     /*
     // Override to support conditional editing of the table view.
