@@ -7,6 +7,18 @@
 
 import Foundation
 
+enum Gender {
+    case male, female
+}
+
+enum FacilityType {
+    case lab, hospital
+}
+
 enum UserType {
     case patient, lab, admin
+}
+
+enum BookingStatus {
+    case booked, completed, cancelled
 }
