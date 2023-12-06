@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		443BA9F32B20338300794C5A /* AppData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443BA9F22B20338300794C5A /* AppData.swift */; };
 		443CE4BC2B1DAD8B0024D74B /* AdminViewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443CE4BB2B1DAD8B0024D74B /* AdminViewTableViewCell.swift */; };
 		4461122F2B1D90C7002F815C /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4461122E2B1D90C7002F815C /* LoginViewController.swift */; };
 		446112312B1D99CF002F815C /* MedicalService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446112302B1D99CF002F815C /* MedicalService.swift */; };
@@ -31,6 +32,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		443BA9F22B20338300794C5A /* AppData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppData.swift; sourceTree = "<group>"; };
 		443CE4BB2B1DAD8B0024D74B /* AdminViewTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminViewTableViewCell.swift; sourceTree = "<group>"; };
 		4461122E2B1D90C7002F815C /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		446112302B1D99CF002F815C /* MedicalService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicalService.swift; sourceTree = "<group>"; };
@@ -142,6 +144,7 @@
 			isa = PBXGroup;
 			children = (
 				446C06712B1C92DB006A6A5E /* User.swift */,
+				443BA9F22B20338300794C5A /* AppData.swift */,
 				446C06732B1C92E3006A6A5E /* Patient.swift */,
 				446C06752B1C92EE006A6A5E /* Test.swift */,
 				446C06772B1C92F3006A6A5E /* Package.swift */,
@@ -249,6 +252,7 @@
 				446112312B1D99CF002F815C /* MedicalService.swift in Sources */,
 				446C06722B1C92DB006A6A5E /* User.swift in Sources */,
 				446112332B1D9B5B002F815C /* Category.swift in Sources */,
+				443BA9F32B20338300794C5A /* AppData.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

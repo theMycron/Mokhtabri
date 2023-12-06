@@ -7,7 +7,7 @@
 
 import Foundation
 
-class Package: MedicalService {
+class Package: MedicalService, Codable {
     var expiryDate: DateComponents // use 'year', 'month' and 'day' components
     var tests: [Test]
     

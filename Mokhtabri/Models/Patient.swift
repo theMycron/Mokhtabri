@@ -7,7 +7,7 @@
 
 import Foundation
 
-class Patient: User {
+class Patient: User, Codable {
     var firstName: String
     var lastName: String
     var phone: String

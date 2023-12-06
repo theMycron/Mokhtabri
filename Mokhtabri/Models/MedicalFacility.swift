@@ -7,7 +7,7 @@
 
 import Foundation
 
-class MedicalFacility: User {
+class MedicalFacility: User, Codable {
     var name: String
     var phone: String
     var city: String
@@ -18,6 +18,7 @@ class MedicalFacility: User {
     var openingTime: DateComponents
     var closingTime: DateComponents
     var medicalServices: [MedicalService]
+    var bookings: [Booking]
     // should also store an image, not sure how
     
     init(name: String, phone: String, city: String, website: String, alwaysOpen: Bool, type: FacilityType, openingTime: DateComponents, closingTime: DateComponents, username: String, password: String) {
@@ -30,6 +31,7 @@ class MedicalFacility: User {
         self.openingTime = openingTime
         self.closingTime = closingTime
         self.medicalServices = []
+        self.bookings = []
         super.init(username: username, password: password, userType: UserType.lab)
     }
     

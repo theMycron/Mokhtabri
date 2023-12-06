@@ -7,7 +7,7 @@
 
 import Foundation
 
-class Test: MedicalService {
+class Test: MedicalService, Codable {
     var category: Category
     
     init(category: Category, name: String, price: Float, description: String, instructions: String, forMedicalFacility: MedicalFacility) {

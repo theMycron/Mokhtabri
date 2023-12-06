@@ -7,7 +7,7 @@
 
 import Foundation
 
-class MedicalService {
+class MedicalService: Codable {
     var name: String
     var price: Float
     var description: String
