@@ -12,6 +12,7 @@
 		446112312B1D99CF002F815C /* MedicalService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446112302B1D99CF002F815C /* MedicalService.swift */; };
 		446112332B1D9B5B002F815C /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446112322B1D9B5B002F815C /* Category.swift */; };
 		446112352B1DABB0002F815C /* AdminViewTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446112342B1DABB0002F815C /* AdminViewTableViewController.swift */; };
+		4462E0112B25DA0600769654 /* AdminViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4462E0102B25DA0600769654 /* AdminViewController.swift */; };
 		446C06722B1C92DB006A6A5E /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446C06712B1C92DB006A6A5E /* User.swift */; };
 		446C06742B1C92E3006A6A5E /* Patient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446C06732B1C92E3006A6A5E /* Patient.swift */; };
 		446C06762B1C92EE006A6A5E /* Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446C06752B1C92EE006A6A5E /* Test.swift */; };
@@ -36,6 +37,7 @@
 		446112302B1D99CF002F815C /* MedicalService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicalService.swift; sourceTree = "<group>"; };
 		446112322B1D9B5B002F815C /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		446112342B1DABB0002F815C /* AdminViewTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminViewTableViewController.swift; sourceTree = "<group>"; };
+		4462E0102B25DA0600769654 /* AdminViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminViewController.swift; sourceTree = "<group>"; };
 		446C06712B1C92DB006A6A5E /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		446C06732B1C92E3006A6A5E /* Patient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Patient.swift; sourceTree = "<group>"; };
 		446C06752B1C92EE006A6A5E /* Test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Test.swift; sourceTree = "<group>"; };
@@ -113,6 +115,7 @@
 			children = (
 				4461122E2B1D90C7002F815C /* LoginViewController.swift */,
 				446112342B1DABB0002F815C /* AdminViewTableViewController.swift */,
+				4462E0102B25DA0600769654 /* AdminViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -238,6 +241,7 @@
 				446C06782B1C92F3006A6A5E /* Package.swift in Sources */,
 				448FF7202B15F90200B3CA1D /* AppDelegate.swift in Sources */,
 				446C067A2B1C9302006A6A5E /* Booking.swift in Sources */,
+				4462E0112B25DA0600769654 /* AdminViewController.swift in Sources */,
 				446C06742B1C92E3006A6A5E /* Patient.swift in Sources */,
 				446C06762B1C92EE006A6A5E /* Test.swift in Sources */,
 				446C067C2B1C930D006A6A5E /* MedicalFacility.swift in Sources */,
