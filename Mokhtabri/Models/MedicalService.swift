@@ -12,7 +12,7 @@ class MedicalService: Codable {
     var price: Float
     var description: String
     var instructions: String
-    var forMedicalFacility: MedicalFacility
+    unowned var forMedicalFacility: MedicalFacility
     // should also store an image, not sure how
     
     enum CodingKeys: Codable, CodingKey {
@@ -25,6 +25,15 @@ class MedicalService: Codable {
         self.description = description
         self.instructions = instructions
         self.forMedicalFacility = forMedicalFacility
+    }
+    
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(name, forKey: .name)
+        try container.encode(price, forKey: .price)
+        try container.encode(description, forKey: .description)
+        try container.encode(instructions, forKey: .instructions)
+        try container.encode(forMedicalFacility, forKey: .forMedicalFacility)
     }
     
     required init(from decoder: Decoder) throws {

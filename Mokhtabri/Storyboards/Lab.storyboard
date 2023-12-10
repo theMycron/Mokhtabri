@@ -115,20 +115,8 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Item 1" id="RgP-ak-QUL"/>
-                    <connections>
-                        <outlet property="searchDisplayController" destination="i3S-5Q-Cpj" id="ud5-Yw-isU"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DqA-Ks-diq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-                <searchDisplayController id="i3S-5Q-Cpj">
-                    <connections>
-                        <outlet property="delegate" destination="DZv-nm-Lco" id="LaA-hF-46S"/>
-                        <outlet property="searchBar" destination="BnR-vq-84v" id="geJ-hz-Icc"/>
-                        <outlet property="searchContentsController" destination="DZv-nm-Lco" id="Vxv-sC-nx7"/>
-                        <outlet property="searchResultsDataSource" destination="DZv-nm-Lco" id="q4X-qM-MC6"/>
-                        <outlet property="searchResultsDelegate" destination="DZv-nm-Lco" id="27K-t4-SGi"/>
-                    </connections>
-                </searchDisplayController>
             </objects>
             <point key="canvasLocation" x="1105" y="-1195"/>
         </scene>

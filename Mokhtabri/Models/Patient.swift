@@ -37,7 +37,18 @@ class Patient: User {
         super.init(username: username, password: password, userType: .patient)
     }
     
-    
+    override func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(firstName, forKey: .firstName)
+        try container.encode(lastName, forKey: .lastName)
+        try container.encode(phone, forKey: .phone)
+        try container.encode(cpr, forKey: .cpr)
+        try container.encode(email, forKey: .email)
+        try container.encode(gender, forKey: .gender)
+        try container.encode(dateOfBirth, forKey: .dateOfBirth)
+        try container.encode(bookings, forKey: .bookings)
+        try super.encode(to: encoder)
+    }
     
     // this initializer decodes the object and is required for coding functionality
     required init(from decoder: Decoder) throws {

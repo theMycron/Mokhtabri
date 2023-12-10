@@ -39,6 +39,21 @@ class MedicalFacility: User {
         super.init(username: username, password: password, userType: UserType.lab)
     }
     
+    override func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(name, forKey: .name)
+        try container.encode(phone, forKey: .phone)
+        try container.encode(city, forKey: .city)
+        try container.encode(website, forKey: .website)
+        try container.encode(alwaysOpen, forKey: .alwaysOpen)
+        try container.encode(type, forKey: .type)
+        try container.encode(openingTime, forKey: .openingTime)
+        try container.encode(closingTime, forKey: .closingTime)
+        try container.encode(medicalServices, forKey: .medicalServices)
+        try container.encode(bookings, forKey: .bookings)
+        try super.encode(to: encoder)
+    }
+    
     required init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         self.name = try values.decodeIfPresent(String.self, forKey: .name)!
