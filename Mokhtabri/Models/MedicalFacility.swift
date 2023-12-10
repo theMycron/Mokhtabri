@@ -1,10 +1,3 @@
-//
-//  Hospital.swift
-//  Mokhtabri
-//
-//  Created by Yousif Mohamed Ali Abdulla Salman Alhawaj on 03/12/2023.
-//
-
 import Foundation
 
 class MedicalFacility: User {
@@ -14,15 +7,14 @@ class MedicalFacility: User {
     var website: String
     var alwaysOpen: Bool
     var type: FacilityType
-    // openingTime and closingTime will be stored with 'hour' and 'minute' properties of DateComponents
     var openingTime: DateComponents
     var closingTime: DateComponents
     var medicalServices: [MedicalService]
     var bookings: [Booking]
-    // should also store an image, not sure how
-    
+    var image: Data? // Property to store an image
+
     enum CodingKeys: Codable, CodingKey {
-        case name, phone, city, website, alwaysOpen, type, openingTime, closingTime, medicalServices, bookings
+        case name, phone, city, website, alwaysOpen, type, openingTime, closingTime, medicalServices, bookings, image
     }
     
     init(name: String, phone: String, city: String, website: String, alwaysOpen: Bool, type: FacilityType, openingTime: DateComponents, closingTime: DateComponents, username: String, password: String) {
@@ -36,26 +28,38 @@ class MedicalFacility: User {
         self.closingTime = closingTime
         self.medicalServices = []
         self.bookings = []
+        self.image = nil // Initialize the image property
         super.init(username: username, password: password, userType: UserType.lab)
     }
-    
+
     required init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
-        self.name = try values.decodeIfPresent(String.self, forKey: .name)!
-        self.phone = try values.decodeIfPresent(String.self, forKey: .phone)!
-        self.city = try values.decodeIfPresent(String.self, forKey: .city)!
-        self.website = try values.decodeIfPresent(String.self, forKey: .website)!
-        self.alwaysOpen = try values.decodeIfPresent(Bool.self, forKey: .alwaysOpen)!
-        self.type = try values.decodeIfPresent(FacilityType.self, forKey: .type)!
-        self.openingTime = try values.decodeIfPresent(DateComponents.self, forKey: .openingTime)!
-        self.closingTime = try values.decodeIfPresent(DateComponents.self, forKey: .closingTime)!
-        self.medicalServices = try values.decodeIfPresent([MedicalService].self, forKey: .medicalServices)!
-        self.bookings = try values.decodeIfPresent([Booking].self, forKey: .bookings)!
-        // decode base class
+        self.name = try values.decode(String.self, forKey: .name)
+        self.phone = try values.decode(String.self, forKey: .phone)
+        self.city = try values.decode(String.self, forKey: .city)
+        self.website = try values.decode(String.self, forKey: .website)
+        self.alwaysOpen = try values.decode(Bool.self, forKey: .alwaysOpen)
+        self.type = try values.decode(FacilityType.self, forKey: .type)
+        self.openingTime = try values.decode(DateComponents.self, forKey: .openingTime)
+        self.closingTime = try values.decode(DateComponents.self, forKey: .closingTime)
+        self.medicalServices = try values.decode([MedicalService].self, forKey: .medicalServices)
+        self.bookings = try values.decode([Booking].self, forKey: .bookings)
+        
+        // Decode image as base64-encoded data
+        if let imageBase64 = try values.decodeIfPresent(String.self, forKey: .image) {
+            self.image = Data(base64Encoded: imageBase64)
+        } else {
+            self.image = nil
+        }
+
         try super.init(from: decoder)
     }
     
-    
-    
-    
+    // Encode the image as base64-encoded string
+    func encodeImage() -> String? {
+        if let image = self.image {
+            return image.base64EncodedString()
+        }
+        return nil
+    }
 }
