@@ -1,33 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22155" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="fG5-9h-Q7R">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22131"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
-        <scene sceneID="s0d-6b-0kx">
-            <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-                <viewController id="Y6W-OH-hqX" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                    </view>
-                </viewController>
-            </objects>
-            <point key="canvasLocation" x="-265" y="427"/>
-        </scene>
         <!--Root View Controller-->
         <scene sceneID="uD6-w2-FpR">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="0TD-Ry-Wze" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <tableViewController id="3qa-Mv-Yux" customClass="LabHistoryTableViewController" customModule="Mokhtabri" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="insetGrouped" separatorStyle="singleLineEtched" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" estimatedSectionHeaderHeight="-1" sectionFooterHeight="18" estimatedSectionFooterHeight="-1" id="ezx-Bd-Jkl">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
@@ -136,33 +119,15 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Root View Controller" id="1Q0-Ao-SMN"/>
                 </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0TD-Ry-Wze" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2625" y="610"/>
         </scene>
-        <!--Tab Bar Controller-->
-        <scene sceneID="XEh-cz-0KH">
-            <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="krq-CJ-l4b" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-                <tabBarController id="woG-1O-90j" sceneMemberID="viewController">
-                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="B1R-tU-6V0">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="49"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    </tabBar>
-                    <connections>
-                        <segue destination="fG5-9h-Q7R" kind="relationship" relationship="viewControllers" id="2ay-ob-RRr"/>
-                        <segue destination="MVK-i9-zMM" kind="relationship" relationship="viewControllers" id="WzS-7n-xys"/>
-                    </connections>
-                </tabBarController>
-            </objects>
-            <point key="canvasLocation" x="796" y="-582"/>
-        </scene>
-        <!--Item-->
+        <!--Bookings-->
         <scene sceneID="Dze-Fn-eGC">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="mZV-ti-qmz" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-                <navigationController id="fG5-9h-Q7R" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="mxK-Pc-Sag"/>
+                <navigationController storyboardIdentifier="LabBookings" id="fG5-9h-Q7R" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Bookings" selectedImage="book.circle" catalog="system" id="0Hh-Cr-4AM"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="1Cb-SY-qVA">
                         <rect key="frame" x="0.0" y="59" width="393" height="44"/>
@@ -172,8 +137,9 @@
                         <segue destination="3qa-Mv-Yux" kind="relationship" relationship="rootViewController" id="vuf-Oc-rCp"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mZV-ti-qmz" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1224" y="631"/>
+            <point key="canvasLocation" x="1625" y="610"/>
         </scene>
         <!--Home-->
         <scene sceneID="4Gw-Hh-mPn">
@@ -193,6 +159,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="book.circle" catalog="system" width="128" height="123"/>
         <image name="house.fill" catalog="system" width="128" height="104"/>
         <image name="test" width="1920" height="1080"/>
         <systemColor name="systemBackgroundColor">

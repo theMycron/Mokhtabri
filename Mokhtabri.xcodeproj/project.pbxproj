@@ -7,7 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		44214DDC2B26C9DF000DAA0A /* LabServices.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 44214DDA2B26C9DF000DAA0A /* LabServices.storyboard */; };
+		44214DE02B26CA4D000DAA0A /* LabBookingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44214DDE2B26CA4D000DAA0A /* LabBookingTableViewCell.swift */; };
+		44214DE12B26CA4D000DAA0A /* LabHistoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44214DDF2B26CA4D000DAA0A /* LabHistoryTableViewController.swift */; };
 		443BA9F32B20338300794C5A /* AppData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443BA9F22B20338300794C5A /* AppData.swift */; };
+		443CD4312B26CCF300A26971 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 44214DE62B26CCE1000DAA0A /* Main.storyboard */; };
+		443CD4322B26CCF500A26971 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 443CD4302B26CCEE00A26971 /* LaunchScreen.storyboard */; };
+		443CD4362B26CE8900A26971 /* LabBooking.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 443CD4352B26CE8900A26971 /* LabBooking.storyboard */; };
+		443CD4382B26D2A100A26971 /* PatientSettings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 443CD4372B26D2A100A26971 /* PatientSettings.storyboard */; };
+		443CD43A2B26D2DD00A26971 /* PatientHome.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 443CD4392B26D2DD00A26971 /* PatientHome.storyboard */; };
 		443CE4BC2B1DAD8B0024D74B /* AdminViewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443CE4BB2B1DAD8B0024D74B /* AdminViewTableViewCell.swift */; };
 		4461122F2B1D90C7002F815C /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4461122E2B1D90C7002F815C /* LoginViewController.swift */; };
 		446112312B1D99CF002F815C /* MedicalService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446112302B1D99CF002F815C /* MedicalService.swift */; };
@@ -22,17 +30,22 @@
 		446C067E2B1C9528006A6A5E /* enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446C067D2B1C9528006A6A5E /* enums.swift */; };
 		448FF7202B15F90200B3CA1D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448FF71F2B15F90200B3CA1D /* AppDelegate.swift */; };
 		448FF7222B15F90200B3CA1D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448FF7212B15F90200B3CA1D /* SceneDelegate.swift */; };
-		448FF7272B15F90200B3CA1D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 448FF7252B15F90200B3CA1D /* Main.storyboard */; };
 		448FF7292B15F90400B3CA1D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 448FF7282B15F90400B3CA1D /* Assets.xcassets */; };
-		448FF72C2B15F90400B3CA1D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 448FF72A2B15F90400B3CA1D /* LaunchScreen.storyboard */; };
 		448FF7392B16049500B3CA1D /* Admin.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 448FF7382B16049500B3CA1D /* Admin.storyboard */; };
-		448FF73B2B1604A100B3CA1D /* Lab.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 448FF73A2B1604A100B3CA1D /* Lab.storyboard */; };
-		448FF73D2B1604A600B3CA1D /* Patient.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 448FF73C2B1604A600B3CA1D /* Patient.storyboard */; };
+		448FF73D2B1604A600B3CA1D /* PatientBookings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 448FF73C2B1604A600B3CA1D /* PatientBookings.storyboard */; };
 		44F198D72B1DE2B400EDEA0B /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 44F198D62B1DE2B400EDEA0B /* Colors.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		44214DDA2B26C9DF000DAA0A /* LabServices.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LabServices.storyboard; sourceTree = "<group>"; };
+		44214DDE2B26CA4D000DAA0A /* LabBookingTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LabBookingTableViewCell.swift; path = Mokhtabri/Controllers/LabBookingTableViewCell.swift; sourceTree = SOURCE_ROOT; };
+		44214DDF2B26CA4D000DAA0A /* LabHistoryTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LabHistoryTableViewController.swift; path = Mokhtabri/Controllers/LabHistoryTableViewController.swift; sourceTree = SOURCE_ROOT; };
+		44214DE62B26CCE1000DAA0A /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		443BA9F22B20338300794C5A /* AppData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppData.swift; sourceTree = "<group>"; };
+		443CD4302B26CCEE00A26971 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		443CD4352B26CE8900A26971 /* LabBooking.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LabBooking.storyboard; sourceTree = "<group>"; };
+		443CD4372B26D2A100A26971 /* PatientSettings.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = PatientSettings.storyboard; sourceTree = "<group>"; };
+		443CD4392B26D2DD00A26971 /* PatientHome.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = PatientHome.storyboard; sourceTree = "<group>"; };
 		443CE4BB2B1DAD8B0024D74B /* AdminViewTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminViewTableViewCell.swift; sourceTree = "<group>"; };
 		4461122E2B1D90C7002F815C /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		446112302B1D99CF002F815C /* MedicalService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicalService.swift; sourceTree = "<group>"; };
@@ -48,13 +61,10 @@
 		448FF71C2B15F90200B3CA1D /* Mokhtabri.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Mokhtabri.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		448FF71F2B15F90200B3CA1D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		448FF7212B15F90200B3CA1D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		448FF7262B15F90200B3CA1D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		448FF7282B15F90400B3CA1D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		448FF72B2B15F90400B3CA1D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		448FF72D2B15F90400B3CA1D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		448FF7382B16049500B3CA1D /* Admin.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Admin.storyboard; sourceTree = "<group>"; };
-		448FF73A2B1604A100B3CA1D /* Lab.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Lab.storyboard; sourceTree = "<group>"; };
-		448FF73C2B1604A600B3CA1D /* Patient.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Patient.storyboard; sourceTree = "<group>"; };
+		448FF73C2B1604A600B3CA1D /* PatientBookings.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = PatientBookings.storyboard; sourceTree = "<group>"; };
 		44F198D62B1DE2B400EDEA0B /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -113,6 +123,8 @@
 		448FF7332B16040B00B3CA1D /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				44214DDE2B26CA4D000DAA0A /* LabBookingTableViewCell.swift */,
+				44214DDF2B26CA4D000DAA0A /* LabHistoryTableViewController.swift */,
 				4461122E2B1D90C7002F815C /* LoginViewController.swift */,
 				446112342B1DABB0002F815C /* AdminViewTableViewController.swift */,
 			);
@@ -122,11 +134,14 @@
 		448FF7342B16042100B3CA1D /* Storyboards */ = {
 			isa = PBXGroup;
 			children = (
-				448FF7252B15F90200B3CA1D /* Main.storyboard */,
-				448FF72A2B15F90400B3CA1D /* LaunchScreen.storyboard */,
+				44214DDA2B26C9DF000DAA0A /* LabServices.storyboard */,
+				443CD4302B26CCEE00A26971 /* LaunchScreen.storyboard */,
+				44214DE62B26CCE1000DAA0A /* Main.storyboard */,
+				443CD4352B26CE8900A26971 /* LabBooking.storyboard */,
 				448FF7382B16049500B3CA1D /* Admin.storyboard */,
-				448FF73A2B1604A100B3CA1D /* Lab.storyboard */,
-				448FF73C2B1604A600B3CA1D /* Patient.storyboard */,
+				448FF73C2B1604A600B3CA1D /* PatientBookings.storyboard */,
+				443CD4392B26D2DD00A26971 /* PatientHome.storyboard */,
+				443CD4372B26D2A100A26971 /* PatientSettings.storyboard */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -221,13 +236,16 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				443CD4322B26CCF500A26971 /* LaunchScreen.storyboard in Resources */,
 				448FF7392B16049500B3CA1D /* Admin.storyboard in Resources */,
-				448FF72C2B15F90400B3CA1D /* LaunchScreen.storyboard in Resources */,
 				448FF7292B15F90400B3CA1D /* Assets.xcassets in Resources */,
-				448FF73B2B1604A100B3CA1D /* Lab.storyboard in Resources */,
-				448FF73D2B1604A600B3CA1D /* Patient.storyboard in Resources */,
-				448FF7272B15F90200B3CA1D /* Main.storyboard in Resources */,
+				443CD4312B26CCF300A26971 /* Main.storyboard in Resources */,
+				448FF73D2B1604A600B3CA1D /* PatientBookings.storyboard in Resources */,
 				44F198D72B1DE2B400EDEA0B /* Colors.xcassets in Resources */,
+				443CD43A2B26D2DD00A26971 /* PatientHome.storyboard in Resources */,
+				443CD4382B26D2A100A26971 /* PatientSettings.storyboard in Resources */,
+				44214DDC2B26C9DF000DAA0A /* LabServices.storyboard in Resources */,
+				443CD4362B26CE8900A26971 /* LabBooking.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -241,12 +259,14 @@
 				446C06782B1C92F3006A6A5E /* Package.swift in Sources */,
 				448FF7202B15F90200B3CA1D /* AppDelegate.swift in Sources */,
 				446C067A2B1C9302006A6A5E /* Booking.swift in Sources */,
+				44214DE02B26CA4D000DAA0A /* LabBookingTableViewCell.swift in Sources */,
 				446C06742B1C92E3006A6A5E /* Patient.swift in Sources */,
 				446C06762B1C92EE006A6A5E /* Test.swift in Sources */,
 				446C067C2B1C930D006A6A5E /* MedicalFacility.swift in Sources */,
 				448FF7222B15F90200B3CA1D /* SceneDelegate.swift in Sources */,
 				446C067E2B1C9528006A6A5E /* enums.swift in Sources */,
 				446112352B1DABB0002F815C /* AdminViewTableViewController.swift in Sources */,
+				44214DE12B26CA4D000DAA0A /* LabHistoryTableViewController.swift in Sources */,
 				4461122F2B1D90C7002F815C /* LoginViewController.swift in Sources */,
 				443CE4BC2B1DAD8B0024D74B /* AdminViewTableViewCell.swift in Sources */,
 				446112312B1D99CF002F815C /* MedicalService.swift in Sources */,
@@ -257,25 +277,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXVariantGroup section */
-		448FF7252B15F90200B3CA1D /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				448FF7262B15F90200B3CA1D /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		448FF72A2B15F90400B3CA1D /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				448FF72B2B15F90400B3CA1D /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		448FF72E2B15F90400B3CA1D /* Debug */ = {
