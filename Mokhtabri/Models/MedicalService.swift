@@ -1,10 +1,3 @@
-//
-//  MedicalService.swift
-//  Mokhtabri
-//
-//  Created by Yousif Mohamed Ali Abdulla Salman Alhawaj on 04/12/2023.
-//
-
 import Foundation
 
 class MedicalService: Codable {
@@ -12,11 +5,11 @@ class MedicalService: Codable {
     var price: Float
     var description: String
     var instructions: String
-    unowned var forMedicalFacility: MedicalFacility
-    // should also store an image, not sure how
-    
+    var forMedicalFacility: MedicalFacility
+    var image: Data? // Property to store an image
+
     enum CodingKeys: Codable, CodingKey {
-        case name, price, description, instructions, forMedicalFacility
+        case name, price, description, instructions, forMedicalFacility, image // Include 'image' in the CodingKeys
     }
     
     init(name: String, price: Float, description: String, instructions: String, forMedicalFacility: MedicalFacility) {
@@ -25,6 +18,7 @@ class MedicalService: Codable {
         self.description = description
         self.instructions = instructions
         self.forMedicalFacility = forMedicalFacility
+        self.image = nil // Initialize the image property
     }
     
     func encode(to encoder: Encoder) throws {
@@ -43,5 +37,20 @@ class MedicalService: Codable {
         self.description = try container.decode(String.self, forKey: .description)
         self.instructions = try container.decode(String.self, forKey: .instructions)
         self.forMedicalFacility = try container.decode(MedicalFacility.self, forKey: .forMedicalFacility)
+        
+        // Decode image as base64-encoded data
+        if let imageBase64 = try container.decodeIfPresent(String.self, forKey: .image) {
+            self.image = Data(base64Encoded: imageBase64)
+        } else {
+            self.image = nil
+        }
+    }
+    
+    // Encode the image as base64-encoded string
+    func encodeImage() -> String? {
+        if let image = self.image {
+            return image.base64EncodedString()
+        }
+        return nil
     }
 }

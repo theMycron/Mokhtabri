@@ -17,8 +17,24 @@ class Patient: User {
     var dateOfBirth: DateComponents // use 'year', 'month' and 'day' components
     var bookings: [Booking]
     var age: Int {
-        // TODO: calculate age from dob
-        return 1
+        let calendar = Calendar.current
+        let currentDate = Date()
+        
+        // Check if the 'dateOfBirth' components are valid
+        guard let dobYear = dateOfBirth.year,
+              let dobMonth = dateOfBirth.month,
+              let dobDay = dateOfBirth.day else {
+            return 0 // Return 0 if dateOfBirth components are not valid
+        }
+        
+        // Create a birthdate from the 'dateOfBirth' components
+        if let birthDate = calendar.date(from: DateComponents(year: dobYear, month: dobMonth, day: dobDay)) {
+            // Calculate the difference in years between the birthdate and the current date
+            let ageComponents = calendar.dateComponents([.year], from: birthDate, to: currentDate)
+            return ageComponents.year ?? 0
+        } else {
+            return 0 // Return 0 if the birthdate couldn't be created
+        }
     } // calculated get-only property
     
     enum CodingKeys: Codable, CodingKey {
