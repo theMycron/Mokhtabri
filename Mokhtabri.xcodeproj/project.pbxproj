@@ -26,7 +26,6 @@
 		448FF7292B15F90400B3CA1D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 448FF7282B15F90400B3CA1D /* Assets.xcassets */; };
 		448FF72C2B15F90400B3CA1D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 448FF72A2B15F90400B3CA1D /* LaunchScreen.storyboard */; };
 		448FF7392B16049500B3CA1D /* Admin.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 448FF7382B16049500B3CA1D /* Admin.storyboard */; };
-		448FF73B2B1604A100B3CA1D /* Lab.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 448FF73A2B1604A100B3CA1D /* Lab.storyboard */; };
 		448FF73D2B1604A600B3CA1D /* Patient.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 448FF73C2B1604A600B3CA1D /* Patient.storyboard */; };
 		44F198D72B1DE2B400EDEA0B /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 44F198D62B1DE2B400EDEA0B /* Colors.xcassets */; };
 /* End PBXBuildFile section */
@@ -53,7 +52,6 @@
 		448FF72B2B15F90400B3CA1D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		448FF72D2B15F90400B3CA1D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		448FF7382B16049500B3CA1D /* Admin.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Admin.storyboard; sourceTree = "<group>"; };
-		448FF73A2B1604A100B3CA1D /* Lab.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Lab.storyboard; sourceTree = "<group>"; };
 		448FF73C2B1604A600B3CA1D /* Patient.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Patient.storyboard; sourceTree = "<group>"; };
 		44F198D62B1DE2B400EDEA0B /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -125,7 +123,6 @@
 				448FF7252B15F90200B3CA1D /* Main.storyboard */,
 				448FF72A2B15F90400B3CA1D /* LaunchScreen.storyboard */,
 				448FF7382B16049500B3CA1D /* Admin.storyboard */,
-				448FF73A2B1604A100B3CA1D /* Lab.storyboard */,
 				448FF73C2B1604A600B3CA1D /* Patient.storyboard */,
 			);
 			path = Storyboards;
@@ -224,7 +221,6 @@
 				448FF7392B16049500B3CA1D /* Admin.storyboard in Resources */,
 				448FF72C2B15F90400B3CA1D /* LaunchScreen.storyboard in Resources */,
 				448FF7292B15F90400B3CA1D /* Assets.xcassets in Resources */,
-				448FF73B2B1604A100B3CA1D /* Lab.storyboard in Resources */,
 				448FF73D2B1604A600B3CA1D /* Patient.storyboard in Resources */,
 				448FF7272B15F90200B3CA1D /* Main.storyboard in Resources */,
 				44F198D72B1DE2B400EDEA0B /* Colors.xcassets in Resources */,
