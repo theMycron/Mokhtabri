@@ -28,6 +28,7 @@ class MedicalService: Codable {
         try container.encode(description, forKey: .description)
         try container.encode(instructions, forKey: .instructions)
         try container.encode(forMedicalFacility, forKey: .forMedicalFacility)
+        try container.encode(encodeImage(), forKey: .image)
     }
     
     required init(from decoder: Decoder) throws {

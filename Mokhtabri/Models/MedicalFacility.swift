@@ -9,7 +9,8 @@ class MedicalFacility: User {
     var type: FacilityType
     var openingTime: DateComponents
     var closingTime: DateComponents
-    var medicalServices: [MedicalService]
+//    var medicalServices: [MedicalService]
+    var medicalService: MedicalService
     var bookings: [Booking]
     var image: Data? // Property to store an image
 
@@ -26,7 +27,7 @@ class MedicalFacility: User {
         self.type = type
         self.openingTime = openingTime
         self.closingTime = closingTime
-        self.medicalServices = []
+//        self.medicalServices = []
         self.bookings = []
         self.image = nil // Initialize the image property
         super.init(username: username, password: password, userType: UserType.lab)

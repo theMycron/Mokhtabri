@@ -10,6 +10,7 @@
 		44214DDC2B26C9DF000DAA0A /* LabServices.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 44214DDA2B26C9DF000DAA0A /* LabServices.storyboard */; };
 		44214DE02B26CA4D000DAA0A /* LabBookingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44214DDE2B26CA4D000DAA0A /* LabBookingTableViewCell.swift */; };
 		44214DE12B26CA4D000DAA0A /* LabHistoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44214DDF2B26CA4D000DAA0A /* LabHistoryTableViewController.swift */; };
+		442AB0FE2B27195E00C05BA6 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 442AB0FD2B27195E00C05BA6 /* Persistence.swift */; };
 		443BA9F32B20338300794C5A /* AppData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443BA9F22B20338300794C5A /* AppData.swift */; };
 		443CD4312B26CCF300A26971 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 44214DE62B26CCE1000DAA0A /* Main.storyboard */; };
 		443CD4322B26CCF500A26971 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 443CD4302B26CCEE00A26971 /* LaunchScreen.storyboard */; };
@@ -41,6 +42,7 @@
 		44214DDE2B26CA4D000DAA0A /* LabBookingTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LabBookingTableViewCell.swift; path = Mokhtabri/Controllers/LabBookingTableViewCell.swift; sourceTree = SOURCE_ROOT; };
 		44214DDF2B26CA4D000DAA0A /* LabHistoryTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LabHistoryTableViewController.swift; path = Mokhtabri/Controllers/LabHistoryTableViewController.swift; sourceTree = SOURCE_ROOT; };
 		44214DE62B26CCE1000DAA0A /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		442AB0FD2B27195E00C05BA6 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		443BA9F22B20338300794C5A /* AppData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppData.swift; sourceTree = "<group>"; };
 		443CD4302B26CCEE00A26971 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		443CD4352B26CE8900A26971 /* LabBooking.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LabBooking.storyboard; sourceTree = "<group>"; };
@@ -149,8 +151,10 @@
 		448FF7352B16042900B3CA1D /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				443BA9F22B20338300794C5A /* AppData.swift */,
 				446C067D2B1C9528006A6A5E /* enums.swift */,
 				44F198D62B1DE2B400EDEA0B /* Colors.xcassets */,
+				442AB0FD2B27195E00C05BA6 /* Persistence.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -159,7 +163,6 @@
 			isa = PBXGroup;
 			children = (
 				446C06712B1C92DB006A6A5E /* User.swift */,
-				443BA9F22B20338300794C5A /* AppData.swift */,
 				446C06732B1C92E3006A6A5E /* Patient.swift */,
 				446C06752B1C92EE006A6A5E /* Test.swift */,
 				446C06772B1C92F3006A6A5E /* Package.swift */,
@@ -265,6 +268,7 @@
 				446C067C2B1C930D006A6A5E /* MedicalFacility.swift in Sources */,
 				448FF7222B15F90200B3CA1D /* SceneDelegate.swift in Sources */,
 				446C067E2B1C9528006A6A5E /* enums.swift in Sources */,
+				442AB0FE2B27195E00C05BA6 /* Persistence.swift in Sources */,
 				446112352B1DABB0002F815C /* AdminViewTableViewController.swift in Sources */,
 				44214DE12B26CA4D000DAA0A /* LabHistoryTableViewController.swift in Sources */,
 				4461122F2B1D90C7002F815C /* LoginViewController.swift in Sources */,
