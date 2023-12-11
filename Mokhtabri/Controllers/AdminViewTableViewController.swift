@@ -7,11 +7,24 @@
 
 import UIKit
 
-class AdminViewTableViewController: UITableViewController {
+class AdminViewTableViewController: UITableViewController, UISearchControllerDelegate, UISearchBarDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        // you might need to use a different controller for the search functionality
+        let search = UISearchController()
+        search.delegate = self
+        search.searchBar.delegate = self
+        self.navigationItem.searchController = search
+//        navigationController?.hidesBarsOnSwipe = false
+        navigationItem.hidesSearchBarWhenScrolling = false
+        navigationItem.preferredSearchBarPlacement = .stacked
+        search.searchBar.searchFieldBackgroundPositionAdjustment = .zero
+        
+        
+        search.searchBar.scopeButtonTitles = ["All", "Hospitals", "Labs"]
+        search.searchBar.showsScopeBar = true
         
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -42,8 +55,11 @@ class AdminViewTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-            return 0
+            return 5
         }
+    
+    
+    
     
 
     /*
