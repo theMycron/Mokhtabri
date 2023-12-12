@@ -14,5 +14,14 @@ class AppData {
     static var services: [MedicalService] = []
     static var bookings: [Booking] = []
     static var categories: [Category] = []
+    
+    static func wipe() {
+        admin = []
+        patients = []
+        facilities = []
+        services = []
+        bookings = []
+        categories = []
+    }
 }
 

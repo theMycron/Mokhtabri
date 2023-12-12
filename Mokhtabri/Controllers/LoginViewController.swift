@@ -24,8 +24,9 @@ class LoginViewController: UIViewController {
     }
     
     @IBAction func loadButton(_ sender: Any) {
+        AppData.loadData()
         guard AppData.facilities.count > 0 else {return}
-        displayLabel.text = AppData.facilities[0].username
+        displayLabel.text = "\(AppData.bookings.count) loaded bookings"
     }
     
     @IBAction func createButton(_ sender: Any) {
@@ -38,12 +39,13 @@ class LoginViewController: UIViewController {
         AppData.patients.append(patient1)
         var patient2 = Patient(firstName: "Salem", lastName: "Maki", phone: "3892999", cpr: "38991993", email: "ahsjk@hf.djo", gender: Gender.male, dateOfBirth: dob, username: "windhh", password: "hunter2")
         AppData.patients.append(patient2)
-        var facility1 = MedicalFacility(name: "Alhilal", phone: "37829", city: "BF", website: "fheiso", alwaysOpen: true, type: FacilityType.hospital, openingTime: dob, closingTime: dob, username: "ahli", password: "ahil")
+        var facility1 = MedicalFacility(name: "Alhilal", phone: "37829", city: "BF", website: "fheiso", alwaysOpen: true, type: FacilityType.hospital, openingTime: dob, closingTime: dob, username: "wahoo", password: "ahil")
         AppData.facilities.append(facility1)
         var service1 = MedicalService(name: "Bloooody test", price: 2, description: "IMPOREKHS", instructions: "EAT ITIII", forMedicalFacility: facility1)
-        facility1.medicalServices.append(service1)
+        AppData.services.append(service1)
 //        facility1.bookings.append(Booking(forPatient: patient1, ofMedicalService: service1, bookingDate: dob))
-        displayLabel.text = "\(AppData.facilities[0].medicalServices) \nHas been made."
+        AppData.bookings.append(Booking(forPatient: patient1, ofMedicalService: service1, bookingDate: dob))
+        displayLabel.text = "\(AppData.bookings.count) \nHas been made."
         
         AppData.saveData()
     }

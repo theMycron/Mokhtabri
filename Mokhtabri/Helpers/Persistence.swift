@@ -18,6 +18,7 @@ extension AppData {
         return documentsDirectory.appendingPathComponent(fileName.rawValue).appendingPathExtension("plist")
     }
     
+    // use this function to save data after any data manipulation happens
     static func saveData() {
         saveUsers(toFile: .admins)
         saveUsers(toFile: .patients)
@@ -27,7 +28,9 @@ extension AppData {
         saveBookings()
     }
     
+    // loadData will wipe all AppData arrays to prevent duplication, make sure to call it only once at app startup
     static func loadData() {
+        AppData.wipe()
         loadUsers(fromFile: .admins)
         loadUsers(fromFile: .patients)
         loadUsers(fromFile: .facilities)
@@ -104,7 +107,10 @@ extension AppData {
     fileprivate static func loadUsers(fromFile: FileName) {
         let archiveURL = archiveURL(fromFile)
         let propertyListDecoder = PropertyListDecoder()
-        guard let retrievedData = try? Data(contentsOf: archiveURL) else { return }
+        guard let retrievedData = try? Data(contentsOf: archiveURL) else {
+            print("No user data found")
+            return
+        }
         do {
             if fromFile == .patients {
                 var decodedData: [Patient] = []

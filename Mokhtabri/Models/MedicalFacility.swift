@@ -10,8 +10,8 @@ class MedicalFacility: User {
     var openingTime: DateComponents
     var closingTime: DateComponents
 //    var medicalServices: [MedicalService]
-    var medicalService: MedicalService
-    var bookings: [Booking]
+//    var medicalService: MedicalService
+//    var bookings: [Booking]
     var image: Data? // Property to store an image
 
     enum CodingKeys: Codable, CodingKey {
@@ -28,7 +28,7 @@ class MedicalFacility: User {
         self.openingTime = openingTime
         self.closingTime = closingTime
 //        self.medicalServices = []
-        self.bookings = []
+//        self.bookings = []
         self.image = nil // Initialize the image property
         super.init(username: username, password: password, userType: UserType.lab)
     }
@@ -43,8 +43,8 @@ class MedicalFacility: User {
         try container.encode(type, forKey: .type)
         try container.encode(openingTime, forKey: .openingTime)
         try container.encode(closingTime, forKey: .closingTime)
-        try container.encode(medicalServices, forKey: .medicalServices)
-        try container.encode(bookings, forKey: .bookings)
+//        try container.encode(medicalServices, forKey: .medicalServices)
+//        try container.encode(bookings, forKey: .bookings)
         try super.encode(to: encoder)
     }
     
@@ -58,8 +58,8 @@ class MedicalFacility: User {
         self.type = try values.decode(FacilityType.self, forKey: .type)
         self.openingTime = try values.decode(DateComponents.self, forKey: .openingTime)
         self.closingTime = try values.decode(DateComponents.self, forKey: .closingTime)
-        self.medicalServices = try values.decode([MedicalService].self, forKey: .medicalServices)
-        self.bookings = try values.decode([Booking].self, forKey: .bookings)
+//        self.medicalServices = try values.decode([MedicalService].self, forKey: .medicalServices)
+//        self.bookings = try values.decode([Booking].self, forKey: .bookings)
         
         // Decode image as base64-encoded data
         if let imageBase64 = try values.decodeIfPresent(String.self, forKey: .image) {
