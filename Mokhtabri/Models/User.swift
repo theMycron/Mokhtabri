@@ -7,11 +7,20 @@
 
 import Foundation
 
-class User: Codable {
+class User: Codable, Equatable, Comparable, CustomStringConvertible {
+    
     var username: String
     var password: String
     var id: UUID
     var userType: UserType
+    
+    var description: String {
+        return """
+                - User Info -
+                ID: \(id)
+                Username: \(username)
+                """
+    }
     
 //    enum CodingKeys: Codable, CodingKey {
 //        case username, password, id, userType
@@ -22,6 +31,13 @@ class User: Codable {
         self.password = password
         self.id = UUID()
         self.userType = userType
+    }
+    
+    static func == (lhs: User, rhs: User) -> Bool {
+        return (lhs.id == rhs.id)
+    }
+    static func < (lhs: User, rhs: User) -> Bool {
+        return (lhs.username < rhs.username)
     }
     
 //    func encode(to encoder: Encoder) throws {

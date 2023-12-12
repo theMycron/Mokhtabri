@@ -13,6 +13,20 @@ class MedicalFacility: User {
 //    var medicalService: MedicalService
 //    var bookings: [Booking]
     var image: Data? // Property to store an image
+    
+    override var description: String {
+        return """
+                -- Medical Facility --
+                \(super.description)
+                - Facility Info -
+                Name: \(name)
+                Phone Number: \(phone)
+                City: \(city)
+                Website: \(website)
+                Timing: \(alwaysOpen ? "24 Hours" : "\(MedicalFacility.dateComponentsToTime(openingTime) ?? "") - \(MedicalFacility.dateComponentsToTime(closingTime) ?? "")")
+                Type: \(type.rawValue)
+                """
+    }
 
     enum CodingKeys: Codable, CodingKey {
         case name, phone, city, website, alwaysOpen, type, openingTime, closingTime, medicalServices, bookings, image
@@ -78,4 +92,9 @@ class MedicalFacility: User {
         }
         return nil
     }
+    
+    static func < (lhs: MedicalFacility, rhs: MedicalFacility) -> Bool {
+        return (lhs.name < rhs.name)
+    }
+    
 }

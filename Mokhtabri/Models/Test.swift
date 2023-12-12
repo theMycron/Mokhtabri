@@ -10,6 +10,14 @@ import Foundation
 class Test: MedicalService {
     var category: Category
     
+    override var description: String {
+        return """
+                \(super.description)
+                Type: Test
+                Category: \(category.name)
+                """
+    }
+    
     enum CodingKeys: Codable, CodingKey {
         case category
     }

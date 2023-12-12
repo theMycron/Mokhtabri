@@ -8,8 +8,30 @@
 import Foundation
 
 class Package: MedicalService {
-    var expiryDate: DateComponents // use 'year', 'month' and 'day' components
+    var expiryDate: DateComponents? // use 'year', 'month' and 'day' components, may not expire
     var tests: [Test]
+    
+    override var description: String {
+        // get the expiry date if it is not nil
+        var listedExpiryDate = ""
+        if let date = expiryDate {
+            listedExpiryDate = dateComponentsToDate(date)!.formatted(date: Date.FormatStyle.DateStyle.numeric, time: Date.FormatStyle.TimeStyle.omitted)
+        } else {
+            listedExpiryDate = "None"
+        }
+        // get all tests and place them in a string
+        var listedTests = ""
+        for test in tests {
+            listedTests.append("\(test.name)\n")
+        }
+        return """
+                \(super.description)
+                Type: Package
+                Expiry Date: \(listedExpiryDate)
+                - List of Tests -
+                \(listedTests)
+                """
+    }
     
     enum CodingKeys: Codable, CodingKey {
         case expiryDate, tests

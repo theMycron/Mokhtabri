@@ -26,7 +26,22 @@ class LoginViewController: UIViewController {
     @IBAction func loadButton(_ sender: Any) {
         AppData.loadData()
         guard AppData.facilities.count > 0 else {return}
-        displayLabel.text = "\(AppData.bookings.count) loaded bookings"
+        var openD: DateComponents = DateComponents()
+        openD.hour = 4
+        openD.minute = 0
+        var closeD: DateComponents = DateComponents()
+        closeD.hour = 20
+        closeD.minute = 30
+        let facility = MedicalFacility(name: "AHli", phone: "382479", city: "HAMAD TOWN", website: "www.hae.com", alwaysOpen: false, type: FacilityType.hospital, openingTime: openD, closingTime: closeD, username: "HALI", password: "jdhe")
+        let category = Category(name: "Blood test")
+        let test1 = Test(category: category, name: "General Blood Test", price: 2.5, description: "General blood test for various things", instructions: "Fast for 12 hours", forMedicalFacility: facility)
+        
+        var packageD: DateComponents = DateComponents()
+        packageD.year = 2024
+        packageD.month = 5
+        packageD.day = 27
+        let package = Package(expiryDate: packageD, tests: <#T##[Test]#>, name: "Summer Package", price: 12.45, description: "A great package to test your summer body", instructions: "Fast for 12 hours", forMedicalFacility: facility)
+        displayLabel.text = "\(facility)"
     }
     
     @IBAction func createButton(_ sender: Any) {
