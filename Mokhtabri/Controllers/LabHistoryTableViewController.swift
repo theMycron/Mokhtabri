@@ -12,6 +12,7 @@ class LabHistoryTableViewController: UITableViewController, UISearchBarDelegate 
     var patient = Patient(firstName: "Noora", lastName: "Qasim", phone: "12345678", cpr: "031003257", email: "nooraw376@gmail.com", gender: Gender.female, dateOfBirth: DateComponents(calendar: Calendar.current, year: 2003, month: 10, day: 12), username: "NooraW", password: "12345#")
     
     var searchBar: UISearchBar!
+    var selectedRow = 0
 
     // Create an array to store the bookings
     var bookings = [
@@ -135,6 +136,7 @@ class LabHistoryTableViewController: UITableViewController, UISearchBarDelegate 
         if let destinationVC = segue.destination as? LabBookingInfoTableViewController,
            let selectedIndexPath = tableView.indexPathForSelectedRow {
             // Pass the selected Booking to the destination view controller
+            selectedRow = selectedIndexPath.row
             destinationVC.cbooking = bookings[selectedIndexPath.row]
         }
     }
