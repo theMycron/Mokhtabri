@@ -9,6 +9,8 @@ import UIKit
 
 class LabBookingInfoTableViewController: UITableViewController {
     
+    @IBOutlet weak var btnContent: UIView!
+    
     @IBOutlet weak var testName: UILabel!
     var cbooking : Booking?
     @IBOutlet weak var statusLabel: UILabel!
@@ -22,6 +24,25 @@ class LabBookingInfoTableViewController: UITableViewController {
     @IBOutlet weak var labInfoLabel: UILabel!
     @IBOutlet weak var patientCellContainer: UIView!
     
+    @IBAction func btnPress(_ sender: Any) {
+        // Create the alert controller
+        let alertController = UIAlertController(title: "Confirm Completion", message: "do you want to confirm the completion of \(cbooking?.ofMedicalService.name ?? "") test/package", preferredStyle: .alert)
+
+        // Create the actions
+        let okAction = UIAlertAction(title: "Yes", style: .default) { action in
+            // Handle the response here.
+            self.updateStatus()
+        }
+        // Add Cancel action if needed
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+
+        // Add the actions to the alert controller
+        alertController.addAction(okAction)
+        alertController.addAction(cancelAction)
+
+        // Present the alert
+        present(alertController, animated: true, completion: nil)
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         updateData()
@@ -38,24 +59,31 @@ class LabBookingInfoTableViewController: UITableViewController {
   
     func updateData(){
         
-        guard let price = cbooking?.ofMedicalService.price, let status = cbooking?.status,let patientF = cbooking?.forPatient.firstName, let patientL = cbooking?.forPatient.lastName, let openb = cbooking?.ofMedicalService.forMedicalFacility.alwaysOpen, let iden = cbooking?.forPatient.cpr, let phone = cbooking?.forPatient.phone, let city = cbooking?.ofMedicalService.forMedicalFacility.city else {
+        //take away optionals
+        guard let price = cbooking?.ofMedicalService.price, let status = cbooking?.status,let patientF = cbooking?.forPatient.firstName, let patientL = cbooking?.forPatient.lastName, let openb = cbooking?.ofMedicalService.forMedicalFacility.alwaysOpen, let iden = cbooking?.forPatient.cpr, let phone = cbooking?.forPatient.phone, let city = cbooking?.ofMedicalService.forMedicalFacility.city, let date = cbooking?.bookingDate, let info = cbooking?.ofMedicalService.instructions else {
             return
         }
         
-        var patientDescription = "Patient Full Name: \(patientF)  \(patientL) \nPatient Identification Number: \(iden) \nPatient Mobile Number: \(phone)"
+        let patientDescription = " Patient Full Name: \(patientF)  \(patientL) \n Patient Identification Number: \(iden) \n Patient Mobile Number: \(phone)"
         var time = ""
         if (openb){
             time = "Always Open"
         }else{
-            var dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "HH:mm"
             guard let startTime = cbooking?.ofMedicalService.forMedicalFacility.openingTime.hour,let closingTime = cbooking?.ofMedicalService.forMedicalFacility.closingTime.hour else {return}
             
                 time = "Open From: \(startTime):00 until \(closingTime):00"
             
            
         }
-        var bookingInfo = "\(city) branch\n\(time)"
+        var dateString = ""
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd-MM-yyyy"
+        if let date2 = Calendar.current.date(from: date){
+            dateString = dateFormatter.string(from: date2)
+        }
+            
+        
+        let bookingInfo = " \(city) branch\n \(time)\n Booking Date: \(dateString)\n Special Information: \(info)"
         
         labInfoLabel.text = bookingInfo
         
@@ -86,12 +114,19 @@ class LabBookingInfoTableViewController: UITableViewController {
         return 6
     }
     
+    func updateStatus(){
+        statusLabel.text = "Completed"
+        cbooking?.status = .Completed
+        btnContent.isHidden = true
+    }
     
     func updateView(){
-        
-        patientCellContainer.layer.cornerRadius = 10
-        patientCellContainer.layer.masksToBounds = true
-        patientCellContainer.backgroundColor = UIColor.blue.withAlphaComponent(0.08)
+        //labInfoLabel.layer.cornerRadius = 10
+        //labInfoLabel.layer.masksToBounds = true
+        //labInfoLabel.backgroundColor = UIColor.systemBlue.withAlphaComponent(0.1)
+        //patientCellContainer.layer.cornerRadius = 10
+        //patientCellContainer.layer.masksToBounds = true
+        //patientCellContainer.backgroundColor = UIColor.blue.withAlphaComponent(0.1)
     }
     /*
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
