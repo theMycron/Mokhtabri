@@ -9,7 +9,7 @@ import UIKit
 
 class LabHistoryTableViewController: UITableViewController, UISearchBarDelegate, UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
-       // let scope = searchController.searchBar.selectedScopeButtonIndex
+        // let scope = searchController.searchBar.selectedScopeButtonIndex
         
         
     }
@@ -24,24 +24,14 @@ class LabHistoryTableViewController: UITableViewController, UISearchBarDelegate,
     // Create a patient
     var patient = Patient(firstName: "Noora", lastName: "Qasim", phone: "12345678", cpr: "031003257", email: "nooraw376@gmail.com", gender: Gender.female, dateOfBirth: DateComponents(calendar: Calendar.current, year: 2003, month: 10, day: 12), username: "NooraW", password: "12345#")
     
+    // Create an array to store the bookings
+    var bookings = AppData.bookings
     var searchBar: UISearchBar!
     //var selectedRow = 0
     var selectedSegmentIndex = 0
-    // Create an array to store the bookings
-    var bookings = [
-        
-        Booking(forPatient: Patient(firstName: "Noora", lastName: "Qasim", phone: "12345678", cpr: "031003257", email: "nooraw376@gmail.com", gender: Gender.female, dateOfBirth: DateComponents(calendar: Calendar.current, year: 2003, month: 10, day: 12), username: "NooraW", password: "12345#")
-    , ofMedicalService: MedicalService(name: "VitaminB12", price: 10, description: "Blood test for vitamin B12", instructions: "Fasting required for 8 to 12 hours", forMedicalFacility: MedicalFacility(name: "Al Hilal Hospital", phone: "12345689", city: "East Riffa", website: "Alhilal.com", alwaysOpen: true, type: .hospital, openingTime: DateComponents(calendar: Calendar.current, hour: 9, minute: 0), closingTime: DateComponents(calendar: Calendar.current, hour: 21, minute: 0), username: "AlHihalEastRiffa", password: "alhilal")), bookingDate: DateComponents(calendar: Calendar.current, year: 2023, month: 1, day: 10)),
-                    
-                    
-                    Booking(forPatient: Patient(firstName: "Noora", lastName: "Qasim", phone: "12345678", cpr: "031003257", email: "nooraw376@gmail.com", gender: Gender.female, dateOfBirth: DateComponents(calendar: Calendar.current, year: 2003, month: 10, day: 12), username: "NooraW", password: "12345#")
-                , ofMedicalService: MedicalService(name: "Vitamin D", price: 10, description: "Blood test for vitamin B12", instructions: "Fasting required for 8 to 12 hours", forMedicalFacility: MedicalFacility(name: "Al Hilal Hospital", phone: "12345689", city: "East Riffa", website: "Alhilal.com", alwaysOpen: true, type: .hospital, openingTime: DateComponents(calendar: Calendar.current, hour: 9, minute: 0), closingTime: DateComponents(calendar: Calendar.current, hour: 21, minute: 0), username: "AlHihalEastRiffa", password: "alhilal")), bookingDate: DateComponents(calendar: Calendar.current, year: 2023, month: 2, day: 15)),
     
     
-                    Booking(forPatient: Patient(firstName: "Noora", lastName: "Qasim", phone: "12345678", cpr: "031003257", email: "nooraw376@gmail.com", gender: Gender.female, dateOfBirth: DateComponents(calendar: Calendar.current, year: 2003, month: 10, day: 12), username: "NooraW", password: "12345#")
-                , ofMedicalService: MedicalService(name: "Iron and Hb", price: 10, description: "Blood test for vitamin B12", instructions: "Fasting required for 8 to 12 hours", forMedicalFacility: MedicalFacility(name: "Al Hilal Hospital", phone: "12345689", city: "East Riffa", website: "Alhilal.com", alwaysOpen: false, type: .hospital, openingTime: DateComponents(calendar: Calendar.current, hour: 9, minute: 0), closingTime: DateComponents(calendar: Calendar.current, hour: 21, minute: 0), username: "AlHihalEastRiffa", password: "alhilal")), bookingDate: DateComponents(calendar: Calendar.current, year: 2023, month: 3, day: 20))]
-
-
+    
     
     var activeBookings: [Booking] = []
     var completedBookings: [Booking] = []
@@ -50,12 +40,13 @@ class LabHistoryTableViewController: UITableViewController, UISearchBarDelegate,
     override func viewDidLoad() {
         super.viewDidLoad()
         categorizeBookings()
-
-
-
+        
+        
+        
+        
         // Set up the search controller
         embedSearch()
-
+        //tableView.reloadData()
     }
     
     fileprivate func embedSearch(){
@@ -67,14 +58,14 @@ class LabHistoryTableViewController: UITableViewController, UISearchBarDelegate,
         navigationItem.searchController?.searchBar.scopeButtonTitles = ["Active", "Completed","Cancelled"]
         navigationItem.searchController?.automaticallyShowsScopeBar = false
     }
-
+    
     // MARK: - Table view data source
-
+    
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 1
     }
-
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         switch selectedSegmentIndex {
@@ -87,7 +78,7 @@ class LabHistoryTableViewController: UITableViewController, UISearchBarDelegate,
         
     }
     
-  
+    
     
     
     
@@ -96,7 +87,7 @@ class LabHistoryTableViewController: UITableViewController, UISearchBarDelegate,
         
         // Configure the cell...
         // Assuming your cell has labels named 'patientNameLabel' and 'bookingDateLabel'
-            // let booking = bookings[indexPath.row]
+        // let booking = bookings[indexPath.row]
         let booking: Booking
         switch selectedSegmentIndex {
         case 0: booking = activeBookings[indexPath.row]
@@ -120,23 +111,23 @@ class LabHistoryTableViewController: UITableViewController, UISearchBarDelegate,
         return cell
     }
     
-
-
-
+    
+    
+    
     @objc func segmentedControlValueChanged(_ sender: UISegmentedControl) {
         selectedSegmentIndex = sender.selectedSegmentIndex
         categorizeBookings()
         tableView.reloadData()
     }
-  
-
+    
+    
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         if (section == 2  || section == 0){
             return 10
         }else{
             return 44 // Adjust the height as needed
         }}
-
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let destinationVC = segue.destination as? LabBookingInfoTableViewController,
            let selectedIndexPath = tableView.indexPathForSelectedRow {
@@ -151,18 +142,29 @@ class LabHistoryTableViewController: UITableViewController, UISearchBarDelegate,
               let indexPath = tableView.indexPathForSelectedRow else {
             return
         }
-
+        
         bookings[indexPath.row] = updatedBooking
         categorizeBookings() // Recategorize bookings after updating
         tableView.reloadData()
-                
+        
     }
     func categorizeBookings() {
         activeBookings = bookings.filter { $0.status == .Active } // Replace .active with your actual status value for active bookings
         completedBookings = bookings.filter { $0.status == .Completed } // Replace .completed with your actual status value for completed bookings
         cancelledBookings = bookings.filter { $0.status == .Cancelled } // Replace .cancelled with your actual status value for cancelled bookings
-      }
     }
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            // Delete the row from the data source
+            confirmation(title: "Delete Confirmation", message: "Are you sure you want to delete this booking, if the booking is active it will lead to automatic cancellation"){
+                self.bookings.remove(at: indexPath.row)
+                self.categorizeBookings()
+                AppData.bookings.remove(at: indexPath.row)
+                tableView.deleteRows(at: [indexPath], with: .fade)
+            }
+
+        }
+    }}
 
 
   
@@ -177,17 +179,10 @@ class LabHistoryTableViewController: UITableViewController, UISearchBarDelegate,
     }
     */
 
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
+    
+   // Override to support editing the table view.
+
+    
 
     /*
     // Override to support rearranging the table view.

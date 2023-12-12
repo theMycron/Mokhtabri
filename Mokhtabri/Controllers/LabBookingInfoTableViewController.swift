@@ -9,6 +9,8 @@ import UIKit
 
 class LabBookingInfoTableViewController: UITableViewController {
     
+    
+    
     @IBOutlet weak var btnContent: UIView!
     
     @IBOutlet weak var testName: UILabel!
@@ -31,41 +33,15 @@ class LabBookingInfoTableViewController: UITableViewController {
 
     @IBAction func btnPress(_ sender: Any) {
         // Create the alert controller
-        let alertController = UIAlertController(title: "Confirm Completion", message: "do you want to confirm the completion of \(cbooking?.ofMedicalService.name ?? "") test/package", preferredStyle: .alert)
-
-        // Create the actions
-        let okAction = UIAlertAction(title: "Yes", style: .default) { action in
-            // Handle the response here.
+        confirmation(title: "Confirm Completion", message: "do you want to confirm the completion of \(cbooking?.ofMedicalService.name ?? "") test/package"){
             self.updateStatus()
         }
-        // Add Cancel action if needed
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-
-        // Add the actions to the alert controller
-        alertController.addAction(okAction)
-        alertController.addAction(cancelAction)
-
-        // Present the alert
-        present(alertController, animated: true, completion: nil)
     }
     
     @IBAction func cancelBtn(_ sender: Any) {
-        let alertController = UIAlertController(title: "Confirm Cancellation", message: "do you want to confirm the cancellation of \(cbooking?.ofMedicalService.name ?? "") test/package", preferredStyle: .alert)
-
-        // Create the actions
-        let okAction = UIAlertAction(title: "Yes", style: .default) { action in
-            // Handle the response here.
+        confirmation(title: "Confirm Cancellation", message: "do you want to confirm the cancellation of \(cbooking?.ofMedicalService.name ?? "") test/package"){
             self.updateStatus2()
         }
-        // Add Cancel action if needed
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-
-        // Add the actions to the alert controller
-        alertController.addAction(okAction)
-        alertController.addAction(cancelAction)
-
-        // Present the alert
-        present(alertController, animated: true, completion: nil)
 
     }
     
@@ -74,11 +50,6 @@ class LabBookingInfoTableViewController: UITableViewController {
         updateData()
         updateView()
 
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
 
     // MARK: - Table view data source
