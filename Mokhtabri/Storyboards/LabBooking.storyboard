@@ -330,9 +330,16 @@
                             <outlet property="delegate" destination="WlQ-Ix-lqB" id="BT4-HQ-LHr"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="mit-gc-7qu"/>
+                    <navigationItem key="navigationItem" id="mit-gc-7qu">
+                        <barButtonItem key="rightBarButtonItem" title="Cancel" id="CZ7-QT-gUu">
+                            <connections>
+                                <action selector="cancelBtn:" destination="WlQ-Ix-lqB" id="KlU-cw-yDh"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="btnContent" destination="Oek-I9-2KR" id="rlw-rE-O75"/>
+                        <outlet property="cancelbtnO" destination="CZ7-QT-gUu" id="fZh-Ng-SBK"/>
                         <outlet property="labInfoLabel" destination="gO6-qD-Iue" id="cQN-PB-A3w"/>
                         <outlet property="patientCell" destination="JZg-5X-CGM" id="vFJ-ZM-2V5"/>
                         <outlet property="patientCellContainer" destination="4Nc-ad-e0g" id="gEX-0U-2h3"/>
@@ -340,15 +347,13 @@
                         <outlet property="priceLabel" destination="cBR-h2-0tJ" id="1jd-Su-eJX"/>
                         <outlet property="statusLabel" destination="B6d-wK-NIJ" id="bMg-In-PE9"/>
                         <outlet property="testName" destination="uWR-59-0J8" id="xvN-8B-BRi"/>
+                        <segue destination="Ok3-Jr-Pji" kind="unwind" unwindAction="prepareForUnwindWithSegue:" id="2u8-hD-tXF"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Gf1-Zy-uaK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="PNS-20-5VQ">
-                    <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                </imageView>
+                <exit id="Ok3-Jr-Pji" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="5052.6717557251905" y="557.74647887323943"/>
+            <point key="canvasLocation" x="4955" y="549"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="kKA-1U-Wef">

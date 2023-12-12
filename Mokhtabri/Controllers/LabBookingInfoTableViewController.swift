@@ -24,6 +24,11 @@ class LabBookingInfoTableViewController: UITableViewController {
     @IBOutlet weak var labInfoLabel: UILabel!
     @IBOutlet weak var patientCellContainer: UIView!
     
+    
+    func performUnwindSegue() {
+           performSegue(withIdentifier: "showInfo", sender: self)
+       }
+
     @IBAction func btnPress(_ sender: Any) {
         // Create the alert controller
         let alertController = UIAlertController(title: "Confirm Completion", message: "do you want to confirm the completion of \(cbooking?.ofMedicalService.name ?? "") test/package", preferredStyle: .alert)
@@ -43,6 +48,27 @@ class LabBookingInfoTableViewController: UITableViewController {
         // Present the alert
         present(alertController, animated: true, completion: nil)
     }
+    
+    @IBAction func cancelBtn(_ sender: Any) {
+        let alertController = UIAlertController(title: "Confirm Cancellation", message: "do you want to confirm the cancellation of \(cbooking?.ofMedicalService.name ?? "") test/package", preferredStyle: .alert)
+
+        // Create the actions
+        let okAction = UIAlertAction(title: "Yes", style: .default) { action in
+            // Handle the response here.
+            self.updateStatus2()
+        }
+        // Add Cancel action if needed
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+
+        // Add the actions to the alert controller
+        alertController.addAction(okAction)
+        alertController.addAction(cancelAction)
+
+        // Present the alert
+        present(alertController, animated: true, completion: nil)
+
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         updateData()
@@ -118,15 +144,23 @@ class LabBookingInfoTableViewController: UITableViewController {
         statusLabel.text = "Completed"
         cbooking?.status = .Completed
         btnContent.isHidden = true
+        cancelbtnO.isHidden = true
     }
     
+    @IBOutlet weak var cancelbtnO: UIBarButtonItem!
+    func updateStatus2(){
+        statusLabel.text = "Cancelled"
+        cbooking?.status = .Completed
+        btnContent.isHidden = true
+        cancelbtnO.isHidden = true
+    }
+    
+    
     func updateView(){
-        //labInfoLabel.layer.cornerRadius = 10
-        //labInfoLabel.layer.masksToBounds = true
-        //labInfoLabel.backgroundColor = UIColor.systemBlue.withAlphaComponent(0.1)
-        //patientCellContainer.layer.cornerRadius = 10
-        //patientCellContainer.layer.masksToBounds = true
-        //patientCellContainer.backgroundColor = UIColor.blue.withAlphaComponent(0.1)
+        if cbooking?.status == .Cancelled || cbooking?.status == .Completed{
+            btnContent.isHidden = true
+            cancelbtnO.isHidden = true
+        }
     }
     /*
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

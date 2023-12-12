@@ -140,8 +140,22 @@ class LabHistoryTableViewController: UITableViewController, UISearchBarDelegate 
             destinationVC.cbooking = bookings[selectedIndexPath.row]
         }
     }
+    
+    @IBAction func prepareForUnwind(segue:UIStoryboardSegue){
+        guard let source = segue.source as? LabBookingInfoTableViewController, let book = source.cbooking else{
+            return
+        }
+        if let indexPath = tableView.indexPathForSelectedRow{
+            bookings.remove(at: indexPath.row)
+            bookings.insert(book, at: indexPath.row)
+            tableView.deselectRow(at: indexPath, animated: true)
+        }
+                
+    }
 
-   
+
+  
+    
 
 
     /*
