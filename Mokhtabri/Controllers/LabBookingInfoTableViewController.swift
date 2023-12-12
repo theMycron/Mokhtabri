@@ -150,7 +150,7 @@ class LabBookingInfoTableViewController: UITableViewController {
     @IBOutlet weak var cancelbtnO: UIBarButtonItem!
     func updateStatus2(){
         statusLabel.text = "Cancelled"
-        cbooking?.status = .Completed
+        cbooking?.status = .Cancelled
         btnContent.isHidden = true
         cancelbtnO.isHidden = true
     }

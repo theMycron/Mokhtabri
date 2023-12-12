@@ -10,7 +10,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Booking History-->
+        <!--Lab History Table View Controller-->
         <scene sceneID="XMf-eR-iD7">
             <objects>
                 <tableViewController id="9av-kC-JTt" customClass="LabHistoryTableViewController" customModule="Mokhtabri" customModuleProvider="target" sceneMemberID="viewController">
@@ -46,32 +46,8 @@
                                     </constraints>
                                 </tableViewCellContentView>
                             </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="StaticCell2" rowHeight="55" id="o5D-ac-EBz">
-                                <rect key="frame" x="20" y="110.33333206176758" width="353" height="55"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="o5D-ac-EBz" id="xvS-PL-jv1">
-                                    <rect key="frame" x="0.0" y="0.0" width="353" height="55"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="w9o-tu-QFS">
-                                            <rect key="frame" x="0.0" y="11.666666666666664" width="353" height="32.666666666666671"/>
-                                            <segments>
-                                                <segment title="Active"/>
-                                                <segment title="Completed"/>
-                                                <segment title="Cancelled"/>
-                                            </segments>
-                                        </segmentedControl>
-                                    </subviews>
-                                    <constraints>
-                                        <constraint firstAttribute="trailing" secondItem="w9o-tu-QFS" secondAttribute="trailing" id="2XM-D6-cN0"/>
-                                        <constraint firstItem="w9o-tu-QFS" firstAttribute="leading" secondItem="xvS-PL-jv1" secondAttribute="leading" id="65e-VG-zJB"/>
-                                        <constraint firstItem="w9o-tu-QFS" firstAttribute="centerY" secondItem="xvS-PL-jv1" secondAttribute="centerY" id="MQZ-6X-Ko5"/>
-                                        <constraint firstItem="w9o-tu-QFS" firstAttribute="top" secondItem="xvS-PL-jv1" secondAttribute="topMargin" constant="-0.33333206176757812" id="p7Q-h2-0JR"/>
-                                    </constraints>
-                                </tableViewCellContentView>
-                            </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="blue" indentationWidth="10" reuseIdentifier="PatientViewCell" rowHeight="96" id="u0b-a4-fCh" customClass="LabBookingTableViewCell" customModule="Mokhtabri" customModuleProvider="target">
-                                <rect key="frame" x="20" y="165.33333206176758" width="353" height="96"/>
+                                <rect key="frame" x="20" y="110.33333206176758" width="353" height="96"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="u0b-a4-fCh" id="YOx-Al-Zai">
                                     <rect key="frame" x="0.0" y="0.0" width="353" height="96"/>
@@ -148,7 +124,21 @@
                             <outlet property="delegate" destination="9av-kC-JTt" id="Zat-u4-BGl"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Booking History" id="TBT-MM-XVW"/>
+                    <navigationItem key="navigationItem" id="TBT-MM-XVW">
+                        <nil key="title"/>
+                        <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" id="w9o-tu-QFS">
+                            <rect key="frame" x="66.666666666666686" y="6" width="260" height="32"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <segments>
+                                <segment title="Active"/>
+                                <segment title="Completed"/>
+                                <segment title="Cancelled"/>
+                            </segments>
+                            <connections>
+                                <action selector="segmentedControl:" destination="9av-kC-JTt" eventType="valueChanged" id="RB7-8F-YUC"/>
+                            </connections>
+                        </segmentedControl>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tlL-pI-x3T" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

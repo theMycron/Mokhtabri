@@ -7,13 +7,26 @@
 
 import UIKit
 
-class LabHistoryTableViewController: UITableViewController, UISearchBarDelegate {
+class LabHistoryTableViewController: UITableViewController, UISearchBarDelegate, UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+       // let scope = searchController.searchBar.selectedScopeButtonIndex
+        
+        
+    }
+    
+    @IBAction func segmentedControl(_ sender: UISegmentedControl) {
+        selectedSegmentIndex = sender.selectedSegmentIndex
+        categorizeBookings()
+        tableView.reloadData()
+    }
+    
+    
     // Create a patient
     var patient = Patient(firstName: "Noora", lastName: "Qasim", phone: "12345678", cpr: "031003257", email: "nooraw376@gmail.com", gender: Gender.female, dateOfBirth: DateComponents(calendar: Calendar.current, year: 2003, month: 10, day: 12), username: "NooraW", password: "12345#")
     
     var searchBar: UISearchBar!
-    var selectedRow = 0
-
+    //var selectedRow = 0
+    var selectedSegmentIndex = 0
     // Create an array to store the bookings
     var bookings = [
         
@@ -30,32 +43,47 @@ class LabHistoryTableViewController: UITableViewController, UISearchBarDelegate 
 
 
     
- 
+    var activeBookings: [Booking] = []
+    var completedBookings: [Booking] = []
+    var cancelledBookings: [Booking] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        categorizeBookings()
 
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
 
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
+
+        // Set up the search controller
+        embedSearch()
+
+    }
+    
+    fileprivate func embedSearch(){
+        navigationItem.searchController = UISearchController()
+        navigationItem.searchController?.searchBar.placeholder = "Search Through Bookings"
+        navigationItem.searchController?.searchResultsUpdater = self
+        
+        //scope
+        navigationItem.searchController?.searchBar.scopeButtonTitles = ["Active", "Completed","Cancelled"]
+        navigationItem.searchController?.automaticallyShowsScopeBar = false
     }
 
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 3
+        return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        if (section == 0 || section == 1){
-            return 0
-        }else {
-            return bookings.count
+        switch selectedSegmentIndex {
+        case 0: return activeBookings.count
+        case 1: return completedBookings.count
+        case 2: return cancelledBookings.count
+        default: return 0
         }
+        
         
     }
     
@@ -68,7 +96,14 @@ class LabHistoryTableViewController: UITableViewController, UISearchBarDelegate 
         
         // Configure the cell...
         // Assuming your cell has labels named 'patientNameLabel' and 'bookingDateLabel'
-        let booking = bookings[indexPath.row]
+            // let booking = bookings[indexPath.row]
+        let booking: Booking
+        switch selectedSegmentIndex {
+        case 0: booking = activeBookings[indexPath.row]
+        case 1: booking = completedBookings[indexPath.row]
+        case 2: booking = cancelledBookings[indexPath.row]
+        default: fatalError("Invalid segment index")
+        }
         let patientName = "\(booking.forPatient.firstName) \(booking.forPatient.lastName)"
         let bookingDate = booking.bookingDate
         
@@ -85,48 +120,18 @@ class LabHistoryTableViewController: UITableViewController, UISearchBarDelegate 
         return cell
     }
     
-    func createSearchBarHeaderView() -> UIView {
-        let searchBar = UISearchBar()
-        searchBar.placeholder = "Search"
-        searchBar.delegate = self
-        // Customize the appearance of the search bar if needed
-        return searchBar
-    }
 
-    func createSegmentedControlHeaderView() -> UIView {
-        let segmentedControl = UISegmentedControl(items: ["Active", "Completed","Cancelled"])
-        segmentedControl.selectedSegmentIndex = 0 // Set the initial selected index
-        segmentedControl.addTarget(self, action: #selector(segmentedControlValueChanged(_:)), for: .valueChanged)
-        // Customize the appearance of the segmented control if needed
-        
-        return segmentedControl
-    }
+
 
     @objc func segmentedControlValueChanged(_ sender: UISegmentedControl) {
-        switch sender.selectedSegmentIndex {
-        case 0:
-            // Handle Option 1 selection
-            break
-        case 1:
-            // Handle Option 2 selection
-            break
-        default:
-            break
-        }
+        selectedSegmentIndex = sender.selectedSegmentIndex
+        categorizeBookings()
+        tableView.reloadData()
     }
-    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        switch section {
-        case 0:
-            return createSearchBarHeaderView()
-        case 1:
-            return createSegmentedControlHeaderView()
-        default:
-            return nil
-        }
-    }
+  
 
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        if (section == 2){
+        if (section == 2  || section == 0){
             return 10
         }else{
             return 44 // Adjust the height as needed
@@ -136,21 +141,27 @@ class LabHistoryTableViewController: UITableViewController, UISearchBarDelegate 
         if let destinationVC = segue.destination as? LabBookingInfoTableViewController,
            let selectedIndexPath = tableView.indexPathForSelectedRow {
             // Pass the selected Booking to the destination view controller
-            selectedRow = selectedIndexPath.row
             destinationVC.cbooking = bookings[selectedIndexPath.row]
         }
     }
     
     @IBAction func prepareForUnwind(segue:UIStoryboardSegue){
-        guard let source = segue.source as? LabBookingInfoTableViewController, let book = source.cbooking else{
+        guard let source = segue.source as? LabBookingInfoTableViewController,
+              let updatedBooking = source.cbooking,
+              let indexPath = tableView.indexPathForSelectedRow else {
             return
         }
-        if let indexPath = tableView.indexPathForSelectedRow{
-            bookings.remove(at: indexPath.row)
-            bookings.insert(book, at: indexPath.row)
-            tableView.deselectRow(at: indexPath, animated: true)
-        }
+
+        bookings[indexPath.row] = updatedBooking
+        categorizeBookings() // Recategorize bookings after updating
+        tableView.reloadData()
                 
+    }
+    func categorizeBookings() {
+        activeBookings = bookings.filter { $0.status == .Active } // Replace .active with your actual status value for active bookings
+        completedBookings = bookings.filter { $0.status == .Completed } // Replace .completed with your actual status value for completed bookings
+        cancelledBookings = bookings.filter { $0.status == .Cancelled } // Replace .cancelled with your actual status value for cancelled bookings
+      }
     }
 
 
@@ -203,4 +214,4 @@ class LabHistoryTableViewController: UITableViewController, UISearchBarDelegate 
     }
     */
 
-}
+
