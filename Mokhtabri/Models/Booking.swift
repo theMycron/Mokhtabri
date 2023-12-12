@@ -18,8 +18,8 @@ class Booking: Codable {
         self.ofMedicalService = ofMedicalService
         self.bookingDate = bookingDate
         self.status = status
-        // add this booking to the list of bookings in the facility
-        ofMedicalService.forMedicalFacility.bookings.append(self)
+        // add this booking to the list of bookings in the facility (NOT NEEDED)
+//        ofMedicalService.forMedicalFacility.bookings.append(self)
     }
     
     

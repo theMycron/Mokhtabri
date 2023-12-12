@@ -9,8 +9,9 @@ class MedicalFacility: User {
     var type: FacilityType
     var openingTime: DateComponents
     var closingTime: DateComponents
-    var medicalServices: [MedicalService]
-    var bookings: [Booking]
+//    var medicalServices: [MedicalService]
+//    var medicalService: MedicalService
+//    var bookings: [Booking]
     var image: Data? // Property to store an image
 
     enum CodingKeys: Codable, CodingKey {
@@ -26,12 +27,27 @@ class MedicalFacility: User {
         self.type = type
         self.openingTime = openingTime
         self.closingTime = closingTime
-        self.medicalServices = []
-        self.bookings = []
+//        self.medicalServices = []
+//        self.bookings = []
         self.image = nil // Initialize the image property
         super.init(username: username, password: password, userType: UserType.lab)
     }
-
+    
+    override func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(name, forKey: .name)
+        try container.encode(phone, forKey: .phone)
+        try container.encode(city, forKey: .city)
+        try container.encode(website, forKey: .website)
+        try container.encode(alwaysOpen, forKey: .alwaysOpen)
+        try container.encode(type, forKey: .type)
+        try container.encode(openingTime, forKey: .openingTime)
+        try container.encode(closingTime, forKey: .closingTime)
+//        try container.encode(medicalServices, forKey: .medicalServices)
+//        try container.encode(bookings, forKey: .bookings)
+        try super.encode(to: encoder)
+    }
+    
     required init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         self.name = try values.decode(String.self, forKey: .name)
@@ -42,8 +58,8 @@ class MedicalFacility: User {
         self.type = try values.decode(FacilityType.self, forKey: .type)
         self.openingTime = try values.decode(DateComponents.self, forKey: .openingTime)
         self.closingTime = try values.decode(DateComponents.self, forKey: .closingTime)
-        self.medicalServices = try values.decode([MedicalService].self, forKey: .medicalServices)
-        self.bookings = try values.decode([Booking].self, forKey: .bookings)
+//        self.medicalServices = try values.decode([MedicalService].self, forKey: .medicalServices)
+//        self.bookings = try values.decode([Booking].self, forKey: .bookings)
         
         // Decode image as base64-encoded data
         if let imageBase64 = try values.decodeIfPresent(String.self, forKey: .image) {

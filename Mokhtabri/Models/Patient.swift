@@ -15,7 +15,7 @@ class Patient: User {
     var email: String
     var gender: Gender
     var dateOfBirth: DateComponents // use 'year', 'month' and 'day' components
-    var bookings: [Booking]
+//    var bookings: [Booking]
     var age: Int {
         let calendar = Calendar.current
         let currentDate = Date()
@@ -49,11 +49,22 @@ class Patient: User {
         self.email = email
         self.gender = gender
         self.dateOfBirth = dateOfBirth
-        self.bookings = []
+//        self.bookings = []
         super.init(username: username, password: password, userType: .patient)
     }
     
-    
+    override func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(firstName, forKey: .firstName)
+        try container.encode(lastName, forKey: .lastName)
+        try container.encode(phone, forKey: .phone)
+        try container.encode(cpr, forKey: .cpr)
+        try container.encode(email, forKey: .email)
+        try container.encode(gender, forKey: .gender)
+        try container.encode(dateOfBirth, forKey: .dateOfBirth)
+//        try container.encode(bookings, forKey: .bookings)
+        try super.encode(to: encoder)
+    }
     
     // this initializer decodes the object and is required for coding functionality
     required init(from decoder: Decoder) throws {
@@ -65,7 +76,7 @@ class Patient: User {
         self.email = try values.decodeIfPresent(String.self, forKey: .email)!
         self.gender = try values.decodeIfPresent(Gender.self, forKey: .gender)!
         self.dateOfBirth = try values.decodeIfPresent(DateComponents.self, forKey: .dateOfBirth)!
-        self.bookings = try values.decodeIfPresent([Booking].self, forKey: .bookings)!
+//        self.bookings = try values.decodeIfPresent([Booking].self, forKey: .bookings)!
         // decode base class
         try super.init(from: decoder)
             

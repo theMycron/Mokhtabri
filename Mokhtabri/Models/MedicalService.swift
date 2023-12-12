@@ -8,7 +8,7 @@ class MedicalService: Codable {
     var forMedicalFacility: MedicalFacility
     var image: Data? // Property to store an image
 
-    enum CodingKeys: String, CodingKey {
+    enum CodingKeys: Codable, CodingKey {
         case name, price, description, instructions, forMedicalFacility, image // Include 'image' in the CodingKeys
     }
     
@@ -19,6 +19,16 @@ class MedicalService: Codable {
         self.instructions = instructions
         self.forMedicalFacility = forMedicalFacility
         self.image = nil // Initialize the image property
+    }
+    
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(name, forKey: .name)
+        try container.encode(price, forKey: .price)
+        try container.encode(description, forKey: .description)
+        try container.encode(instructions, forKey: .instructions)
+        try container.encode(forMedicalFacility, forKey: .forMedicalFacility)
+        try container.encode(encodeImage(), forKey: .image)
     }
     
     required init(from decoder: Decoder) throws {
