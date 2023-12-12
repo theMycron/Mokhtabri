@@ -34,6 +34,7 @@
 		448FF7292B15F90400B3CA1D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 448FF7282B15F90400B3CA1D /* Assets.xcassets */; };
 		448FF7392B16049500B3CA1D /* Admin.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 448FF7382B16049500B3CA1D /* Admin.storyboard */; };
 		448FF73D2B1604A600B3CA1D /* PatientBookings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 448FF73C2B1604A600B3CA1D /* PatientBookings.storyboard */; };
+		44A530D02B287AF3001B2CA3 /* HelperFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A530CF2B287AF3001B2CA3 /* HelperFunctions.swift */; };
 		44F198D72B1DE2B400EDEA0B /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 44F198D62B1DE2B400EDEA0B /* Colors.xcassets */; };
 		F2F60A1C2B27186A005B74C6 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2F60A1B2B27186A005B74C6 /* SettingsTableViewController.swift */; };
 		F2F60A1E2B271CD0005B74C6 /* LabBookingInfoTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2F60A1D2B271CD0005B74C6 /* LabBookingInfoTableViewController.swift */; };
@@ -70,6 +71,7 @@
 		448FF72D2B15F90400B3CA1D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		448FF7382B16049500B3CA1D /* Admin.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Admin.storyboard; sourceTree = "<group>"; };
 		448FF73C2B1604A600B3CA1D /* PatientBookings.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = PatientBookings.storyboard; sourceTree = "<group>"; };
+		44A530CF2B287AF3001B2CA3 /* HelperFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelperFunctions.swift; sourceTree = "<group>"; };
 		44F198D62B1DE2B400EDEA0B /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
 		F2F60A1B2B27186A005B74C6 /* SettingsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
 		F2F60A1D2B271CD0005B74C6 /* LabBookingInfoTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LabBookingInfoTableViewController.swift; path = Mokhtabri/Controllers/LabBookingInfoTableViewController.swift; sourceTree = SOURCE_ROOT; };
@@ -164,6 +166,7 @@
 				446C067D2B1C9528006A6A5E /* enums.swift */,
 				44F198D62B1DE2B400EDEA0B /* Colors.xcassets */,
 				442AB0FD2B27195E00C05BA6 /* Persistence.swift */,
+				44A530CF2B287AF3001B2CA3 /* HelperFunctions.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -277,6 +280,7 @@
 				446C067C2B1C930D006A6A5E /* MedicalFacility.swift in Sources */,
 				448FF7222B15F90200B3CA1D /* SceneDelegate.swift in Sources */,
 				F2F60A1C2B27186A005B74C6 /* SettingsTableViewController.swift in Sources */,
+				44A530D02B287AF3001B2CA3 /* HelperFunctions.swift in Sources */,
 				F2F60A222B27A83D005B74C6 /* PatientInfoTableViewCell.swift in Sources */,
 				446C067E2B1C9528006A6A5E /* enums.swift in Sources */,
 				442AB0FE2B27195E00C05BA6 /* Persistence.swift in Sources */,
