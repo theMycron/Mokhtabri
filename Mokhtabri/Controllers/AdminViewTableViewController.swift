@@ -36,8 +36,7 @@ class AdminViewTableViewController: UITableViewController, UISearchControllerDel
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 10
+        return AppData.facilities.count
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -50,6 +49,7 @@ class AdminViewTableViewController: UITableViewController, UISearchControllerDel
         let cell = tableView.dequeueReusableCell(withIdentifier: "AdminViewCell", for: indexPath)
 
         // Configure the cell...
+//        cell.update(with: )
 
         return cell
     }

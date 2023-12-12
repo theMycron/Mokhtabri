@@ -9,6 +9,21 @@ import UIKit
 
 class AdminViewTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var lblName: UILabel!
+    
+    @IBOutlet weak var lblCity: UILabel!
+    
+    @IBOutlet weak var lblType: UILabel!
+    
+    @IBOutlet weak var imgDisplay: UIImageView!
+    
+    func update(with facility: MedicalFacility) {
+        lblName.text = facility.name
+        lblCity.text = facility.city
+        lblType.text = facility.type.rawValue
+        // TODO: add image
+    }
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

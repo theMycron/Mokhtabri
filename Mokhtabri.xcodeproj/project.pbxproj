@@ -22,7 +22,6 @@
 		446112312B1D99CF002F815C /* MedicalService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446112302B1D99CF002F815C /* MedicalService.swift */; };
 		446112332B1D9B5B002F815C /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446112322B1D9B5B002F815C /* Category.swift */; };
 		446112352B1DABB0002F815C /* AdminViewTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446112342B1DABB0002F815C /* AdminViewTableViewController.swift */; };
-		4462E0112B25DA0600769654 /* AdminViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4462E0102B25DA0600769654 /* AdminViewController.swift */; };
 		446C06722B1C92DB006A6A5E /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446C06712B1C92DB006A6A5E /* User.swift */; };
 		446C06742B1C92E3006A6A5E /* Patient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446C06732B1C92E3006A6A5E /* Patient.swift */; };
 		446C06762B1C92EE006A6A5E /* Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446C06752B1C92EE006A6A5E /* Test.swift */; };
@@ -35,6 +34,7 @@
 		448FF7292B15F90400B3CA1D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 448FF7282B15F90400B3CA1D /* Assets.xcassets */; };
 		448FF7392B16049500B3CA1D /* Admin.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 448FF7382B16049500B3CA1D /* Admin.storyboard */; };
 		448FF73D2B1604A600B3CA1D /* PatientBookings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 448FF73C2B1604A600B3CA1D /* PatientBookings.storyboard */; };
+		449FD76B2B28886200808C7B /* AdminEditTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 449FD76A2B28886200808C7B /* AdminEditTableViewController.swift */; };
 		44A530D02B287AF3001B2CA3 /* HelperFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A530CF2B287AF3001B2CA3 /* HelperFunctions.swift */; };
 		44F198D72B1DE2B400EDEA0B /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 44F198D62B1DE2B400EDEA0B /* Colors.xcassets */; };
 		F2F60A1C2B27186A005B74C6 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2F60A1B2B27186A005B74C6 /* SettingsTableViewController.swift */; };
@@ -58,7 +58,6 @@
 		446112302B1D99CF002F815C /* MedicalService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicalService.swift; sourceTree = "<group>"; };
 		446112322B1D9B5B002F815C /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		446112342B1DABB0002F815C /* AdminViewTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminViewTableViewController.swift; sourceTree = "<group>"; };
-		4462E0102B25DA0600769654 /* AdminViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminViewController.swift; sourceTree = "<group>"; };
 		446C06712B1C92DB006A6A5E /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		446C06732B1C92E3006A6A5E /* Patient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Patient.swift; sourceTree = "<group>"; };
 		446C06752B1C92EE006A6A5E /* Test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Test.swift; sourceTree = "<group>"; };
@@ -73,6 +72,7 @@
 		448FF72D2B15F90400B3CA1D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		448FF7382B16049500B3CA1D /* Admin.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Admin.storyboard; sourceTree = "<group>"; };
 		448FF73C2B1604A600B3CA1D /* PatientBookings.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = PatientBookings.storyboard; sourceTree = "<group>"; };
+		449FD76A2B28886200808C7B /* AdminEditTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminEditTableViewController.swift; sourceTree = "<group>"; };
 		44A530CF2B287AF3001B2CA3 /* HelperFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelperFunctions.swift; sourceTree = "<group>"; };
 		44F198D62B1DE2B400EDEA0B /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
 		F2F60A1B2B27186A005B74C6 /* SettingsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
@@ -142,7 +142,7 @@
 				44214DDF2B26CA4D000DAA0A /* LabHistoryTableViewController.swift */,
 				4461122E2B1D90C7002F815C /* LoginViewController.swift */,
 				446112342B1DABB0002F815C /* AdminViewTableViewController.swift */,
-				4462E0102B25DA0600769654 /* AdminViewController.swift */,
+				449FD76A2B28886200808C7B /* AdminEditTableViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -277,7 +277,6 @@
 				446C06782B1C92F3006A6A5E /* Package.swift in Sources */,
 				448FF7202B15F90200B3CA1D /* AppDelegate.swift in Sources */,
 				446C067A2B1C9302006A6A5E /* Booking.swift in Sources */,
-				4462E0112B25DA0600769654 /* AdminViewController.swift in Sources */,
 				44214DE02B26CA4D000DAA0A /* LabBookingTableViewCell.swift in Sources */,
 				446C06742B1C92E3006A6A5E /* Patient.swift in Sources */,
 				446C06762B1C92EE006A6A5E /* Test.swift in Sources */,
@@ -291,6 +290,7 @@
 				446112352B1DABB0002F815C /* AdminViewTableViewController.swift in Sources */,
 				44214DE12B26CA4D000DAA0A /* LabHistoryTableViewController.swift in Sources */,
 				4461122F2B1D90C7002F815C /* LoginViewController.swift in Sources */,
+				449FD76B2B28886200808C7B /* AdminEditTableViewController.swift in Sources */,
 				F2F60A1E2B271CD0005B74C6 /* LabBookingInfoTableViewController.swift in Sources */,
 				443CE4BC2B1DAD8B0024D74B /* AdminViewTableViewCell.swift in Sources */,
 				446112312B1D99CF002F815C /* MedicalService.swift in Sources */,
