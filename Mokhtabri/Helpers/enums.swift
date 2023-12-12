@@ -20,5 +20,5 @@ enum UserType: Codable {
 }
 
 enum BookingStatus: String, Codable {
-    case active = "Active", completed = "Completed", cancelled = "Cancelled"
+    case Active = "Active", Completed = "Completed", Cancelled = "Cancelled"
 }

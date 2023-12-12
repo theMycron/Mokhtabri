@@ -13,7 +13,7 @@ class Booking: Codable {
     var bookingDate: DateComponents // use 'year', 'month' and 'day' components
     var status: BookingStatus
     
-    init(forPatient: Patient, ofMedicalService: MedicalService, bookingDate: DateComponents, status: BookingStatus = BookingStatus.active) {
+    init(forPatient: Patient, ofMedicalService: MedicalService, bookingDate: DateComponents, status: BookingStatus = BookingStatus.Active) {
         self.forPatient = forPatient
         self.ofMedicalService = ofMedicalService
         self.bookingDate = bookingDate

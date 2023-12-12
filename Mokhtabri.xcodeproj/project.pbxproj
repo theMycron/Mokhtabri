@@ -36,6 +36,7 @@
 		44F198D72B1DE2B400EDEA0B /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 44F198D62B1DE2B400EDEA0B /* Colors.xcassets */; };
 		F2F60A1C2B27186A005B74C6 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2F60A1B2B27186A005B74C6 /* SettingsTableViewController.swift */; };
 		F2F60A1E2B271CD0005B74C6 /* LabBookingInfoTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2F60A1D2B271CD0005B74C6 /* LabBookingInfoTableViewController.swift */; };
+		F2F60A222B27A83D005B74C6 /* PatientInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2F60A212B27A83D005B74C6 /* PatientInfoTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -70,6 +71,7 @@
 		44F198D62B1DE2B400EDEA0B /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
 		F2F60A1B2B27186A005B74C6 /* SettingsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
 		F2F60A1D2B271CD0005B74C6 /* LabBookingInfoTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LabBookingInfoTableViewController.swift; path = Mokhtabri/Controllers/LabBookingInfoTableViewController.swift; sourceTree = SOURCE_ROOT; };
+		F2F60A212B27A83D005B74C6 /* PatientInfoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PatientInfoTableViewCell.swift; path = Mokhtabri/Views/PatientInfoTableViewCell.swift; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,6 +88,7 @@
 		443CE4BD2B1DADFA0024D74B /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				F2F60A212B27A83D005B74C6 /* PatientInfoTableViewCell.swift */,
 				443CE4BB2B1DAD8B0024D74B /* AdminViewTableViewCell.swift */,
 			);
 			path = Views;
@@ -271,6 +274,7 @@
 				446C067C2B1C930D006A6A5E /* MedicalFacility.swift in Sources */,
 				448FF7222B15F90200B3CA1D /* SceneDelegate.swift in Sources */,
 				F2F60A1C2B27186A005B74C6 /* SettingsTableViewController.swift in Sources */,
+				F2F60A222B27A83D005B74C6 /* PatientInfoTableViewCell.swift in Sources */,
 				446C067E2B1C9528006A6A5E /* enums.swift in Sources */,
 				446112352B1DABB0002F815C /* AdminViewTableViewController.swift in Sources */,
 				44214DE12B26CA4D000DAA0A /* LabHistoryTableViewController.swift in Sources */,

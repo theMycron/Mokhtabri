@@ -13,7 +13,7 @@
         <scene sceneID="XMf-eR-iD7">
             <objects>
                 <tableViewController id="9av-kC-JTt" customClass="LabHistoryTableViewController" customModule="Mokhtabri" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="insetGrouped" separatorStyle="singleLineEtched" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" estimatedSectionHeaderHeight="-1" sectionFooterHeight="18" estimatedSectionFooterHeight="-1" id="za7-qo-leg">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="insetGrouped" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" estimatedSectionHeaderHeight="-1" sectionFooterHeight="18" estimatedSectionFooterHeight="-1" id="za7-qo-leg">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -137,7 +137,7 @@
                                     <outlet property="bookingDate" destination="Al1-cX-2dC" id="nFl-Qd-peU"/>
                                     <outlet property="name" destination="Fvi-YT-6yb" id="38a-R9-pa2"/>
                                     <outlet property="patient" destination="NbE-lu-VnC" id="XXb-Fb-T49"/>
-                                    <segue destination="WlQ-Ix-lqB" kind="show" id="ZVh-ja-eg5"/>
+                                    <segue destination="WlQ-Ix-lqB" kind="show" identifier="showInfo" id="ZVh-ja-eg5"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -250,22 +250,27 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="PatientInfo" rowHeight="156" id="JZg-5X-CGM">
+                                    <tableViewCell clipsSubviews="YES" contentMode="left" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="PatientInfo" rowHeight="156" id="JZg-5X-CGM" customClass="PatientInfoTableViewCell" customModule="Mokhtabri" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="358" width="393" height="156"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="JZg-5X-CGM" id="4Nc-ad-e0g">
                                             <rect key="frame" x="0.0" y="0.0" width="393" height="156"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="wordWrap" numberOfLines="9" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j05-00-Jgz">
-                                                    <rect key="frame" x="45" y="16" width="172" height="21"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="wordWrap" numberOfLines="9" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j05-00-Jgz">
+                                                    <rect key="frame" x="45" y="12" width="303" height="132"/>
                                                     <color key="tintColor" name="AccentColor"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
+                                            <constraints>
+                                                <constraint firstItem="j05-00-Jgz" firstAttribute="leading" secondItem="4Nc-ad-e0g" secondAttribute="leadingMargin" constant="25" id="3s8-uk-nyT"/>
+                                                <constraint firstItem="j05-00-Jgz" firstAttribute="top" secondItem="4Nc-ad-e0g" secondAttribute="topMargin" id="c7f-pP-G2r"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="j05-00-Jgz" secondAttribute="trailing" constant="25" id="q1d-OX-q75"/>
+                                                <constraint firstItem="j05-00-Jgz" firstAttribute="bottom" secondItem="4Nc-ad-e0g" secondAttribute="bottomMargin" id="sXb-bI-sMj"/>
+                                            </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="BookingInfo" rowHeight="156" id="gVn-sR-g9h">
@@ -275,15 +280,20 @@
                                             <rect key="frame" x="0.0" y="0.0" width="393" height="156"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="wordWrap" numberOfLines="9" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gO6-qD-Iue">
-                                                    <rect key="frame" x="45" y="16" width="172" height="21"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="wordWrap" numberOfLines="9" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gO6-qD-Iue">
+                                                    <rect key="frame" x="40" y="12" width="313" height="132"/>
                                                     <color key="tintColor" name="AccentColor"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
+                                            <constraints>
+                                                <constraint firstItem="gO6-qD-Iue" firstAttribute="bottom" secondItem="FkQ-RH-ksW" secondAttribute="bottomMargin" id="0OD-sF-wrh"/>
+                                                <constraint firstItem="gO6-qD-Iue" firstAttribute="leading" secondItem="FkQ-RH-ksW" secondAttribute="leadingMargin" constant="20" id="4Nr-fx-VdP"/>
+                                                <constraint firstItem="gO6-qD-Iue" firstAttribute="top" secondItem="FkQ-RH-ksW" secondAttribute="topMargin" id="P5r-AJ-FLM"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="gO6-qD-Iue" secondAttribute="trailing" constant="20" id="TYY-aJ-beW"/>
+                                            </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </cells>
@@ -295,6 +305,15 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="mit-gc-7qu"/>
+                    <connections>
+                        <outlet property="labInfoLabel" destination="gO6-qD-Iue" id="cQN-PB-A3w"/>
+                        <outlet property="patientCell" destination="JZg-5X-CGM" id="vFJ-ZM-2V5"/>
+                        <outlet property="patientCellContainer" destination="4Nc-ad-e0g" id="gEX-0U-2h3"/>
+                        <outlet property="patientInfo" destination="j05-00-Jgz" id="yKE-0A-2de"/>
+                        <outlet property="priceLabel" destination="cBR-h2-0tJ" id="1jd-Su-eJX"/>
+                        <outlet property="statusLabel" destination="B6d-wK-NIJ" id="bMg-In-PE9"/>
+                        <outlet property="testName" destination="uWR-59-0J8" id="xvN-8B-BRi"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Gf1-Zy-uaK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="PNS-20-5VQ">
