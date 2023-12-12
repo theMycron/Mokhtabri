@@ -23,7 +23,7 @@ class MedicalFacility: User {
                 Phone Number: \(phone)
                 City: \(city)
                 Website: \(website)
-                Timing: \(alwaysOpen ? "24 Hours" : "\(MedicalFacility.dateComponentsToTime(openingTime) ?? "") - \(MedicalFacility.dateComponentsToTime(closingTime) ?? "")")
+                Timing: \(alwaysOpen ? "24 Hours" : "\(dateComponentsToTime(openingTime) ?? "") - \(dateComponentsToTime(closingTime) ?? "")")
                 Type: \(type.rawValue)
                 """
     }

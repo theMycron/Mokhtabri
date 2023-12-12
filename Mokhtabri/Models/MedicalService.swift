@@ -11,7 +11,7 @@ class MedicalService: Codable, Equatable, Comparable, CustomStringConvertible {
     
     var description: String {
         return """
-                - Service Info -
+                -- Service Info --
                 ID: \(id)
                 Name: \(name)
                 Price: \(price) BHD

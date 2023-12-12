@@ -10,6 +10,9 @@ import Foundation
 class Patient: User {
     var firstName: String
     var lastName: String
+    var name: String {
+        return "\(firstName) \(lastName)"
+    }
     var phone: String
     var cpr: String
     var email: String
@@ -21,7 +24,7 @@ class Patient: User {
                 -- Patient --
                 \(super.description)
                 - Patient Info -
-                Name: \(firstName) \(lastName)
+                Name: \(name)
                 Gender: \(gender.rawValue)
                 Phone Number: \(phone)
                 CPR: \(cpr)

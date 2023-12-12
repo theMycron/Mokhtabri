@@ -35,13 +35,15 @@ class LoginViewController: UIViewController {
         let facility = MedicalFacility(name: "AHli", phone: "382479", city: "HAMAD TOWN", website: "www.hae.com", alwaysOpen: false, type: FacilityType.hospital, openingTime: openD, closingTime: closeD, username: "HALI", password: "jdhe")
         let category = Category(name: "Blood test")
         let test1 = Test(category: category, name: "General Blood Test", price: 2.5, description: "General blood test for various things", instructions: "Fast for 12 hours", forMedicalFacility: facility)
+        let test2 = Test(category: category, name: "studd", price: 2.5, description: "General blood test for various things", instructions: "Fast for 12 hours", forMedicalFacility: facility)
+        let test3 = Test(category: category, name: "files", price: 2.5, description: "General blood test for various things", instructions: "Fast for 12 hours", forMedicalFacility: facility)
         
         var packageD: DateComponents = DateComponents()
         packageD.year = 2024
         packageD.month = 5
         packageD.day = 27
-        let package = Package(expiryDate: packageD, tests: <#T##[Test]#>, name: "Summer Package", price: 12.45, description: "A great package to test your summer body", instructions: "Fast for 12 hours", forMedicalFacility: facility)
-        displayLabel.text = "\(facility)"
+        let package = Package(expiryDate: packageD, tests: [test1,test2,test3], name: "Summer Package", price: 12.45, description: "A great package to test your summer body", instructions: "Fast for 12 hours", forMedicalFacility: facility)
+        displayLabel.text = "\(AppData.bookings[0])"
     }
     
     @IBAction func createButton(_ sender: Any) {
