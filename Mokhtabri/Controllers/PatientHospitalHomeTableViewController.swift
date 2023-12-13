@@ -1,31 +1,28 @@
 //
-//  SettingsTableViewController.swift
+//  PatientHospitalHomeTableViewController.swift
 //  Mokhtabri
 //
-//  Created by Nooni on 11/12/2023.
+//  Created by Fatema Ahmed Ebrahim Mohamed Naser on 13/12/2023.
 //
 
 import UIKit
 
-class SettingsTableViewController: UITableViewController {
-    // declaration
-    
-    @IBOutlet weak var lblProfile: UILabel!
-    @IBOutlet weak var lblChangePassword: UILabel!
-    
-    @IBOutlet weak var lblContactUs: UILabel!
-    @IBOutlet weak var lblPrivacyPolicy: UILabel!
+class PatientHospitalHomeTableViewController: UITableViewController {
+    //Declare variables
+    var hospitals:  [MedicalFacility] = []
+    let sampleHospital = MedicalFacility(name: "Alsalam Hospital", phone: "13101010", city: "Riffa", website: "https://www.alsalam.care", alwaysOpen: true, type: .hospital, openingTime: DateComponents(calendar: Calendar.current, hour: 0, minute: 0), closingTime: DateComponents(calendar: Calendar.current, hour: 0, minute: 0), username: "Alsalam", password: "1234")
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //lblProfile.text = "Profile"
+        hospitals.append(sampleHospital)
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
-
+    
+    
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -35,18 +32,22 @@ class SettingsTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 6
+        return hospitals.count
+    }
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "hospitalCell", for: indexPath)
+
+        let hospital = hospitals[indexPath.row]
+        
+        // Configure the cell with hospital information
+        cell.textLabel?.text = hospital.name
+        cell.detailTextLabel?.text = hospital.city
+        
+        return cell
     }
 
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        // Deselect the row after tapping
-        tableView.deselectRow(at: indexPath, animated: true)
-        
-        if indexPath.row == 5 {
-            confirmation(title: "Delete Account", message: "Are you sure you want to delete your account?"){
-            }
-        }
-    }
+
     /*
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)

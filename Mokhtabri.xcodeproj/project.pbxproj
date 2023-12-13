@@ -36,6 +36,7 @@
 		448FF73D2B1604A600B3CA1D /* PatientBookings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 448FF73C2B1604A600B3CA1D /* PatientBookings.storyboard */; };
 		44A530D02B287AF3001B2CA3 /* HelperFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A530CF2B287AF3001B2CA3 /* HelperFunctions.swift */; };
 		44F198D72B1DE2B400EDEA0B /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 44F198D62B1DE2B400EDEA0B /* Colors.xcassets */; };
+		D66337982B29E32300E81CE4 /* PatientHospitalHomeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D66337972B29E32300E81CE4 /* PatientHospitalHomeTableViewController.swift */; };
 		F2F60A1C2B27186A005B74C6 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2F60A1B2B27186A005B74C6 /* SettingsTableViewController.swift */; };
 		F2F60A1E2B271CD0005B74C6 /* LabBookingInfoTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2F60A1D2B271CD0005B74C6 /* LabBookingInfoTableViewController.swift */; };
 		F2F60A222B27A83D005B74C6 /* PatientInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2F60A212B27A83D005B74C6 /* PatientInfoTableViewCell.swift */; };
@@ -74,6 +75,7 @@
 		448FF73C2B1604A600B3CA1D /* PatientBookings.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = PatientBookings.storyboard; sourceTree = "<group>"; };
 		44A530CF2B287AF3001B2CA3 /* HelperFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelperFunctions.swift; sourceTree = "<group>"; };
 		44F198D62B1DE2B400EDEA0B /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
+		D66337972B29E32300E81CE4 /* PatientHospitalHomeTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientHospitalHomeTableViewController.swift; sourceTree = "<group>"; };
 		F2F60A1B2B27186A005B74C6 /* SettingsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
 		F2F60A1D2B271CD0005B74C6 /* LabBookingInfoTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LabBookingInfoTableViewController.swift; path = Mokhtabri/Controllers/LabBookingInfoTableViewController.swift; sourceTree = SOURCE_ROOT; };
 		F2F60A212B27A83D005B74C6 /* PatientInfoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PatientInfoTableViewCell.swift; path = Mokhtabri/Views/PatientInfoTableViewCell.swift; sourceTree = SOURCE_ROOT; };
@@ -136,6 +138,7 @@
 		448FF7332B16040B00B3CA1D /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				D66337972B29E32300E81CE4 /* PatientHospitalHomeTableViewController.swift */,
 				F2F60A1D2B271CD0005B74C6 /* LabBookingInfoTableViewController.swift */,
 				F2F60A1B2B27186A005B74C6 /* SettingsTableViewController.swift */,
 				44214DDE2B26CA4D000DAA0A /* LabBookingTableViewCell.swift */,
@@ -274,6 +277,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D66337982B29E32300E81CE4 /* PatientHospitalHomeTableViewController.swift in Sources */,
 				446C06782B1C92F3006A6A5E /* Package.swift in Sources */,
 				F2F60A242B28FF04005B74C6 /* Alerts.swift in Sources */,
 				448FF7202B15F90200B3CA1D /* AppDelegate.swift in Sources */,
