@@ -33,6 +33,10 @@ class AdminEditTableViewController: UITableViewController {
     
     @IBOutlet weak var imgDisplay: UIImageView!
     
+    @IBOutlet weak var openingTimeCell: UITableViewCell!
+    
+    @IBOutlet weak var closingTimeCell: UITableViewCell!
+    
     var facility: MedicalFacility?
     
     init?(coder: NSCoder, facility: MedicalFacility?) {
@@ -45,10 +49,37 @@ class AdminEditTableViewController: UITableViewController {
         super.init(coder: coder)
     }
     
+    func updateView() {
+        guard let facility = facility else {return}
+        txtName.text = facility.name
+        txtPhone.text = facility.phone
+        txtCity.text = facility.city
+        txtWebsite.text = facility.website
+        if facility.type == FacilityType.hospital {
+            segmentType.selectedSegmentIndex = 0
+        } else {
+            segmentType.selectedSegmentIndex = 1
+        }
+        
+        toggleAlwaysOpen.isOn = facility.alwaysOpen
+        tableView.reloadSections([4], with: .automatic)
+        if !facility.alwaysOpen {
+            let calendar = Calendar.current
+            let openingComponents: DateComponents = facility.openingTime
+            let closingComponents: DateComponents = facility.closingTime
+            timeOpening.date = calendar.date(from: openingComponents)!
+            timeClosing.date = calendar.date(from: closingComponents)!
+        }
+        txtUsername.text = facility.username
+        txtPassword.text = facility.password
+        txtConfirm.text = facility.password
+    }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        updateView()
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -93,14 +124,30 @@ class AdminEditTableViewController: UITableViewController {
         AppData.facilities.append(facility!)
         AppData.saveData()
         performSegue(withIdentifier: "unwindToView", sender: self)
+        
     }
     
     @IBAction func btnAddPhotoPressed(_ sender: Any) {
         
     }
     
+    @IBAction func toggleChanged(_ sender: Any) {
+//        tableView.reloadRows(at: [IndexPath(row: 1, section: 2), IndexPath(row: 2, section: 2)], with: .automatic)
+        tableView.reloadSections([4], with: .automatic)
+    }
+    
     // MARK: - Table view data source
 
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        let cell = tableView.cellForRow(at: indexPath)
+        if cell == self.openingTimeCell || cell == self.closingTimeCell {
+            print(toggleAlwaysOpen.isOn ? 0 : super.tableView(tableView, heightForRowAt: indexPath))
+            return toggleAlwaysOpen.isOn ? 0 : super.tableView(tableView, heightForRowAt: indexPath)
+        }
+        return super.tableView(tableView, heightForRowAt: indexPath)
+    }
+    
+    
 //    override func numberOfSections(in tableView: UITableView) -> Int {
 //        // #warning Incomplete implementation, return the number of sections
 //        return 4
