@@ -33,6 +33,19 @@ class AdminEditTableViewController: UITableViewController {
     
     @IBOutlet weak var imgDisplay: UIImageView!
     
+    var facility: MedicalFacility?
+    
+    init?(coder: NSCoder, facility: MedicalFacility?) {
+        self.facility = facility
+        super.init(coder: coder)
+    }
+    
+    required init?(coder: NSCoder) {
+        self.facility = nil
+        super.init(coder: coder)
+    }
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -75,11 +88,11 @@ class AdminEditTableViewController: UITableViewController {
             return
         }
         // TODO: add image as well
-        let facility = MedicalFacility(name: name ?? "", phone: phone ?? "", city: city ?? "", website: website ?? "", alwaysOpen: alwaysopen, type: type, openingTime: openingTime, closingTime: closingTime, username: username ?? "", password: password ?? "")
+        facility = MedicalFacility(name: name ?? "", phone: phone ?? "", city: city ?? "", website: website ?? "", alwaysOpen: alwaysopen, type: type, openingTime: openingTime, closingTime: closingTime, username: username ?? "", password: password ?? "")
         // if facility was created successfully, add to appdata and save
-        AppData.facilities.append(facility)
+        AppData.facilities.append(facility!)
         AppData.saveData()
-        dismiss(animated: true)
+        performSegue(withIdentifier: "unwindToView", sender: self)
     }
     
     @IBAction func btnAddPhotoPressed(_ sender: Any) {
@@ -88,15 +101,15 @@ class AdminEditTableViewController: UITableViewController {
     
     // MARK: - Table view data source
 
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 0
-    }
+//    override func numberOfSections(in tableView: UITableView) -> Int {
+//        // #warning Incomplete implementation, return the number of sections
+//        return 4
+//    }
 
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 0
-    }
+//    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+//        // #warning Incomplete implementation, return the number of rows
+//        return 0
+//    }
 
     /*
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

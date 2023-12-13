@@ -12,7 +12,7 @@ class AdminViewTableViewController: UITableViewController, UISearchControllerDel
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // you might need to use a different controller for the search functionality
+        // might need to use a different controller for the search functionality
         let search = UISearchController()
         search.delegate = self
         search.searchBar.delegate = self
@@ -25,6 +25,8 @@ class AdminViewTableViewController: UITableViewController, UISearchControllerDel
         
         search.searchBar.scopeButtonTitles = ["All", "Hospitals", "Labs"]
         search.searchBar.showsScopeBar = true
+        
+        AppData.loadData()
         
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -44,12 +46,35 @@ class AdminViewTableViewController: UITableViewController, UISearchControllerDel
         return 1
     }
 
+    @IBAction func unwindFromEdit(unwindSegue: UIStoryboardSegue) {
+        guard let source = unwindSegue.source as? AdminEditTableViewController,
+              let facility = source.facility
+        else {return}
+        
+        if let indexPath = tableView.indexPathForSelectedRow {
+            AppData.facilities.remove(at: indexPath.section)
+            AppData.facilities.insert(facility, at: indexPath.section)
+            tableView.deselectRow(at: indexPath, animated: true)
+        } else {
+            AppData.facilities.append(facility)
+        }
+        tableView.reloadData()
+    }
+    
+    @IBSegueAction func editFacility(_ coder: NSCoder, sender: Any?) -> AdminEditTableViewController? {
+        guard let cell = sender as? UITableViewCell, let indexPath = tableView.indexPath(for: cell) else {
+            return nil
+        }
+        let facility = AppData.facilities[indexPath.section]
+        return AdminEditTableViewController(coder: coder, facility: facility)
+    }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "AdminViewCell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "AdminViewCell", for: indexPath) as! AdminViewTableViewCell
 
         // Configure the cell...
-//        cell.update(with: )
+        let facility: MedicalFacility = AppData.facilities[indexPath.section]
+        cell.update(with: facility)
 
         return cell
     }
@@ -62,25 +87,29 @@ class AdminViewTableViewController: UITableViewController, UISearchControllerDel
     
     
 
-    /*
+    
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         // Return false if you do not want the specified item to be editable.
         return true
     }
-    */
+    
 
-    /*
+    
     // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
+            tableView.beginUpdates()
             // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
+            AppData.facilities.remove(at: indexPath.section)
+//            tableView.deleteRows(at: [indexPath], with: .automatic)
+            tableView.deleteSections([indexPath.section], with: .fade)
+            tableView.endUpdates()
+//            tableView.deleteSections(<#T##sections: IndexSet##IndexSet#>, with: <#T##UITableView.RowAnimation#>)
+            AppData.saveData()
+        }
     }
-    */
+    
 
     /*
     // Override to support rearranging the table view.
