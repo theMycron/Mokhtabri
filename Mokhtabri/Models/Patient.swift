@@ -10,11 +10,28 @@ import Foundation
 class Patient: User {
     var firstName: String
     var lastName: String
+    var name: String {
+        return "\(firstName) \(lastName)"
+    }
     var phone: String
     var cpr: String
     var email: String
     var gender: Gender
     var dateOfBirth: DateComponents // use 'year', 'month' and 'day' components
+    
+    override var description: String {
+        return """
+                -- Patient --
+                \(super.description)
+                - Patient Info -
+                Name: \(name)
+                Gender: \(gender.rawValue)
+                Phone Number: \(phone)
+                CPR: \(cpr)
+                Email: \(email)
+                Age: \(age)
+                """
+    }
 //    var bookings: [Booking]
     var age: Int {
         let calendar = Calendar.current

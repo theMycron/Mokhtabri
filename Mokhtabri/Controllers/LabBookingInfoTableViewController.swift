@@ -9,6 +9,10 @@ import UIKit
 
 class LabBookingInfoTableViewController: UITableViewController {
     
+    
+    
+    @IBOutlet weak var btnContent: UIView!
+    
     @IBOutlet weak var testName: UILabel!
     var cbooking : Booking?
     @IBOutlet weak var statusLabel: UILabel!
@@ -22,40 +26,61 @@ class LabBookingInfoTableViewController: UITableViewController {
     @IBOutlet weak var labInfoLabel: UILabel!
     @IBOutlet weak var patientCellContainer: UIView!
     
+    
+    func performUnwindSegue() {
+           performSegue(withIdentifier: "showInfo", sender: self)
+       }
+
+    @IBAction func btnPress(_ sender: Any) {
+        // Create the alert controller
+        confirmation(title: "Confirm Completion", message: "do you want to confirm the completion of \(cbooking?.ofMedicalService.name ?? "") test/package"){
+            self.updateStatus()
+        }
+    }
+    
+    @IBAction func cancelBtn(_ sender: Any) {
+        confirmation(title: "Confirm Cancellation", message: "do you want to confirm the cancellation of \(cbooking?.ofMedicalService.name ?? "") test/package"){
+            self.updateStatus2()
+        }
+
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         updateData()
         updateView()
 
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
 
     // MARK: - Table view data source
   
     func updateData(){
         
-        guard let price = cbooking?.ofMedicalService.price, let status = cbooking?.status,let patientF = cbooking?.forPatient.firstName, let patientL = cbooking?.forPatient.lastName, let openb = cbooking?.ofMedicalService.forMedicalFacility.alwaysOpen, let iden = cbooking?.forPatient.cpr, let phone = cbooking?.forPatient.phone, let city = cbooking?.ofMedicalService.forMedicalFacility.city else {
+        //take away optionals
+        guard let price = cbooking?.ofMedicalService.price, let status = cbooking?.status,let patientF = cbooking?.forPatient.firstName, let patientL = cbooking?.forPatient.lastName, let openb = cbooking?.ofMedicalService.forMedicalFacility.alwaysOpen, let iden = cbooking?.forPatient.cpr, let phone = cbooking?.forPatient.phone, let city = cbooking?.ofMedicalService.forMedicalFacility.city, let date = cbooking?.bookingDate, let info = cbooking?.ofMedicalService.instructions else {
             return
         }
         
-        var patientDescription = "Patient Full Name: \(patientF)  \(patientL) \nPatient Identification Number: \(iden) \nPatient Mobile Number: \(phone)"
+        let patientDescription = " Patient Full Name: \(patientF)  \(patientL) \n Patient Identification Number: \(iden) \n Patient Mobile Number: \(phone)"
         var time = ""
         if (openb){
             time = "Always Open"
         }else{
-            var dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "HH:mm"
             guard let startTime = cbooking?.ofMedicalService.forMedicalFacility.openingTime.hour,let closingTime = cbooking?.ofMedicalService.forMedicalFacility.closingTime.hour else {return}
             
                 time = "Open From: \(startTime):00 until \(closingTime):00"
             
            
         }
-        var bookingInfo = "\(city) branch\n\(time)"
+        var dateString = ""
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd-MM-yyyy"
+        if let date2 = Calendar.current.date(from: date){
+            dateString = dateFormatter.string(from: date2)
+        }
+            
+        
+        let bookingInfo = " \(city) branch\n \(time)\n Booking Date: \(dateString)\n Special Information: \(info)"
         
         labInfoLabel.text = bookingInfo
         
@@ -86,12 +111,27 @@ class LabBookingInfoTableViewController: UITableViewController {
         return 6
     }
     
+    func updateStatus(){
+        statusLabel.text = "Completed"
+        cbooking?.status = .Completed
+        btnContent.isHidden = true
+        cancelbtnO.isHidden = true
+    }
+    
+    @IBOutlet weak var cancelbtnO: UIBarButtonItem!
+    func updateStatus2(){
+        statusLabel.text = "Cancelled"
+        cbooking?.status = .Cancelled
+        btnContent.isHidden = true
+        cancelbtnO.isHidden = true
+    }
+    
     
     func updateView(){
-        
-        patientCellContainer.layer.cornerRadius = 10
-        patientCellContainer.layer.masksToBounds = true
-        patientCellContainer.backgroundColor = UIColor.blue.withAlphaComponent(0.08)
+        if cbooking?.status == .Cancelled || cbooking?.status == .Completed{
+            btnContent.isHidden = true
+            cancelbtnO.isHidden = true
+        }
     }
     /*
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
