@@ -38,6 +38,20 @@ class SettingsTableViewController: UITableViewController {
         return 6
     }
 
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        // Deselect the row after tapping
+        tableView.deselectRow(at: indexPath, animated: true)
+        
+        if indexPath.row == 5 { // Replace 5 with the row number of the cell you want to trigger the alert
+            // Show an alert
+            let alertController = UIAlertController(title: "Delete Account", message: "Are you sure you want to delete your account?", preferredStyle: .alert)
+            let okayAction = UIAlertAction(title: "Yes", style: .default, handler: nil)
+            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+            alertController.addAction(okayAction)
+            alertController.addAction(cancelAction)
+            present(alertController, animated: true, completion: nil)
+        }
+    }
     /*
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)

@@ -104,7 +104,7 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <segue destination="LxH-g4-sAo" kind="show" id="Ga8-77-qzz"/>
+                                            <segue destination="LxH-g4-sAo" kind="showDetail" id="Ga8-77-qzz"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="G7f-Xl-WU7">
@@ -160,7 +160,7 @@
                             <outlet property="delegate" destination="QR4-rP-ONX" id="5T4-vh-sSu"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Settings" id="0Qs-5B-INW"/>
+                    <navigationItem key="navigationItem" title="Settings" largeTitleDisplayMode="always" id="MJ7-Ih-VWX"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gys-jV-868" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -187,11 +187,11 @@
             <objects>
                 <viewController id="LxH-g4-sAo" userLabel="Privacy Policy" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="CIx-Fw-Wrd">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cyE-b8-U7F">
-                                <rect key="frame" x="0.0" y="103" width="393" height="44"/>
+                                <rect key="frame" x="0.0" y="0.0" width="393" height="44"/>
                             </navigationBar>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Terms and Conditions" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GpM-ZE-oVc">
                                 <rect key="frame" x="27" y="392" width="253" height="36"/>
