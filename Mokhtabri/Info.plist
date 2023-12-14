@@ -16,7 +16,7 @@
 					<key>UISceneDelegateClassName</key>
 					<string>$(PRODUCT_MODULE_NAME).SceneDelegate</string>
 					<key>UISceneStoryboardFile</key>
-					<string>PatientSettings</string>
+					<string>PatientSetting</string>
 				</dict>
 			</array>
 		</dict>
