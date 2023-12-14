@@ -62,7 +62,7 @@ class AdminEditTableViewController: UITableViewController {
         }
         
         toggleAlwaysOpen.isOn = facility.alwaysOpen
-        tableView.reloadSections([4], with: .automatic)
+        print(toggleAlwaysOpen.isOn)
         if !facility.alwaysOpen {
             let calendar = Calendar.current
             let openingComponents: DateComponents = facility.openingTime
@@ -86,6 +86,7 @@ class AdminEditTableViewController: UITableViewController {
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
+    
 
     @IBAction func btnCancelPressed(_ sender: Any) {
         // dismiss modal without saving
@@ -132,16 +133,20 @@ class AdminEditTableViewController: UITableViewController {
     }
     
     @IBAction func toggleChanged(_ sender: Any) {
-//        tableView.reloadRows(at: [IndexPath(row: 1, section: 2), IndexPath(row: 2, section: 2)], with: .automatic)
-        tableView.reloadSections([4], with: .automatic)
+        updateCells()
+    }
+    
+    func updateCells() {
+        // used to update opening time and closing time cells when 24 hour is enabled
+        tableView.beginUpdates()
+        tableView.endUpdates()
     }
     
     // MARK: - Table view data source
 
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        let cell = tableView.cellForRow(at: indexPath)
-        if cell == self.openingTimeCell || cell == self.closingTimeCell {
-            print(toggleAlwaysOpen.isOn ? 0 : super.tableView(tableView, heightForRowAt: indexPath))
+        // hide opening time and closing time cells if facility is initially set to always open
+        if indexPath.section == 2 && (indexPath.row == 1 || indexPath.row == 2) {
             return toggleAlwaysOpen.isOn ? 0 : super.tableView(tableView, heightForRowAt: indexPath)
         }
         return super.tableView(tableView, heightForRowAt: indexPath)
