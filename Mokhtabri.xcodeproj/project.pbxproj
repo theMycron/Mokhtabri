@@ -36,6 +36,13 @@
 		448FF73D2B1604A600B3CA1D /* PatientBookings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 448FF73C2B1604A600B3CA1D /* PatientBookings.storyboard */; };
 		44A530D02B287AF3001B2CA3 /* HelperFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A530CF2B287AF3001B2CA3 /* HelperFunctions.swift */; };
 		44F198D72B1DE2B400EDEA0B /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 44F198D62B1DE2B400EDEA0B /* Colors.xcassets */; };
+		883968992B2CA03E008911FB /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 883968982B2CA03E008911FB /* GoogleService-Info.plist */; };
+		8839689C2B2CA090008911FB /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 8839689B2B2CA090008911FB /* FirebaseAnalytics */; };
+		8839689E2B2CA090008911FB /* FirebaseAnalyticsOnDeviceConversion in Frameworks */ = {isa = PBXBuildFile; productRef = 8839689D2B2CA090008911FB /* FirebaseAnalyticsOnDeviceConversion */; };
+		883968A02B2CA090008911FB /* FirebaseAnalyticsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 8839689F2B2CA090008911FB /* FirebaseAnalyticsSwift */; };
+		883968A22B2CA090008911FB /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */ = {isa = PBXBuildFile; productRef = 883968A12B2CA090008911FB /* FirebaseAnalyticsWithoutAdIdSupport */; };
+		883968A42B2CA090008911FB /* FirebaseAppCheck in Frameworks */ = {isa = PBXBuildFile; productRef = 883968A32B2CA090008911FB /* FirebaseAppCheck */; };
+		883968A72B2CA428008911FB /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 883968A62B2CA428008911FB /* FirebaseAuth */; };
 		F2F60A1C2B27186A005B74C6 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2F60A1B2B27186A005B74C6 /* SettingsTableViewController.swift */; };
 		F2F60A1E2B271CD0005B74C6 /* LabBookingInfoTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2F60A1D2B271CD0005B74C6 /* LabBookingInfoTableViewController.swift */; };
 		F2F60A222B27A83D005B74C6 /* PatientInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2F60A212B27A83D005B74C6 /* PatientInfoTableViewCell.swift */; };
@@ -74,6 +81,7 @@
 		448FF73C2B1604A600B3CA1D /* PatientBookings.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = PatientBookings.storyboard; sourceTree = "<group>"; };
 		44A530CF2B287AF3001B2CA3 /* HelperFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelperFunctions.swift; sourceTree = "<group>"; };
 		44F198D62B1DE2B400EDEA0B /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
+		883968982B2CA03E008911FB /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		F2F60A1B2B27186A005B74C6 /* SettingsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
 		F2F60A1D2B271CD0005B74C6 /* LabBookingInfoTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LabBookingInfoTableViewController.swift; path = Mokhtabri/Controllers/LabBookingInfoTableViewController.swift; sourceTree = SOURCE_ROOT; };
 		F2F60A212B27A83D005B74C6 /* PatientInfoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PatientInfoTableViewCell.swift; path = Mokhtabri/Views/PatientInfoTableViewCell.swift; sourceTree = SOURCE_ROOT; };
@@ -85,6 +93,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				883968A02B2CA090008911FB /* FirebaseAnalyticsSwift in Frameworks */,
+				883968A72B2CA428008911FB /* FirebaseAuth in Frameworks */,
+				8839689C2B2CA090008911FB /* FirebaseAnalytics in Frameworks */,
+				8839689E2B2CA090008911FB /* FirebaseAnalyticsOnDeviceConversion in Frameworks */,
+				883968A42B2CA090008911FB /* FirebaseAppCheck in Frameworks */,
+				883968A22B2CA090008911FB /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -105,6 +119,7 @@
 			children = (
 				448FF71E2B15F90200B3CA1D /* Mokhtabri */,
 				448FF71D2B15F90200B3CA1D /* Products */,
+				883968A52B2CA428008911FB /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -119,6 +134,7 @@
 		448FF71E2B15F90200B3CA1D /* Mokhtabri */ = {
 			isa = PBXGroup;
 			children = (
+				883968982B2CA03E008911FB /* GoogleService-Info.plist */,
 				443CE4BD2B1DADFA0024D74B /* Views */,
 				448FF7372B16043900B3CA1D /* Delegates */,
 				448FF7362B16042F00B3CA1D /* Models */,
@@ -196,6 +212,13 @@
 			path = Delegates;
 			sourceTree = "<group>";
 		};
+		883968A52B2CA428008911FB /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -212,6 +235,14 @@
 			dependencies = (
 			);
 			name = Mokhtabri;
+			packageProductDependencies = (
+				8839689B2B2CA090008911FB /* FirebaseAnalytics */,
+				8839689D2B2CA090008911FB /* FirebaseAnalyticsOnDeviceConversion */,
+				8839689F2B2CA090008911FB /* FirebaseAnalyticsSwift */,
+				883968A12B2CA090008911FB /* FirebaseAnalyticsWithoutAdIdSupport */,
+				883968A32B2CA090008911FB /* FirebaseAppCheck */,
+				883968A62B2CA428008911FB /* FirebaseAuth */,
+			);
 			productName = Mokhtabri;
 			productReference = 448FF71C2B15F90200B3CA1D /* Mokhtabri.app */;
 			productType = "com.apple.product-type.application";
@@ -240,6 +271,9 @@
 				Base,
 			);
 			mainGroup = 448FF7132B15F90200B3CA1D;
+			packageReferences = (
+				8839689A2B2CA090008911FB /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+			);
 			productRefGroup = 448FF71D2B15F90200B3CA1D /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -260,6 +294,7 @@
 				443CD4312B26CCF300A26971 /* Main.storyboard in Resources */,
 				448FF73D2B1604A600B3CA1D /* PatientBookings.storyboard in Resources */,
 				44F198D72B1DE2B400EDEA0B /* Colors.xcassets in Resources */,
+				883968992B2CA03E008911FB /* GoogleService-Info.plist in Resources */,
 				443CD43A2B26D2DD00A26971 /* PatientHome.storyboard in Resources */,
 				443CD4382B26D2A100A26971 /* PatientSettings.storyboard in Resources */,
 				44214DDC2B26C9DF000DAA0A /* LabServices.storyboard in Resources */,
@@ -495,6 +530,50 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		8839689A2B2CA090008911FB /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 10.19.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		8839689B2B2CA090008911FB /* FirebaseAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8839689A2B2CA090008911FB /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalytics;
+		};
+		8839689D2B2CA090008911FB /* FirebaseAnalyticsOnDeviceConversion */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8839689A2B2CA090008911FB /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalyticsOnDeviceConversion;
+		};
+		8839689F2B2CA090008911FB /* FirebaseAnalyticsSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8839689A2B2CA090008911FB /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalyticsSwift;
+		};
+		883968A12B2CA090008911FB /* FirebaseAnalyticsWithoutAdIdSupport */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8839689A2B2CA090008911FB /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalyticsWithoutAdIdSupport;
+		};
+		883968A32B2CA090008911FB /* FirebaseAppCheck */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8839689A2B2CA090008911FB /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAppCheck;
+		};
+		883968A62B2CA428008911FB /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8839689A2B2CA090008911FB /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 448FF7142B15F90200B3CA1D /* Project object */;
 }
