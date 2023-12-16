@@ -16,15 +16,25 @@ class SettingsTableViewController: UITableViewController {
     @IBOutlet weak var lblContactUs: UILabel!
     @IBOutlet weak var lblPrivacyPolicy: UILabel!
     
-    @IBAction func logoutBtn(_ sender: UIButton) {
-        //create alert
-        confirmation(title: "Log out", message: "Are you sure you want to log out?"){
+
+    @IBAction func logoutBtnClick(_ sender: UIBarButtonItem) {
+        // Create alert
+        confirmation(title: "Log out", message: "Are you sure you want to log out?") { [weak self] in
+            guard let self = self else { return }
             
-            [self] in
-                    self.performSegue(withIdentifier: "LoginViewController", sender: sender)
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            guard let loginViewController = storyboard.instantiateViewController(withIdentifier: "login") as? LoginViewController else {
+                return
+            }
+            
+            loginViewController.modalPresentationStyle = .fullScreen
+            self.present(loginViewController, animated: true) {
+                // Dismiss the settings page
+                self.dismiss(animated: true, completion: nil)
+            }
         }
-        
     }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         //lblProfile.text = "Profile"
@@ -32,7 +42,7 @@ class SettingsTableViewController: UITableViewController {
         // self.clearsSelectionOnViewWillAppear = false
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
+         //self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
 
     // MARK: - Table view data source
@@ -66,6 +76,12 @@ class SettingsTableViewController: UITableViewController {
                 }
             }
         }
+    }
+    
+    // for the navigation bar to appear
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(false, animated: animated)
     }
     /*
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

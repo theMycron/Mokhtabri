@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="QR4-rP-ONX">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="HXp-Uh-nSB">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -162,37 +162,21 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Settings" largeTitleDisplayMode="always" id="MJ7-Ih-VWX">
                         <barButtonItem key="rightBarButtonItem" style="plain" id="9ws-Pp-QaD">
-                            <button key="customView" opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="26J-gg-WCb">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="26J-gg-WCb">
                                 <rect key="frame" x="290" y="3" width="87" height="38.333333333333336"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="Log out"/>
                             </button>
                             <connections>
-                                <action selector="logoutBtn:" destination="QR4-rP-ONX" id="ekA-MB-8Gs"/>
+                                <action selector="logoutBtnClick:" destination="QR4-rP-ONX" id="EGZ-vb-jRX"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gys-jV-868" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1730.534351145038" y="1212.6760563380283"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="Vgi-r6-W8h">
-            <objects>
-                <navigationController id="gUK-EO-Lo7" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="4x9-h9-9sv">
-                        <rect key="frame" x="0.0" y="59" width="393" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <connections>
-                        <segue destination="QR4-rP-ONX" kind="relationship" relationship="rootViewController" id="SVP-3K-yvA"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="3Cm-2V-c6R" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="825" y="1213"/>
+            <point key="canvasLocation" x="2657.2519083969464" y="1212.6760563380283"/>
         </scene>
         <!--Privacy Policy-->
         <scene sceneID="7om-LO-iRn">
@@ -253,7 +237,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xfP-eg-OsM" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2769" y="1075"/>
+            <point key="canvasLocation" x="3695.419847328244" y="1074.6478873239437"/>
         </scene>
         <!--Contact Us-->
         <scene sceneID="VVV-mb-bKF">
@@ -319,7 +303,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xDe-kD-3tf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2745.801526717557" y="1754.9295774647887"/>
+            <point key="canvasLocation" x="3670.9923664122134" y="1754.9295774647887"/>
         </scene>
         <!--Settings-->
         <scene sceneID="QE2-e8-ptk">
@@ -337,6 +321,25 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HE9-Ro-yMi" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1583.9694656488548" y="397.88732394366201"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="t22-ph-gtq">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="HXp-Uh-nSB" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" id="ECc-in-QUW"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Iis-3f-qQM">
+                        <rect key="frame" x="0.0" y="59" width="393" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="QR4-rP-ONX" kind="relationship" relationship="rootViewController" id="dXu-0T-8j1"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3Q4-tN-70v" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1730.534351145038" y="1212.6760563380283"/>
         </scene>
     </scenes>
     <resources>
