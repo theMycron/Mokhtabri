@@ -16,6 +16,15 @@ class SettingsTableViewController: UITableViewController {
     @IBOutlet weak var lblContactUs: UILabel!
     @IBOutlet weak var lblPrivacyPolicy: UILabel!
     
+    @IBAction func logoutBtn(_ sender: UIButton) {
+        //create alert
+        confirmation(title: "Log out", message: "Are you sure you want to log out?"){
+            
+            [self] in
+                    self.performSegue(withIdentifier: "LoginViewController", sender: sender)
+        }
+        
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         //lblProfile.text = "Profile"
@@ -38,18 +47,24 @@ class SettingsTableViewController: UITableViewController {
         return 6
     }
 
+
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // Deselect the row after tapping
         tableView.deselectRow(at: indexPath, animated: true)
         
-        if indexPath.row == 5 { // Replace 5 with the row number of the cell you want to trigger the alert
+        if indexPath.row == 5 {
             // Show an alert
-            let alertController = UIAlertController(title: "Delete Account", message: "Are you sure you want to delete your account?", preferredStyle: .alert)
-            let okayAction = UIAlertAction(title: "Yes", style: .default, handler: nil)
-            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-            alertController.addAction(okayAction)
-            alertController.addAction(cancelAction)
-            present(alertController, animated: true, completion: nil)
+            confirmation(title: "Delete Account", message: "Are you sure you want to delete your account?") { [weak self] in
+                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                guard let viewController = storyboard.instantiateViewController(withIdentifier: "login") as? LoginViewController else {
+                    return
+                }
+                viewController.modalPresentationStyle = .fullScreen
+                self?.present(viewController, animated: true) {
+                    // Dismiss the previous view controller in settings
+                    self?.navigationController?.viewControllers = [viewController]
+                }
+            }
         }
     }
     /*
