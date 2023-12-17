@@ -9,6 +9,11 @@ import UIKit
 
 class PatientBookingTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var type: UILabel!
+    @IBOutlet weak var price: UILabel!
+    @IBOutlet weak var bookingDate: UILabel!
+    @IBOutlet weak var hospitalName: UILabel!
+    @IBOutlet weak var TestName: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

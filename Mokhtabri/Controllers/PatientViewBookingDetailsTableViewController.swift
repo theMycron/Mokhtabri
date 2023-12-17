@@ -1,5 +1,5 @@
 //
-//  PatientBookingTableViewController.swift
+//  PatientViewBookingDetailsTableViewController.swift
 //  Mokhtabri
 //
 //  Created by Noora Qasim on 17/12/2023.
@@ -7,15 +7,11 @@
 
 import UIKit
 
-class PatientBookingTableViewController: UITableViewController, UISearchResultsUpdating {
-    func updateSearchResults(for searchController: UISearchController) {
-        
-    }
-    
+class PatientViewBookingDetailsTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        embedSearch()
+
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -25,15 +21,6 @@ class PatientBookingTableViewController: UITableViewController, UISearchResultsU
 
     // MARK: - Table view data source
 
-    fileprivate func embedSearch(){
-        navigationItem.searchController = UISearchController()
-        navigationItem.searchController?.searchBar.placeholder = "Search Through Bookings"
-        navigationItem.searchController?.searchResultsUpdater = self
-        
-        //scope
-        navigationItem.searchController?.searchBar.scopeButtonTitles = ["Active", "Completed","Cancelled"]
-        navigationItem.searchController?.automaticallyShowsScopeBar = false
-    }
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 1
@@ -41,31 +28,18 @@ class PatientBookingTableViewController: UITableViewController, UISearchResultsU
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return listOfBookings.count
+        return 4
     }
-//declare
-    var listOfBookings = AppData.bookings
-    
+
+    /*
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "PatientBooking", for: indexPath) as! PatientBookingTableViewCell
-        
-        let booking = listOfBookings[indexPath.row]
-        guard let dateDay = booking.bookingDate.day, let dateMonth = booking.bookingDate.month, let dateYear = booking.bookingDate.year else{
-            return cell
-        }
-        cell.bookingDate.text = "Date:\(dateDay)-\(dateMonth)-\(dateYear)"
-        cell.TestName.text = booking.ofMedicalService.name
-        cell.hospitalName.text = booking.ofMedicalService.forMedicalFacility.name
-        cell.price.text = "\(booking.ofMedicalService.price) BHD"
-        cell.type.text = "Test"
-        //gonna fix in a minute
-       // if(booking.ofMedicalService.)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
 
         // Configure the cell...
 
         return cell
     }
-    
+    */
 
     /*
     // Override to support conditional editing of the table view.
