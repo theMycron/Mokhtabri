@@ -9,73 +9,122 @@ import UIKit
 import FirebaseAuth
 
 class LoginViewController: UIViewController {
-
-    @IBOutlet weak var displayLabel: UILabel!
+//declare user defaults
+    let defaults = UserDefaults.standard
+    //creating outlets for the fields
+    
+    @IBOutlet weak var usernameTxt: UITextField!
+    @IBOutlet weak var passwordTxt: UITextField!
+    @IBAction func loginBtnTapped(_ sender: Any) {
+        //start validating
+            validateFields()
+        
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
-//        guard let appData = AppData.loadData() else {
-//            displayLabel.text = "Not loaded."
-//            return
-//        }
-//        
-//        displayLabel.text = appData.patients.description
+        
         
     }
-    
-    @IBAction func loadButton(_ sender: Any) {
-        AppData.loadData()
-        guard AppData.facilities.count > 0 else {return}
-        var openD: DateComponents = DateComponents()
-        openD.hour = 4
-        openD.minute = 0
-        var closeD: DateComponents = DateComponents()
-        closeD.hour = 20
-        closeD.minute = 30
-        let facility = MedicalFacility(name: "AHli", phone: "382479", city: "HAMAD TOWN", website: "www.hae.com", alwaysOpen: false, type: FacilityType.hospital, openingTime: openD, closingTime: closeD, username: "HALI", password: "jdhe")
-        let category = Category(name: "Blood test")
-        let test1 = Test(category: category, name: "General Blood Test", price: 2.5, description: "General blood test for various things", instructions: "Fast for 12 hours", forMedicalFacility: facility)
-        let test2 = Test(category: category, name: "studd", price: 2.5, description: "General blood test for various things", instructions: "Fast for 12 hours", forMedicalFacility: facility)
-        let test3 = Test(category: category, name: "files", price: 2.5, description: "General blood test for various things", instructions: "Fast for 12 hours", forMedicalFacility: facility)
-        
-        var packageD: DateComponents = DateComponents()
-        packageD.year = 2024
-        packageD.month = 5
-        packageD.day = 27
-        let package = Package(expiryDate: packageD, tests: [test1,test2,test3], name: "Summer Package", price: 12.45, description: "A great package to test your summer body", instructions: "Fast for 12 hours", forMedicalFacility: facility)
-        displayLabel.text = "\(AppData.bookings[0])"
-    }
-    
-    @IBAction func createButton(_ sender: Any) {
-        AppData.admin.append(User(username: "hfeuios", password: "fejsiuo", userType: UserType.admin))
-        var dob: DateComponents = DateComponents()
-        dob.year = 2003
-        dob.month = 12
-        dob.day = 7
-        let patient1 = Patient(firstName: "Ali", lastName: "Mohammed", phone: "3892999", cpr: "38991993", email: "ahsjk@hf.djo", gender: Gender.male, dateOfBirth: dob, username: "windhh", password: "hunter2")
-        AppData.patients.append(patient1)
-        let patient2 = Patient(firstName: "Salem", lastName: "Maki", phone: "3892999", cpr: "38991993", email: "ahsjk@hf.djo", gender: Gender.male, dateOfBirth: dob, username: "windhh", password: "hunter2")
-        AppData.patients.append(patient2)
-        let facility1 = MedicalFacility(name: "Alhilal", phone: "37829", city: "BF", website: "fheiso", alwaysOpen: true, type: FacilityType.hospital, openingTime: dob, closingTime: dob, username: "wahoo", password: "ahil")
-        AppData.facilities.append(facility1)
-        let service1 = MedicalService(name: "Bloooody test", price: 2, description: "IMPOREKHS", instructions: "EAT ITIII", forMedicalFacility: facility1)
-        AppData.services.append(service1)
-//        facility1.bookings.append(Booking(forPatient: patient1, ofMedicalService: service1, bookingDate: dob))
-        AppData.bookings.append(Booking(forPatient: patient1, ofMedicalService: service1, bookingDate: dob))
-        displayLabel.text = "\(AppData.bookings.count) \nHas been made."
-        
-        AppData.saveData()
-    }
-    
-    /*
-    // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    
+    
+    
+    func validateFields(){
+        //validations for input fields
+        if usernameTxt.text?.isEmpty==true{
+            //prompt an alert to the user
+            let alert = UIAlertController(title: "Empty Field", message: "Please Enter Your Username", preferredStyle: .alert)
+            
+            //show a dismiss button + presnt the alert
+            alert.addAction(UIAlertAction(title: "Dismiss", style: .cancel, handler: nil))
+            
+            present(alert, animated: true)
+            
+            return
+        }
+        
+        if passwordTxt.text?.isEmpty == true{
+            //prompt an alert to the user
+            let alert = UIAlertController(title: "Empty Field", message: "Please Enter Your Password", preferredStyle: .alert)
+            
+            //show a dismiss button + presnt the alert
+            alert.addAction(UIAlertAction(title: "Dismiss", style: .cancel, handler: nil))
+            
+            present(alert, animated: true)
+            
+            return
+        }
+        
+        //start login process after validation
+        login()
     }
-    */
+    
+    func login(){
+        
+        //force unwrap tp avoid the crash
+        Auth.auth().signIn(withEmail: usernameTxt.text!, password: passwordTxt.text!) { [weak self] authResult, errorMessgae in
+            
+            
+            guard let strongSelf = self else {return}
+            
+            if let errorMessgae = errorMessgae{
+                print(errorMessgae.localizedDescription)
+                
+               
+            }
+            //double check the information
+            self!.checkUserInfo()
+        }
+        
+    }
+    //double check that the user logged in and have information
+    func checkUserInfo(){
+        if Auth.auth().currentUser != nil {
+            //print the id to ensure
+            print(Auth.auth().currentUser?.uid)
+            //print(Auth.auth().currentUser?.displayName)
+            
+            //set the value inside the user defaults
+            self.defaults.set(true, forKey: "Logged In")
+            
+            //pass the user the overview
+            let mainSB = UIStoryboard(name: "Main", bundle: nil)
+            let vc = mainSB.instantiateViewController(withIdentifier: "tabBar")
+            vc.modalPresentationStyle = .overFullScreen
+            self.present(vc, animated: true)
+            let userID: String = Auth.auth().currentUser!.uid
+            
+            
+        }else{
+            //set the user as false inside user defaults
+            self.defaults.set(false, forKey: "Logged In")
+            
+            //pass the user to the login form directly
+            let login = UIStoryboard(name: "Main", bundle: nil)
+            let loginVc = login.instantiateViewController(withIdentifier: "login")
+            loginVc.modalPresentationStyle = .overFullScreen
+            self.present(loginVc, animated: true)
+           
 
+        }
+        
+        
+        
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        //checkUserInfo()
+    }
+    //if the credentials were wromg
+    
+   // let alert = UIAlertController(title: "Invalid Credentials", message: "The username and password you entered were invalid. Please try again.", preferredStyle: .alert)
+    
+    
+    
+    @IBAction func createPatientAccountTapped(_ sender: Any) {
+        
+        
+    }
+    
 }
