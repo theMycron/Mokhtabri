@@ -43,6 +43,7 @@
 		883968A22B2CA090008911FB /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */ = {isa = PBXBuildFile; productRef = 883968A12B2CA090008911FB /* FirebaseAnalyticsWithoutAdIdSupport */; };
 		883968A42B2CA090008911FB /* FirebaseAppCheck in Frameworks */ = {isa = PBXBuildFile; productRef = 883968A32B2CA090008911FB /* FirebaseAppCheck */; };
 		883968A72B2CA428008911FB /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 883968A62B2CA428008911FB /* FirebaseAuth */; };
+		8DE802CB2B2DF11B007328FF /* PatientUpdateProfileTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DE802CA2B2DF11B007328FF /* PatientUpdateProfileTableViewController.swift */; };
 		F2F60A1C2B27186A005B74C6 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2F60A1B2B27186A005B74C6 /* SettingsTableViewController.swift */; };
 		F2F60A1E2B271CD0005B74C6 /* LabBookingInfoTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2F60A1D2B271CD0005B74C6 /* LabBookingInfoTableViewController.swift */; };
 		F2F60A222B27A83D005B74C6 /* PatientInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2F60A212B27A83D005B74C6 /* PatientInfoTableViewCell.swift */; };
@@ -82,6 +83,7 @@
 		44A530CF2B287AF3001B2CA3 /* HelperFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelperFunctions.swift; sourceTree = "<group>"; };
 		44F198D62B1DE2B400EDEA0B /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
 		883968982B2CA03E008911FB /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		8DE802CA2B2DF11B007328FF /* PatientUpdateProfileTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientUpdateProfileTableViewController.swift; sourceTree = "<group>"; };
 		F2F60A1B2B27186A005B74C6 /* SettingsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
 		F2F60A1D2B271CD0005B74C6 /* LabBookingInfoTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LabBookingInfoTableViewController.swift; path = Mokhtabri/Controllers/LabBookingInfoTableViewController.swift; sourceTree = SOURCE_ROOT; };
 		F2F60A212B27A83D005B74C6 /* PatientInfoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PatientInfoTableViewCell.swift; path = Mokhtabri/Views/PatientInfoTableViewCell.swift; sourceTree = SOURCE_ROOT; };
@@ -152,6 +154,7 @@
 		448FF7332B16040B00B3CA1D /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				8DE802CA2B2DF11B007328FF /* PatientUpdateProfileTableViewController.swift */,
 				F2F60A1D2B271CD0005B74C6 /* LabBookingInfoTableViewController.swift */,
 				F2F60A1B2B27186A005B74C6 /* SettingsTableViewController.swift */,
 				44214DDE2B26CA4D000DAA0A /* LabBookingTableViewCell.swift */,
@@ -317,6 +320,7 @@
 				446C06742B1C92E3006A6A5E /* Patient.swift in Sources */,
 				446C06762B1C92EE006A6A5E /* Test.swift in Sources */,
 				446C067C2B1C930D006A6A5E /* MedicalFacility.swift in Sources */,
+				8DE802CB2B2DF11B007328FF /* PatientUpdateProfileTableViewController.swift in Sources */,
 				448FF7222B15F90200B3CA1D /* SceneDelegate.swift in Sources */,
 				F2F60A1C2B27186A005B74C6 /* SettingsTableViewController.swift in Sources */,
 				44A530D02B287AF3001B2CA3 /* HelperFunctions.swift in Sources */,

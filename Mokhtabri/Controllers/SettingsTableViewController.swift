@@ -16,24 +16,22 @@ class SettingsTableViewController: UITableViewController {
     @IBOutlet weak var lblContactUs: UILabel!
     @IBOutlet weak var lblPrivacyPolicy: UILabel!
     
-
-    @IBAction func logoutBtnClick(_ sender: UIBarButtonItem) {
-        // Create alert
-        confirmation(title: "Log out", message: "Are you sure you want to log out?") { [weak self] in
-            guard let self = self else { return }
-            
+    
+    @IBAction func logoutBtn(_ sender: Any) {
+        confirmation(title: "Log out", message: "Are you sure you want to log out of your account?") { [weak self] in
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            guard let loginViewController = storyboard.instantiateViewController(withIdentifier: "login") as? LoginViewController else {
+            guard let viewController = storyboard.instantiateViewController(withIdentifier: "login") as? LoginViewController else {
                 return
             }
-            
-            loginViewController.modalPresentationStyle = .fullScreen
-            self.present(loginViewController, animated: true) {
-                // Dismiss the settings page
-                self.dismiss(animated: true, completion: nil)
+            viewController.modalPresentationStyle = .fullScreen
+            self?.present(viewController, animated: true) {
+                // Dismiss the previous view controller in settings
+                self?.navigationController?.viewControllers = [viewController]
             }
         }
     }
+    
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
