@@ -4,8 +4,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22131"/>
-        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -40,7 +38,7 @@
                     </tabBar>
                     <connections>
                         <segue destination="JRc-6A-vYM" kind="relationship" relationship="viewControllers" id="af1-dn-mig"/>
-                        <segue destination="yBd-fa-YEg" kind="relationship" relationship="viewControllers" id="cIZ-pl-eZy"/>
+                        <segue destination="l6Z-Yi-xhX" kind="relationship" relationship="viewControllers" id="SuL-cw-niz"/>
                         <segue destination="WIO-tZ-lIV" kind="relationship" relationship="viewControllers" id="1fW-uu-bwa"/>
                     </connections>
                 </tabBarController>
@@ -48,47 +46,127 @@
             </objects>
             <point key="canvasLocation" x="859" y="-788"/>
         </scene>
-        <!--View Controller-->
-        <scene sceneID="qoa-LX-8d3">
+        <!--Table View Controller-->
+        <scene sceneID="Ccq-8d-Gq8">
             <objects>
-                <viewController id="vxh-jV-gJZ" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="0ZK-1j-3fT">
+                <tableViewController id="8S4-8z-0VG" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="insetGrouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" estimatedSectionHeaderHeight="-1" sectionFooterHeight="18" estimatedSectionFooterHeight="-1" id="dhb-5R-zJc">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <viewLayoutGuide key="safeArea" id="tib-Ye-pY4"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="9WL-61-7Io"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="f9y-73-ABA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="blue" indentationWidth="10" reuseIdentifier="PatientBookingViewCell" rowHeight="96" id="avF-7U-BPP" customClass="PatientBookingTableViewCell" customModule="Mokhtabri" customModuleProvider="target">
+                                <rect key="frame" x="20" y="55.333332061767578" width="353" height="96"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="avF-7U-BPP" id="DRH-m1-Apn">
+                                    <rect key="frame" x="0.0" y="0.0" width="353" height="96"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <stackView opaque="NO" contentMode="scaleToFill" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="QWc-g8-g2S">
+                                            <rect key="frame" x="10" y="10" width="333" height="76"/>
+                                            <subviews>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="test" translatesAutoresizingMaskIntoConstraints="NO" id="vFo-VU-g6y">
+                                                    <rect key="frame" x="0.0" y="0.0" width="72" height="76"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="72" id="H8g-iR-ThG"/>
+                                                        <constraint firstAttribute="width" secondItem="vFo-VU-g6y" secondAttribute="height" multiplier="1:1" id="iwS-DO-j63"/>
+                                                        <constraint firstAttribute="width" constant="72" id="v1q-wY-6oB"/>
+                                                    </constraints>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                            <integer key="value" value="15"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                                    </userDefinedRuntimeAttributes>
+                                                </imageView>
+                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="9" translatesAutoresizingMaskIntoConstraints="NO" id="yYy-GQ-rGW">
+                                                    <rect key="frame" x="92" y="0.0" width="241" height="76"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NW3-GK-aqo">
+                                                            <rect key="frame" x="0.0" y="0.0" width="241" height="22"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Patient Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Yd-Wr-7Q8">
+                                                            <rect key="frame" x="0.0" y="31" width="241" height="18"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="18" id="Eng-1d-ixm"/>
+                                                            </constraints>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                            <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Booking date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VSB-Zv-JDJ">
+                                                            <rect key="frame" x="0.0" y="58" width="241" height="18"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="18" id="qDF-fo-Jex"/>
+                                                            </constraints>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                            <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                </stackView>
+                                            </subviews>
+                                        </stackView>
+                                    </subviews>
+                                    <color key="backgroundColor" red="0.1752340862" green="0.43704334859999999" blue="1" alpha="0.080000000000000002" colorSpace="custom" customColorSpace="displayP3"/>
+                                    <constraints>
+                                        <constraint firstAttribute="trailing" secondItem="QWc-g8-g2S" secondAttribute="trailing" constant="10" id="Qp8-ZS-l0F"/>
+                                        <constraint firstItem="QWc-g8-g2S" firstAttribute="leading" secondItem="DRH-m1-Apn" secondAttribute="leading" constant="10" id="dyV-Qp-QtU"/>
+                                        <constraint firstItem="QWc-g8-g2S" firstAttribute="top" secondItem="DRH-m1-Apn" secondAttribute="top" constant="10" id="vda-jA-QGb"/>
+                                        <constraint firstAttribute="bottom" secondItem="QWc-g8-g2S" secondAttribute="bottom" constant="10" id="wzi-nr-2sz"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="bookingDate" destination="VSB-Zv-JDJ" id="DOg-wP-Lns"/>
+                                    <outlet property="name" destination="NW3-GK-aqo" id="Bai-hf-mUh"/>
+                                    <outlet property="patient" destination="4Yd-Wr-7Q8" id="d94-ls-4Dw"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="8S4-8z-0VG" id="KzQ-6A-4Co"/>
+                            <outlet property="delegate" destination="8S4-8z-0VG" id="JZ7-cC-rAq"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="qnN-Pa-yu4">
+                        <nil key="title"/>
+                        <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="n1c-uL-EUP">
+                            <rect key="frame" x="66.666666666666686" y="5.6666666666666679" width="260" height="33"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <segments>
+                                <segment title="Active"/>
+                                <segment title="Completed"/>
+                                <segment title="Cancelled"/>
+                            </segments>
+                        </segmentedControl>
+                    </navigationItem>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pMw-QF-NP7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1889.3129770992366" y="56.338028169014088"/>
+            <point key="canvasLocation" x="2138" y="-36"/>
         </scene>
         <!--Booking History-->
-        <scene sceneID="btg-jp-GdR">
+        <scene sceneID="NzU-cg-6E9">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="yBd-fa-YEg" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Booking History" image="book.circle" catalog="system" id="HBu-55-cPd"/>
-                    <toolbarItems/>
-                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="f9E-y6-Ihe">
+                <navigationController id="l6Z-Yi-xhX" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Booking History" image="book.circle" catalog="system" id="OR0-Ad-F5g"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="60R-jn-WEl">
                         <rect key="frame" x="0.0" y="59" width="393" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
-                    <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="vxh-jV-gJZ" kind="relationship" relationship="rootViewController" id="ClU-Am-F6h"/>
+                        <segue destination="8S4-8z-0VG" kind="relationship" relationship="rootViewController" id="qXR-ct-pBB"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="QVo-Op-VdN" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="DCu-C3-acn" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="962.59541984732823" y="56.338028169014088"/>
+            <point key="canvasLocation" x="1234" y="-36"/>
         </scene>
     </scenes>
     <resources>
         <image name="book.circle" catalog="system" width="128" height="123"/>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
+        <image name="test" width="1920" height="1080"/>
     </resources>
 </document>

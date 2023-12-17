@@ -2,7 +2,7 @@
 //  LabBookingInfoTableViewController.swift
 //  Mokhtabri
 //
-//  Created by Nooni on 11/12/2023.
+//  Created by Noora Qasim on 11/12/2023.
 //
 
 import UIKit
