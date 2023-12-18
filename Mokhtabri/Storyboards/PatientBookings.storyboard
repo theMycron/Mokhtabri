@@ -290,6 +290,12 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="Tmf-gd-EPi"/>
+                    <connections>
+                        <outlet property="info" destination="tas-on-Cyb" id="coy-WD-cvR"/>
+                        <outlet property="price" destination="u94-81-J3J" id="LKG-E5-Org"/>
+                        <outlet property="status" destination="CFC-eh-IBP" id="gm6-LJ-btd"/>
+                        <outlet property="testName" destination="dfx-5o-Pzz" id="t9F-td-mNv"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TtV-Hu-o12" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

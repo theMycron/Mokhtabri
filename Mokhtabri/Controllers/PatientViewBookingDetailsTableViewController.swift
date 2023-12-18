@@ -8,9 +8,16 @@
 import UIKit
 
 class PatientViewBookingDetailsTableViewController: UITableViewController {
-
+    
+    var booking : Booking?
+    @IBOutlet weak var info: UILabel!
+    
+    @IBOutlet weak var price: UILabel!
+    @IBOutlet weak var testName: UILabel!
+    @IBOutlet weak var status: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
+        updateView()
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -30,7 +37,12 @@ class PatientViewBookingDetailsTableViewController: UITableViewController {
         // #warning Incomplete implementation, return the number of rows
         return 4
     }
-
+    func updateView(){
+        guard let stat = booking?.status else {
+            return
+        }
+        status.text = "\(stat)"
+    }
     /*
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
