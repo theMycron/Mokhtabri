@@ -66,6 +66,12 @@ class PatientBookingTableViewController: UITableViewController, UISearchResultsU
         return cell
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let destination = segue.destination as? PatientViewBookingDetailsTableViewController, let selected = tableView.indexPathForSelectedRow {
+            destination.booking = listOfBookings[selected.row]
+        }
+    }
+    
 
     /*
     // Override to support conditional editing of the table view.

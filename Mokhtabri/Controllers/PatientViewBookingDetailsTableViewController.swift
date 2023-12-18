@@ -8,9 +8,18 @@
 import UIKit
 
 class PatientViewBookingDetailsTableViewController: UITableViewController {
-
+    
+    var booking : Booking?
+    @IBOutlet weak var info: UILabel!
+    
+    @IBOutlet weak var btn: UIBarButtonItem!
+    @IBOutlet weak var price: UILabel!
+    @IBOutlet weak var testName: UILabel!
+    @IBOutlet weak var status: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
+        updateView()
+        checkBtn()
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -30,7 +39,42 @@ class PatientViewBookingDetailsTableViewController: UITableViewController {
         // #warning Incomplete implementation, return the number of rows
         return 4
     }
-
+    func updateView(){
+        guard let stat = booking?.status, let tname = booking?.ofMedicalService.name, let tprice = booking?.ofMedicalService.price  else {
+            return
+        }
+        status.text = "\(stat)"
+        testName.text = tname
+        price.text = "\(tprice) BHD"
+        let testorPackage = booking?.ofMedicalService
+        if testorPackage is Test{
+            updateTest()
+        }else {
+            updatePackage()
+        }
+    }
+    
+    func updateTest(){
+        guard let year = booking?.bookingDate.year,let month = booking?.bookingDate.month, let day = booking?.bookingDate.day, let branch = booking?.ofMedicalService.forMedicalFacility.city, let specialInfo = booking?.ofMedicalService.instructions else {
+            return
+        }
+        info.text = "\(branch) branch\nBooking Date: \(day)-\(month)-\(year)\nSpecial Information: \(specialInfo)"
+    }
+    
+    func updatePackage(){
+        
+    }
+    
+    func checkBtn(){
+        guard let stat = booking?.status else {
+            return
+        }
+        if stat == .Active{
+            btn.isHidden = false
+        }else{
+            btn.isHidden = true
+        }
+    }
     /*
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
