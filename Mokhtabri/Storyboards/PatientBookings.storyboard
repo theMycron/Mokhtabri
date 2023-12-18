@@ -263,6 +263,11 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                     </subviews>
+                                                    <color key="backgroundColor" red="0.92941176889999999" green="0.95686274770000002" blue="0.99607843159999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                    <constraints>
+                                                        <constraint firstItem="tas-on-Cyb" firstAttribute="top" secondItem="MqR-tH-mA4" secondAttribute="top" id="KLn-Dn-ei4"/>
+                                                        <constraint firstAttribute="bottom" secondItem="tas-on-Cyb" secondAttribute="bottom" id="zKp-kh-0h1"/>
+                                                    </constraints>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                                             <integer key="value" value="25"/>
@@ -271,7 +276,7 @@
                                                     </userDefinedRuntimeAttributes>
                                                 </stackView>
                                             </subviews>
-                                            <color key="backgroundColor" red="0.92941176889999999" green="0.95686274770000002" blue="0.99607843159999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
                                                 <constraint firstAttribute="trailingMargin" secondItem="MqR-tH-mA4" secondAttribute="trailing" id="3od-yA-MfB"/>
                                                 <constraint firstItem="MqR-tH-mA4" firstAttribute="top" secondItem="PS0-eE-RAJ" secondAttribute="topMargin" id="KTE-qk-Kdu"/>
@@ -293,6 +298,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="btn" destination="0HN-AR-51R" id="FNU-xj-hVK"/>
+                        <outlet property="celltrial" destination="Sr6-7e-YVc" id="6sC-cK-NHY"/>
                         <outlet property="info" destination="tas-on-Cyb" id="coy-WD-cvR"/>
                         <outlet property="price" destination="u94-81-J3J" id="LKG-E5-Org"/>
                         <outlet property="status" destination="CFC-eh-IBP" id="gm6-LJ-btd"/>

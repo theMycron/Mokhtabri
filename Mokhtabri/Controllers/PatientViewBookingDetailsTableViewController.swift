@@ -9,6 +9,7 @@ import UIKit
 
 class PatientViewBookingDetailsTableViewController: UITableViewController {
     
+    @IBOutlet weak var celltrial: PatientInfoTableViewCell!
     var booking : Booking?
     @IBOutlet weak var info: UILabel!
     
@@ -20,6 +21,7 @@ class PatientViewBookingDetailsTableViewController: UITableViewController {
         super.viewDidLoad()
         updateView()
         checkBtn()
+        
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
