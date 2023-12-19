@@ -54,11 +54,12 @@ class AdminViewTableViewController: UITableViewController, UISearchControllerDel
         if let indexPath = tableView.indexPathForSelectedRow {
             AppData.facilities.remove(at: indexPath.section)
             AppData.facilities.insert(facility, at: indexPath.section)
-            tableView.deselectRow(at: indexPath, animated: true)
+//            tableView.deselectRow(at: indexPath, animated: true)
         } else {
             AppData.facilities.append(facility)
         }
         tableView.reloadData()
+        AppData.saveData()
     }
     
     @IBSegueAction func editFacility(_ coder: NSCoder, sender: Any?) -> AdminEditTableViewController? {
@@ -66,6 +67,7 @@ class AdminViewTableViewController: UITableViewController, UISearchControllerDel
             return nil
         }
         let facility = AppData.facilities[indexPath.section]
+        tableView.deselectRow(at: indexPath, animated: true)
         return AdminEditTableViewController(coder: coder, facility: facility)
     }
     

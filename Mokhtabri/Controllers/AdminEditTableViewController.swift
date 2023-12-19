@@ -122,8 +122,8 @@ class AdminEditTableViewController: UITableViewController {
         // TODO: add image as well
         facility = MedicalFacility(name: name ?? "", phone: phone ?? "", city: city ?? "", website: website ?? "", alwaysOpen: alwaysopen, type: type, openingTime: openingTime, closingTime: closingTime, username: username ?? "", password: password ?? "")
         // if facility was created successfully, add to appdata and save
-        AppData.facilities.append(facility!)
-        AppData.saveData()
+//        AppData.facilities.append(facility!)
+//        AppData.saveData()
         performSegue(withIdentifier: "unwindToView", sender: self)
         
     }
