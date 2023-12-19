@@ -72,14 +72,32 @@ class PatientHospitalSelectTableViewController: UITableViewController {
             let cell = tableView.dequeueReusableCell(withIdentifier: "PatientBooking", for: indexPath) as! PatientBookingTableViewCell
 
             cell.TestName.text = listOfTests[indexPath.row].name
-            cell.price.text = "\(listOfTests.count)"
+            cell.price.text = "\(listOfTests[indexPath.row].price) BHD"
+            cell.hospitalName.text = "\(listOfTests[indexPath.row].forMedicalFacility.name)"
+
             
     
             return cell
         }else {
             if indexPath.row == 1 {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "infocell", for: indexPath) as! PatientViewInfoTableViewCell
-                cell.info.text = "\(listOfTests.count)"
+                if selectedHospital?.alwaysOpen == true {
+                    if let hospitalName = selectedHospital?.name, let hospitalCity = selectedHospital?.city {
+                        cell.info.text = "\(hospitalName) - \(hospitalCity) - Open 24 Hours"
+                    } else {
+                        // Handle the case where either name or city is nil
+                        cell.info.text = "Hospital Information Not Available"
+                    }
+                } else {
+                    if let hospitalName = selectedHospital?.name, let hospitalCity = selectedHospital?.city, let openingTime = selectedHospital?.openingTime.hour, let closingTime = selectedHospital?.closingTime.hour {
+                        cell.info.text = "\(hospitalName) - \(hospitalCity)  Timing: \(openingTime):00 - \(closingTime):00"
+                    } else {
+                        // Handle the case where any of the required information is nil
+                        cell.info.text = "Hospital Information Not Available"
+                    }
+
+                }
+
                 
                 return cell
             } else {
