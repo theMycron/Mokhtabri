@@ -21,7 +21,7 @@ class PatientViewBookingDetailsTableViewController: UITableViewController {
         super.viewDidLoad()
         updateView()
         checkBtn()
-        celltrial.
+        //celltrial.
         
 
         // Uncomment the following line to preserve selection between presentations
