@@ -7,25 +7,17 @@
 
 import UIKit
 
-class AdminViewTableViewController: UITableViewController, UISearchControllerDelegate, UISearchBarDelegate {
+class AdminViewTableViewController: UITableViewController, UISearchResultsUpdating, UISearchBarDelegate {
 
+    var displayedFacilities: [MedicalFacility] = AppData.facilities
+    let search = UISearchController()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // might need to use a different controller for the search functionality
-        let search = UISearchController()
-        search.delegate = self
-        search.searchBar.delegate = self
-        self.navigationItem.searchController = search
-//        navigationController?.hidesBarsOnSwipe = false
-        navigationItem.hidesSearchBarWhenScrolling = false
-        navigationItem.preferredSearchBarPlacement = .stacked
-        search.searchBar.searchFieldBackgroundPositionAdjustment = .zero
+        embedSearch()
         
-        
-        search.searchBar.scopeButtonTitles = ["All", "Hospitals", "Labs"]
-        search.searchBar.showsScopeBar = true
-        
+        // remove later
         AppData.loadData()
         
         // Uncomment the following line to preserve selection between presentations
@@ -37,8 +29,63 @@ class AdminViewTableViewController: UITableViewController, UISearchControllerDel
 
     // MARK: - Table view data source
 
+    func embedSearch() {
+        // might need to use a different controller for the search functionality
+        search.searchResultsUpdater = self
+        self.navigationItem.searchController = search
+//        navigationController?.hidesBarsOnSwipe = false
+        search.searchBar.delegate = self
+        navigationItem.hidesSearchBarWhenScrolling = false
+        navigationItem.preferredSearchBarPlacement = .stacked
+        search.searchBar.searchFieldBackgroundPositionAdjustment = .zero
+        
+        
+        search.searchBar.scopeButtonTitles = ["All", "Hospitals", "Labs"]
+        search.searchBar.showsScopeBar = true
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
+        filterFacilities(scope: selectedScope)
+    }
+    
+    func filterFacilities(scope: Int) {
+        switch scope {
+        case 0:
+            displayedFacilities = AppData.facilities
+        case 1:
+            displayedFacilities = AppData.facilities.compactMap{$0.type == FacilityType.hospital ? $0 : nil}
+        case 2:
+            displayedFacilities = AppData.facilities.compactMap{$0.type == FacilityType.lab ? $0 : nil}
+        default:
+            return
+        }
+        tableView.reloadData()
+    }
+    
+    func updateSearchResults(for searchController: UISearchController) {
+        let scope = search.searchBar.selectedScopeButtonIndex
+        if let query = searchController.searchBar.text?.lowercased().trimmingCharacters(in: .whitespaces), !query.isEmpty {
+            if scope == 0 {
+                displayedFacilities = AppData.facilities.filter{
+                    return $0.name.lowercased().contains(query) || $0.city.lowercased().contains(query)
+                }
+            } else if scope == 1 {
+                displayedFacilities = AppData.facilities.filter{
+                    return $0.type == FacilityType.hospital && ($0.name.lowercased().contains(query) || $0.city.lowercased().contains(query))
+                }
+            } else if scope == 2 {
+                displayedFacilities = AppData.facilities.filter{
+                    return $0.type == FacilityType.lab && ($0.name.lowercased().contains(query) || $0.city.lowercased().contains(query))
+                }
+            }
+        } else {
+            filterFacilities(scope: scope)
+        }
+        tableView.reloadData()
+    }
+    
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return AppData.facilities.count
+        return displayedFacilities.count
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -51,13 +98,15 @@ class AdminViewTableViewController: UITableViewController, UISearchControllerDel
               let facility = source.facility
         else {return}
         
+        // replace old facility with updated one or just add it if it is new
         if let indexPath = tableView.indexPathForSelectedRow {
-            AppData.facilities.remove(at: indexPath.section)
-            AppData.facilities.insert(facility, at: indexPath.section)
-//            tableView.deselectRow(at: indexPath, animated: true)
+            displayedFacilities.remove(at: indexPath.section)
+            displayedFacilities.insert(facility, at: indexPath.section)
+            tableView.deselectRow(at: indexPath, animated: true)
         } else {
-            AppData.facilities.append(facility)
+            displayedFacilities.append(facility)
         }
+        AppData.facilities = displayedFacilities
         tableView.reloadData()
         AppData.saveData()
     }
@@ -66,8 +115,7 @@ class AdminViewTableViewController: UITableViewController, UISearchControllerDel
         guard let cell = sender as? UITableViewCell, let indexPath = tableView.indexPath(for: cell) else {
             return nil
         }
-        let facility = AppData.facilities[indexPath.section]
-        tableView.deselectRow(at: indexPath, animated: true)
+        let facility = displayedFacilities[indexPath.section]
         return AdminEditTableViewController(coder: coder, facility: facility)
     }
     
@@ -75,7 +123,7 @@ class AdminViewTableViewController: UITableViewController, UISearchControllerDel
         let cell = tableView.dequeueReusableCell(withIdentifier: "AdminViewCell", for: indexPath) as! AdminViewTableViewCell
 
         // Configure the cell...
-        let facility: MedicalFacility = AppData.facilities[indexPath.section]
+        let facility: MedicalFacility = displayedFacilities[indexPath.section]
         cell.update(with: facility)
 
         return cell
@@ -103,11 +151,10 @@ class AdminViewTableViewController: UITableViewController, UISearchControllerDel
         if editingStyle == .delete {
             tableView.beginUpdates()
             // Delete the row from the data source
-            AppData.facilities.remove(at: indexPath.section)
-//            tableView.deleteRows(at: [indexPath], with: .automatic)
+            displayedFacilities.remove(at: indexPath.section)
             tableView.deleteSections([indexPath.section], with: .fade)
             tableView.endUpdates()
-//            tableView.deleteSections(<#T##sections: IndexSet##IndexSet#>, with: <#T##UITableView.RowAnimation#>)
+            AppData.facilities = displayedFacilities
             AppData.saveData()
         }
     }

@@ -90,7 +90,7 @@ class AdminEditTableViewController: UITableViewController {
 
     @IBAction func btnCancelPressed(_ sender: Any) {
         // dismiss modal without saving
-        dismiss(animated: true)
+        performSegue(withIdentifier: "unwindToView", sender: self)
     }
     
     @IBAction func btnSavePressed(_ sender: Any) {
