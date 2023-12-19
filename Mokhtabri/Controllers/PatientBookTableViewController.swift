@@ -2,7 +2,7 @@
 //  PatientBookTableViewController.swift
 //  Mokhtabri
 //
-//  Created by Nooni on 19/12/2023.
+//  Created by Noora Qasim on 19/12/2023.
 //
 
 import UIKit
