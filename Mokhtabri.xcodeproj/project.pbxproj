@@ -45,6 +45,12 @@
 		883968A72B2CA428008911FB /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 883968A62B2CA428008911FB /* FirebaseAuth */; };
 		8844CE2E2B2F795E009366DF /* RegisterForm1ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8844CE2D2B2F795E009366DF /* RegisterForm1ViewController.swift */; };
 		8DE802CB2B2DF11B007328FF /* PatientUpdateProfileTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DE802CA2B2DF11B007328FF /* PatientUpdateProfileTableViewController.swift */; };
+		D6FD0EF32B31AF4A00BBCBDC /* PatientHomeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6FD0EF22B31AF4A00BBCBDC /* PatientHomeTableViewController.swift */; };
+		D6FD0EF52B31AFA500BBCBDC /* PatientHospitalSelectTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6FD0EF42B31AFA500BBCBDC /* PatientHospitalSelectTableViewController.swift */; };
+		D6FD0EF72B31B11100BBCBDC /* PatientHospitalViewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6FD0EF62B31B11100BBCBDC /* PatientHospitalViewTableViewCell.swift */; };
+		D6FD0EF92B31B73500BBCBDC /* imgTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6FD0EF82B31B73500BBCBDC /* imgTableViewCell.swift */; };
+		D6FD0EFB2B31B7E300BBCBDC /* PatientViewInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6FD0EFA2B31B7E300BBCBDC /* PatientViewInfoTableViewCell.swift */; };
+		D6FD0EFD2B31B83A00BBCBDC /* segmentedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6FD0EFC2B31B83A00BBCBDC /* segmentedTableViewCell.swift */; };
 		F2239F3D2B310D0900D38282 /* PatientBookTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2239F3C2B310D0900D38282 /* PatientBookTableViewController.swift */; };
 		F2239F3F2B31A67300D38282 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = F2239F3E2B31A67300D38282 /* FirebaseAnalytics */; };
 		F2239F412B31A67300D38282 /* FirebaseAnalyticsOnDeviceConversion in Frameworks */ = {isa = PBXBuildFile; productRef = F2239F402B31A67300D38282 /* FirebaseAnalyticsOnDeviceConversion */; };
@@ -144,6 +150,12 @@
 		883968982B2CA03E008911FB /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		8844CE2D2B2F795E009366DF /* RegisterForm1ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterForm1ViewController.swift; sourceTree = "<group>"; };
 		8DE802CA2B2DF11B007328FF /* PatientUpdateProfileTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientUpdateProfileTableViewController.swift; sourceTree = "<group>"; };
+		D6FD0EF22B31AF4A00BBCBDC /* PatientHomeTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientHomeTableViewController.swift; sourceTree = "<group>"; };
+		D6FD0EF42B31AFA500BBCBDC /* PatientHospitalSelectTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientHospitalSelectTableViewController.swift; sourceTree = "<group>"; };
+		D6FD0EF62B31B11100BBCBDC /* PatientHospitalViewTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientHospitalViewTableViewCell.swift; sourceTree = "<group>"; };
+		D6FD0EF82B31B73500BBCBDC /* imgTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = imgTableViewCell.swift; sourceTree = "<group>"; };
+		D6FD0EFA2B31B7E300BBCBDC /* PatientViewInfoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientViewInfoTableViewCell.swift; sourceTree = "<group>"; };
+		D6FD0EFC2B31B83A00BBCBDC /* segmentedTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = segmentedTableViewCell.swift; sourceTree = "<group>"; };
 		F2239F3C2B310D0900D38282 /* PatientBookTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientBookTableViewController.swift; sourceTree = "<group>"; };
 		F23FB2192B2F2BF300B3F5E2 /* PatientBookingTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientBookingTableViewController.swift; sourceTree = "<group>"; };
 		F23FB21B2B2F2D4700B3F5E2 /* PatientBookingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientBookingTableViewCell.swift; sourceTree = "<group>"; };
@@ -230,7 +242,11 @@
 			children = (
 				F2F60A212B27A83D005B74C6 /* PatientInfoTableViewCell.swift */,
 				443CE4BB2B1DAD8B0024D74B /* AdminViewTableViewCell.swift */,
+				D6FD0EF82B31B73500BBCBDC /* imgTableViewCell.swift */,
 				F23FB21B2B2F2D4700B3F5E2 /* PatientBookingTableViewCell.swift */,
+				D6FD0EF62B31B11100BBCBDC /* PatientHospitalViewTableViewCell.swift */,
+				D6FD0EFA2B31B7E300BBCBDC /* PatientViewInfoTableViewCell.swift */,
+				D6FD0EFC2B31B83A00BBCBDC /* segmentedTableViewCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -284,6 +300,8 @@
 				F23FB21D2B2F374200B3F5E2 /* PatientViewBookingDetailsTableViewController.swift */,
 				8844CE2D2B2F795E009366DF /* RegisterForm1ViewController.swift */,
 				F2239F3C2B310D0900D38282 /* PatientBookTableViewController.swift */,
+				D6FD0EF22B31AF4A00BBCBDC /* PatientHomeTableViewController.swift */,
+				D6FD0EF42B31AFA500BBCBDC /* PatientHospitalSelectTableViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -491,10 +509,13 @@
 			files = (
 				446C06782B1C92F3006A6A5E /* Package.swift in Sources */,
 				F2F60A242B28FF04005B74C6 /* Alerts.swift in Sources */,
+				D6FD0EF52B31AFA500BBCBDC /* PatientHospitalSelectTableViewController.swift in Sources */,
 				448FF7202B15F90200B3CA1D /* AppDelegate.swift in Sources */,
 				446C067A2B1C9302006A6A5E /* Booking.swift in Sources */,
+				D6FD0EF32B31AF4A00BBCBDC /* PatientHomeTableViewController.swift in Sources */,
 				44214DE02B26CA4D000DAA0A /* LabBookingTableViewCell.swift in Sources */,
 				446C06742B1C92E3006A6A5E /* Patient.swift in Sources */,
+				D6FD0EFB2B31B7E300BBCBDC /* PatientViewInfoTableViewCell.swift in Sources */,
 				446C06762B1C92EE006A6A5E /* Test.swift in Sources */,
 				446C067C2B1C930D006A6A5E /* MedicalFacility.swift in Sources */,
 				8DE802CB2B2DF11B007328FF /* PatientUpdateProfileTableViewController.swift in Sources */,
@@ -511,12 +532,15 @@
 				44214DE12B26CA4D000DAA0A /* LabHistoryTableViewController.swift in Sources */,
 				4461122F2B1D90C7002F815C /* LoginViewController.swift in Sources */,
 				F2F60A1E2B271CD0005B74C6 /* LabBookingInfoTableViewController.swift in Sources */,
+				D6FD0EF72B31B11100BBCBDC /* PatientHospitalViewTableViewCell.swift in Sources */,
 				443CE4BC2B1DAD8B0024D74B /* AdminViewTableViewCell.swift in Sources */,
 				F23FB21C2B2F2D4700B3F5E2 /* PatientBookingTableViewCell.swift in Sources */,
 				446112312B1D99CF002F815C /* MedicalService.swift in Sources */,
 				446C06722B1C92DB006A6A5E /* User.swift in Sources */,
 				446112332B1D9B5B002F815C /* Category.swift in Sources */,
 				F23FB21E2B2F374200B3F5E2 /* PatientViewBookingDetailsTableViewController.swift in Sources */,
+				D6FD0EF92B31B73500BBCBDC /* imgTableViewCell.swift in Sources */,
+				D6FD0EFD2B31B83A00BBCBDC /* segmentedTableViewCell.swift in Sources */,
 				443BA9F32B20338300794C5A /* AppData.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
