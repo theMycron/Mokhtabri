@@ -45,8 +45,13 @@ class LabBookingInfoTableViewController: UITableViewController {
 
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        updateData()
+        updateView()
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         updateData()
         updateView()
 
@@ -61,7 +66,7 @@ class LabBookingInfoTableViewController: UITableViewController {
             return
         }
         
-        let patientDescription = " Patient Full Name: \(patientF)  \(patientL) \n Patient Identification Number: \(iden) \n Patient Mobile Number: \(phone)"
+        let patientDescription = " Patient Full Name: \(patientF)  \(patientL) \n Patient Identification Number: \(iden) \n Patient Mobile Number: \(phone)\(status)"
         var time = ""
         if (openb){
             time = "Always Open"
@@ -116,6 +121,15 @@ class LabBookingInfoTableViewController: UITableViewController {
         cbooking?.status = .Completed
         btnContent.isHidden = true
         cancelbtnO.isHidden = true
+        guard let cbooking = cbooking else {
+            return
+        }
+        for index in 0..<AppData.bookings.count{
+            if AppData.bookings[index].ofMedicalService == cbooking.ofMedicalService && AppData.bookings[index].bookingDate == cbooking.bookingDate {
+                AppData.bookings[index].status = .Completed // Update the booking
+                break // Exit the loop if you assume there's only one match
+            }
+        }
     }
     
     @IBOutlet weak var cancelbtnO: UIBarButtonItem!
@@ -124,6 +138,16 @@ class LabBookingInfoTableViewController: UITableViewController {
         cbooking?.status = .Cancelled
         btnContent.isHidden = true
         cancelbtnO.isHidden = true
+        guard let cbooking = cbooking else {
+            return
+        }
+        for index in 0..<AppData.bookings.count{
+            if AppData.bookings[index].ofMedicalService == cbooking.ofMedicalService && AppData.bookings[index].bookingDate == cbooking.bookingDate {
+                AppData.bookings[index].status = .Cancelled // Update the booking
+                break // Exit the loop if you assume there's only one match
+            }
+        }
+
     }
     
     

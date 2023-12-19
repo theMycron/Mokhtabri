@@ -39,6 +39,7 @@ class LabHistoryTableViewController: UITableViewController, UISearchBarDelegate,
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        bookings = AppData.bookings
         categorizeBookings()
         
         
@@ -136,22 +137,40 @@ class LabHistoryTableViewController: UITableViewController, UISearchBarDelegate,
         }
     }
     
-    @IBAction func prepareForUnwind(segue:UIStoryboardSegue){
+   /* @IBAction func prepareForUnwind(segue:UIStoryboardSegue){
         guard let source = segue.source as? LabBookingInfoTableViewController,
               let updatedBooking = source.cbooking,
               let indexPath = tableView.indexPathForSelectedRow else {
             return
         }
         
-        bookings[indexPath.row] = updatedBooking
+        for index in 0..<bookings.count {
+            if bookings[index].ofMedicalService == updatedBooking.ofMedicalService && bookings[index].bookingDate == updatedBooking.bookingDate {
+                bookings[index] = updatedBooking // Update the booking
+                break // Exit the loop if you assume there's only one match
+            }
+        }
         categorizeBookings() // Recategorize bookings after updating
         tableView.reloadData()
         
-    }
+    }*/
     func categorizeBookings() {
         activeBookings = bookings.filter { $0.status == .Active } // Replace .active with your actual status value for active bookings
         completedBookings = bookings.filter { $0.status == .Completed } // Replace .completed with your actual status value for completed bookings
         cancelledBookings = bookings.filter { $0.status == .Cancelled } // Replace .cancelled with your actual status value for cancelled bookings
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        bookings = AppData.bookings
+        categorizeBookings()
+        tableView.reloadData()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        bookings = AppData.bookings // Re-fetch the bookings
+        categorizeBookings()
+        tableView.reloadData()
     }
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {

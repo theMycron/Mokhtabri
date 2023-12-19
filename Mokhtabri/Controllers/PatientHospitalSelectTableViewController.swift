@@ -14,7 +14,11 @@ class PatientHospitalSelectTableViewController: UITableViewController {
     var selectedHospital: MedicalFacility?
     var listOfTests: [MedicalService] = []
     
-    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let destination = segue.destination as? PatientBookTableViewController, let selectedRow = tableView.indexPathForSelectedRow{
+            destination.sampleTest = listOfTests[selectedRow.row]
+        }
+    }
     override func viewDidLoad() {
         loadData()
         super.viewDidLoad()
@@ -111,6 +115,8 @@ class PatientHospitalSelectTableViewController: UITableViewController {
             
             
         }
+        
+        
         
         
         

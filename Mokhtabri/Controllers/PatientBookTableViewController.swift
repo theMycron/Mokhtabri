@@ -8,7 +8,9 @@
 import UIKit
 
 class PatientBookTableViewController: UITableViewController {
-    var sampleTest = Test(category: Category(name: "Blood Test"), name: "VitaminB12", price: 10, description: "blood test for vitaminb12", instructions: "fasting 8-12 hours prior is mandatory", forMedicalFacility:  MedicalFacility(name: "Al Hilal Hospital", phone: "12345689", city: "East Riffa", website: "Alhilal.com", alwaysOpen: false, type: .hospital, openingTime: DateComponents(calendar: Calendar.current, hour: 9, minute: 0), closingTime: DateComponents(calendar: Calendar.current, hour: 21, minute: 0), username: "AlHihalEastRiffa", password: "alhilal"))
+    var SamplePatient = Patient(firstName: "Noora", lastName: "Qasim", phone: "38084876", cpr: "031003257", email: "nooraw376@gmail.com", gender: .female, dateOfBirth: DateComponents(calendar: Calendar.current, year:2003, month: 10, day: 12), username: "nqasim", password: "123")
+    var sampleTest : MedicalService =
+    Test(category: Category(name: "Blood Test"), name: "VitaminB12", price: 10, description: "blood test for vitaminb12", instructions: "fasting 8-12 hours prior is mandatory", forMedicalFacility:  MedicalFacility(name: "Al Hilal Hospital", phone: "12345689", city: "East Riffa", website: "Alhilal.com", alwaysOpen: false, type: .hospital, openingTime: DateComponents(calendar: Calendar.current, hour: 9, minute: 0), closingTime: DateComponents(calendar: Calendar.current, hour: 21, minute: 0), username: "AlHihalEastRiffa", password: "alhilal"))
     
     @IBOutlet weak var btn: UIBarButtonItem!
     @IBOutlet weak var hospitalName: UILabel!
@@ -49,7 +51,12 @@ class PatientBookTableViewController: UITableViewController {
         hospitalName.text = "\(sampleTest.forMedicalFacility.name)"
         testName.text = "\(sampleTest.name)"
         datePicker.date = Date()
-        Description.text = "Special Instructions:\(sampleTest.instructions)"
+        if sampleTest is Test{
+            updateDes()
+        }else{
+            updateDes2()
+        }
+        
     }
 
     @IBAction func bookClicked(_ sender: Any) {
@@ -57,7 +64,11 @@ class PatientBookTableViewController: UITableViewController {
             let currentDate = Date()
         if selectedDate >= currentDate{
             confirmation(title: "Confirm Booking", message: "Do you want to confirm your booking of the \(sampleTest.name) test/package"){
-                
+                let calendar = Calendar.current
+                let selectedDateComponents = calendar.dateComponents([.year, .month, .day], from: selectedDate)
+                let newBooking = Booking(forPatient: self.SamplePatient, ofMedicalService: self.sampleTest, bookingDate: selectedDateComponents)
+                AppData.bookings.append(newBooking)
+                self.testName.text = "\(AppData.bookings.count)"
             }
         }else{
             confirmation(title: "Invalid", message: "Please select Valid Date"){
@@ -66,6 +77,25 @@ class PatientBookTableViewController: UITableViewController {
         }
 
     }
+    
+    func updateDes(){
+        Description.text = "Special Instructions:\(sampleTest.instructions)"
+    }
+    
+    func updateDes2(){
+        let package = sampleTest as! Package
+            var tests = ""
+        for t in package.tests {
+            tests += "-\(t.name)\n"
+        }
+            
+            Description.text = "Special Instructions: \(sampleTest.instructions)\nTests Included:\n\(tests)"
+        }
+    
+    
+        
+        
+    
     /*
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)

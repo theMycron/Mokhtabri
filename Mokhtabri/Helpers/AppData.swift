@@ -26,18 +26,22 @@ class AppData {
         categories = []
     }
     
+    //patient sample
+    static var patient1 = Patient(firstName: "Noora", lastName: "Qasim", phone: "12345678", cpr: "031003257", email: "nooraw376@gmail.com", gender: Gender.female, dateOfBirth: DateComponents(calendar: Calendar.current, year: 2003, month: 10, day: 12), username: "NooraW", password: "12345#")
+    
+    //bookings sample
     static var sampleBookings = [
         
-        Booking(forPatient: Patient(firstName: "Noora", lastName: "Qasim", phone: "12345678", cpr: "031003257", email: "nooraw376@gmail.com", gender: Gender.female, dateOfBirth: DateComponents(calendar: Calendar.current, year: 2003, month: 10, day: 12), username: "NooraW", password: "12345#")
-                , ofMedicalService: Test(category: Category(name: "Blood Test"), name: "VitaminB12", price: 10, description: "blood test for vitaminb12", instructions: "fasting 8-12 hours prior is mandatory", forMedicalFacility:  MedicalFacility(name: "Al Hilal Hospital", phone: "12345689", city: "East Riffa", website: "Alhilal.com", alwaysOpen: false, type: .hospital, openingTime: DateComponents(calendar: Calendar.current, hour: 9, minute: 0), closingTime: DateComponents(calendar: Calendar.current, hour: 21, minute: 0), username: "AlHihalEastRiffa", password: "alhilal")), bookingDate: DateComponents(calendar: Calendar.current, year: 2023, month: 1, day: 10)),
+        Booking(forPatient: patient1
+                , ofMedicalService: test1, bookingDate: DateComponents(calendar: Calendar.current, year: 2023, month: 1, day: 10)),
         
         
-        Booking(forPatient: Patient(firstName: "Noora", lastName: "Qasim", phone: "12345678", cpr: "031003257", email: "nooraw376@gmail.com", gender: Gender.female, dateOfBirth: DateComponents(calendar: Calendar.current, year: 2003, month: 10, day: 12), username: "NooraW", password: "12345#")
-                , ofMedicalService: MedicalService(name: "Vitamin D", price: 10, description: "Blood test for vitamin B12", instructions: "Fasting required for 8 to 12 hours", forMedicalFacility: MedicalFacility(name: "Al Hilal Hospital", phone: "12345689", city: "East Riffa", website: "Alhilal.com", alwaysOpen: true, type: .hospital, openingTime: DateComponents(calendar: Calendar.current, hour: 9, minute: 0), closingTime: DateComponents(calendar: Calendar.current, hour: 21, minute: 0), username: "AlHihalEastRiffa", password: "alhilal")), bookingDate: DateComponents(calendar: Calendar.current, year: 2023, month: 2, day: 15)),
+        Booking(forPatient: patient1
+                , ofMedicalService: test2,bookingDate: DateComponents(calendar: Calendar.current, year: 2023, month: 2, day: 15)),
         
         
-        Booking(forPatient: Patient(firstName: "Noora", lastName: "Qasim", phone: "12345678", cpr: "031003257", email: "nooraw376@gmail.com", gender: Gender.female, dateOfBirth: DateComponents(calendar: Calendar.current, year: 2003, month: 10, day: 12), username: "NooraW", password: "12345#")
-                , ofMedicalService: MedicalService(name: "Iron and Hb", price: 10, description: "Blood test for vitamin B12", instructions: "Fasting required for 8 to 12 hours", forMedicalFacility: MedicalFacility(name: "Al Hilal Hospital", phone: "12345689", city: "East Riffa", website: "Alhilal.com", alwaysOpen: false, type: .hospital, openingTime: DateComponents(calendar: Calendar.current, hour: 9, minute: 0), closingTime: DateComponents(calendar: Calendar.current, hour: 21, minute: 0), username: "AlHihalEastRiffa", password: "alhilal")), bookingDate: DateComponents(calendar: Calendar.current, year: 2023, month: 3, day: 20))]
+        Booking(forPatient: patient1
+                , ofMedicalService: test3,bookingDate: DateComponents(calendar: Calendar.current, year: 2023, month: 3, day: 20))]
     
     static var listOfTests = [test1,test2,test3,test4]
     
@@ -63,5 +67,6 @@ class AppData {
             bookings = sampleBookings
             services = listOfTests
             facilities = hospitals
+            patients = [patient1]
         }
     }}

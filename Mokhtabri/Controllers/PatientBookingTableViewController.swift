@@ -71,6 +71,13 @@ class PatientBookingTableViewController: UITableViewController, UISearchResultsU
             destination.booking = listOfBookings[selected.row]
         }
     }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        // Update the list of bookings
+        listOfBookings = AppData.bookings
+        // Reload the table view
+        tableView.reloadData()
+    }
     
 
     /*

@@ -27,6 +27,7 @@ class PatientHomeTableViewController: UITableViewController,UISearchBarDelegate,
     
     //sample data
     var hospitals:  [MedicalFacility] = AppData.facilities
+    var services: [MedicalService] = AppData.services
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,44 +44,75 @@ class PatientHomeTableViewController: UITableViewController,UISearchBarDelegate,
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 1
+        return 2
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return hospitals.count
+        if section == 0 {
+            return hospitals.count
+        }else {
+            return services.count
+        }
+        
     }
 
     
     // change data
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "HospitCell", for: indexPath) as! PatientHospitalViewTableViewCell
-        
-        
-        
-        let hospital = hospitals[indexPath.row]
-        cell.HospitalName.text = hospital.name
-        cell.location.text = hospital.city
-        if hospital.alwaysOpen == true {
-            cell.openingTime.text = "Open 24 Hours"
-        } else {
-            guard let hour = hospital.openingTime.hour,
-                  let chour = hospital.closingTime.hour
-            else {
-                return cell
+        if indexPath.section == 0 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "HospitCell", for: indexPath) as! PatientHospitalViewTableViewCell
+            
+            
+            
+            let hospital = hospitals[indexPath.row]
+            cell.HospitalName.text = hospital.name
+            cell.location.text = hospital.city
+            if hospital.alwaysOpen == true {
+                cell.openingTime.text = "Open 24 Hours"
+            } else {
+                guard let hour = hospital.openingTime.hour,
+                      let chour = hospital.closingTime.hour
+                else {
+                    return cell
+                }
+                cell.openingTime.text = "From \(hour) am - \(chour) pm"
             }
-            cell.openingTime.text = "From \(hour) am - \(chour) pm"
-        }
-        
-        // Configure the cell...
+            
+            // Configure the cell...
 
-        return cell
+            return cell
+        } else {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "PatientBooking", for: indexPath) as! PatientBookingTableViewCell
+            
+            let service = services[indexPath.row]
+            cell.TestName.text = service.name
+            cell.hospitalName.text = service.forMedicalFacility.name
+            cell.price.text = "\(service.price)BHD"
+            if service is Test {
+                //cell.type.text = "Test"
+            }else{
+                //cell.type.text = "Package"
+            }
+            return cell
+        }
+    
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let destination = segue.destination as?
             PatientHospitalSelectTableViewController, let selectedRow = tableView.indexPathForSelectedRow {
             destination.selectedHospital = hospitals[selectedRow.row]
+        } else if let destination = segue.destination as? PatientBookTableViewController, let selected = tableView.indexPathForSelectedRow {
+            destination.sampleTest = services[selected.row]
+        }
+    }
+    
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if section == 0 {
+            return "Hospitals/Labs"
+        }else{
+            return "Tests/Packages"
         }
     }
 
