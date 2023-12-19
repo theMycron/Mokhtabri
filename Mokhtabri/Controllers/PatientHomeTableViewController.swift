@@ -26,9 +26,7 @@ class PatientHomeTableViewController: UITableViewController,UISearchBarDelegate,
     }
     
     //sample data
-    var hospitals:  [MedicalFacility] = [MedicalFacility(name: "Alsalam Hospital", phone: "13101010", city: "Riffa", website: "https://www.alsalam.care", alwaysOpen: true, type: .hospital, openingTime: DateComponents(calendar: Calendar.current, hour: 0, minute: 0), closingTime: DateComponents(calendar: Calendar.current, hour: 0, minute: 0), username: "Alsalam", password: "1234")
-    , MedicalFacility(name: "ALHilal Hospital", phone: "17495555", city: "Riffa", website: "https://www.alhilalhealthcare.com", alwaysOpen: false, type: .hospital, openingTime: DateComponents(calendar: Calendar.current, hour: 9, minute: 0), closingTime: DateComponents(calendar: Calendar.current, hour: 10, minute: 0), username: "AlHilal", password: "4321")
-    ]
+    var hospitals:  [MedicalFacility] = AppData.facilities
     
     override func viewDidLoad() {
         super.viewDidLoad()
