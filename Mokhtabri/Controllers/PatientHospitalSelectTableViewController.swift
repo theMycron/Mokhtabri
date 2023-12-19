@@ -12,12 +12,14 @@ class PatientHospitalSelectTableViewController: UITableViewController {
     
     // declare variables
     var selectedHospital: MedicalFacility?
-    var listOfTests: [MedicalService]?
+    var listOfTests: [MedicalService] = []
     
     
     override func viewDidLoad() {
+        loadData()
         super.viewDidLoad()
         tableView.delegate = self
+        
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
         
@@ -47,23 +49,37 @@ class PatientHospitalSelectTableViewController: UITableViewController {
         if section == 0 {
             return 2
         }else {
-            return listOfTests?.count ?? 1
+            return listOfTests.count
         }
     }
     
     func loadData() {
+        let listOfAllTests = AppData.services
+        guard let hospital = selectedHospital else {
+            return
+        }
         
+        for test in listOfAllTests {
+            if test.forMedicalFacility.name == hospital.name {
+            listOfTests.append(test)
+                
+            }
+        }
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 1{
             let cell = tableView.dequeueReusableCell(withIdentifier: "PatientBooking", for: indexPath) as! PatientBookingTableViewCell
-            cell.TestName.text = "ay"
+
+            cell.TestName.text = listOfTests[indexPath.row].name
+            cell.price.text = "\(listOfTests.count)"
+            
+    
             return cell
         }else {
             if indexPath.row == 1 {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "infocell", for: indexPath) as! PatientViewInfoTableViewCell
-                cell.info.text = "hello"
+                cell.info.text = "\(listOfTests.count)"
                 
                 return cell
             } else {
