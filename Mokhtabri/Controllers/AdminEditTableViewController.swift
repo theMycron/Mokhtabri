@@ -9,6 +9,8 @@ import UIKit
 
 class AdminEditTableViewController: UITableViewController {
 
+    @IBOutlet weak var btnSave: UIBarButtonItem!
+    
     @IBOutlet weak var txtName: UITextField!
     
     @IBOutlet weak var txtPhone: UITextField!
@@ -38,6 +40,8 @@ class AdminEditTableViewController: UITableViewController {
     @IBOutlet weak var closingTimeCell: UITableViewCell!
     
     var facility: MedicalFacility?
+    
+    var hasChanges: Bool = false
     
     init?(coder: NSCoder, facility: MedicalFacility?) {
         self.facility = facility
@@ -78,7 +82,8 @@ class AdminEditTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        // this delegate will control the sheet, and will stop the user from dismissing if changes were made
+        navigationController?.presentationController?.delegate = self
         updateView()
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -134,6 +139,7 @@ class AdminEditTableViewController: UITableViewController {
     
     @IBAction func toggleChanged(_ sender: Any) {
         updateCells()
+        madeChanges()
     }
     
     func updateCells() {
@@ -151,6 +157,14 @@ class AdminEditTableViewController: UITableViewController {
         }
         return super.tableView(tableView, heightForRowAt: indexPath)
     }
+    
+    
+    @IBAction func madeChanges() {
+        hasChanges = true
+        isModalInPresentation = hasChanges
+        btnSave.isEnabled = hasChanges
+    }
+    
     
     
 //    override func numberOfSections(in tableView: UITableView) -> Int {
@@ -218,4 +232,19 @@ class AdminEditTableViewController: UITableViewController {
     }
     */
 
+}
+
+extension AdminEditTableViewController: UIAdaptivePresentationControllerDelegate {
+    
+    
+    func presentationControllerDidAttemptToDismiss(_ presentationController: UIPresentationController) {
+        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        alert.addAction(UIAlertAction(title: "Discard Changes", style: .destructive) { _ in
+            self.performSegue(withIdentifier: "unwindToView", sender: self)
+        })
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        
+        
+        self.present(alert, animated: true, completion: nil)
+    }
 }

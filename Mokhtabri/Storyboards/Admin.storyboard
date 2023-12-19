@@ -25,7 +25,7 @@
                                             <action selector="btnCancelPressed:" destination="IT6-Mn-ReT" id="aah-yV-s74"/>
                                         </connections>
                                     </barButtonItem>
-                                    <barButtonItem key="rightBarButtonItem" systemItem="save" id="3CJ-u5-hA4">
+                                    <barButtonItem key="rightBarButtonItem" enabled="NO" systemItem="save" id="3CJ-u5-hA4">
                                         <connections>
                                             <action selector="btnSavePressed:" destination="IT6-Mn-ReT" id="yNT-dl-0DT"/>
                                         </connections>
@@ -80,14 +80,14 @@
                             <tableViewSection id="Vf1-gh-2nv">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="AdminTextInputCell" id="MM9-8b-XGk">
-                                        <rect key="frame" x="20" y="284" width="390" height="42"/>
+                                        <rect key="frame" x="20" y="284" width="390" height="41.666667938232422"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="MM9-8b-XGk" id="Uwi-P7-K2r">
-                                            <rect key="frame" x="0.0" y="0.0" width="390" height="42"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="390" height="41.666667938232422"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="teX-i7-Ctr">
-                                                    <rect key="frame" x="20" y="11" width="100" height="20"/>
+                                                    <rect key="frame" x="20" y="11.000000000000002" width="100" height="19.666666666666671"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="100" id="kSR-C1-zKe"/>
                                                     </constraints>
@@ -96,9 +96,12 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Facility Name" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="4mF-Je-Ixk">
-                                                    <rect key="frame" x="121" y="11" width="249" height="20"/>
+                                                    <rect key="frame" x="121" y="11.000000000000002" width="249" height="19.666666666666671"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits"/>
+                                                    <connections>
+                                                        <action selector="madeChanges" destination="IT6-Mn-ReT" eventType="editingDidEnd" id="vKX-Zd-PdR"/>
+                                                    </connections>
                                                 </textField>
                                             </subviews>
                                             <constraints>
@@ -113,7 +116,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="AdminTextInputCell" id="KK3-cZ-MFA">
-                                        <rect key="frame" x="20" y="326" width="390" height="41.333332061767578"/>
+                                        <rect key="frame" x="20" y="325.66666793823242" width="390" height="41.333332061767578"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="KK3-cZ-MFA" id="5FC-1e-bgX">
                                             <rect key="frame" x="0.0" y="0.0" width="390" height="41.333332061767578"/>
@@ -132,6 +135,9 @@
                                                     <rect key="frame" x="121" y="10.999999999999998" width="249" height="19.333333333333329"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits" keyboardType="phonePad"/>
+                                                    <connections>
+                                                        <action selector="madeChanges" destination="IT6-Mn-ReT" eventType="editingDidEnd" id="Fia-77-X2W"/>
+                                                    </connections>
                                                 </textField>
                                             </subviews>
                                             <constraints>
@@ -146,7 +152,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="AdminTextInputCell" id="jfP-AO-IcW">
-                                        <rect key="frame" x="20" y="367.33333206176758" width="390" height="41.333332061767578"/>
+                                        <rect key="frame" x="20" y="367" width="390" height="41.333332061767578"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="jfP-AO-IcW" id="YJ1-Lw-k5V">
                                             <rect key="frame" x="0.0" y="0.0" width="390" height="41.333332061767578"/>
@@ -165,6 +171,9 @@
                                                     <rect key="frame" x="121" y="10.999999999999998" width="249" height="19.333333333333329"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits"/>
+                                                    <connections>
+                                                        <action selector="madeChanges" destination="IT6-Mn-ReT" eventType="editingDidEnd" id="UsV-cL-cx8"/>
+                                                    </connections>
                                                 </textField>
                                             </subviews>
                                             <constraints>
@@ -179,7 +188,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="AdminTextInputCell" id="r7b-yc-6km">
-                                        <rect key="frame" x="20" y="408.66666412353516" width="390" height="41.333332061767578"/>
+                                        <rect key="frame" x="20" y="408.33333206176758" width="390" height="41.333332061767578"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="r7b-yc-6km" id="KWO-LA-G3r">
                                             <rect key="frame" x="0.0" y="0.0" width="390" height="41.333332061767578"/>
@@ -198,6 +207,9 @@
                                                     <rect key="frame" x="121" y="10.999999999999998" width="249" height="19.333333333333329"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits" keyboardType="URL"/>
+                                                    <connections>
+                                                        <action selector="madeChanges" destination="IT6-Mn-ReT" eventType="editingDidEnd" id="hCn-SW-a88"/>
+                                                    </connections>
                                                 </textField>
                                             </subviews>
                                             <constraints>
@@ -212,7 +224,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="AdminSegmentInputCell" id="cmi-3V-KS6">
-                                        <rect key="frame" x="20" y="449.99999618530273" width="390" height="39.333332061767578"/>
+                                        <rect key="frame" x="20" y="449.66666412353516" width="390" height="39.333332061767578"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="cmi-3V-KS6" id="XAV-cg-Kak">
                                             <rect key="frame" x="0.0" y="0.0" width="390" height="39.333332061767578"/>
@@ -233,6 +245,9 @@
                                                         <segment title="Hospital"/>
                                                         <segment title="Lab"/>
                                                     </segments>
+                                                    <connections>
+                                                        <action selector="madeChanges" destination="IT6-Mn-ReT" eventType="valueChanged" id="b6o-bN-Atx"/>
+                                                    </connections>
                                                 </segmentedControl>
                                             </subviews>
                                             <constraints>
@@ -250,7 +265,7 @@
                             <tableViewSection id="hr4-yN-oh7">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="AdminToggleInputCell" id="ElP-zN-AMe">
-                                        <rect key="frame" x="20" y="525.33332824707031" width="390" height="39.333332061767578"/>
+                                        <rect key="frame" x="20" y="524.99999618530273" width="390" height="39.333332061767578"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ElP-zN-AMe" id="UYC-MZ-Syr">
                                             <rect key="frame" x="0.0" y="0.0" width="390" height="39.333332061767578"/>
@@ -280,7 +295,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="AdminTimeInputCell" id="reN-om-zEA">
-                                        <rect key="frame" x="20" y="564.66666030883789" width="390" height="39.333332061767578"/>
+                                        <rect key="frame" x="20" y="564.33332824707031" width="390" height="39.333332061767578"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="reN-om-zEA" id="DuJ-Dl-HYF">
                                             <rect key="frame" x="0.0" y="0.0" width="390" height="39.333332061767578"/>
@@ -300,6 +315,9 @@
                                                     <date key="date" timeIntervalSinceReferenceDate="723445200.42291296">
                                                         <!--2023-12-05 05:00:00 +0000-->
                                                     </date>
+                                                    <connections>
+                                                        <action selector="madeChanges" destination="IT6-Mn-ReT" eventType="valueChanged" id="G3Y-e8-rcN"/>
+                                                    </connections>
                                                 </datePicker>
                                             </subviews>
                                             <constraints>
@@ -313,7 +331,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="AdminTimeInputCell" id="i6v-Bk-jo8">
-                                        <rect key="frame" x="20" y="603.99999237060547" width="390" height="39.333332061767578"/>
+                                        <rect key="frame" x="20" y="603.66666030883789" width="390" height="39.333332061767578"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="i6v-Bk-jo8" id="UrG-bN-wVD">
                                             <rect key="frame" x="0.0" y="0.0" width="390" height="39.333332061767578"/>
@@ -333,6 +351,9 @@
                                                     <date key="date" timeIntervalSinceReferenceDate="723488400.42291296">
                                                         <!--2023-12-05 17:00:00 +0000-->
                                                     </date>
+                                                    <connections>
+                                                        <action selector="madeChanges" destination="IT6-Mn-ReT" eventType="valueChanged" id="Tb6-4W-9py"/>
+                                                    </connections>
                                                 </datePicker>
                                             </subviews>
                                             <constraints>
@@ -350,14 +371,14 @@
                             <tableViewSection id="Ld4-c0-Psq">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="AdminTextInputCell" id="8pT-nf-n5N">
-                                        <rect key="frame" x="20" y="679.33332443237305" width="390" height="41"/>
+                                        <rect key="frame" x="20" y="678.99999237060547" width="390" height="41.666667938232422"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="8pT-nf-n5N" id="9Nf-Ti-2oX">
-                                            <rect key="frame" x="0.0" y="0.0" width="390" height="41"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="390" height="41.666667938232422"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sr5-yw-LgF">
-                                                    <rect key="frame" x="20" y="11" width="100" height="19"/>
+                                                    <rect key="frame" x="20" y="11.000000000000002" width="100" height="19.666666666666671"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="100" id="DRM-3A-20S"/>
                                                     </constraints>
@@ -366,9 +387,12 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter Username" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="cPV-sX-zth">
-                                                    <rect key="frame" x="121" y="11" width="249" height="19"/>
+                                                    <rect key="frame" x="121" y="11.000000000000002" width="249" height="19.666666666666671"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits"/>
+                                                    <connections>
+                                                        <action selector="madeChanges" destination="IT6-Mn-ReT" eventType="editingDidEnd" id="m8Z-9U-Qir"/>
+                                                    </connections>
                                                 </textField>
                                             </subviews>
                                             <constraints>
@@ -383,7 +407,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="AdminTextInputCell" id="hlv-IT-512">
-                                        <rect key="frame" x="20" y="720.33332443237305" width="390" height="39.333332061767578"/>
+                                        <rect key="frame" x="20" y="720.66666030883789" width="390" height="39.333332061767578"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="hlv-IT-512" id="8eP-ja-6Az">
                                             <rect key="frame" x="0.0" y="0.0" width="390" height="39.333332061767578"/>
@@ -402,6 +426,9 @@
                                                     <rect key="frame" x="121" y="10.999999999999998" width="249" height="17.333333333333329"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits" secureTextEntry="YES" textContentType="new-password"/>
+                                                    <connections>
+                                                        <action selector="madeChanges" destination="IT6-Mn-ReT" eventType="editingDidEnd" id="6Ou-Eh-ggQ"/>
+                                                    </connections>
                                                 </textField>
                                             </subviews>
                                             <constraints>
@@ -416,7 +443,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="AdminTextInputCell" id="CHf-dU-3YF">
-                                        <rect key="frame" x="20" y="759.66665649414062" width="390" height="39.333332061767578"/>
+                                        <rect key="frame" x="20" y="759.99999237060547" width="390" height="39.333332061767578"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="CHf-dU-3YF" id="TV3-ea-6qr">
                                             <rect key="frame" x="0.0" y="0.0" width="390" height="39.333332061767578"/>
@@ -435,6 +462,9 @@
                                                     <rect key="frame" x="121" y="10.999999999999998" width="249" height="17.333333333333329"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits" secureTextEntry="YES" textContentType="new-password"/>
+                                                    <connections>
+                                                        <action selector="madeChanges" destination="IT6-Mn-ReT" eventType="editingDidEnd" id="akS-Yf-Han"/>
+                                                    </connections>
                                                 </textField>
                                             </subviews>
                                             <constraints>
@@ -460,6 +490,7 @@
                         </connections>
                     </tableView>
                     <connections>
+                        <outlet property="btnSave" destination="3CJ-u5-hA4" id="yJk-ah-cYG"/>
                         <outlet property="closingTimeCell" destination="i6v-Bk-jo8" id="VNn-Dh-aST"/>
                         <outlet property="imgDisplay" destination="w8t-2V-we5" id="DIi-RK-Bhi"/>
                         <outlet property="openingTimeCell" destination="reN-om-zEA" id="Aj0-tv-SN2"/>
