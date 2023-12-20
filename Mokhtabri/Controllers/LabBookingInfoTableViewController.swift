@@ -116,38 +116,32 @@ class LabBookingInfoTableViewController: UITableViewController {
         return 6
     }
     
-    func updateStatus(){
+    
+    @IBOutlet weak var cancelbtnO: UIBarButtonItem!
+   
+    
+    func updateStatus() {
         statusLabel.text = "Completed"
         cbooking?.status = .Completed
         btnContent.isHidden = true
         cancelbtnO.isHidden = true
-        guard let cbooking = cbooking else {
-            return
-        }
-        for index in 0..<AppData.bookings.count{
-            if AppData.bookings[index].ofMedicalService == cbooking.ofMedicalService && AppData.bookings[index].bookingDate == cbooking.bookingDate {
-                AppData.bookings[index].status = .Completed // Update the booking
-                break // Exit the loop if you assume there's only one match
-            }
+        guard let cbooking = cbooking else { return }
+
+        if let index = AppData.bookings.firstIndex(where: { $0.id == cbooking.id }) {
+            AppData.bookings[index].status = .Completed
         }
     }
-    
-    @IBOutlet weak var cancelbtnO: UIBarButtonItem!
-    func updateStatus2(){
+
+    func updateStatus2() {
         statusLabel.text = "Cancelled"
         cbooking?.status = .Cancelled
         btnContent.isHidden = true
         cancelbtnO.isHidden = true
-        guard let cbooking = cbooking else {
-            return
-        }
-        for index in 0..<AppData.bookings.count{
-            if AppData.bookings[index].ofMedicalService == cbooking.ofMedicalService && AppData.bookings[index].bookingDate == cbooking.bookingDate {
-                AppData.bookings[index].status = .Cancelled // Update the booking
-                break // Exit the loop if you assume there's only one match
-            }
-        }
+        guard let cbooking = cbooking else { return }
 
+        if let index = AppData.bookings.firstIndex(where: { $0.id == cbooking.id }) {
+            AppData.bookings[index].status = .Cancelled
+        }
     }
     
     

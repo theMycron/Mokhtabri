@@ -142,6 +142,7 @@
                                     <outlet property="TestName" destination="NW3-GK-aqo" id="KR4-Ca-xwu"/>
                                     <outlet property="bookingDate" destination="VSB-Zv-JDJ" id="jG9-h2-oqZ"/>
                                     <outlet property="hospitalName" destination="4Yd-Wr-7Q8" id="kPp-qT-MLq"/>
+                                    <outlet property="img" destination="vFo-VU-g6y" id="ccA-TU-DpU"/>
                                     <outlet property="price" destination="WJa-QA-DDS" id="wmf-fV-1B3"/>
                                     <outlet property="type" destination="tLo-EB-avh" id="Uqs-9f-fnQ"/>
                                     <segue destination="aM2-Wg-7bS" kind="show" id="nAz-0G-dwh"/>
@@ -219,10 +220,10 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Name" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dfx-5o-Pzz">
-                                                    <rect key="frame" x="30" y="0.0" width="128" height="54"/>
+                                                    <rect key="frame" x="30" y="0.0" width="176" height="54"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="19"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>

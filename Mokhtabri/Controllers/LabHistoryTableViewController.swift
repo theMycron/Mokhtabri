@@ -129,11 +129,28 @@ class LabHistoryTableViewController: UITableViewController, UISearchBarDelegate,
             return 44 // Adjust the height as needed
         }}
     
+   
+
+    
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let destinationVC = segue.destination as? LabBookingInfoTableViewController,
            let selectedIndexPath = tableView.indexPathForSelectedRow {
             // Pass the selected Booking to the destination view controller
-            destinationVC.cbooking = bookings[selectedIndexPath.row]
+            let selectedBooking: Booking
+            switch selectedSegmentIndex {
+            case 0:
+                selectedBooking = activeBookings[selectedIndexPath.row]
+            case 1:
+                selectedBooking = completedBookings[selectedIndexPath.row]
+            case 2:
+                selectedBooking = cancelledBookings[selectedIndexPath.row]
+            default:
+                fatalError("Invalid segment index")
+            }
+            
+            destinationVC.cbooking = selectedBooking
+            
         }
     }
     
