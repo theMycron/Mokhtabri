@@ -8,7 +8,14 @@
 import UIKit
 import FirebaseAuth
 
-class LoginViewController: UIViewController {
+class LoginViewController: UIViewController, UITextFieldDelegate {
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        emailTxt.delegate = self
+        passwordTxt.delegate = self
+        
+    }
 //declare user defaults
     let defaults = UserDefaults.standard
     //creating outlets for the fields
@@ -16,23 +23,11 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var emailTxt: UITextField!
     @IBOutlet weak var passwordTxt: UITextField!
     
-    func validateEmailFormat() {
-        guard let email = emailTxt.text else {
-            // Email text field is empty
-            return
-        }
-        
-        let emailRegex = "[A-Za-z0-9._%+-]+@gmail\\.com$"
-        let emailPredicate = NSPredicate(format: "SELF MATCHES %@", emailRegex)
-        
-        if !emailPredicate.evaluate(with: email) {
-            showInvalidEmailAlert()
-        }
-    }
-
+  
+//show alert messsage for user
     func showInvalidEmailAlert() {
         let alertController = UIAlertController(title: "Invalid Email Format",
-                                                message: "Please enter a valid Gmail address.",
+                                                message: "Please enter a valid email address.",
                                                 preferredStyle: .alert)
         
         let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
@@ -41,19 +36,14 @@ class LoginViewController: UIViewController {
         present(alertController, animated: true, completion: nil)
     }
     
-    
     @IBAction func loginBtnTapped(_ sender: Any) {
         //start validating
        
             validateFields()
-            validateEmailFormat()
+         
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        
-    }
+   
 
     
     
@@ -72,6 +62,7 @@ class LoginViewController: UIViewController {
             return
         }
         
+      
         
        
         if passwordTxt.text?.isEmpty == true{
@@ -100,7 +91,17 @@ class LoginViewController: UIViewController {
             present(alert, animated: true)
             return
         }
+        guard let email = emailTxt.text else {
+            // Email text field is empty
+            return
+        }
         
+        let emailRegex = "[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}"
+        let emailPredicate = NSPredicate(format: "SELF MATCHES %@", emailRegex)
+        
+        if !emailPredicate.evaluate(with: email) {
+            showInvalidEmailAlert()
+        }
         
         
         //start login process after validation
@@ -109,6 +110,7 @@ class LoginViewController: UIViewController {
     
     func login(){
         
+     
         //force unwrap tp avoid the crash
         Auth.auth().signIn(withEmail: emailTxt.text!, password: passwordTxt.text!) { [weak self] authResult, errorMessgae in
             
@@ -129,7 +131,7 @@ class LoginViewController: UIViewController {
     func checkUserInfo(){
         if Auth.auth().currentUser != nil {
             //print the id to ensure
-            print(Auth.auth().currentUser?.uid)
+            print(Auth.auth().currentUser?.uid) 
             //print(Auth.auth().currentUser?.displayName)
             
             //set the value inside the user defaults
@@ -139,8 +141,24 @@ class LoginViewController: UIViewController {
             let mainSB = UIStoryboard(name: "Main", bundle: nil)
             let vc = mainSB.instantiateViewController(withIdentifier: "PatientRegistration")
             vc.modalPresentationStyle = .overFullScreen
-            self.present(vc, animated: true)
-            let userID: String = Auth.auth().currentUser!.uid
+           self.present(vc, animated: true)
+            
+            
+         
+            
+            //let storyboard = UIStoryboard(name: "PatientHome", bundle: nil)
+           // guard let viewController = storyboard.instantiateViewController(withIdentifier: "PatientHome") as? PatientHomeTableViewController else {
+                //return
+            //}
+            //viewController.modalPresentationStyle = .fullScreen
+            //self.present(viewController, animated: true) {
+                // Dismiss the previous view controller in settings
+                //self.navigationController?.viewControllers = [viewController]
+            //}
+            //let userID: String = Auth.auth().currentUser!.uid
+            
+            
+           
             
             
         }else{
@@ -169,6 +187,17 @@ class LoginViewController: UIViewController {
     
     
     
-  
-    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if textField == emailTxt{
+            passwordTxt.becomeFirstResponder()
+        }else{
+            validateFields()
+        
+            //login()
+        }
+        return true
+    }
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+    }
 }

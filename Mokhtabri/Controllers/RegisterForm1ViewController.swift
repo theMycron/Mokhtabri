@@ -9,13 +9,20 @@ import Foundation
 import UIKit
 import FirebaseAuth
 
-class RegisterForm1ViewController: UIViewController {
+class RegisterForm1ViewController: UIViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
         datePicker.datePickerMode = .date
+    
+        firstname.delegate = self
+        lastname.delegate = self
+        cpr.delegate = self
+        email.delegate = self
+        password.delegate = self
         
-        // Do any additional setup after loading the view.
+    
+      
     }
     
     
@@ -41,24 +48,13 @@ class RegisterForm1ViewController: UIViewController {
     //declare user defaults
     let defaults = UserDefaults.standard
     
-    //validation for email entry format
-    func validateEmailFormat() {
-        guard let email = email.text else {
-            // Email text field is empty
-            return
-        }
-        
-        let emailRegex = "[A-Za-z0-9._%+-]+@gmail\\.com$"
-        let emailPredicate = NSPredicate(format: "SELF MATCHES %@", emailRegex)
-        
-        if !emailPredicate.evaluate(with: email) {
-            showInvalidEmailAlert()
-        }
-    }
+    
+    
+  
 
     func showInvalidEmailAlert() {
         let alertController = UIAlertController(title: "Invalid Email Format",
-                                                message: "Please enter a valid Gmail address.",
+                                                message: "Please enter a valid email address.",
                                                 preferredStyle: .alert)
         
         let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
@@ -66,12 +62,10 @@ class RegisterForm1ViewController: UIViewController {
         
         present(alertController, animated: true, completion: nil)
     }
-    
-    
     @IBAction func registerBtnTapped(_ sender: Any) {
         
         validateFields()
-        validateEmailFormat()
+       
     }
     
     
@@ -121,7 +115,17 @@ class RegisterForm1ViewController: UIViewController {
             return
             
         }
+        guard let cpr = cpr.text else {
+            // CPR text field is empty
+            return
+        }
         
+        let cprRegex = "^[0-9]{9}$"
+        let cprPredicate = NSPredicate(format: "SELF MATCHES %@", cprRegex)
+        
+        if !cprPredicate.evaluate(with: cpr) {
+            showInvalidCPRAlert()
+        }
         
         
         //validation for cpr field
@@ -138,20 +142,22 @@ class RegisterForm1ViewController: UIViewController {
             
             
             
-        }
-        validateEmailFormat()
-        //function to validate email entry format
-        func validateEmailFormat() -> Bool {
-            guard let email = email.text else {
-                // Email text field is empty
-                return false
-            }
             
-            let emailRegex = "[A-Za-z0-9._%+-]+@gmail\\.com$"
-            let emailPredicate = NSPredicate(format: "SELF MATCHES %@", emailRegex)
-            
-            return emailPredicate.evaluate(with: email)
         }
+        guard let email = email.text else {
+            // Email text field is empty
+            return
+        }
+        
+        let emailRegex = "[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}"
+        let emailPredicate = NSPredicate(format: "SELF MATCHES %@", emailRegex)
+        
+        if !emailPredicate.evaluate(with: email) {
+            showInvalidEmailAlert()
+        }
+        
+       
+      
         
         
         //validation for password field
@@ -192,10 +198,22 @@ class RegisterForm1ViewController: UIViewController {
     
     
   
+    func showInvalidCPRAlert() {
+        let alertController = UIAlertController(title: "Invalid CPR Format",
+                                                message: "Please enter a valid CPR number consisting of 9 digits.",
+                                                preferredStyle: .alert)
+        
+        let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+        alertController.addAction(okAction)
+        
+        present(alertController, animated: true, completion: nil)
+    }
     
     
     //send user information + password to firebase
-    func Register(){
+   func Register(){
+        
+      
         
         Auth.auth().createUser(withEmail: email.text!, password: password.text!) { (authResult, error) in
             
@@ -250,6 +268,29 @@ class RegisterForm1ViewController: UIViewController {
         let def = UserDefaults.standard
         defaults.set(selectedGender, forKey: "Selected Gender")
         
+    }
+    
+    
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if textField == firstname{
+            lastname.becomeFirstResponder()
+        }else if textField == lastname{
+            cpr.becomeFirstResponder()
+        }else   if textField == cpr{
+            email.becomeFirstResponder()
+        }else if textField == email{
+            password.becomeFirstResponder()
+        }
+        
+        else{
+            validateFields()
+        }
+        return true
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
     }
     
 }
