@@ -20,6 +20,7 @@ class AdminViewTableViewController: UITableViewController, UISearchResultsUpdati
         // remove later
         AppData.loadData()
         
+        filterFacilities(scope: 0)
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -107,7 +108,7 @@ class AdminViewTableViewController: UITableViewController, UISearchResultsUpdati
             displayedFacilities.append(facility)
         }
         AppData.facilities = displayedFacilities
-        tableView.reloadData()
+        filterFacilities(scope: search.searchBar.selectedScopeButtonIndex) // refresh view
         AppData.saveData()
     }
     
