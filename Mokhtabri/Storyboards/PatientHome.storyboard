@@ -211,7 +211,7 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="etj-Do-EBW" kind="relationship" relationship="rootViewController" id="a70-Ix-mMI"/>
+                        <segue destination="etj-Do-EBW" kind="relationship" relationship="rootViewController" id="9qr-IC-fQD"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="K4j-CW-jCx" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -378,10 +378,10 @@
                             <outlet property="delegate" destination="etj-Do-EBW" id="zGW-ib-A8u"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="Bfx-SN-2Ts">
+                    <navigationItem key="navigationItem" id="xEV-yD-j5I">
                         <nil key="title"/>
-                        <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" id="MMq-tg-z4G" userLabel="SegmentedControlPatient" customClass="UISegmented">
-                            <rect key="frame" x="16" y="6" width="361" height="32"/>
+                        <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="tUx-wv-ay6">
+                            <rect key="frame" x="16" y="5" width="361" height="34"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <segments>
                                 <segment title="All"/>
@@ -390,13 +390,20 @@
                                 <segment title="Tests"/>
                                 <segment title="Packages"/>
                             </segments>
+                            <connections>
+                                <action selector="segementClick:" destination="etj-Do-EBW" eventType="valueChanged" id="pn0-mM-iTA"/>
+                                <action selector="segmentedValueChanged:" destination="etj-Do-EBW" eventType="valueChanged" id="D8L-iz-Go8"/>
+                            </connections>
                         </segmentedControl>
                     </navigationItem>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="Filter" destination="tUx-wv-ay6" id="G7C-yy-TCz"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6Vr-R6-h7G" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2387" y="-319"/>
+            <point key="canvasLocation" x="2385.4961832061067" y="-319.01408450704224"/>
         </scene>
         <!--Patient Hospital Select Table View Controller-->
         <scene sceneID="tXM-fX-C7B">

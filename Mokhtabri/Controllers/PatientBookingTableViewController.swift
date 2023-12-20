@@ -58,6 +58,7 @@ class PatientBookingTableViewController: UITableViewController, UISearchResultsU
         cell.hospitalName.text = booking.ofMedicalService.forMedicalFacility.name
         cell.price.text = "\(booking.ofMedicalService.price) BHD"
         cell.type.text = "Test"
+        
         //gonna fix in a minute
        // if(booking.ofMedicalService.)
 

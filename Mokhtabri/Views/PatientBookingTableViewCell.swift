@@ -9,6 +9,7 @@ import UIKit
 
 class PatientBookingTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var img: UIImageView!
     @IBOutlet weak var type: UILabel!
     @IBOutlet weak var price: UILabel!
     @IBOutlet weak var bookingDate: UILabel!
