@@ -26,6 +26,78 @@ class AppData {
         categories = []
     }
     
+    // Methods to manage users
+    
+    static func getUser(username: String) -> User? {
+        let allUsers: [User] = admin + patients + facilities
+        return allUsers.first(where: { $0.username == username })
+    }
+    static func getUser(uuid: UUID) -> User? {
+        let allUsers: [User] = admin + patients + facilities
+        return allUsers.first(where: { $0.id == uuid })
+    }
+    
+    static func addUser(user: User) {
+        if user is Patient {
+            patients.append(user as! Patient)
+        } else if user is MedicalFacility {
+            facilities.append(user as! MedicalFacility)
+        } else {
+            admin.append(user)
+        }
+        saveData()
+    }
+    
+    // editUser will not work if equivalence is based on UUIDs (they will change
+    // if user is edited), so it was changed to be based on username. This also
+    // means that username cannot be changed.
+    static func editUser(user: User) {
+        if user is Patient {
+            if let userIndex = patients.firstIndex(of: user as! Patient) {
+                patients.remove(at: userIndex)
+                patients.insert(user as! Patient, at: userIndex)
+                saveData()
+            }
+        } else if user is MedicalFacility {
+            if let userIndex = facilities.firstIndex(of: user as! MedicalFacility) {
+                facilities.remove(at: userIndex)
+                facilities.insert(user as! MedicalFacility, at: userIndex)
+                saveData()
+            }
+        } else {
+            if let userIndex = admin.firstIndex(of: user) {
+                admin.remove(at: userIndex)
+                admin.insert(user, at: userIndex)
+                saveData()
+            }
+        }
+    }
+    
+    /*
+     For user deletion, Ms. Maleeha only allowed deletion if the user did not have
+     a relationship with another object. In our case, that would if a patient had a booking.
+     We could do the same thing, but we can also 'cascade' the deletion and delete
+     objects in the relationship. So that would mean deleting the Booking if the Patient is
+     deleted. But in that case, the facility would also lose the booking. The same goes if
+     a facility is deleted, all patients bookings would be deleted too.
+     
+     TODO: figure this out
+     */
+    
+    static func deleteUser(user: User) -> Bool {
+        if user is Patient {
+            
+        } else if user is MedicalFacility {
+            
+        } else {
+            
+        }
+        
+        return false
+    }
+    
+    
+    
     //patient sample
     static var patient1 = Patient(firstName: "Noora", lastName: "Qasim", phone: "12345678", cpr: "031003257", email: "nooraw376@gmail.com", gender: Gender.female, dateOfBirth: DateComponents(calendar: Calendar.current, year: 2003, month: 10, day: 12), username: "NooraW", password: "12345#")
     
