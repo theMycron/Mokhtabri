@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22155" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="N1E-z0-dmh">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="N1E-z0-dmh">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22131"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -211,7 +211,7 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="etj-Do-EBW" kind="relationship" relationship="rootViewController" id="a70-Ix-mMI"/>
+                        <segue destination="etj-Do-EBW" kind="relationship" relationship="rootViewController" id="9qr-IC-fQD"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="K4j-CW-jCx" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -378,10 +378,10 @@
                             <outlet property="delegate" destination="etj-Do-EBW" id="zGW-ib-A8u"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="Bfx-SN-2Ts">
+                    <navigationItem key="navigationItem" id="xEV-yD-j5I">
                         <nil key="title"/>
-                        <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" id="MMq-tg-z4G" userLabel="SegmentedControlPatient" customClass="UISegmented">
-                            <rect key="frame" x="16" y="6" width="361" height="32"/>
+                        <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="tUx-wv-ay6">
+                            <rect key="frame" x="16" y="5" width="361" height="34"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <segments>
                                 <segment title="All"/>
@@ -390,13 +390,20 @@
                                 <segment title="Tests"/>
                                 <segment title="Packages"/>
                             </segments>
+                            <connections>
+                                <action selector="segementClick:" destination="etj-Do-EBW" eventType="valueChanged" id="pn0-mM-iTA"/>
+                                <action selector="segmentedValueChanged:" destination="etj-Do-EBW" eventType="valueChanged" id="D8L-iz-Go8"/>
+                            </connections>
                         </segmentedControl>
                     </navigationItem>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="Filter" destination="tUx-wv-ay6" id="G7C-yy-TCz"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6Vr-R6-h7G" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2387" y="-319"/>
+            <point key="canvasLocation" x="2385.4961832061067" y="-319.01408450704224"/>
         </scene>
         <!--Patient Hospital Select Table View Controller-->
         <scene sceneID="tXM-fX-C7B">
@@ -551,7 +558,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="VQJ-Bt-x7Z"/>
+        <segue reference="zhV-r1-C5h"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="house.fill" catalog="system" width="128" height="104"/>

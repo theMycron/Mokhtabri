@@ -11,6 +11,9 @@ class PatientHomeTableViewController: UITableViewController,UISearchBarDelegate,
     func updateSearchResults(for searchController: UISearchController) {
         
     }
+    @IBAction func segementClick(_ sender: Any) {
+    }
+    @IBOutlet weak var Filter: UISegmentedControl!
     
     // declaring elements
     
@@ -26,96 +29,223 @@ class PatientHomeTableViewController: UITableViewController,UISearchBarDelegate,
     }
     
     //sample data
-    var hospitals:  [MedicalFacility] = AppData.facilities
+    var facility:  [MedicalFacility] = AppData.facilities
     var services: [MedicalService] = AppData.services
+    //var labs: [MedicalFacility] = AppData.facilities
+    var tests: [Test] = []
+    func filterTests() {
+        for service in services {
+            if service is Test {
+                tests.append(service as! Test)
+            }
+        }
+    }
+    var packages: [Package] = []
+    func filterPackages() {
+        for service in services {
+            if service is Package {
+                packages.append(service as! Package)
+            }
+        }
+    }
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
         embedSearch()
 
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
+        filterTests()
+        filterPackages()
     }
+
 
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 2
+        if Filter.selectedSegmentIndex == 0 {
+            return 3
+        } else {
+            return 1
+        }
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        if section == 0 {
-            return hospitals.count
+        if Filter.selectedSegmentIndex == 1 {
+            return facility.count
+        } else if Filter.selectedSegmentIndex == 2 {
+            return tests.count
+        } else if Filter.selectedSegmentIndex == 3 {
+            return tests.count
+        } else if Filter.selectedSegmentIndex == 4 {
+            return packages.count
         }else {
-            return services.count
+            if section == 0 {
+                return facility.count
+            } else if section == 1 {
+                return tests.count
+            } else {
+                return packages.count
+            }
         }
-        
     }
 
     
     // change data
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if indexPath.section == 0 {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "HospitCell", for: indexPath) as! PatientHospitalViewTableViewCell
-            
-            
-            
-            let hospital = hospitals[indexPath.row]
-            cell.HospitalName.text = hospital.name
-            cell.location.text = hospital.city
-            if hospital.alwaysOpen == true {
-                cell.openingTime.text = "Open 24 Hours"
-            } else {
-                guard let hour = hospital.openingTime.hour,
-                      let chour = hospital.closingTime.hour
-                else {
-                    return cell
-                }
-                cell.openingTime.text = "From \(hour) am - \(chour) pm"
-            }
-            
-            // Configure the cell...
-
-            return cell
-        } else {
+        // for hospitals
+        if Filter.selectedSegmentIndex == 3 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "PatientBooking", for: indexPath) as! PatientBookingTableViewCell
             
-            let service = services[indexPath.row]
+            let service = tests[indexPath.row]
             cell.TestName.text = service.name
             cell.hospitalName.text = service.forMedicalFacility.name
             cell.price.text = "\(service.price)BHD"
-            if service is Test {
-                //cell.type.text = "Test"
-            }else{
-                //cell.type.text = "Package"
-            }
+
             return cell
+        }
+        // for packages
+        else if Filter.selectedSegmentIndex == 4 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "PatientBooking", for: indexPath) as! PatientBookingTableViewCell
+            
+            let service = packages[indexPath.row]
+            cell.TestName.text = service.name
+            cell.hospitalName.text = service.forMedicalFacility.name
+            cell.price.text = "\(service.price)BHD"
+
+            return cell
+        } else {
+            if indexPath.section == 0 {
+                let cell = tableView.dequeueReusableCell(withIdentifier: "HospitCell", for: indexPath) as! PatientHospitalViewTableViewCell
+                
+                
+                let hospital = facility[indexPath.row]
+                cell.HospitalName.text = hospital.name
+                cell.location.text = hospital.city
+                if hospital.alwaysOpen == true {
+                    cell.openingTime.text = "Open 24 Hours"
+                } else {
+                    guard let hour = hospital.openingTime.hour,
+                          let chour = hospital.closingTime.hour
+                    else {
+                        return cell
+                    }
+                    cell.openingTime.text = "From \(hour) am - \(chour) pm"
+                }
+
+                return cell
+            } // for tests
+            else if indexPath.section == 1 {
+                let cell = tableView.dequeueReusableCell(withIdentifier: "PatientBooking", for: indexPath) as! PatientBookingTableViewCell
+                
+                let service = tests[indexPath.row]
+                cell.TestName.text = service.name
+                cell.hospitalName.text = service.forMedicalFacility.name
+                cell.price.text = "\(service.price)BHD"
+                return cell
+            }
+            // for packages
+            else {
+                let cell = tableView.dequeueReusableCell(withIdentifier: "PatientBooking", for: indexPath) as! PatientBookingTableViewCell
+                
+                let service = packages[indexPath.row]
+                cell.TestName.text = service.name
+                cell.hospitalName.text = service.forMedicalFacility.name
+                cell.price.text = "\(service.price)BHD"
+                return cell
+            }
         }
     
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+
+        
+        
+        
         if let destination = segue.destination as?
             PatientHospitalSelectTableViewController, let selectedRow = tableView.indexPathForSelectedRow {
-            destination.selectedHospital = hospitals[selectedRow.row]
+
+            destination.selectedHospital = facility[selectedRow.row]
+            
         } else if let destination = segue.destination as? PatientBookTableViewController, let selected = tableView.indexPathForSelectedRow {
-            destination.sampleTest = services[selected.row]
+            if Filter.selectedSegmentIndex == 0 {
+                //to do, change to 2 later
+                 if selected.section == 1 {
+                    destination.sampleTest = tests[selected.row]
+                } else {
+                    destination.sampleTest = packages[selected.row]
+                }
+
+            }else if Filter.selectedSegmentIndex == 3 {
+                destination.sampleTest = tests[selected.row]
+            }else {
+                destination.sampleTest = packages[selected.row]
+            }
+            
         }
     }
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        if section == 0 {
-            return "Hospitals/Labs"
-        }else{
-            return "Tests/Packages"
+        if Filter.selectedSegmentIndex == 0 {
+            if section == 0 {
+                return "Hospitals"
+            } //else if section == 1 {
+                //return "Labs"
+    //        }
+    else if section == 1 {
+                return "Tests"
+            } else if section == 2 {
+                return "Packages"
+            } else {
+                return "invalid"
+            }
+        } else {
+            return ""
+        }
+
+    }
+    
+    // Property to keep track of the selected segment index
+    var selectedSegmentIndex: Int = 0 {
+        didSet {
+            tableView.reloadData()
         }
     }
 
+    @IBAction func segmentedValueChanged(_ sender: UISegmentedControl) {
+        switch sender.selectedSegmentIndex {
+        case 0:
+
+            tableView.reloadData()
+            break
+        case 1:
+            // handles hospital
+            tableView.reloadData()
+            break
+        case 2:
+            // handles lab
+            tableView.reloadData()
+            break
+        case 3:
+            // handles tests
+            tableView.reloadData()
+            break
+            
+        case 4:
+            // handles packages
+            tableView.reloadData()
+            break
+        default:
+            tableView.reloadData()
+            break
+        }
+        
+    }
+    
+    func categorizeView() {
+        
+    }
+ 
     
 
     /*
