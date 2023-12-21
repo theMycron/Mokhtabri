@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
-    <device id="retina6_72" orientation="portrait" appearance="light"/>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+    <device id="ipad12_9rounded" orientation="portrait" layout="fullscreen" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -13,26 +13,24 @@
             <objects>
                 <viewController id="01J-lp-oVM" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
-                        <rect key="frame" x="0.0" y="0.0" width="430" height="932"/>
+                        <rect key="frame" x="0.0" y="0.0" width="1024" height="1366"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Tu7-wd-vfh">
-                                <rect key="frame" x="50" y="84" width="330" height="789"/>
-                                <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Logo" translatesAutoresizingMaskIntoConstraints="NO" id="6qp-3X-41V">
-                                        <rect key="frame" x="0.0" y="0.0" width="330" height="789"/>
-                                    </imageView>
-                                </subviews>
-                            </stackView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="MokhtabriLogo" translatesAutoresizingMaskIntoConstraints="NO" id="kO4-2I-0Jg">
+                                <rect key="frame" x="15" y="124" width="994" height="1122"/>
+                                <color key="backgroundColor" red="0.26281487939999998" green="0.35104817150000001" blue="0.59218233819999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="kO4-2I-0Jg" secondAttribute="height" multiplier="400:639" id="jQL-sC-yBp"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" red="0.26281487939999998" green="0.35104817150000001" blue="0.59218233819999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
-                            <constraint firstItem="Tu7-wd-vfh" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="25" id="4oY-jb-KRp"/>
-                            <constraint firstItem="Tu7-wd-vfh" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="50" id="6K7-VQ-QFh"/>
-                            <constraint firstAttribute="trailing" secondItem="Tu7-wd-vfh" secondAttribute="trailing" constant="50" id="cGa-Eh-OtW"/>
-                            <constraint firstItem="Tu7-wd-vfh" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="25" id="hy3-kc-er0"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="Tu7-wd-vfh" secondAttribute="bottom" constant="25" id="yMq-TB-DiR"/>
+                            <constraint firstItem="kO4-2I-0Jg" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="100" id="4JC-69-Kgd"/>
+                            <constraint firstItem="kO4-2I-0Jg" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="15" id="e75-0C-yyz"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="kO4-2I-0Jg" secondAttribute="bottom" constant="100" id="eBl-l1-cwJ"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="kO4-2I-0Jg" secondAttribute="trailing" constant="15" id="zWg-ib-YeD"/>
                         </constraints>
                     </view>
                 </viewController>
@@ -42,9 +40,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Logo" width="459" height="376"/>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
+        <image name="MokhtabriLogo" width="500" height="500"/>
     </resources>
 </document>

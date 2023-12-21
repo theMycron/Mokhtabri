@@ -1,50 +1,39 @@
 //
-//  SettingsTableViewController.swift
+//  PatientBookingTableViewController.swift
 //  Mokhtabri
 //
-//  Created by Noora Qasim on 11/12/2023.
+//  Created by Noora Qasim on 17/12/2023.
 //
 
 import UIKit
 
-class SettingsTableViewController: UITableViewController {
-    // declaration
-    
-    @IBOutlet weak var lblProfile: UILabel!
-    @IBOutlet weak var lblChangePassword: UILabel!
-    
-    @IBOutlet weak var lblContactUs: UILabel!
-    @IBOutlet weak var lblPrivacyPolicy: UILabel!
-    
-    
-    @IBAction func logoutBtn(_ sender: Any) {
-        confirmation(title: "Log out", message: "Are you sure you want to log out of your account?") { [weak self] in
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            guard let viewController = storyboard.instantiateViewController(withIdentifier: "login") as? LoginViewController else {
-                return
-            }
-            viewController.modalPresentationStyle = .fullScreen
-            self?.present(viewController, animated: true) {
-                // Dismiss the previous view controller in settings
-                self?.navigationController?.viewControllers = [viewController]
-            }
-        }
+class PatientBookingTableViewController: UITableViewController, UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        
     }
     
 
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        //lblProfile.text = "Profile"
+        embedSearch()
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-         //self.navigationItem.rightBarButtonItem = self.editButtonItem
+        // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
 
     // MARK: - Table view data source
 
+    fileprivate func embedSearch(){
+        navigationItem.searchController = UISearchController()
+        navigationItem.searchController?.searchBar.placeholder = "Search Through Bookings"
+        navigationItem.searchController?.searchResultsUpdater = self
+        
+        //scope
+        navigationItem.searchController?.searchBar.scopeButtonTitles = ["Active", "Completed","Cancelled"]
+        navigationItem.searchController?.automaticallyShowsScopeBar = false
+    }
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 1
@@ -52,44 +41,45 @@ class SettingsTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 6
+        return listOfBookings.count
     }
-
-
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        // Deselect the row after tapping
-        tableView.deselectRow(at: indexPath, animated: true)
-        
-        if indexPath.row == 5 {
-            // Show an alert
-            confirmation(title: "Delete Account", message: "Are you sure you want to delete your account?") { [weak self] in
-                let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                guard let viewController = storyboard.instantiateViewController(withIdentifier: "login") as? LoginViewController else {
-                    return
-                }
-                viewController.modalPresentationStyle = .fullScreen
-                self?.present(viewController, animated: true) {
-                    // Dismiss the previous view controller in settings
-                    self?.navigationController?.viewControllers = [viewController]
-                }
-            }
-        }
-    }
+//declare
+    var listOfBookings = AppData.bookings
     
-    // for the navigation bar to appear
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        navigationController?.setNavigationBarHidden(false, animated: animated)
-    }
-    /*
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "PatientBooking", for: indexPath) as! PatientBookingTableViewCell
+        
+        let booking = listOfBookings[indexPath.row]
+        guard let dateDay = booking.bookingDate.day, let dateMonth = booking.bookingDate.month, let dateYear = booking.bookingDate.year else{
+            return cell
+        }
+        cell.bookingDate.text = "Date:\(dateDay)-\(dateMonth)-\(dateYear)"
+        cell.TestName.text = booking.ofMedicalService.name
+        cell.hospitalName.text = booking.ofMedicalService.forMedicalFacility.name
+        cell.price.text = "\(booking.ofMedicalService.price) BHD"
+        cell.type.text = "Test"
+        
+        //gonna fix in a minute
+       // if(booking.ofMedicalService.)
 
         // Configure the cell...
 
         return cell
     }
-    */
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let destination = segue.destination as? PatientViewBookingDetailsTableViewController, let selected = tableView.indexPathForSelectedRow {
+            destination.booking = listOfBookings[selected.row]
+        }
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        // Update the list of bookings
+        listOfBookings = AppData.bookings
+        // Reload the table view
+        tableView.reloadData()
+    }
+    
 
     /*
     // Override to support conditional editing of the table view.

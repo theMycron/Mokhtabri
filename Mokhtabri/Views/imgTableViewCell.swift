@@ -1,23 +1,21 @@
 //
-//  LabBookingTableViewCell.swift
+//  imgTableViewCell.swift
 //  Mokhtabri
 //
-//  Created by Noora Qasim on 10/12/2023.
+//  Created by Fatema Ahmed Ebrahim Mohamed Naser on 19/12/2023.
 //
 
 import UIKit
 
-class LabBookingTableViewCell: UITableViewCell {
-
+class imgTableViewCell: UITableViewCell {
+    @IBOutlet weak var img: UIImageView!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        
     }
 
-    @IBOutlet weak var name: UILabel!
-    
-    @IBOutlet weak var bookingDate: UILabel!
-    @IBOutlet weak var patient: UILabel!
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 

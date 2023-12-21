@@ -2,79 +2,202 @@
 //  LoginViewController.swift
 //  Mokhtabri
 //
-//  Created by Yousif Mohamed Ali Abdulla Salman Alhawaj on 04/12/2023.
-//
+//  Created by Maryam Aleskafi on 04/12/2023.
+
 
 import UIKit
+import FirebaseAuth
 
-class LoginViewController: UIViewController {
-
-    @IBOutlet weak var displayLabel: UILabel!
+class LoginViewController: UIViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
-//        guard let appData = AppData.loadData() else {
-//            displayLabel.text = "Not loaded."
-//            return
-//        }
-//        
-//        displayLabel.text = appData.patients.description
+        emailTxt.delegate = self
+        passwordTxt.delegate = self
         
     }
+//declare user defaults
+    let defaults = UserDefaults.standard
+    //creating outlets for the fields
     
-    @IBAction func loadButton(_ sender: Any) {
-        AppData.loadData()
-        guard AppData.facilities.count > 0 else {return}
-        var openD: DateComponents = DateComponents()
-        openD.hour = 4
-        openD.minute = 0
-        var closeD: DateComponents = DateComponents()
-        closeD.hour = 20
-        closeD.minute = 30
-        let facility = MedicalFacility(name: "AHli", phone: "382479", city: "HAMAD TOWN", website: "www.hae.com", alwaysOpen: false, type: FacilityType.hospital, openingTime: openD, closingTime: closeD, username: "HALI", password: "jdhe")
-        let category = Category(name: "Blood test")
-        let test1 = Test(category: category, name: "General Blood Test", price: 2.5, description: "General blood test for various things", instructions: "Fast for 12 hours", forMedicalFacility: facility)
-        let test2 = Test(category: category, name: "studd", price: 2.5, description: "General blood test for various things", instructions: "Fast for 12 hours", forMedicalFacility: facility)
-        let test3 = Test(category: category, name: "files", price: 2.5, description: "General blood test for various things", instructions: "Fast for 12 hours", forMedicalFacility: facility)
+    @IBOutlet weak var emailTxt: UITextField!
+    @IBOutlet weak var passwordTxt: UITextField!
+    
+  
+//show alert messsage for user
+    func showInvalidEmailAlert() {
+        let alertController = UIAlertController(title: "Invalid Email Format",
+                                                message: "Please enter a valid email address.",
+                                                preferredStyle: .alert)
         
-        var packageD: DateComponents = DateComponents()
-        packageD.year = 2024
-        packageD.month = 5
-        packageD.day = 27
-        let package = Package(expiryDate: packageD, tests: [test1,test2,test3], name: "Summer Package", price: 12.45, description: "A great package to test your summer body", instructions: "Fast for 12 hours", forMedicalFacility: facility)
-        displayLabel.text = "\(AppData.bookings[0])"
+        let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+        alertController.addAction(okAction)
+        
+        present(alertController, animated: true, completion: nil)
     }
     
-    @IBAction func createButton(_ sender: Any) {
-        AppData.admin.append(User(username: "hfeuios", password: "fejsiuo", userType: UserType.admin))
-        var dob: DateComponents = DateComponents()
-        dob.year = 2003
-        dob.month = 12
-        dob.day = 7
-        var patient1 = Patient(firstName: "Ali", lastName: "Mohammed", phone: "3892999", cpr: "38991993", email: "ahsjk@hf.djo", gender: Gender.male, dateOfBirth: dob, username: "windhh", password: "hunter2")
-        AppData.patients.append(patient1)
-        var patient2 = Patient(firstName: "Salem", lastName: "Maki", phone: "3892999", cpr: "38991993", email: "ahsjk@hf.djo", gender: Gender.male, dateOfBirth: dob, username: "windhh", password: "hunter2")
-        AppData.patients.append(patient2)
-        var facility1 = MedicalFacility(name: "Alhilal", phone: "37829", city: "BF", website: "fheiso", alwaysOpen: true, type: FacilityType.hospital, openingTime: dob, closingTime: dob, username: "wahoo", password: "ahil")
-        AppData.facilities.append(facility1)
-        var service1 = MedicalService(name: "Bloooody test", price: 2, description: "IMPOREKHS", instructions: "EAT ITIII", forMedicalFacility: facility1)
-        AppData.services.append(service1)
-//        facility1.bookings.append(Booking(forPatient: patient1, ofMedicalService: service1, bookingDate: dob))
-        AppData.bookings.append(Booking(forPatient: patient1, ofMedicalService: service1, bookingDate: dob))
-        displayLabel.text = "\(AppData.bookings.count) \nHas been made."
-        
-        AppData.saveData()
+    @IBAction func loginBtnTapped(_ sender: Any) {
+        //start validating
+       
+            validateFields()
+         
     }
     
-    /*
-    // MARK: - Navigation
+   
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
+    
+    
+    
+    func validateFields(){
+        //validations for input fields
+        if emailTxt.text?.isEmpty==true{
+            //prompt an alert to the user
+            let alert = UIAlertController(title: "Empty Field", message: "Please Enter Your Email", preferredStyle: .alert)
+            
+            //show a dismiss button + presnt the alert
+            alert.addAction(UIAlertAction(title: "Dismiss", style: .cancel, handler: nil))
+            
+            present(alert, animated: true)
+            
+            return
+        }
+        
+      
+        
+       
+        if passwordTxt.text?.isEmpty == true{
+            //prompt an alert to the user
+            let alert = UIAlertController(title: "Empty Field", message: "Please Enter Your Password", preferredStyle: .alert)
+            
+            //show a dismiss button + presnt the alert
+            alert.addAction(UIAlertAction(title: "Dismiss", style: .cancel, handler: nil))
+            
+            present(alert, animated: true)
+            
+            return
+        }
+        //Password length validation
+        let pwd = passwordTxt.text ?? ""
+        let passwordLength = pwd.count
 
+        // Set the desired minimum password length
+        let minimumPasswordLength = 8
+
+        if passwordLength < minimumPasswordLength {
+            // Password length is less than the desired length
+            // Display an alert or show an error message to the user
+            let alert = UIAlertController(title: "Weak Password", message: "Password should be at least \(minimumPasswordLength) characters long for more security.", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            present(alert, animated: true)
+            return
+        }
+        guard let email = emailTxt.text else {
+            // Email text field is empty
+            return
+        }
+        
+        let emailRegex = "[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}"
+        let emailPredicate = NSPredicate(format: "SELF MATCHES %@", emailRegex)
+        
+        if !emailPredicate.evaluate(with: email) {
+            showInvalidEmailAlert()
+        }
+        
+        
+        //start login process after validation
+        login()
+    }
+    
+    func login(){
+        
+     
+        //force unwrap tp avoid the crash
+        Auth.auth().signIn(withEmail: emailTxt.text!, password: passwordTxt.text!) { [weak self] authResult, errorMessgae in
+            
+            
+            guard let strongSelf = self else {return}
+            
+            if let errorMessgae = errorMessgae{
+                print(errorMessgae.localizedDescription)
+                
+               
+            }
+            //double check the information
+            self!.checkUserInfo()
+        }
+        
+    }
+    //double check that the user logged in and have information
+    func checkUserInfo(){
+        if Auth.auth().currentUser != nil {
+            //print the id to ensure
+            print(Auth.auth().currentUser?.uid) 
+            //print(Auth.auth().currentUser?.displayName)
+            
+            //set the value inside the user defaults
+            self.defaults.set(true, forKey: "Logged In")
+            
+            //pass the user the overview
+            let mainSB = UIStoryboard(name: "Main", bundle: nil)
+            let vc = mainSB.instantiateViewController(withIdentifier: "PatientRegistration")
+            vc.modalPresentationStyle = .overFullScreen
+           self.present(vc, animated: true)
+            
+            
+         
+            
+            //let storyboard = UIStoryboard(name: "PatientHome", bundle: nil)
+           // guard let viewController = storyboard.instantiateViewController(withIdentifier: "PatientHome") as? PatientHomeTableViewController else {
+                //return
+            //}
+            //viewController.modalPresentationStyle = .fullScreen
+            //self.present(viewController, animated: true) {
+                // Dismiss the previous view controller in settings
+                //self.navigationController?.viewControllers = [viewController]
+            //}
+            //let userID: String = Auth.auth().currentUser!.uid
+            
+            
+           
+            
+            
+        }else{
+            //set the user as false inside user defaults
+            self.defaults.set(false, forKey: "Logged In")
+            
+            //redirect user
+            let login = UIStoryboard(name: "Main", bundle: nil)
+            let loginVc = login.instantiateViewController(withIdentifier: "login")
+            loginVc.modalPresentationStyle = .overFullScreen
+            self.present(loginVc, animated: true)
+           
+
+        }
+        
+        
+        
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        //checkUserInfo()
+    }
+    //if the credentials were wromg
+    
+   // let alert = UIAlertController(title: "Invalid Credentials", message: "The username and password you entered were invalid. Please try again.", preferredStyle: .alert)
+    
+    
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if textField == emailTxt{
+            passwordTxt.becomeFirstResponder()
+        }else{
+            validateFields()
+        
+            //login()
+        }
+        return true
+    }
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+    }
 }

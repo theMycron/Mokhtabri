@@ -1,46 +1,34 @@
 //
-//  SettingsTableViewController.swift
+//  PatientViewBookingDetailsTableViewController.swift
 //  Mokhtabri
 //
-//  Created by Noora Qasim on 11/12/2023.
+//  Created by Noora Qasim on 17/12/2023.
 //
 
 import UIKit
 
-class SettingsTableViewController: UITableViewController {
-    // declaration
+class PatientViewBookingDetailsTableViewController: UITableViewController {
     
-    @IBOutlet weak var lblProfile: UILabel!
-    @IBOutlet weak var lblChangePassword: UILabel!
+    @IBOutlet weak var celltrial: PatientInfoTableViewCell!
+    var booking : Booking?
+    @IBOutlet weak var info: UILabel!
     
-    @IBOutlet weak var lblContactUs: UILabel!
-    @IBOutlet weak var lblPrivacyPolicy: UILabel!
-    
-    
-    @IBAction func logoutBtn(_ sender: Any) {
-        confirmation(title: "Log out", message: "Are you sure you want to log out of your account?") { [weak self] in
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            guard let viewController = storyboard.instantiateViewController(withIdentifier: "login") as? LoginViewController else {
-                return
-            }
-            viewController.modalPresentationStyle = .fullScreen
-            self?.present(viewController, animated: true) {
-                // Dismiss the previous view controller in settings
-                self?.navigationController?.viewControllers = [viewController]
-            }
-        }
-    }
-    
-
-    
+    @IBOutlet weak var btn: UIBarButtonItem!
+    @IBOutlet weak var price: UILabel!
+    @IBOutlet weak var testName: UILabel!
+    @IBOutlet weak var status: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
-        //lblProfile.text = "Profile"
+        updateView()
+        checkBtn()
+        //celltrial.
+        
+
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-         //self.navigationItem.rightBarButtonItem = self.editButtonItem
+        // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
 
     // MARK: - Table view data source
@@ -52,34 +40,43 @@ class SettingsTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 6
+        return 4
     }
-
-
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        // Deselect the row after tapping
-        tableView.deselectRow(at: indexPath, animated: true)
-        
-        if indexPath.row == 5 {
-            // Show an alert
-            confirmation(title: "Delete Account", message: "Are you sure you want to delete your account?") { [weak self] in
-                let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                guard let viewController = storyboard.instantiateViewController(withIdentifier: "login") as? LoginViewController else {
-                    return
-                }
-                viewController.modalPresentationStyle = .fullScreen
-                self?.present(viewController, animated: true) {
-                    // Dismiss the previous view controller in settings
-                    self?.navigationController?.viewControllers = [viewController]
-                }
-            }
+    func updateView(){
+        guard let stat = booking?.status, let tname = booking?.ofMedicalService.name, let tprice = booking?.ofMedicalService.price  else {
+            return
+        }
+        status.text = "\(stat)"
+        testName.text = tname
+        price.text = "\(tprice) BHD"
+        let testorPackage = booking?.ofMedicalService
+        if testorPackage is Test{
+            updateTest()
+        }else {
+            updatePackage()
         }
     }
     
-    // for the navigation bar to appear
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        navigationController?.setNavigationBarHidden(false, animated: animated)
+    func updateTest(){
+        guard let year = booking?.bookingDate.year,let month = booking?.bookingDate.month, let day = booking?.bookingDate.day, let branch = booking?.ofMedicalService.forMedicalFacility.city, let specialInfo = booking?.ofMedicalService.instructions else {
+            return
+        }
+        info.text = "\(branch) branch\nBooking Date: \(day)-\(month)-\(year)\nSpecial Information: \(specialInfo)"
+    }
+    
+    func updatePackage(){
+        
+    }
+    
+    func checkBtn(){
+        guard let stat = booking?.status else {
+            return
+        }
+        if stat == .Active{
+            btn.isHidden = false
+        }else{
+            btn.isHidden = true
+        }
     }
     /*
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
