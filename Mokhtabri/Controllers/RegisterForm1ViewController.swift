@@ -2,7 +2,7 @@
 //  RegisterForm1ViewController.swift
 //  Mokhtabri
 //
-//  Created by Maram Eskafi on 17/12/2023.
+//  Created by Maryam Eskafi on 17/12/2023.
 //
 
 import Foundation
@@ -13,7 +13,6 @@ class RegisterForm1ViewController: UIViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        datePicker.datePickerMode = .date
     
         firstname.delegate = self
         lastname.delegate = self
