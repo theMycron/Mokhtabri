@@ -164,8 +164,14 @@
                                 <segment title="Completed"/>
                                 <segment title="Cancelled"/>
                             </segments>
+                            <connections>
+                                <action selector="segmentedControl:" destination="8S4-8z-0VG" eventType="valueChanged" id="TLv-Bd-aUF"/>
+                            </connections>
                         </segmentedControl>
                     </navigationItem>
+                    <connections>
+                        <outlet property="segmentOutlet" destination="n1c-uL-EUP" id="MA2-lR-m39"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pMw-QF-NP7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -282,7 +288,11 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="0c2-2O-MXW">
-                        <barButtonItem key="rightBarButtonItem" title="Cancel" id="0HN-AR-51R"/>
+                        <barButtonItem key="rightBarButtonItem" title="Cancel" id="0HN-AR-51R">
+                            <connections>
+                                <action selector="cancelClicked:" destination="aM2-Wg-7bS" id="IoA-NR-rie"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="btn" destination="0HN-AR-51R" id="FNU-xj-hVK"/>

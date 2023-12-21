@@ -13,9 +13,16 @@ class PatientBookingTableViewController: UITableViewController, UISearchResultsU
     }
     
 
+    @IBOutlet weak var segmentOutlet: UISegmentedControl!
+    @IBAction func segmentedControl(_ sender: UISegmentedControl) {
+        selectedSegement = sender.selectedSegmentIndex
+        categorizeBookings()
+        tableView.reloadData()
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         embedSearch()
+        categorizeBookings()
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -41,15 +48,30 @@ class PatientBookingTableViewController: UITableViewController, UISearchResultsU
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return listOfBookings.count
+        switch selectedSegement{
+        case 0: return activeBookings.count
+        case 1: return completedBookings.count
+        case 2: return cancelledBookings.count
+        default: return 0
+        }
     }
 //declare
     var listOfBookings = AppData.bookings
+    var activeBookings : [Booking] = []
+    var completedBookings : [Booking] = []
+    var cancelledBookings : [Booking] = []
+    var selectedSegement = 0
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "PatientBooking", for: indexPath) as! PatientBookingTableViewCell
         
-        let booking = listOfBookings[indexPath.row]
+        let booking: Booking
+        switch selectedSegement {
+        case 0: booking = activeBookings[indexPath.row]
+        case 1: booking = completedBookings[indexPath.row]
+        case 2: booking = cancelledBookings[indexPath.row]
+        default: fatalError("Invalid segment")
+        }
         guard let dateDay = booking.bookingDate.day, let dateMonth = booking.bookingDate.month, let dateYear = booking.bookingDate.year else{
             return cell
         }
@@ -69,13 +91,23 @@ class PatientBookingTableViewController: UITableViewController, UISearchResultsU
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let destination = segue.destination as? PatientViewBookingDetailsTableViewController, let selected = tableView.indexPathForSelectedRow {
-            destination.booking = listOfBookings[selected.row]
+            
+            let selectedBooking: Booking
+            switch selectedSegement {
+            case 0: selectedBooking = activeBookings[selected.row]
+            case 1: selectedBooking = completedBookings[selected.row]
+            case 2: selectedBooking = completedBookings[selected.row]
+            default: fatalError("invalid segment")
+            }
+            destination.booking = selectedBooking
         }
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         // Update the list of bookings
+        
         listOfBookings = AppData.bookings
+        categorizeBookings()
         // Reload the table view
         tableView.reloadData()
     }
@@ -89,17 +121,53 @@ class PatientBookingTableViewController: UITableViewController, UISearchResultsU
     }
     */
 
-    /*
+    
     // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
+            //TODO: fix this later when you categorize
+            confirmation(title: "Confirm Deletion", message: "If you delete this booking it will be automatically cancelled"){
+                
+                let bookingToRemove: Booking
+                switch self.selectedSegement{
+                case 0: bookingToRemove = self.activeBookings[indexPath.row]
+                case 1: bookingToRemove =  self.completedBookings[indexPath.row]
+                case 2: bookingToRemove = self.cancelledBookings[indexPath.row]
+                default:
+                    fatalError("invalid segment")
+                }
+                self.categorizeBookings()
+                if let indexInAppData = AppData.bookings.firstIndex(where: { $0.id == bookingToRemove.id }) {
+                    AppData.bookings.remove(at: indexInAppData)
+                }
+                
+                self.listOfBookings.remove(at: indexPath.row)
+                AppData.bookings.remove(at: indexPath.row)
+                tableView.deleteRows(at: [indexPath], with: .fade)
+            }
+        }
     }
-    */
+    
+    func categorizeBookings(){
+        activeBookings = listOfBookings.filter{
+            $0.status == .Active
+        }
+        completedBookings = listOfBookings.filter{
+            $0.status == .Completed
+        }
+        cancelledBookings = listOfBookings.filter{
+            $0.status == .Cancelled
+        }
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        listOfBookings = AppData.bookings
+        categorizeBookings()
+        tableView.reloadData()
+    }
+    
+ 
 
     /*
     // Override to support rearranging the table view.

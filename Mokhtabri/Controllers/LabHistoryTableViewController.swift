@@ -193,9 +193,27 @@ class LabHistoryTableViewController: UITableViewController, UISearchBarDelegate,
         if editingStyle == .delete {
             // Delete the row from the data source
             confirmation(title: "Delete Confirmation", message: "Are you sure you want to delete this booking, if the booking is active it will lead to automatic cancellation"){
-                self.bookings.remove(at: indexPath.row)
+                
+                
+                let bookingToRemove: Booking
+                switch self.selectedSegmentIndex {
+                case 0:
+                    bookingToRemove = self.activeBookings[indexPath.row]
+                    self.activeBookings.remove(at: indexPath.row)
+                case 1:
+                    bookingToRemove = self.completedBookings[indexPath.row]
+                    self.completedBookings.remove(at: indexPath.row)
+                case 2:
+                    bookingToRemove = self.cancelledBookings[indexPath.row]
+                    self.cancelledBookings.remove(at: indexPath.row)
+                default:
+                    return // Or handle default case appropriately
+                }
                 self.categorizeBookings()
-                AppData.bookings.remove(at: indexPath.row)
+                // Find the booking in AppData.bookings
+                if let indexInAppData = AppData.bookings.firstIndex(where: { $0.id == bookingToRemove.id }) {
+                    AppData.bookings.remove(at: indexInAppData)
+                }
                 tableView.deleteRows(at: [indexPath], with: .fade)
             }
 
