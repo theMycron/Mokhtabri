@@ -8,6 +8,18 @@
 import UIKit
 
 class PatientHomeTableViewController: UITableViewController,UISearchBarDelegate, UISearchResultsUpdating {
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        embedSearch()
+
+        filterTests()
+        filterPackages()
+        filterLabs()
+        //filterHospital()
+    }
+    
+    
     func updateSearchResults(for searchController: UISearchController) {
         
     }
@@ -31,7 +43,8 @@ class PatientHomeTableViewController: UITableViewController,UISearchBarDelegate,
     //sample data
     var facility:  [MedicalFacility] = AppData.facilities
     var services: [MedicalService] = AppData.services
-    //var labs: [MedicalFacility] = AppData.facilities
+    var labs: [MedicalFacility] = AppData.labs
+    var hospitals: [MedicalFacility] = AppData.hospitals
     var tests: [Test] = []
     func filterTests() {
         for service in services {
@@ -48,22 +61,31 @@ class PatientHomeTableViewController: UITableViewController,UISearchBarDelegate,
             }
         }
     }
+    func filterLabs() {
+        for fac  in facility {
+            if fac.type == .lab {
+                labs.append(fac )
+            }
+        }
+    }
+    
+    func filterHospital(){
+        for fac  in facility {
+            if fac.type == .hospital {
+                hospitals.append(fac )
+            }
+        }
+    }
 
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        embedSearch()
 
-        filterTests()
-        filterPackages()
-    }
 
 
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         if Filter.selectedSegmentIndex == 0 {
-            return 3
+            return 4
         } else {
             return 1
         }
@@ -73,17 +95,19 @@ class PatientHomeTableViewController: UITableViewController,UISearchBarDelegate,
         if Filter.selectedSegmentIndex == 1 {
             return facility.count
         } else if Filter.selectedSegmentIndex == 2 {
-            return tests.count
+            return labs.count
         } else if Filter.selectedSegmentIndex == 3 {
             return tests.count
         } else if Filter.selectedSegmentIndex == 4 {
             return packages.count
         }else {
             if section == 0 {
-                return facility.count
+                return hospitals.count
             } else if section == 1 {
+                return labs.count
+            } else if section == 2{
                 return tests.count
-            } else {
+            }else {
                 return packages.count
             }
         }
@@ -102,7 +126,24 @@ class PatientHomeTableViewController: UITableViewController,UISearchBarDelegate,
             cell.price.text = "\(service.price)BHD"
 
             return cell
+        } else if Filter.selectedSegmentIndex == 2 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "HospitCell", for: indexPath) as! PatientHospitalViewTableViewCell
+            let lab = labs[indexPath.row]
+            cell.HospitalName.text = lab.name
+            cell.location.text = lab.city
+            if lab.alwaysOpen == true {
+                cell.openingTime.text = "Open 24 Hours"
+            } else {
+                guard let hour = lab.openingTime.hour,
+                      let chour = lab.closingTime.hour
+                else {
+                    return cell
+                }
+                cell.openingTime.text = "From \(hour) am - \(chour) pm"
+            }
+            return cell
         }
+        
         // for packages
         else if Filter.selectedSegmentIndex == 4 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "PatientBooking", for: indexPath) as! PatientBookingTableViewCell
@@ -117,8 +158,7 @@ class PatientHomeTableViewController: UITableViewController,UISearchBarDelegate,
             if indexPath.section == 0 {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "HospitCell", for: indexPath) as! PatientHospitalViewTableViewCell
                 
-                
-                let hospital = facility[indexPath.row]
+                let hospital = hospitals[indexPath.row]
                 cell.HospitalName.text = hospital.name
                 cell.location.text = hospital.city
                 if hospital.alwaysOpen == true {
@@ -131,10 +171,10 @@ class PatientHomeTableViewController: UITableViewController,UISearchBarDelegate,
                     }
                     cell.openingTime.text = "From \(hour) am - \(chour) pm"
                 }
-
+                
                 return cell
             } // for tests
-            else if indexPath.section == 1 {
+            else if indexPath.section == 2 {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "PatientBooking", for: indexPath) as! PatientBookingTableViewCell
                 
                 let service = tests[indexPath.row]
@@ -144,13 +184,28 @@ class PatientHomeTableViewController: UITableViewController,UISearchBarDelegate,
                 return cell
             }
             // for packages
-            else {
+            else if indexPath.section == 3 {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "PatientBooking", for: indexPath) as! PatientBookingTableViewCell
-                
                 let service = packages[indexPath.row]
                 cell.TestName.text = service.name
                 cell.hospitalName.text = service.forMedicalFacility.name
                 cell.price.text = "\(service.price)BHD"
+                return cell
+            } else {
+                let cell = tableView.dequeueReusableCell(withIdentifier: "HospitCell", for: indexPath) as! PatientHospitalViewTableViewCell
+                let lab = labs[indexPath.row]
+                cell.HospitalName.text = lab.name
+                cell.location.text = lab.city
+                if lab.alwaysOpen == true {
+                    cell.openingTime.text = "Open 24 Hours"
+                } else {
+                    guard let hour = lab.openingTime.hour,
+                          let chour = lab.closingTime.hour
+                    else {
+                        return cell
+                    }
+                    cell.openingTime.text = "From \(hour) am - \(chour) pm"
+                }
                 return cell
             }
         }
@@ -165,7 +220,14 @@ class PatientHomeTableViewController: UITableViewController,UISearchBarDelegate,
         if let destination = segue.destination as?
             PatientHospitalSelectTableViewController, let selectedRow = tableView.indexPathForSelectedRow {
 
-            destination.selectedHospital = facility[selectedRow.row]
+            if Filter.selectedSegmentIndex == 0 {
+                if selectedRow.section == 2 {
+                    destination.selectedHospital = facility[selectedRow.row]
+               } else {
+                   destination.selectedHospital = labs[selectedRow.row]
+               }
+            }
+            //destination.selectedHospital = facility[selectedRow.row]
             
         } else if let destination = segue.destination as? PatientBookTableViewController, let selected = tableView.indexPathForSelectedRow {
             if Filter.selectedSegmentIndex == 0 {
@@ -176,9 +238,10 @@ class PatientHomeTableViewController: UITableViewController,UISearchBarDelegate,
                     destination.sampleTest = packages[selected.row]
                 }
 
-            }else if Filter.selectedSegmentIndex == 3 {
+            } else if Filter.selectedSegmentIndex == 3 {
                 destination.sampleTest = tests[selected.row]
-            }else {
+            }
+            else {
                 destination.sampleTest = packages[selected.row]
             }
             
@@ -189,12 +252,12 @@ class PatientHomeTableViewController: UITableViewController,UISearchBarDelegate,
         if Filter.selectedSegmentIndex == 0 {
             if section == 0 {
                 return "Hospitals"
-            } //else if section == 1 {
-                //return "Labs"
-    //        }
-    else if section == 1 {
+            } else if section == 1 {
+                return "Labs"
+            }
+    else if section == 2 {
                 return "Tests"
-            } else if section == 2 {
+            } else if section == 3 {
                 return "Packages"
             } else {
                 return "invalid"
