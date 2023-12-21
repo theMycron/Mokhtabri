@@ -209,11 +209,12 @@ class LabHistoryTableViewController: UITableViewController, UISearchBarDelegate,
                 default:
                     return // Or handle default case appropriately
                 }
-                self.categorizeBookings()
                 // Find the booking in AppData.bookings
                 if let indexInAppData = AppData.bookings.firstIndex(where: { $0.id == bookingToRemove.id }) {
                     AppData.bookings.remove(at: indexInAppData)
+                    self.bookings.remove(at: indexInAppData)
                 }
+                self.categorizeBookings()
                 tableView.deleteRows(at: [indexPath], with: .fade)
             }
 

@@ -96,7 +96,7 @@ class PatientBookingTableViewController: UITableViewController, UISearchResultsU
             switch selectedSegement {
             case 0: selectedBooking = activeBookings[selected.row]
             case 1: selectedBooking = completedBookings[selected.row]
-            case 2: selectedBooking = completedBookings[selected.row]
+            case 2: selectedBooking = cancelledBookings[selected.row]
             default: fatalError("invalid segment")
             }
             destination.booking = selectedBooking
@@ -130,24 +130,31 @@ class PatientBookingTableViewController: UITableViewController, UISearchResultsU
             confirmation(title: "Confirm Deletion", message: "If you delete this booking it will be automatically cancelled"){
                 
                 let bookingToRemove: Booking
-                switch self.selectedSegement{
-                case 0: bookingToRemove = self.activeBookings[indexPath.row]
-                case 1: bookingToRemove =  self.completedBookings[indexPath.row]
-                case 2: bookingToRemove = self.cancelledBookings[indexPath.row]
+                switch self.selectedSegement {
+                case 0:
+                    bookingToRemove = self.activeBookings[indexPath.row]
+                    self.activeBookings.remove(at: indexPath.row)
+                case 1:
+                    bookingToRemove = self.completedBookings[indexPath.row]
+                    self.completedBookings.remove(at: indexPath.row)
+                case 2:
+                    bookingToRemove = self.cancelledBookings[indexPath.row]
+                    self.cancelledBookings.remove(at: indexPath.row)
                 default:
-                    fatalError("invalid segment")
-                }
-                self.categorizeBookings()
-                if let indexInAppData = AppData.bookings.firstIndex(where: { $0.id == bookingToRemove.id }) {
-                    AppData.bookings.remove(at: indexInAppData)
+                    return // Or handle default case appropriately
                 }
                 
-                self.listOfBookings.remove(at: indexPath.row)
-                AppData.bookings.remove(at: indexPath.row)
+                // Find the booking in AppData.bookings
+                if let indexInAppData = AppData.bookings.firstIndex(where: { $0.id == bookingToRemove.id }) {
+                    AppData.bookings.remove(at: indexInAppData)
+                    self.listOfBookings.remove(at: indexInAppData)
+                }
+                self.categorizeBookings()
                 tableView.deleteRows(at: [indexPath], with: .fade)
             }
+            }
         }
-    }
+    
     
     func categorizeBookings(){
         activeBookings = listOfBookings.filter{
