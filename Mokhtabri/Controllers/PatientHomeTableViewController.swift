@@ -169,7 +169,7 @@ class PatientHomeTableViewController: UITableViewController,UISearchBarDelegate,
                     else {
                         return cell
                     }
-                    cell.openingTime.text = "From \(hour) am - \(chour) pm"
+                    cell.openingTime.text = "From \(hour):00 - \(chour):00"
                 }
                 
                 return cell
@@ -200,11 +200,36 @@ class PatientHomeTableViewController: UITableViewController,UISearchBarDelegate,
                     cell.openingTime.text = "Open 24 Hours"
                 } else {
                     guard let hour = lab.openingTime.hour,
-                          let chour = lab.closingTime.hour
+                          let chour = lab.closingTime.hour,
+                          let min = lab.openingTime.minute,
+                            let cmin = lab.closingTime.minute
                     else {
                         return cell
                     }
-                    cell.openingTime.text = "From \(hour) am - \(chour) pm"
+                    let formatter = DateFormatter()
+                    formatter.dateFormat = "HH:mm" // 24-hour format
+
+                    // Assuming 'hour', 'min', 'chour', and 'cmin' are integers
+                    let calendar = Calendar.current
+
+                    // Create opening time Date
+                    var openingComponents = DateComponents()
+                    openingComponents.hour = hour
+                    openingComponents.minute = min
+                    if let openingDate = calendar.date(from: openingComponents) {
+                        let openingTimeString = formatter.string(from: openingDate)
+                        cell.openingTime.text = "From \(openingTimeString)"
+                    }
+
+                    // Create closing time Date
+                    var closingComponents = DateComponents()
+                    closingComponents.hour = chour
+                    closingComponents.minute = cmin
+                    if let closingDate = calendar.date(from: closingComponents) {
+                        let closingTimeString = formatter.string(from: closingDate)
+                        cell.openingTime.text?.append(" - \(closingTimeString)")
+                    }
+
                 }
                 return cell
             }
@@ -226,6 +251,10 @@ class PatientHomeTableViewController: UITableViewController,UISearchBarDelegate,
                } else {
                    destination.selectedHospital = labs[selectedRow.row]
                }
+            } else if Filter.selectedSegmentIndex == 1 {
+                destination.selectedHospital = facility[selectedRow.row]
+            } else {
+                destination.selectedHospital = labs[selectedRow.row]
             }
             //destination.selectedHospital = facility[selectedRow.row]
             
