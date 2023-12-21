@@ -11,13 +11,13 @@ class User: Codable, Equatable, Comparable, CustomStringConvertible {
     
     var username: String
     var password: String
-    var id: UUID
+    var uuid: UUID
     var userType: UserType
     
     var description: String {
         return """
                 - User Info -
-                ID: \(id)
+                ID: \(uuid)
                 Username: \(username)
                 """
     }
@@ -29,12 +29,12 @@ class User: Codable, Equatable, Comparable, CustomStringConvertible {
     init(username: String, password: String, userType: UserType) {
         self.username = username
         self.password = password
-        self.id = UUID()
+        self.uuid = UUID()
         self.userType = userType
     }
     
     static func == (lhs: User, rhs: User) -> Bool {
-        return (lhs.username == rhs.username)
+        return (lhs.uuid == rhs.uuid)
     }
     static func < (lhs: User, rhs: User) -> Bool {
         return (lhs.username < rhs.username)

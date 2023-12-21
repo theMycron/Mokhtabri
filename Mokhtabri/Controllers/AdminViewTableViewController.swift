@@ -104,10 +104,11 @@ class AdminViewTableViewController: UITableViewController, UISearchResultsUpdati
             displayedFacilities.remove(at: indexPath.section)
             displayedFacilities.insert(facility, at: indexPath.section)
             tableView.deselectRow(at: indexPath, animated: true)
+            AppData.editUser(user: facility)
         } else {
             displayedFacilities.append(facility)
+            AppData.addUser(user: facility)
         }
-        AppData.facilities = displayedFacilities
         filterFacilities(scope: search.searchBar.selectedScopeButtonIndex) // refresh view
         AppData.saveData()
     }

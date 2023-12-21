@@ -101,6 +101,7 @@ class AdminEditTableViewController: UITableViewController {
     @IBAction func btnSavePressed(_ sender: Any) {
         // create new facility and save, show alert if data is invalid
         // TODO: implement input validation
+        var oldId: UUID?
         
         let name: String? = txtName.text
         let phone: String? = txtPhone.text
@@ -125,7 +126,13 @@ class AdminEditTableViewController: UITableViewController {
             return
         }
         // TODO: add image as well
+        if let facility = facility {
+            oldId = facility.uuid
+        }
         facility = MedicalFacility(name: name ?? "", phone: phone ?? "", city: city ?? "", website: website ?? "", alwaysOpen: alwaysopen, type: type, openingTime: openingTime, closingTime: closingTime, username: username ?? "", password: password ?? "")
+        if let oldId = oldId {
+            facility!.uuid = oldId
+        }
         // if facility was created successfully, add to appdata and save
 //        AppData.facilities.append(facility!)
 //        AppData.saveData()
