@@ -64,8 +64,10 @@ class RegisterForm1ViewController: UIViewController, UITextFieldDelegate {
     @IBAction func registerBtnTapped(_ sender: Any) {
         
         validateFields()
+        backToLogin()
        
     }
+    
     
     
     
@@ -269,6 +271,24 @@ class RegisterForm1ViewController: UIViewController, UITextFieldDelegate {
         
     }
     
+    
+    func backToLogin(){
+        let alertController = UIAlertController(title: "Successfully Registered!",
+                                                message: "Please proceed to the login page to complete the signing-in process",
+                                                preferredStyle: .alert)
+
+        let okAction = UIAlertAction(title: "OK", style: .default) { [weak self] _ in
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let viewController = storyboard.instantiateViewController(withIdentifier: "login")
+            viewController.modalPresentationStyle = .fullScreen
+            self?.present(viewController, animated: true) {
+                self?.navigationController?.viewControllers = [viewController]
+            }
+        }
+
+        alertController.addAction(okAction)
+        present(alertController, animated: true, completion: nil)
+    }
     
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {

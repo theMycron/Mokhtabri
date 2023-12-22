@@ -1,113 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="iXO-JQ-Qmk">
-    <device id="ipad12_9rounded" orientation="portrait" layout="fullscreen" appearance="light"/>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="NbA-dU-nON">
+    <device id="retina6_72" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Login-->
-        <scene sceneID="Lee-Na-5rd">
-            <objects>
-                <viewController title="Login" useStoryboardIdentifierAsRestorationIdentifier="YES" id="sMm-Ym-RJv" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="5L9-Cl-wKu">
-                        <rect key="frame" x="0.0" y="0.0" width="1024" height="1366"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WzR-dP-k9x">
-                                <rect key="frame" x="256" y="816" width="512" height="34"/>
-                                <color key="backgroundColor" red="0.26281487939999998" green="0.35104817150000001" blue="0.59218233819999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="tinted" title="Login">
-                                    <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </buttonConfiguration>
-                            </button>
-                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter your password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Elv-3f-bVE">
-                                <rect key="frame" x="256" y="736" width="512" height="34"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
-                            </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hello &amp; Welcome to Mokhtabri!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qTn-Or-wD5">
-                                <rect key="frame" x="20" y="629.5" width="984" height="27.5"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="23"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="MokhtabriLogo" translatesAutoresizingMaskIntoConstraints="NO" id="lew-eF-Fol">
-                                <rect key="frame" x="0.0" y="24" width="1024" height="314"/>
-                            </imageView>
-                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter your email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Lsx-ec-jEv">
-                                <rect key="frame" x="256" y="691" width="512" height="34"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
-                            </textField>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d9G-CO-5lE">
-                                <rect key="frame" x="60.5" y="866" width="903" height="34"/>
-                                <color key="tintColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="New user? Create a new patient account"/>
-                            </button>
-                        </subviews>
-                        <viewLayoutGuide key="safeArea" id="L6v-Ti-Xt1"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <constraints>
-                            <constraint firstItem="Elv-3f-bVE" firstAttribute="centerY" secondItem="5L9-Cl-wKu" secondAttribute="centerY" constant="70" id="1yh-h8-iWv"/>
-                            <constraint firstItem="lew-eF-Fol" firstAttribute="top" secondItem="L6v-Ti-Xt1" secondAttribute="top" id="2ja-zD-iH0"/>
-                            <constraint firstItem="Lsx-ec-jEv" firstAttribute="width" secondItem="5L9-Cl-wKu" secondAttribute="width" multiplier="0.499576" id="7Ul-ZC-tZx"/>
-                            <constraint firstItem="WzR-dP-k9x" firstAttribute="centerX" secondItem="5L9-Cl-wKu" secondAttribute="centerX" id="Afy-hq-MhY"/>
-                            <constraint firstItem="d9G-CO-5lE" firstAttribute="centerX" secondItem="5L9-Cl-wKu" secondAttribute="centerX" id="BXo-ro-9JZ"/>
-                            <constraint firstItem="WzR-dP-k9x" firstAttribute="centerY" secondItem="5L9-Cl-wKu" secondAttribute="centerY" constant="150" id="DYZ-FU-qLd"/>
-                            <constraint firstItem="lew-eF-Fol" firstAttribute="leading" secondItem="L6v-Ti-Xt1" secondAttribute="leading" id="FEP-D6-rOD"/>
-                            <constraint firstItem="L6v-Ti-Xt1" firstAttribute="trailing" secondItem="qTn-Or-wD5" secondAttribute="trailing" constant="20" id="H8W-7G-Zzo"/>
-                            <constraint firstItem="d9G-CO-5lE" firstAttribute="centerY" secondItem="5L9-Cl-wKu" secondAttribute="centerY" constant="200" id="ISj-vz-G6t"/>
-                            <constraint firstItem="Elv-3f-bVE" firstAttribute="centerX" secondItem="5L9-Cl-wKu" secondAttribute="centerX" id="NYK-2x-fSl"/>
-                            <constraint firstItem="d9G-CO-5lE" firstAttribute="width" secondItem="5L9-Cl-wKu" secondAttribute="width" multiplier="0.882051" id="OZ6-IY-aDT"/>
-                            <constraint firstItem="Lsx-ec-jEv" firstAttribute="centerY" secondItem="5L9-Cl-wKu" secondAttribute="centerY" constant="25" id="SF7-z1-Jse"/>
-                            <constraint firstItem="Elv-3f-bVE" firstAttribute="width" secondItem="5L9-Cl-wKu" secondAttribute="width" multiplier="0.5" id="VIz-0P-JcE"/>
-                            <constraint firstItem="WzR-dP-k9x" firstAttribute="centerX" secondItem="L6v-Ti-Xt1" secondAttribute="centerX" id="YHH-vP-xb6"/>
-                            <constraint firstItem="qTn-Or-wD5" firstAttribute="leading" secondItem="L6v-Ti-Xt1" secondAttribute="leading" constant="20" id="ccH-Fu-zaU"/>
-                            <constraint firstItem="L6v-Ti-Xt1" firstAttribute="trailing" secondItem="lew-eF-Fol" secondAttribute="trailing" id="gpy-vi-Pjw"/>
-                            <constraint firstItem="WzR-dP-k9x" firstAttribute="width" secondItem="5L9-Cl-wKu" secondAttribute="width" multiplier="0.5" id="gsi-g4-ijg"/>
-                            <constraint firstItem="lew-eF-Fol" firstAttribute="height" secondItem="5L9-Cl-wKu" secondAttribute="height" multiplier="0.23" id="h3b-vb-JE0"/>
-                            <constraint firstItem="qTn-Or-wD5" firstAttribute="centerY" secondItem="5L9-Cl-wKu" secondAttribute="centerY" constant="-40" id="wAP-Dm-DXf"/>
-                            <constraint firstItem="Lsx-ec-jEv" firstAttribute="centerX" secondItem="5L9-Cl-wKu" secondAttribute="centerX" id="wC3-wX-Xf0"/>
-                        </constraints>
-                    </view>
-                    <navigationItem key="navigationItem" title="Login" id="zZ7-lS-Lth"/>
-                    <connections>
-                        <outlet property="emailTxt" destination="Lsx-ec-jEv" id="bK0-Y7-Iq7"/>
-                        <outlet property="passwordTxt" destination="Elv-3f-bVE" id="yt1-jo-xk6"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="kG8-Zb-tb0" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-1142" y="-753"/>
-        </scene>
         <!--LoginTEST-->
         <scene sceneID="V39-Cf-sgd">
             <objects>
                 <viewController storyboardIdentifier="login" modalPresentationStyle="fullScreen" id="qEu-0D-mPZ" userLabel="LoginTEST" customClass="LoginViewController" customModule="Mokhtabri" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="fT5-Sc-ynO">
-                        <rect key="frame" x="0.0" y="0.0" width="1024" height="1366"/>
+                        <rect key="frame" x="0.0" y="0.0" width="430" height="932"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jcb-0s-4tt">
-                                <rect key="frame" x="0.0" y="74" width="1024" height="1272"/>
+                                <rect key="frame" x="0.0" y="103" width="430" height="795"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="AZs-3O-4iy">
-                                        <rect key="frame" x="0.0" y="0.0" width="1024" height="757"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="430" height="514.66666666666663"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="QAL-0I-Uhj">
-                                                <rect key="frame" x="0.0" y="0.0" width="1024" height="757"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="430" height="514.66666666666663"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="kTA-Aw-ot3">
-                                                        <rect key="frame" x="100" y="0.0" width="824" height="555"/>
+                                                        <rect key="frame" x="20" y="0.0" width="390" height="305"/>
                                                         <subviews>
                                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="MokhtabriLogo 2" translatesAutoresizingMaskIntoConstraints="NO" id="B7E-2F-H15">
-                                                                <rect key="frame" x="0.0" y="0.0" width="824" height="500"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="390" height="250"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="height" constant="250" id="LBU-JJ-Fim">
                                                                         <variation key="heightClass=regular-widthClass=regular" constant="500"/>
@@ -115,7 +39,7 @@
                                                                 </constraints>
                                                             </imageView>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hello &amp; Welcome to Mokhtabri!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Cm-X3-ovz">
-                                                                <rect key="frame" x="0.0" y="505" width="824" height="50"/>
+                                                                <rect key="frame" x="0.0" y="255" width="390" height="50"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="height" constant="50" id="cmZ-fO-wzf"/>
                                                                 </constraints>
@@ -126,20 +50,20 @@
                                                         </subviews>
                                                     </stackView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="gA3-gk-J1V">
-                                                        <rect key="frame" x="76.5" y="575" width="871" height="182"/>
+                                                        <rect key="frame" x="32" y="325" width="366" height="189.66666666666663"/>
                                                         <subviews>
                                                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter your email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Wc7-Go-Tfv">
-                                                                <rect key="frame" x="0.0" y="0.0" width="871" height="34"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="366" height="34"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                 <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
                                                             </textField>
                                                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter your password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="6Nn-Jm-CfS">
-                                                                <rect key="frame" x="0.0" y="49" width="871" height="34"/>
+                                                                <rect key="frame" x="0.0" y="49" width="366" height="34"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                 <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                                             </textField>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fhg-TU-0aw">
-                                                                <rect key="frame" x="0.0" y="98" width="871" height="34.5"/>
+                                                                <rect key="frame" x="0.0" y="98" width="366" height="38.333333333333343"/>
                                                                 <color key="backgroundColor" red="0.26281487939999998" green="0.35104817150000001" blue="0.59218233819999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                                 <state key="normal" title="Button"/>
                                                                 <buttonConfiguration key="configuration" style="plain" title="Login">
@@ -150,7 +74,7 @@
                                                                 </connections>
                                                             </button>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BGO-Cq-2bQ">
-                                                                <rect key="frame" x="0.0" y="147.5" width="871" height="34.5"/>
+                                                                <rect key="frame" x="0.0" y="151.33333333333337" width="366" height="38.333333333333343"/>
                                                                 <color key="tintColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <state key="normal" title="Button"/>
                                                                 <buttonConfiguration key="configuration" style="plain" title="New user? Create a new patient account"/>
@@ -206,223 +130,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nwx-KE-kAC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1666.1538461538462" y="52.606635071090047"/>
-        </scene>
-        <!--Patient RegistrationTEST-->
-        <scene sceneID="N7v-cW-2Qd">
-            <objects>
-                <viewController wantsFullScreenLayout="YES" hidesBottomBarWhenPushed="YES" id="GcZ-uU-XuV" userLabel="Patient RegistrationTEST" customClass="RegisterForm1ViewController" customModule="Mokhtabri" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="HZr-Rr-aYL">
-                        <rect key="frame" x="0.0" y="0.0" width="1024" height="1366"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="oBD-OY-E2e">
-                                <rect key="frame" x="20" y="44" width="984" height="1302"/>
-                                <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Cip-kh-tJp">
-                                        <rect key="frame" x="0.0" y="0.0" width="984" height="923.5"/>
-                                        <subviews>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalCompressionResistancePriority="749" image="MokhtabriLogo 2" highlighted="YES" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lKk-ii-9WB">
-                                                <rect key="frame" x="0.0" y="0.0" width="984" height="886"/>
-                                            </imageView>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Let's create your account!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o1g-hg-JUn">
-                                                <rect key="frame" x="0.0" y="896" width="984" height="27.5"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="23"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                        </subviews>
-                                    </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="wPe-Wq-nFO">
-                                        <rect key="frame" x="0.0" y="933.5" width="984" height="368.5"/>
-                                        <subviews>
-                                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter your firstname" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="y7S-fl-li0">
-                                                <rect key="frame" x="0.0" y="0.0" width="984" height="34"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits"/>
-                                            </textField>
-                                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter your lastname" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="F7N-th-Mpa">
-                                                <rect key="frame" x="0.0" y="49" width="984" height="34"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits"/>
-                                            </textField>
-                                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter your CPR" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9bO-Os-PdQ">
-                                                <rect key="frame" x="0.0" y="98" width="984" height="34"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
-                                            </textField>
-                                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter your email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="LjW-dC-a3T">
-                                                <rect key="frame" x="0.0" y="147" width="984" height="34"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
-                                            </textField>
-                                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter a password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ceW-Eg-Wii">
-                                                <rect key="frame" x="0.0" y="196" width="984" height="34"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
-                                            </textField>
-                                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="KJ6-wp-WHQ">
-                                                <rect key="frame" x="0.0" y="245" width="984" height="32"/>
-                                                <segments>
-                                                    <segment title="Male"/>
-                                                    <segment title="Female"/>
-                                                </segments>
-                                            </segmentedControl>
-                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="top" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="FQI-fb-drw">
-                                                <rect key="frame" x="0.0" y="291" width="984" height="77.5"/>
-                                                <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Choose your date of birth:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zvj-Md-9GD">
-                                                        <rect key="frame" x="0.0" y="0.0" width="237" height="25.5"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="21"/>
-                                                        <nil key="textColor"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                    <datePicker contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" datePickerMode="date" translatesAutoresizingMaskIntoConstraints="NO" id="AO0-FX-PX5">
-                                                        <rect key="frame" x="0.0" y="27.5" width="204" height="50"/>
-                                                    </datePicker>
-                                                </subviews>
-                                            </stackView>
-                                        </subviews>
-                                    </stackView>
-                                </subviews>
-                            </stackView>
-                        </subviews>
-                        <viewLayoutGuide key="safeArea" id="L7f-4a-gla"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <constraints>
-                            <constraint firstItem="oBD-OY-E2e" firstAttribute="top" secondItem="L7f-4a-gla" secondAttribute="top" constant="20" id="NfK-R0-2AC"/>
-                            <constraint firstAttribute="trailing" secondItem="oBD-OY-E2e" secondAttribute="trailing" constant="20" id="OA3-Zo-AGb"/>
-                            <constraint firstItem="oBD-OY-E2e" firstAttribute="leading" secondItem="HZr-Rr-aYL" secondAttribute="leading" constant="20" id="e4J-Cu-o28"/>
-                            <constraint firstAttribute="bottom" secondItem="oBD-OY-E2e" secondAttribute="bottom" constant="20" id="ldk-g6-8fn"/>
-                        </constraints>
-                    </view>
-                    <navigationItem key="navigationItem" title="Patient Registration" id="67f-TA-fN5">
-                        <barButtonItem key="rightBarButtonItem" title="Register" id="8JD-BQ-dJY"/>
-                    </navigationItem>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="cns-8Q-8ek" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="295" y="53"/>
-        </scene>
-        <!--Patient Registration-->
-        <scene sceneID="B6d-sh-AcT">
-            <objects>
-                <viewController useStoryboardIdentifierAsRestorationIdentifier="YES" id="Crh-Nn-WNy" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="hkO-wp-zuK">
-                        <rect key="frame" x="0.0" y="0.0" width="1024" height="1366"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Let's get started!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oBw-jW-TG4">
-                                <rect key="frame" x="20" y="619.5" width="984" height="27.5"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="23"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="MokhtabriLogo" translatesAutoresizingMaskIntoConstraints="NO" id="AIe-xF-XdW">
-                                <rect key="frame" x="0.0" y="24" width="1024" height="410"/>
-                            </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N9G-C0-Y5P">
-                                <rect key="frame" x="32" y="487" width="0.0" height="0.0"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter your lastname" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="i1Z-6C-YtJ">
-                                <rect key="frame" x="264" y="691" width="496" height="34"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter your CPR" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="P0e-6o-38Q">
-                                <rect key="frame" x="264" y="731" width="496" height="34"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
-                            </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter your firstname" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8uE-8E-dn9">
-                                <rect key="frame" x="264" y="651" width="496" height="34"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="lN1-IT-dTe">
-                                <rect key="frame" x="264" y="852.5" width="496" height="32"/>
-                                <segments>
-                                    <segment title="Male"/>
-                                    <segment title="Female"/>
-                                </segments>
-                            </segmentedControl>
-                            <stackView opaque="NO" contentMode="scaleToFill" spacing="26" translatesAutoresizingMaskIntoConstraints="NO" id="xP4-JG-lUS">
-                                <rect key="frame" x="266" y="893" width="492" height="50"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DOB:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xqo-He-Mkp">
-                                        <rect key="frame" x="0.0" y="0.0" width="40" height="50"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" translatesAutoresizingMaskIntoConstraints="NO" id="Uvn-h5-PE9">
-                                        <rect key="frame" x="66" y="0.0" width="426" height="50"/>
-                                    </datePicker>
-                                </subviews>
-                            </stackView>
-                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter your email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ByT-bo-Slc">
-                                <rect key="frame" x="264" y="771" width="496" height="34"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
-                            </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter a password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ahg-PU-8Xf">
-                                <rect key="frame" x="264" y="811" width="496" height="34"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
-                            </textField>
-                        </subviews>
-                        <viewLayoutGuide key="safeArea" id="Szd-3n-b0s"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <constraints>
-                            <constraint firstItem="ahg-PU-8Xf" firstAttribute="centerY" secondItem="hkO-wp-zuK" secondAttribute="centerY" constant="145" id="1tR-DV-IF6"/>
-                            <constraint firstItem="xP4-JG-lUS" firstAttribute="centerX" secondItem="hkO-wp-zuK" secondAttribute="centerX" id="7QN-FM-kte"/>
-                            <constraint firstItem="ahg-PU-8Xf" firstAttribute="centerX" secondItem="hkO-wp-zuK" secondAttribute="centerX" id="7qW-d1-PCn"/>
-                            <constraint firstItem="P0e-6o-38Q" firstAttribute="width" secondItem="hkO-wp-zuK" secondAttribute="width" multiplier="0.484615" id="BzZ-lk-ctj"/>
-                            <constraint firstItem="oBw-jW-TG4" firstAttribute="leading" secondItem="Szd-3n-b0s" secondAttribute="leading" constant="20" id="C9T-yD-i8k"/>
-                            <constraint firstItem="AIe-xF-XdW" firstAttribute="top" secondItem="Szd-3n-b0s" secondAttribute="top" id="Enf-RR-zku"/>
-                            <constraint firstItem="8uE-8E-dn9" firstAttribute="centerY" secondItem="hkO-wp-zuK" secondAttribute="centerY" constant="-15" id="Ivd-YB-87o"/>
-                            <constraint firstItem="xP4-JG-lUS" firstAttribute="centerY" secondItem="hkO-wp-zuK" secondAttribute="centerY" constant="235" id="Jqc-Nk-wdc"/>
-                            <constraint firstItem="ByT-bo-Slc" firstAttribute="centerX" secondItem="hkO-wp-zuK" secondAttribute="centerX" id="L88-Vy-Mgt"/>
-                            <constraint firstItem="AIe-xF-XdW" firstAttribute="height" secondItem="hkO-wp-zuK" secondAttribute="height" multiplier="0.3" id="MWS-Ed-toh"/>
-                            <constraint firstItem="ByT-bo-Slc" firstAttribute="width" secondItem="hkO-wp-zuK" secondAttribute="width" multiplier="0.484615" id="NXQ-uG-VcI"/>
-                            <constraint firstItem="i1Z-6C-YtJ" firstAttribute="centerY" secondItem="hkO-wp-zuK" secondAttribute="centerY" constant="25" id="Q6f-36-buy"/>
-                            <constraint firstItem="ahg-PU-8Xf" firstAttribute="width" secondItem="hkO-wp-zuK" secondAttribute="width" multiplier="0.484615" id="R8I-cR-GIJ"/>
-                            <constraint firstItem="lN1-IT-dTe" firstAttribute="centerX" secondItem="hkO-wp-zuK" secondAttribute="centerX" id="RUx-CC-5xf"/>
-                            <constraint firstItem="xP4-JG-lUS" firstAttribute="width" secondItem="hkO-wp-zuK" secondAttribute="width" multiplier="0.480342" id="ToJ-iK-Rbc"/>
-                            <constraint firstItem="oBw-jW-TG4" firstAttribute="centerY" secondItem="hkO-wp-zuK" secondAttribute="centerY" constant="-50" id="VYn-MK-wPa"/>
-                            <constraint firstItem="8uE-8E-dn9" firstAttribute="width" secondItem="hkO-wp-zuK" secondAttribute="width" multiplier="0.484615" id="VdN-x3-BwQ"/>
-                            <constraint firstItem="P0e-6o-38Q" firstAttribute="centerY" secondItem="hkO-wp-zuK" secondAttribute="centerY" constant="65" id="Z2o-li-qgy"/>
-                            <constraint firstItem="i1Z-6C-YtJ" firstAttribute="centerX" secondItem="hkO-wp-zuK" secondAttribute="centerX" id="a3f-Kg-QPo"/>
-                            <constraint firstItem="AIe-xF-XdW" firstAttribute="trailing" secondItem="Szd-3n-b0s" secondAttribute="trailing" id="bLF-UL-htP"/>
-                            <constraint firstItem="Szd-3n-b0s" firstAttribute="trailing" secondItem="oBw-jW-TG4" secondAttribute="trailing" constant="20" id="exd-zO-orO"/>
-                            <constraint firstItem="ByT-bo-Slc" firstAttribute="centerY" secondItem="hkO-wp-zuK" secondAttribute="centerY" constant="105" id="f8m-Kr-15Z"/>
-                            <constraint firstItem="P0e-6o-38Q" firstAttribute="centerX" secondItem="hkO-wp-zuK" secondAttribute="centerX" id="qys-GN-2sM"/>
-                            <constraint firstItem="lN1-IT-dTe" firstAttribute="width" secondItem="hkO-wp-zuK" secondAttribute="width" multiplier="0.484615" id="s17-CI-5P6"/>
-                            <constraint firstItem="AIe-xF-XdW" firstAttribute="leading" secondItem="Szd-3n-b0s" secondAttribute="leading" id="srF-ay-dHc"/>
-                            <constraint firstItem="lN1-IT-dTe" firstAttribute="centerY" secondItem="hkO-wp-zuK" secondAttribute="centerY" constant="185" id="u3p-cz-7Je"/>
-                            <constraint firstItem="i1Z-6C-YtJ" firstAttribute="width" secondItem="hkO-wp-zuK" secondAttribute="width" multiplier="0.484615" id="vCQ-LA-fHf"/>
-                            <constraint firstItem="8uE-8E-dn9" firstAttribute="centerX" secondItem="Szd-3n-b0s" secondAttribute="centerX" id="zqr-99-LYl"/>
-                        </constraints>
-                    </view>
-                    <toolbarItems/>
-                    <navigationItem key="navigationItem" title="Patient Registration" largeTitleDisplayMode="always" id="rW3-gQ-7hb" customClass="patient">
-                        <barButtonItem key="rightBarButtonItem" style="plain" id="U4Y-ub-hNF">
-                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="hCU-cA-h8z">
-                                <rect key="frame" x="287" y="2.6666666666666679" width="87" height="39"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="Register"/>
-                            </button>
-                        </barButtonItem>
-                    </navigationItem>
-                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="4Es-vh-r06" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-169" y="-754"/>
         </scene>
         <!--Admin-->
         <scene sceneID="WWO-l4-TW2">
@@ -526,7 +233,7 @@
                     <tabBarItem key="tabBarItem" title="Item" id="gl2-Ih-RDd"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="tke-ME-Zu7">
-                        <rect key="frame" x="0.0" y="24" width="1024" height="50"/>
+                        <rect key="frame" x="0.0" y="59" width="430" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -543,23 +250,23 @@
             <objects>
                 <viewController storyboardIdentifier="PatientRegistration" wantsFullScreenLayout="YES" modalPresentationStyle="fullScreen" hidesBottomBarWhenPushed="YES" useStoryboardIdentifierAsRestorationIdentifier="YES" id="O9a-KG-s4H" userLabel="Scroll Patient RegistrationTEST" customClass="RegisterForm1ViewController" customModule="Mokhtabri" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="qMY-j3-QSj">
-                        <rect key="frame" x="0.0" y="0.0" width="1024" height="1366"/>
+                        <rect key="frame" x="0.0" y="0.0" width="430" height="932"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HuX-DD-dA0">
-                                <rect key="frame" x="0.0" y="74" width="1024" height="1272"/>
+                                <rect key="frame" x="0.0" y="103" width="430" height="795"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="wUH-S6-BmM">
-                                        <rect key="frame" x="0.0" y="0.0" width="1024" height="901"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="430" height="651"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="cgu-Cm-hBK">
-                                                <rect key="frame" x="0.0" y="0.0" width="1024" height="901"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="430" height="651"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="LGr-zc-7jd">
-                                                        <rect key="frame" x="100" y="0.0" width="824" height="555"/>
+                                                        <rect key="frame" x="20" y="0.0" width="390" height="305"/>
                                                         <subviews>
                                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalCompressionResistancePriority="749" image="MokhtabriLogo 2" translatesAutoresizingMaskIntoConstraints="NO" id="1fK-nf-djC">
-                                                                <rect key="frame" x="0.0" y="0.0" width="824" height="500"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="390" height="250"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="height" constant="250" id="HDp-2X-Raa">
                                                                         <variation key="heightClass=regular-widthClass=regular" constant="500"/>
@@ -567,7 +274,7 @@
                                                                 </constraints>
                                                             </imageView>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Let's create your account!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nhi-JT-uVd">
-                                                                <rect key="frame" x="0.0" y="505" width="824" height="50"/>
+                                                                <rect key="frame" x="0.0" y="255" width="390" height="50"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="height" constant="50" id="tmm-mR-P8o"/>
                                                                 </constraints>
@@ -578,35 +285,35 @@
                                                         </subviews>
                                                     </stackView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="aQe-MI-Rnv">
-                                                        <rect key="frame" x="20" y="565" width="984" height="276"/>
+                                                        <rect key="frame" x="20" y="315" width="390" height="276"/>
                                                         <subviews>
                                                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter your firstname" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="HQe-Ws-BF5">
-                                                                <rect key="frame" x="0.0" y="0.0" width="984" height="34"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="390" height="34"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                 <textInputTraits key="textInputTraits"/>
                                                             </textField>
                                                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter your lastname" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rbO-4K-5s2">
-                                                                <rect key="frame" x="0.0" y="49" width="984" height="34"/>
+                                                                <rect key="frame" x="0.0" y="49" width="390" height="34"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                 <textInputTraits key="textInputTraits"/>
                                                             </textField>
                                                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter your CPR" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="nLs-EA-roq">
-                                                                <rect key="frame" x="0.0" y="98" width="984" height="34"/>
+                                                                <rect key="frame" x="0.0" y="98" width="390" height="34"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                 <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                                             </textField>
                                                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter your email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="U4q-EJ-c4f">
-                                                                <rect key="frame" x="0.0" y="147" width="984" height="34"/>
+                                                                <rect key="frame" x="0.0" y="147" width="390" height="34"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                 <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
                                                             </textField>
                                                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter a password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="LEw-Mb-aDT">
-                                                                <rect key="frame" x="0.0" y="196" width="984" height="34"/>
+                                                                <rect key="frame" x="0.0" y="196" width="390" height="34"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                 <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                                             </textField>
                                                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="rhj-ny-hDk">
-                                                                <rect key="frame" x="0.0" y="245" width="984" height="32"/>
+                                                                <rect key="frame" x="0.0" y="245" width="390" height="32"/>
                                                                 <segments>
                                                                     <segment title="Male"/>
                                                                     <segment title="Female"/>
@@ -615,16 +322,16 @@
                                                         </subviews>
                                                     </stackView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="wdt-Et-7Ho">
-                                                        <rect key="frame" x="176" y="851" width="672" height="50"/>
+                                                        <rect key="frame" x="74" y="601" width="282" height="50"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date Of Birth:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z6h-JP-lJ3">
-                                                                <rect key="frame" x="0.0" y="0.0" width="335" height="50"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="140" height="50"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" translatesAutoresizingMaskIntoConstraints="NO" id="4VV-W1-lrf">
-                                                                <rect key="frame" x="337" y="0.0" width="335" height="50"/>
+                                                                <rect key="frame" x="142" y="0.0" width="140" height="50"/>
                                                             </datePicker>
                                                         </subviews>
                                                     </stackView>
@@ -687,7 +394,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="MokhtabriLogo" width="1024" height="1024"/>
         <image name="MokhtabriLogo 2" width="400" height="400"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

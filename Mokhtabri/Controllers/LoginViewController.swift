@@ -130,18 +130,35 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     //double check that the user logged in and have information
     func checkUserInfo(){
         if Auth.auth().currentUser != nil {
-            //print the id to ensure
-            print(Auth.auth().currentUser?.uid) 
-            //print(Auth.auth().currentUser?.displayName)
-            
-            //set the value inside the user defaults
-            self.defaults.set(true, forKey: "Logged In")
-            
-            //pass the user the overview
-            let mainSB = UIStoryboard(name: "Main", bundle: nil)
-            let vc = mainSB.instantiateViewController(withIdentifier: "PatientRegistration")
-            vc.modalPresentationStyle = .overFullScreen
-           self.present(vc, animated: true)
+            guard let email = Auth.auth().currentUser?.email else {
+                print("email is null")
+                return
+            }
+
+            let storyboardName: String
+            let viewControllerIdentifier: String
+
+            if email.contains("admin@gmail"){
+                storyboardName = "Admin"
+                viewControllerIdentifier = "adminView"
+            }else if email.contains("@mokhtabri"){
+                storyboardName = "LabBooking"
+                viewControllerIdentifier = "labView"
+            }else {
+                storyboardName = "PatientHome"
+                viewControllerIdentifier = "patient"
+            }
+
+            let storyboard = UIStoryboard(name: storyboardName, bundle: nil)
+            guard let viewController = storyboard.instantiateViewController(withIdentifier: viewControllerIdentifier) as? NavViewController else {
+                return
+            }
+
+            viewController.modalPresentationStyle = .fullScreen
+            self.present(viewController, animated: true) {
+                // Dismiss the previous view controller in settings
+                self.navigationController?.viewControllers = [viewController]
+            }
             
             
          
@@ -158,20 +175,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
             //let userID: String = Auth.auth().currentUser!.uid
             
             
-           
-            
-            
-        }else{
-            //set the user as false inside user defaults
-            self.defaults.set(false, forKey: "Logged In")
-            
-            //redirect user
-            let login = UIStoryboard(name: "Main", bundle: nil)
-            let loginVc = login.instantiateViewController(withIdentifier: "login")
-            loginVc.modalPresentationStyle = .overFullScreen
-            self.present(loginVc, animated: true)
-           
-
         }
         
         
