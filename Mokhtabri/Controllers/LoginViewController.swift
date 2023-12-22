@@ -115,7 +115,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         Auth.auth().signIn(withEmail: emailTxt.text!, password: passwordTxt.text!) { [weak self] authResult, errorMessgae in
             
             
-            guard let strongSelf = self else {return}
+            guard self != nil else {return}
             
             if let errorMessgae = errorMessgae{
                 print(errorMessgae.localizedDescription)
