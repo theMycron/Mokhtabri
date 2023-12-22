@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22155" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="2PN-Fk-6tr">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="l6Z-Yi-xhX">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22131"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -26,25 +25,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lTc-8R-FnN" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-194" y="-474"/>
-        </scene>
-        <!--Tab Bar Controller-->
-        <scene sceneID="Dcp-Xm-wE1">
-            <objects>
-                <tabBarController id="2PN-Fk-6tr" sceneMemberID="viewController">
-                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="jvh-Pi-yvV">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="49"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    </tabBar>
-                    <connections>
-                        <segue destination="JRc-6A-vYM" kind="relationship" relationship="viewControllers" id="af1-dn-mig"/>
-                        <segue destination="l6Z-Yi-xhX" kind="relationship" relationship="viewControllers" id="SuL-cw-niz"/>
-                        <segue destination="WIO-tZ-lIV" kind="relationship" relationship="viewControllers" id="1fW-uu-bwa"/>
-                    </connections>
-                </tabBarController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="GUq-7A-Evw" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="859" y="-788"/>
         </scene>
         <!--Patient Booking Table View Controller-->
         <scene sceneID="Ccq-8d-Gq8">
@@ -164,8 +144,14 @@
                                 <segment title="Completed"/>
                                 <segment title="Cancelled"/>
                             </segments>
+                            <connections>
+                                <action selector="segmentedControl:" destination="8S4-8z-0VG" eventType="valueChanged" id="TLv-Bd-aUF"/>
+                            </connections>
                         </segmentedControl>
                     </navigationItem>
+                    <connections>
+                        <outlet property="segmentOutlet" destination="n1c-uL-EUP" id="MA2-lR-m39"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pMw-QF-NP7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -182,10 +168,10 @@
                             <tableViewSection id="GfD-Zn-jCc">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="c4P-eG-Cbj">
-                                        <rect key="frame" x="20" y="18" width="353" height="47.666667938232422"/>
+                                        <rect key="frame" x="20" y="18" width="353" height="43.666667938232422"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="c4P-eG-Cbj" id="IZ3-CQ-Gd4">
-                                            <rect key="frame" x="0.0" y="0.0" width="353" height="47.666667938232422"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="353" height="43.666667938232422"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Status" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CFC-eh-IBP">
@@ -199,7 +185,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="158" id="RuL-Ig-GKp">
-                                        <rect key="frame" x="20" y="65.666667938232422" width="353" height="158"/>
+                                        <rect key="frame" x="20" y="61.666667938232422" width="353" height="158"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="RuL-Ig-GKp" id="1Ph-HM-eYs">
                                             <rect key="frame" x="0.0" y="0.0" width="353" height="158"/>
@@ -213,7 +199,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="77" id="cwU-g8-t7d">
-                                        <rect key="frame" x="20" y="223.66666793823242" width="353" height="77"/>
+                                        <rect key="frame" x="20" y="219.66666793823242" width="353" height="77"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="cwU-g8-t7d" id="27M-HV-3nN">
                                             <rect key="frame" x="0.0" y="0.0" width="353" height="77"/>
@@ -239,17 +225,17 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="left" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="PatientInfo" rowHeight="156" id="Sr6-7e-YVc" customClass="PatientInfoTableViewCell" customModule="Mokhtabri" customModuleProvider="target">
-                                        <rect key="frame" x="20" y="300.66666793823242" width="353" height="156"/>
+                                        <rect key="frame" x="20" y="296.66666793823242" width="353" height="156"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Sr6-7e-YVc" id="PS0-eE-RAJ">
                                             <rect key="frame" x="0.0" y="0.0" width="353" height="156"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="MqR-tH-mA4">
-                                                    <rect key="frame" x="20" y="12" width="313" height="132"/>
+                                                    <rect key="frame" x="20" y="11" width="313" height="134"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="wordWrap" numberOfLines="9" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tas-on-Cyb">
-                                                            <rect key="frame" x="0.0" y="0.0" width="313" height="132"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="313" height="134"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
@@ -282,7 +268,11 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="0c2-2O-MXW">
-                        <barButtonItem key="rightBarButtonItem" title="Cancel" id="0HN-AR-51R"/>
+                        <barButtonItem key="rightBarButtonItem" title="Cancel" id="0HN-AR-51R">
+                            <connections>
+                                <action selector="cancelClicked:" destination="aM2-Wg-7bS" id="IoA-NR-rie"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="btn" destination="0HN-AR-51R" id="FNU-xj-hVK"/>
@@ -301,7 +291,8 @@
         <scene sceneID="NzU-cg-6E9">
             <objects>
                 <navigationController id="l6Z-Yi-xhX" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Booking History" image="book.circle" catalog="system" id="OR0-Ad-F5g"/>
+                    <tabBarItem key="tabBarItem" title="Booking History" image="book.circle" catalog="system" id="d4X-aI-Q9H"/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="60R-jn-WEl">
                         <rect key="frame" x="0.0" y="59" width="393" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
