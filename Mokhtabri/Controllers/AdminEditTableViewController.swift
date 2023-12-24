@@ -6,8 +6,9 @@
 //
 
 import UIKit
+import FirebaseStorage
 
-class AdminEditTableViewController: UITableViewController {
+class AdminEditTableViewController: UITableViewController, UIImagePickerControllerDelegate & UINavigationControllerDelegate {
 
     @IBOutlet weak var btnSave: UIBarButtonItem!
     
@@ -141,7 +142,42 @@ class AdminEditTableViewController: UITableViewController {
     }
     
     @IBAction func btnAddPhotoPressed(_ sender: Any) {
+        showImagePickerOptions()
+    }
+    
+    func showImagePickerOptions() {
+        let alert = UIAlertController(title: "Select Image", message: "Select image from library or capture from camera", preferredStyle: .actionSheet)
+        let cameraAction = UIAlertAction(title: "Camera", style: .default) { [weak self] (action) in
+            guard let self = self else {return}
+            let cameraPicker = self.imagePicker(sourceType: .camera)
+            cameraPicker.delegate = self
+            self.present(cameraPicker, animated: true)
+        }
         
+        let libraryAction = UIAlertAction(title: "Library", style: .default) { [weak self] (action) in
+            guard let self = self else {return}
+            let libraryPicker = self.imagePicker(sourceType: .photoLibrary)
+            libraryPicker.delegate = self
+            self.present(libraryPicker, animated: true)
+        }
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+        alert.addAction(cameraAction)
+        alert.addAction(libraryAction)
+        alert.addAction(cancelAction)
+        self.present(alert, animated: true)
+    }
+    
+    func imagePicker(sourceType: UIImagePickerController.SourceType) -> UIImagePickerController {
+        let imagePicker = UIImagePickerController()
+        imagePicker.sourceType = sourceType
+        return imagePicker
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        let image = info[.originalImage] as!UIImage
+        imgDisplay.image = image
+        self.dismiss(animated: true)
     }
     
     @IBAction func toggleChanged(_ sender: Any) {
@@ -255,3 +291,4 @@ extension AdminEditTableViewController: UIAdaptivePresentationControllerDelegate
         self.present(alert, animated: true, completion: nil)
     }
 }
+
