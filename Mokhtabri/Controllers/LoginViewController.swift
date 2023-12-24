@@ -135,30 +135,43 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                 return
             }
 
-            let storyboardName: String
             let viewControllerIdentifier: String
+            var isTabBarController: Bool = true
 
             if email.contains("admin@gmail"){
-                storyboardName = "Admin"
-                viewControllerIdentifier = "adminView"
-            }else if email.contains("@mokhtabri"){
-                storyboardName = "LabBooking"
-                viewControllerIdentifier = "labView"
-            }else {
-                storyboardName = "PatientHome"
-                viewControllerIdentifier = "patient"
+                viewControllerIdentifier = "AdminView"
+                // admin screen has no tab bar controller, so do not instantiate as tab bar controller
+                isTabBarController = false
+            } else if email.contains("@mokhtabri"){
+                viewControllerIdentifier = "LabTabBarController"
+            } else {
+                viewControllerIdentifier = "PatientTabBarController"
             }
-
-            let storyboard = UIStoryboard(name: storyboardName, bundle: nil)
-            guard let viewController = storyboard.instantiateViewController(withIdentifier: viewControllerIdentifier) as? NavViewController else {
-                return
+            
+            
+            let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+            if isTabBarController {
+                let viewController = mainStoryboard.instantiateViewController(withIdentifier: viewControllerIdentifier) as! UITabBarController
+                self.view.window?.rootViewController = viewController
+                self.view.window?.makeKeyAndVisible()
+            } else {
+                let viewController = mainStoryboard.instantiateViewController(withIdentifier: viewControllerIdentifier) as! UINavigationController
+                self.view.window?.rootViewController = viewController
+                self.view.window?.makeKeyAndVisible()
             }
-
-            viewController.modalPresentationStyle = .fullScreen
-            self.present(viewController, animated: true) {
-                // Dismiss the previous view controller in settings
-                self.navigationController?.viewControllers = [viewController]
-            }
+            
+            
+//
+//            let storyboard = UIStoryboard(name: storyboardName, bundle: nil)
+//            guard let viewController = storyboard.instantiateViewController(withIdentifier: viewControllerIdentifier) as? UINavigationController else {
+//                return
+//            }
+//
+//            viewController.modalPresentationStyle = .fullScreen
+//            self.present(viewController, animated: true) {
+//                // Dismiss the previous view controller in settings
+//                self.navigationController?.viewControllers = [viewController]
+//            }
             
             
          

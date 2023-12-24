@@ -333,10 +333,8 @@ class RegisterForm1ViewController: UIViewController, UITextFieldDelegate {
         let okAction = UIAlertAction(title: "OK", style: .default) { [weak self] _ in
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let viewController = storyboard.instantiateViewController(withIdentifier: "login")
-            viewController.modalPresentationStyle = .fullScreen
-            self?.present(viewController, animated: true) {
-                self?.navigationController?.viewControllers = [viewController]
-            }
+            self?.view.window?.rootViewController = viewController
+            self?.view.window?.makeKeyAndVisible()
         }
 
         alertController.addAction(okAction)
