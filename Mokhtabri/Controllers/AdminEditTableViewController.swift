@@ -100,14 +100,47 @@ class AdminEditTableViewController: UITableViewController, UIImagePickerControll
     }
     
     @IBAction func btnSavePressed(_ sender: Any) {
+        
+        // do not continue if there was an invalid input
+        guard validateFields() else {
+            return
+        }
+        
+        performSegue(withIdentifier: "unwindToView", sender: self)
+        
+    }
+    
+    func displayError(title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default))
+        present(alert, animated: true)
+    }
+    
+    func validateFields() -> Bool {
         // create new facility and save, show alert if data is invalid
-        // TODO: implement input validation
         var oldId: UUID?
         
-        let name: String? = txtName.text
-        let phone: String? = txtPhone.text
-        let city: String? = txtCity.text
-        let website: String? = txtWebsite.text
+        guard let name: String = txtName.text,
+              !name.isEmpty else {
+            displayError(title: "Missing Name", message: "Please enter a name.")
+            return false
+        }
+        
+        guard let phone: String = txtPhone.text,
+              !phone.isEmpty else {
+            displayError(title: "Missing Phone Number", message: "Please enter a phone number.")
+            return false
+        }
+        guard let city: String = txtCity.text,
+              !city.isEmpty else {
+            displayError(title: "Missing City", message: "Please enter a city.")
+            return false
+        }
+        guard let website: String = txtWebsite.text,
+            !website.isEmpty else {
+            displayError(title: "Missing Website", message: "Please enter a website.")
+            return false
+        }
         let type: FacilityType = segmentType.selectedSegmentIndex == 0 ? FacilityType.hospital : FacilityType.lab
         let alwaysopen: Bool = toggleAlwaysOpen.isOn
         
@@ -119,27 +152,47 @@ class AdminEditTableViewController: UITableViewController, UIImagePickerControll
         var closingTime: DateComponents = DateComponents()
         closingTime = calendar.dateComponents(in: calendar.timeZone, from: closingTimeRaw)
         
-        let username: String? = txtUsername.text
-        let password: String? = txtPassword.text
-        let confirm: String? = txtConfirm.text
-        guard password == confirm else {
-            // throw error if not matching
-            return
+        guard let username: String = txtUsername.text,
+              !username.isEmpty else {
+            displayError(title: "Missing Email", message: "Please enter an email.")
+            return false
         }
+        let emailRegex = "[A-Za-z0-9._%+-]+@mokhtabri\\.com"
+        let emailPredicate = NSPredicate(format: "SELF MATCHES %@", emailRegex)
+        guard emailPredicate.evaluate(with: username) else {
+            displayError(title: "Invalid Email", message: "Please enter a valid email address for the facility (ending in @mokhtabri.com)")
+            return false
+        }
+        
+        guard let password: String = txtPassword.text,
+              !password.isEmpty else {
+            displayError(title: "Missing Password", message: "Please enter a password.")
+            return false
+        }
+        guard password.count >= 8 else {
+            displayError(title: "Invalid Password", message: "Please enter a password with at least 8 characters.")
+            return false
+        }
+        
+        guard let confirm: String = txtConfirm.text,
+              password == confirm else {
+            // throw error if not matching
+            displayError(title: "Passwords Not Matching", message: "Please re-enter your passwords and make sure they match.")
+            return false
+        }
+        
         // TODO: add image as well
+        // if editing an existing facility, save id to replace it
         if let facility = facility {
             oldId = facility.uuid
         }
-        facility = MedicalFacility(name: name ?? "", phone: phone ?? "", city: city ?? "", website: website ?? "", alwaysOpen: alwaysopen, type: type, openingTime: openingTime, closingTime: closingTime, username: username ?? "", password: password ?? "")
+        facility = MedicalFacility(name: name, phone: phone, city: city, website: website, alwaysOpen: alwaysopen, type: type, openingTime: openingTime, closingTime: closingTime, username: username, password: password)
         if let oldId = oldId {
-            facility!.uuid = oldId
+            facility!.uuid = oldId // replace new uuid with old one if editing to ensure they are the same facility
         }
-        // if facility was created successfully, add to appdata and save
-//        AppData.facilities.append(facility!)
-//        AppData.saveData()
-        performSegue(withIdentifier: "unwindToView", sender: self)
-        
+        return true
     }
+    
     
     @IBAction func btnAddPhotoPressed(_ sender: Any) {
         showImagePickerOptions()
