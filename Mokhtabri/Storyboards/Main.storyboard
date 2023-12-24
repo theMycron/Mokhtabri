@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="NbA-dU-nON">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="NbA-dU-nON">
     <device id="retina6_72" orientation="portrait" appearance="light"/>
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -13,7 +12,7 @@
         <!--LoginTEST-->
         <scene sceneID="V39-Cf-sgd">
             <objects>
-                <viewController storyboardIdentifier="login" modalPresentationStyle="fullScreen" id="qEu-0D-mPZ" userLabel="LoginTEST" customClass="LoginViewController" customModule="Mokhtabri" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController modalPresentationStyle="fullScreen" id="qEu-0D-mPZ" userLabel="LoginTEST" customClass="LoginViewController" customModule="Mokhtabri" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="fT5-Sc-ynO">
                         <rect key="frame" x="0.0" y="0.0" width="430" height="932"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -22,10 +21,10 @@
                                 <rect key="frame" x="0.0" y="103" width="430" height="795"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="AZs-3O-4iy">
-                                        <rect key="frame" x="0.0" y="0.0" width="430" height="514.66666666666663"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="430" height="506.66666666666669"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="QAL-0I-Uhj">
-                                                <rect key="frame" x="0.0" y="0.0" width="430" height="514.66666666666663"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="430" height="506.66666666666669"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="kTA-Aw-ot3">
                                                         <rect key="frame" x="20" y="0.0" width="390" height="305"/>
@@ -50,7 +49,7 @@
                                                         </subviews>
                                                     </stackView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="gA3-gk-J1V">
-                                                        <rect key="frame" x="32" y="325" width="366" height="189.66666666666663"/>
+                                                        <rect key="frame" x="32" y="325" width="366" height="181.66666666666663"/>
                                                         <subviews>
                                                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter your email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Wc7-Go-Tfv">
                                                                 <rect key="frame" x="0.0" y="0.0" width="366" height="34"/>
@@ -63,7 +62,7 @@
                                                                 <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                                             </textField>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fhg-TU-0aw">
-                                                                <rect key="frame" x="0.0" y="98" width="366" height="38.333333333333343"/>
+                                                                <rect key="frame" x="0.0" y="98" width="366" height="34.333333333333343"/>
                                                                 <color key="backgroundColor" red="0.26281487939999998" green="0.35104817150000001" blue="0.59218233819999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                                 <state key="normal" title="Button"/>
                                                                 <buttonConfiguration key="configuration" style="plain" title="Login">
@@ -74,7 +73,7 @@
                                                                 </connections>
                                                             </button>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BGO-Cq-2bQ">
-                                                                <rect key="frame" x="0.0" y="151.33333333333337" width="366" height="38.333333333333343"/>
+                                                                <rect key="frame" x="0.0" y="147.33333333333337" width="366" height="34.333333333333343"/>
                                                                 <color key="tintColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <state key="normal" title="Button"/>
                                                                 <buttonConfiguration key="configuration" style="plain" title="New user? Create a new patient account"/>
@@ -129,20 +128,23 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nwx-KE-kAC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1666.1538461538462" y="52.606635071090047"/>
+            <point key="canvasLocation" x="-434" y="-109"/>
         </scene>
         <!--Admin-->
         <scene sceneID="WWO-l4-TW2">
             <objects>
-                <viewControllerPlaceholder storyboardName="Admin" id="Uqs-ua-zmH" sceneMemberID="viewController"/>
+                <viewControllerPlaceholder storyboardIdentifier="AdminView" storyboardName="Admin" id="Uqs-ua-zmH" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="IXv-FM-7vp"/>
+                </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Y5L-Om-KTf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2726" y="1052"/>
+            <point key="canvasLocation" x="615" y="-109"/>
         </scene>
         <!--LabTabBarController-->
         <scene sceneID="wF1-7x-xvU">
             <objects>
-                <tabBarController title="LabTabBarController" id="tSY-bp-0Zu" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="LabTabBarController" title="LabTabBarController" id="tSY-bp-0Zu" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="cZg-8a-Z1u"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="l42-am-ZIA">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -155,12 +157,13 @@
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="490-bu-nyr" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2747" y="257"/>
+            <point key="canvasLocation" x="1256" y="192"/>
         </scene>
         <!--PatientTabBarController-->
         <scene sceneID="Glr-3D-jGY">
             <objects>
-                <tabBarController title="PatientTabBarController" id="iXO-JQ-Qmk" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="PatientTabBarController" title="PatientTabBarController" id="iXO-JQ-Qmk" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="Yoz-6o-fhL"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="mLJ-fK-oAt">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -174,7 +177,7 @@
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="D4F-BU-YVz" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5504.5801526717551" y="-711.26760563380287"/>
+            <point key="canvasLocation" x="1256" y="-635"/>
         </scene>
         <!--LabBooking-->
         <scene sceneID="CBN-lM-low">
@@ -184,7 +187,7 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2v7-1z-flH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2481" y="713"/>
+            <point key="canvasLocation" x="1027" y="621"/>
         </scene>
         <!--LabServices-->
         <scene sceneID="6va-tR-eL2">
@@ -194,7 +197,7 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="i0F-WX-Pla" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2999" y="713"/>
+            <point key="canvasLocation" x="1544" y="621"/>
         </scene>
         <!--PatientSettings-->
         <scene sceneID="FEe-iD-o8u">
@@ -204,7 +207,7 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zim-m6-KtC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3130" y="-237"/>
+            <point key="canvasLocation" x="1669" y="-202"/>
         </scene>
         <!--PatientHome-->
         <scene sceneID="2eS-oj-tFF">
@@ -214,7 +217,7 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0yG-GX-9wG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2355" y="-237"/>
+            <point key="canvasLocation" x="894" y="-202"/>
         </scene>
         <!--PatientBookings-->
         <scene sceneID="Cft-Np-lIk">
@@ -224,12 +227,12 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DxN-ML-HYV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2726" y="-237"/>
+            <point key="canvasLocation" x="1265" y="-202"/>
         </scene>
         <!--Item-->
         <scene sceneID="eVa-8N-Isd">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="NbA-dU-nON" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="login" automaticallyAdjustsScrollViewInsets="NO" id="NbA-dU-nON" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Item" id="gl2-Ih-RDd"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="tke-ME-Zu7">
@@ -243,7 +246,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0jp-oA-tW1" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2063" y="-768"/>
+            <point key="canvasLocation" x="-1441" y="-109"/>
         </scene>
         <!--Scroll Patient RegistrationTEST-->
         <scene sceneID="tBV-7Q-WLE">
@@ -390,7 +393,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2dc-DM-8aK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-526" y="53"/>
+            <point key="canvasLocation" x="-435" y="684"/>
         </scene>
     </scenes>
     <resources>
