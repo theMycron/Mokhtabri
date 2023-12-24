@@ -350,11 +350,6 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
-                    <connections>
-                        <outlet property="CellPress" destination="3y2-uJ-2xw" id="zuP-Vg-FgJ"/>
-                        <outlet property="Tab" destination="3y2-uJ-2xw" id="few-Fk-8By"/>
-                        <outletCollection property="Cell" destination="3y2-uJ-2xw" collectionClass="NSMutableArray" id="d4Y-bb-3tY"/>
-                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TFz-Ix-B6L" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
