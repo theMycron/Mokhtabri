@@ -8,7 +8,7 @@
 import UIKit
 
 class LabViewTableViewController: UITableViewController, UISearchResultsUpdating, UISearchBarDelegate {
-    var displayedFacilities: [MedicalFacility] = AppData.facilities
+    var displayedFacilities: [MedicalService] = AppData.services
     let search = UISearchController()
 
     override func viewDidLoad() {
@@ -49,11 +49,10 @@ class LabViewTableViewController: UITableViewController, UISearchResultsUpdating
     func filterFacilities(scope: Int) {
         switch scope {
         case 0:
-            displayedFacilities = AppData.facilities
+            displayedFacilities = AppData.services
         case 1:
-            displayedFacilities = AppData.facilities.compactMap{$0.type == FacilityType.hospital ? $0 : nil}
-        case 2:
-            displayedFacilities = AppData.facilities.compactMap{$0.type == FacilityType.lab ? $0 : nil}
+            displayedFacilities = AppData.services.compactMap{(($0 as? Test) != nil) ? $0 : nil}
+        
         default:
             return
         }
@@ -64,18 +63,18 @@ class LabViewTableViewController: UITableViewController, UISearchResultsUpdating
         let scope = search.searchBar.selectedScopeButtonIndex
         if let query = searchController.searchBar.text?.lowercased().trimmingCharacters(in: .whitespaces), !query.isEmpty {
             if scope == 0 {
-                displayedFacilities = AppData.facilities.filter{
-                    return $0.name.lowercased().contains(query) || $0.city.lowercased().contains(query)
+                displayedFacilities = AppData.services.filter{
+                    return $0.name.lowercased().contains(query)
                 }
-            } else if scope == 1 {
-                displayedFacilities = AppData.facilities.filter{
+            } /*else if scope == 1 {
+                displayedFacilities = AppData.services.filter{
                     return $0.type == FacilityType.hospital && ($0.name.lowercased().contains(query) || $0.city.lowercased().contains(query))
                 }
             } else if scope == 2 {
-                displayedFacilities = AppData.facilities.filter{
+                displayedFacilities = AppData.services.filter{
                     return $0.type == FacilityType.lab && ($0.name.lowercased().contains(query) || $0.city.lowercased().contains(query))
                 }
-            }
+            }*/
         } else {
             filterFacilities(scope: scope)
         }
@@ -100,14 +99,16 @@ class LabViewTableViewController: UITableViewController, UISearchResultsUpdating
         else {return}
         
         // replace old facility with updated one or just add it if it is new
+        
+        
         if let indexPath = tableView.indexPathForSelectedRow {
             displayedFacilities.remove(at: indexPath.section)
             displayedFacilities.insert(facility, at: indexPath.section)
             tableView.deselectRow(at: indexPath, animated: true)
-            AppData.editUser(user: facility)
+         //   AppData.editUser(user: facility)
         } else {
             displayedFacilities.append(facility)
-            AppData.addUser(user: facility)
+          //  AppData.addUser(user: facility)
         }
         filterFacilities(scope: search.searchBar.selectedScopeButtonIndex) // refresh view
         AppData.saveData()

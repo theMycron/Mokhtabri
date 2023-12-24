@@ -39,11 +39,11 @@ class LabEditTableTableViewController: UITableViewController, UIAdaptivePresenta
     
     @IBOutlet weak var closingTimeCell: UITableViewCell!
     
-    var facility: MedicalFacility?
+    var facility: MedicalService?
     
     var hasChanges: Bool = false
     
-    init?(coder: NSCoder, facility: MedicalFacility?) {
+    init?(coder: NSCoder, facility: MedicalService?) {
         self.facility = facility
         super.init(coder: coder)
     }
@@ -56,18 +56,18 @@ class LabEditTableTableViewController: UITableViewController, UIAdaptivePresenta
     func updateView() {
         guard let facility = facility else {return}
         txtName.text = facility.name
-        txtPhone.text = facility.phone
-        txtCity.text = facility.city
-        txtWebsite.text = facility.website
-        if facility.type == FacilityType.hospital {
+        txtPhone.text = String(facility.price)
+     //   txtCity.text = facility.city
+       // txtWebsite.text = facility.website
+    /*    if facility.type == FacilityType.hospital {
             segmentType.selectedSegmentIndex = 0
         } else {
             segmentType.selectedSegmentIndex = 1
-        }
+        }*/
         
-        toggleAlwaysOpen.isOn = facility.alwaysOpen
-        print(toggleAlwaysOpen.isOn)
-        if !facility.alwaysOpen {
+      //  toggleAlwaysOpen.isOn = facility.alwaysOpen
+       // print(toggleAlwaysOpen.isOn)
+      /*  if !facility.alwaysOpen {
             let calendar = Calendar.current
             let openingComponents: DateComponents = facility.openingTime
             let closingComponents: DateComponents = facility.closingTime
@@ -77,6 +77,7 @@ class LabEditTableTableViewController: UITableViewController, UIAdaptivePresenta
         txtUsername.text = facility.username
         txtPassword.text = facility.password
         txtConfirm.text = facility.password
+        */
     }
     
     
@@ -105,37 +106,42 @@ class LabEditTableTableViewController: UITableViewController, UIAdaptivePresenta
         
         let name: String? = txtName.text
         let phone: String? = txtPhone.text
-        let city: String? = txtCity.text
-        let website: String? = txtWebsite.text
-        let type: FacilityType = segmentType.selectedSegmentIndex == 0 ? FacilityType.hospital : FacilityType.lab
-        let alwaysopen: Bool = toggleAlwaysOpen.isOn
+        //let city: String? = txtCity.text
+       // let website: String? = txtWebsite.text
+       // let type: FacilityType = segmentType.selectedSegmentIndex == 0 ? FacilityType.hospital : FacilityType.lab
+       // let alwaysopen: Bool = toggleAlwaysOpen.isOn
         
-        let calendar = Calendar.current
-        let openingTimeRaw: Date = timeOpening.date
-        var openingTime: DateComponents = DateComponents()
-        openingTime = calendar.dateComponents(in: calendar.timeZone, from: openingTimeRaw)
-        let closingTimeRaw: Date = timeClosing.date
-        var closingTime: DateComponents = DateComponents()
-        closingTime = calendar.dateComponents(in: calendar.timeZone, from: closingTimeRaw)
+      //  let calendar = Calendar.current
+       // let openingTimeRaw: Date = timeOpening.date
+       // var openingTime: DateComponents = DateComponents()
+       // openingTime = calendar.dateComponents(in: calendar.timeZone, from: openingTimeRaw)
+      //  let closingTimeRaw: Date = timeClosing.date
+       // var closingTime: DateComponents = DateComponents()
+       // closingTime = calendar.dateComponents(in: calendar.timeZone, from: closingTimeRaw)
         
-        let username: String? = txtUsername.text
+      /*  let username: String? = txtUsername.text
         let password: String? = txtPassword.text
         let confirm: String? = txtConfirm.text
         guard password == confirm else {
             // throw error if not matching
             return
-        }
+        } */
         // TODO: add image as well
+        
+        
+        //please edit ali 
+        
+        facility = MedicalService(id: id ?? "", name: name ?? "", phone: phone ?? "",serviceDescription: serviceDescription ?? "")
         if let facility = facility {
-            oldId = facility.uuid
+            oldId = facility.id
         }
-        facility = MedicalFacility(name: name ?? "", phone: phone ?? "", city: city ?? "", website: website ?? "", alwaysOpen: alwaysopen, type: type, openingTime: openingTime, closingTime: closingTime, username: username ?? "", password: password ?? "")
+        
         if let oldId = oldId {
-            facility!.uuid = oldId
+            facility!.id = oldId
         }
         // if facility was created successfully, add to appdata and save
-//        AppData.facilities.append(facility!)
-//        AppData.saveData()
+        AppData.services.append(facility!)
+        AppData.saveData()
         performSegue(withIdentifier: "unwindToView", sender: self)
         
     }
@@ -157,14 +163,14 @@ class LabEditTableTableViewController: UITableViewController, UIAdaptivePresenta
     
     // MARK: - Table view data source
 
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+  /*  override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         // hide opening time and closing time cells if facility is initially set to always open
         if indexPath.section == 2 && (indexPath.row == 1 || indexPath.row == 2) {
             return toggleAlwaysOpen.isOn ? 0 : super.tableView(tableView, heightForRowAt: indexPath)
         }
         return super.tableView(tableView, heightForRowAt: indexPath)
     }
-    
+    */
     
     @IBAction func madeChanges() {
         hasChanges = true
