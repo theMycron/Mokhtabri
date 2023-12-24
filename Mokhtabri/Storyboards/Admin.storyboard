@@ -589,7 +589,11 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Medical Facilities" id="QZQ-de-Srb">
-                        <barButtonItem key="leftBarButtonItem" title="Log Out" id="lvt-Ib-uac"/>
+                        <barButtonItem key="leftBarButtonItem" title="Log Out" id="lvt-Ib-uac">
+                            <connections>
+                                <action selector="btnLogOutPressed:" destination="8nS-YP-Y0F" id="eb1-Gs-Hal"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="CjS-fq-ZU2">
                             <connections>
                                 <segue destination="IT6-Mn-ReT" kind="presentation" identifier="AddFacilitySegue" id="6L0-dr-9Uy"/>
