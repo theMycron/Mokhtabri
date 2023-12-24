@@ -95,7 +95,7 @@ class LabViewTableViewController: UITableViewController, UISearchResultsUpdating
     
     //Edit AdminEditTableViewController name
     @IBAction func unwindFromEdit(unwindSegue: UIStoryboardSegue) {
-        guard let source = unwindSegue.source as? AdminEditTableViewController,
+        guard let source = unwindSegue.source as? LabEditTableTableViewController,
               let facility = source.facility
         else {return}
         
@@ -115,12 +115,12 @@ class LabViewTableViewController: UITableViewController, UISearchResultsUpdating
     
     //-----------
     //Edit AdminEditTableViewController name
-    @IBSegueAction func editFacility(_ coder: NSCoder, sender: Any?) -> AdminEditTableViewController? {
+    @IBSegueAction func editFacility(_ coder: NSCoder, sender: Any?) -> LabEditTableTableViewController? {
         guard let cell = sender as? UITableViewCell, let indexPath = tableView.indexPath(for: cell) else {
             return nil
         }
         let facility = displayedFacilities[indexPath.section]
-        return AdminEditTableViewController(coder: coder, facility: facility)
+        return LabEditTableTableViewController(coder: coder, facility: facility)
     }
 
     /*
