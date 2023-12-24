@@ -199,7 +199,7 @@
         <!--Home-->
         <scene sceneID="zte-CR-sWg">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="N1E-z0-dmh" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="patient" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="N1E-z0-dmh" customClass="NavViewController" customModule="Mokhtabri" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Home" image="house.fill" catalog="system" id="iVA-bB-V4b">
                         <color key="badgeColor" name="AccentColor"/>
                     </tabBarItem>
