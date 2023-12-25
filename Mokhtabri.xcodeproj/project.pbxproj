@@ -54,6 +54,7 @@
 		D6FD0EFB2B31B7E300BBCBDC /* PatientViewInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6FD0EFA2B31B7E300BBCBDC /* PatientViewInfoTableViewCell.swift */; };
 		D6FD0EFD2B31B83A00BBCBDC /* segmentedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6FD0EFC2B31B83A00BBCBDC /* segmentedTableViewCell.swift */; };
 		DF17C6402B341950007BFBF1 /* LabViewTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF17C63F2B341950007BFBF1 /* LabViewTableViewController.swift */; };
+		DF2F1F7D2B395EB600C97E40 /* LabViewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF2F1F7C2B395EB600C97E40 /* LabViewTableViewCell.swift */; };
 		F2239F3D2B310D0900D38282 /* PatientBookTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2239F3C2B310D0900D38282 /* PatientBookTableViewController.swift */; };
 		F2239F3F2B31A67300D38282 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = F2239F3E2B31A67300D38282 /* FirebaseAnalytics */; };
 		F2239F412B31A67300D38282 /* FirebaseAnalyticsOnDeviceConversion in Frameworks */ = {isa = PBXBuildFile; productRef = F2239F402B31A67300D38282 /* FirebaseAnalyticsOnDeviceConversion */; };
@@ -212,6 +213,7 @@
 		D6FD0EFA2B31B7E300BBCBDC /* PatientViewInfoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientViewInfoTableViewCell.swift; sourceTree = "<group>"; };
 		D6FD0EFC2B31B83A00BBCBDC /* segmentedTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = segmentedTableViewCell.swift; sourceTree = "<group>"; };
 		DF17C63F2B341950007BFBF1 /* LabViewTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabViewTableViewController.swift; sourceTree = "<group>"; };
+		DF2F1F7C2B395EB600C97E40 /* LabViewTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabViewTableViewCell.swift; sourceTree = "<group>"; };
 		F2239F3C2B310D0900D38282 /* PatientBookTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientBookTableViewController.swift; sourceTree = "<group>"; };
 		F23FB2192B2F2BF300B3F5E2 /* PatientBookingTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientBookingTableViewController.swift; sourceTree = "<group>"; };
 		F23FB21B2B2F2D4700B3F5E2 /* PatientBookingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientBookingTableViewCell.swift; sourceTree = "<group>"; };
@@ -353,6 +355,7 @@
 				D6FD0EF62B31B11100BBCBDC /* PatientHospitalViewTableViewCell.swift */,
 				D6FD0EFA2B31B7E300BBCBDC /* PatientViewInfoTableViewCell.swift */,
 				D6FD0EFC2B31B83A00BBCBDC /* segmentedTableViewCell.swift */,
+				DF2F1F7C2B395EB600C97E40 /* LabViewTableViewCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -671,6 +674,7 @@
 				D6FD0EF52B31AFA500BBCBDC /* PatientHospitalSelectTableViewController.swift in Sources */,
 				448FF7202B15F90200B3CA1D /* AppDelegate.swift in Sources */,
 				446C067A2B1C9302006A6A5E /* Booking.swift in Sources */,
+				DF2F1F7D2B395EB600C97E40 /* LabViewTableViewCell.swift in Sources */,
 				D6FD0EF32B31AF4A00BBCBDC /* PatientHomeTableViewController.swift in Sources */,
 				44214DE02B26CA4D000DAA0A /* LabBookingTableViewCell.swift in Sources */,
 				446C06742B1C92E3006A6A5E /* Patient.swift in Sources */,

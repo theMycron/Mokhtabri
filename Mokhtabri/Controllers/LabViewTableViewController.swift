@@ -8,7 +8,7 @@
 import UIKit
 
 class LabViewTableViewController: UITableViewController, UISearchResultsUpdating, UISearchBarDelegate {
-    var displayedFacilities: [MedicalService] = AppData.services
+    var displayedServices: [MedicalService] = AppData.services
     let search = UISearchController()
 
     override func viewDidLoad() {
@@ -49,9 +49,9 @@ class LabViewTableViewController: UITableViewController, UISearchResultsUpdating
     func filterFacilities(scope: Int) {
         switch scope {
         case 0:
-            displayedFacilities = AppData.services
+            displayedServices = AppData.services
         case 1:
-            displayedFacilities = AppData.services.compactMap{(($0 as? Test) != nil) ? $0 : nil}
+            displayedServices = AppData.services.compactMap{(($0 as? Test) != nil) ? $0 : nil}
         
         default:
             return
@@ -63,7 +63,7 @@ class LabViewTableViewController: UITableViewController, UISearchResultsUpdating
         let scope = search.searchBar.selectedScopeButtonIndex
         if let query = searchController.searchBar.text?.lowercased().trimmingCharacters(in: .whitespaces), !query.isEmpty {
             if scope == 0 {
-                displayedFacilities = AppData.services.filter{
+                displayedServices = AppData.services.filter{
                     return $0.name.lowercased().contains(query)
                 }
             } /*else if scope == 1 {
@@ -83,7 +83,7 @@ class LabViewTableViewController: UITableViewController, UISearchResultsUpdating
     
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return displayedFacilities.count
+        return displayedServices.count
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -102,12 +102,12 @@ class LabViewTableViewController: UITableViewController, UISearchResultsUpdating
         
         
         if let indexPath = tableView.indexPathForSelectedRow {
-            displayedFacilities.remove(at: indexPath.section)
-            displayedFacilities.insert(facility, at: indexPath.section)
+            displayedServices.remove(at: indexPath.section)
+            displayedServices.insert(facility, at: indexPath.section)
             tableView.deselectRow(at: indexPath, animated: true)
          //   AppData.editUser(user: facility)
         } else {
-            displayedFacilities.append(facility)
+            displayedServices.append(facility)
           //  AppData.addUser(user: facility)
         }
         filterFacilities(scope: search.searchBar.selectedScopeButtonIndex) // refresh view
@@ -115,24 +115,40 @@ class LabViewTableViewController: UITableViewController, UISearchResultsUpdating
     }
     
     //-----------
-    //Edit AdminEditTableViewController name
-    @IBSegueAction func editFacility(_ coder: NSCoder, sender: Any?) -> LabEditTableTableViewController? {
+    @IBSegueAction func editService(_ coder: NSCoder, sender: Any?) -> LabEditTableTableViewController? {
         guard let cell = sender as? UITableViewCell, let indexPath = tableView.indexPath(for: cell) else {
             return nil
         }
-        let facility = displayedFacilities[indexPath.section]
+        let facility = displayedServices[indexPath.section]
         return LabEditTableTableViewController(coder: coder, facility: facility)
     }
+    
+    
 
-    /*
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> LabViewTableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "LabViewCell", for: indexPath) as! LabViewTableViewCell
 
-        // Configure the cell...
+        let facility: MedicalService = displayedServices[indexPath.section]
+        cell.update(with: facility)
 
         return cell
     }
-    */
+    
+    
+    
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            tableView.beginUpdates()
+            // Delete the row from the data source
+            displayedServices.remove(at: indexPath.section)
+            tableView.deleteSections([indexPath.section], with: .fade)
+            tableView.endUpdates()
+            AppData.services = displayedServices
+            AppData.saveData()
+        }
+    }
+    
 
     /*
     // Override to support conditional editing of the table view.
