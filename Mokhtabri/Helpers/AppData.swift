@@ -73,6 +73,32 @@ class AppData {
         }
     }
     
+    //this method to manage services
+    static func getService(serviceID: UUID) -> MedicalService? {
+       return services.first(where: { $0.id == serviceID })
+    }
+
+    static func addService(service: MedicalService) {
+       services.append(service)
+       saveData()
+    }
+
+    static func editService(service: MedicalService) {
+       if let serviceIndex = services.firstIndex(of: service) {
+           services.remove(at: serviceIndex)
+           services.insert(service, at: serviceIndex)
+           saveData()
+       }
+    }
+
+    static func deleteService(service: MedicalService) -> Bool {
+       if let serviceIndex = services.firstIndex(of: service) {
+           services.remove(at: serviceIndex)
+           saveData()
+           return true
+       }
+       return false
+    }
     /*
      For user deletion, Ms. Maleeha only allowed deletion if the user did not have
      a relationship with another object. In our case, that would if a patient had a booking.

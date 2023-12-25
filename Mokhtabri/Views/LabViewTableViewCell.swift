@@ -15,10 +15,10 @@ class LabViewTableViewCell: UITableViewCell {
     
     @IBOutlet weak var lblDescription: UILabel!
     
-    func update(with facility: MedicalService) {
-        lblName.text = facility.name
-        lblPrice.text = "\(facility.price)"
-        lblDescription.text = facility.description
+    func update(with service: MedicalService) {
+        lblName.text = service.name
+        lblPrice.text = "\(service.price)"
+        lblDescription.text = service.serviceDescription
         // TODO: add image
     }
     

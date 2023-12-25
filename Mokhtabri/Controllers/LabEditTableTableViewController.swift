@@ -23,31 +23,30 @@ class LabEditTableTableViewController: UITableViewController, UIAdaptivePresenta
     
 
     
-    var facility: MedicalService?
+    var service: MedicalService?
     
     var hasChanges: Bool = false
     
     init?(coder: NSCoder, facility: MedicalService?) {
-        self.facility = facility
+        self.service = facility
         super.init(coder: coder)
     }
     
     required init?(coder: NSCoder) {
-        self.facility = nil
+        self.service = nil
         super.init(coder: coder)
     }
     
     func updateView() {
-        guard let facility = facility else {return}
-        txtName.text = facility.name
-        txtPhone.text = "\(facility.price)"
+        guard let service = service else {return}
+        txtName.text = service.name
+        txtPhone.text = "\(service.price)"
+        txtDescription.text = description
         //trying something
-        if let priceString = txtPhone.text, let price = Float(priceString){
-            
-        }
+        
         //..........
-        txtDescription.text = facility.serviceDescription
-        txtInstruction.text = facility.instructions
+        txtDescription.text = service.serviceDescription
+        txtInstruction.text = service.instructions
      //   txtCity.text = facility.city
        // txtWebsite.text = facility.website
     /*    if facility.type == FacilityType.hospital {
@@ -124,16 +123,16 @@ class LabEditTableTableViewController: UITableViewController, UIAdaptivePresenta
         
         //i Changed price type from Float to String
         
-        facility = MedicalService(name: name ?? "", price: price ?? 0.0 , description: description ?? "", instructions: instructions ?? "", forMedicalFacility: AppData.alhilal)
-        if let facility = facility {
+        service = MedicalService(name: name ?? "", price: price ?? 0.0 , description: description ?? "", instructions: instructions ?? "", forMedicalFacility: AppData.alhilal)
+        if let facility = service {
             oldId = facility.id
         }
         
         if let oldId = oldId {
-            facility!.id = oldId
+            service!.id = oldId
         }
         // if facility was created successfully, add to appdata and save
-        AppData.services.append(facility!)
+        AppData.services.append(service!)
         AppData.saveData()
         performSegue(withIdentifier: "unwindToView", sender: self)
         

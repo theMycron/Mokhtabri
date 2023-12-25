@@ -95,7 +95,7 @@ class LabViewTableViewController: UITableViewController, UISearchResultsUpdating
     //Edit AdminEditTableViewController name
     @IBAction func unwindFromEdit(unwindSegue: UIStoryboardSegue) {
         guard let source = unwindSegue.source as? LabEditTableTableViewController,
-              let facility = source.facility
+              let facility = source.service
         else {return}
         
         // replace old facility with updated one or just add it if it is new
@@ -105,10 +105,10 @@ class LabViewTableViewController: UITableViewController, UISearchResultsUpdating
             displayedServices.remove(at: indexPath.section)
             displayedServices.insert(facility, at: indexPath.section)
             tableView.deselectRow(at: indexPath, animated: true)
-         //   AppData.editUser(user: facility)
+            AppData.editService(service: facility)
         } else {
             displayedServices.append(facility)
-          //  AppData.addUser(user: facility)
+            AppData.addService(service: facility)
         }
         filterFacilities(scope: search.searchBar.selectedScopeButtonIndex) // refresh view
         AppData.saveData()

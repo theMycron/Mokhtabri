@@ -254,7 +254,7 @@
             </objects>
             <point key="canvasLocation" x="4151.9083969465646" y="-202.11267605633805"/>
         </scene>
-        <!--Medical Facilities-->
+        <!--Medical Services-->
         <scene sceneID="B5B-b2-boO">
             <objects>
                 <tableViewController id="hJH-VU-ttd" customClass="LabViewTableViewController" customModule="Mokhtabri" customModuleProvider="target" sceneMemberID="viewController">
@@ -328,7 +328,7 @@
                             <outlet property="delegate" destination="hJH-VU-ttd" id="03V-GD-PVd"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Medical Facilities" id="npH-r8-INo">
+                    <navigationItem key="navigationItem" title="Medical Services" id="npH-r8-INo">
                         <barButtonItem key="leftBarButtonItem" title="Log Out" id="v03-T8-Umz"/>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="yMF-cz-4Dn">
                             <connections>
