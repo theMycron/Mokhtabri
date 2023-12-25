@@ -54,6 +54,8 @@ class AdminEditTableViewController: UITableViewController, UIImagePickerControll
         super.init(coder: coder)
     }
     
+    
+    // fills input fields based on selected facility (when editing a facility)
     func updateView() {
         guard let facility = facility else {return}
         txtName.text = facility.name
@@ -78,6 +80,11 @@ class AdminEditTableViewController: UITableViewController, UIImagePickerControll
         txtUsername.text = facility.username
         txtPassword.text = facility.password
         txtConfirm.text = facility.password
+        
+        // load image
+        if let image = getImageFromFirebase() {
+            imgDisplay.image = image
+        }
     }
     
     
@@ -100,7 +107,7 @@ class AdminEditTableViewController: UITableViewController, UIImagePickerControll
     }
     
     @IBAction func btnSavePressed(_ sender: Any) {
-        
+        // validate fields and save
         // do not continue if there was an invalid input
         guard validateFields() else {
             return
@@ -181,7 +188,8 @@ class AdminEditTableViewController: UITableViewController, UIImagePickerControll
             return false
         }
         
-        // TODO: add image as well
+        
+        
         // if editing an existing facility, save id to replace it
         if let facility = facility {
             oldId = facility.uuid
@@ -190,12 +198,76 @@ class AdminEditTableViewController: UITableViewController, UIImagePickerControll
         if let oldId = oldId {
             facility!.uuid = oldId // replace new uuid with old one if editing to ensure they are the same facility
         }
+        
+        
+        if !uploadImageToFirebase() {
+            return false
+        }
         return true
     }
     
     
     @IBAction func btnAddPhotoPressed(_ sender: Any) {
         showImagePickerOptions()
+    }
+    
+    
+    func uploadImageToFirebase() -> Bool {
+        // display warning if no image was selected, can proceed with no image
+        var cancelled: Bool = false
+        if let image = imgDisplay.image,
+           image.isEqual(UIImage(named: "noPhoto")){
+            let alert = UIAlertController(title: "Missing Image", message: "Are you sure you want to save without an image?", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: {_ in
+                cancelled = true
+            }))
+            alert.addAction(UIAlertAction(title: "Continue", style: .default))
+        }
+        // dont continue if user wants to choose image
+        if cancelled {
+            return false
+        }
+        // get selected image and upload to firebase
+        guard let image = imgDisplay.image?.pngData() else {return false}
+        let filename = "facilityImages/\(facility!.name)_\(facility!.city).png"
+        
+        let storageRef = Storage.storage().reference().child(filename)
+        
+        let currentUploadTask = storageRef.putData(image) {metadata, error in
+            if error != nil {
+                let alert = UIAlertController(title: "Image Upload Failed", message: "The image could not be uploaded to the server.", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: {_ in
+                    cancelled = true
+                }))
+            } else {
+                print(metadata?.description ?? "No metadata")
+                self.facility?.imagePath = filename
+            }
+        }
+        if cancelled {
+            return false
+        }
+        
+        
+        
+        return true
+    }
+    
+    func getImageFromFirebase() -> UIImage? {
+        var image: UIImage?
+        guard let facility = facility,
+                let imagePath = facility.imagePath else {return nil}
+        let storageRef = Storage.storage().reference().child(imagePath)
+        let downloadTask = storageRef.getData(maxSize: 20000000, completion: {data, error in
+            if error != nil {
+                self.displayError(title: "Image Download Failed", message: "Could not fetch image from server. Please reopen form.")
+            } else {
+                if let data = data {
+                    image = UIImage(data: data)
+                }
+            }
+        })
+        return image
     }
     
     func showImagePickerOptions() {
@@ -230,6 +302,7 @@ class AdminEditTableViewController: UITableViewController, UIImagePickerControll
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         let image = info[.originalImage] as!UIImage
         imgDisplay.image = image
+        madeChanges()
         self.dismiss(animated: true)
     }
     
