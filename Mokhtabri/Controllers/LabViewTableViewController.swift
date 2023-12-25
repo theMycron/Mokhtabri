@@ -37,7 +37,7 @@ class LabViewTableViewController: UITableViewController, UISearchResultsUpdating
         search.searchBar.searchFieldBackgroundPositionAdjustment = .zero
         
         
-        search.searchBar.scopeButtonTitles = [ "Tests", "Packages"]
+        search.searchBar.scopeButtonTitles = ["All", "Tests", "Packages"]
         search.searchBar.showsScopeBar = true
     }
 

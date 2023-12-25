@@ -15,29 +15,13 @@ class LabEditTableTableViewController: UITableViewController, UIAdaptivePresenta
     
     @IBOutlet weak var txtPhone: UITextField!
     
-    @IBOutlet weak var txtCity: UITextField!
-    
-    @IBOutlet weak var txtWebsite: UITextField!
-    
-    @IBOutlet weak var segmentType: UISegmentedControl!
-    
-    @IBOutlet weak var toggleAlwaysOpen: UISwitch!
-    
-    @IBOutlet weak var timeOpening: UIDatePicker!
-    
-    @IBOutlet weak var timeClosing: UIDatePicker!
-    
-    @IBOutlet weak var txtUsername: UITextField!
-    
-    @IBOutlet weak var txtPassword: UITextField!
-    
-    @IBOutlet weak var txtConfirm: UITextField!
-    
     @IBOutlet weak var imgDisplay: UIImageView!
     
-    @IBOutlet weak var openingTimeCell: UITableViewCell!
+    @IBOutlet weak var txtDescription: UITextField!
     
-    @IBOutlet weak var closingTimeCell: UITableViewCell!
+    @IBOutlet weak var txtInstruction: UITextField!
+    
+
     
     var facility: MedicalService?
     
@@ -56,7 +40,14 @@ class LabEditTableTableViewController: UITableViewController, UIAdaptivePresenta
     func updateView() {
         guard let facility = facility else {return}
         txtName.text = facility.name
-        txtPhone.text = String(facility.price)
+        txtPhone.text = "\(facility.price)"
+        //trying something
+        if let priceString = txtPhone.text, let price = Float(priceString){
+            
+        }
+        //..........
+        txtDescription.text = facility.serviceDescription
+        txtInstruction.text = facility.instructions
      //   txtCity.text = facility.city
        // txtWebsite.text = facility.website
     /*    if facility.type == FacilityType.hospital {
@@ -105,7 +96,9 @@ class LabEditTableTableViewController: UITableViewController, UIAdaptivePresenta
         var oldId: UUID?
         
         let name: String? = txtName.text
-        let phone: String? = txtPhone.text
+        let price: Float? = Float(txtPhone.text ?? "")
+        let description :String? = txtDescription.text
+        let instructions :String? = txtInstruction.text
         //let city: String? = txtCity.text
        // let website: String? = txtWebsite.text
        // let type: FacilityType = segmentType.selectedSegmentIndex == 0 ? FacilityType.hospital : FacilityType.lab
@@ -129,9 +122,9 @@ class LabEditTableTableViewController: UITableViewController, UIAdaptivePresenta
         // TODO: add image as well
         
         
-        //please edit ali 
+        //i Changed price type from Float to String
         
-        facility = MedicalService(id: id ?? "", name: name ?? "", phone: phone ?? "",serviceDescription: serviceDescription ?? "")
+        facility = MedicalService(name: name ?? "", price: price ?? 0.0 , description: description ?? "", instructions: instructions ?? "", forMedicalFacility: AppData.alhilal)
         if let facility = facility {
             oldId = facility.id
         }
