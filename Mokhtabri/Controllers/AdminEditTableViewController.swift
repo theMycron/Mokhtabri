@@ -7,6 +7,7 @@
 
 import UIKit
 import FirebaseStorage
+import Kingfisher
 
 class AdminEditTableViewController: UITableViewController, UIImagePickerControllerDelegate & UINavigationControllerDelegate {
 
@@ -261,21 +262,9 @@ class AdminEditTableViewController: UITableViewController, UIImagePickerControll
     func getImageFromFirebase() {
         guard let facility = facility,
                 let downloadURL = facility.imageDownloadURL else {return}
-        do {
-            let storageRef = try Storage.storage().reference(for: downloadURL)
-            let downloadTask = storageRef.getData(maxSize: 20 * 1024 * 1024, completion: {data, error in
-                if error != nil {
-                    self.displayError(title: "Image Download Failed", message: "Could not fetch image from server. Please reopen form.")
-                } else {
-                    if let data = data {
-                        // display image when loaded
-                        self.imgDisplay.image = UIImage(data: data)
-                    }
-                }
-            })
-        } catch {
-            print("ERROR: could not get image from URL.")
-        }
+        // Use KingFisher library to store and cache the image
+        imgDisplay.kf.indicatorType = .activity
+        imgDisplay.kf.setImage(with: downloadURL)
     }
     
     func showImagePickerOptions() {
