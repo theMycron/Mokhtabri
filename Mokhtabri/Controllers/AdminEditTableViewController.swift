@@ -82,9 +82,7 @@ class AdminEditTableViewController: UITableViewController, UIImagePickerControll
         txtConfirm.text = facility.password
         
         // load image
-        if let image = getImageFromFirebase() {
-            imgDisplay.image = image
-        }
+        getImageFromFirebase()
     }
     
     
@@ -228,46 +226,47 @@ class AdminEditTableViewController: UITableViewController, UIImagePickerControll
             return false
         }
         // get selected image and upload to firebase
-        guard let image = imgDisplay.image?.pngData() else {return false}
-        let filename = "facilityImages/\(facility!.name)_\(facility!.city).png"
+        guard let image = imgDisplay.image?.jpegData(compressionQuality: 0.9) else {return false}
+        // format filename with lowercased letters and underscores instead of spaces
+        let filename = facility!.defaultFirebaseImageFilename
         
         let storageRef = Storage.storage().reference().child(filename)
-        
-        let currentUploadTask = storageRef.putData(image) {metadata, error in
+        // upload image
+        // This function is ASYNCRONOUS, which means it may take time to upload while the app continues running
+        let currentUploadTask = storageRef.putData(image) {(metadata, error) in
             if error != nil {
+                // handle errors
                 let alert = UIAlertController(title: "Image Upload Failed", message: "The image could not be uploaded to the server.", preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: {_ in
+                alert.addAction(UIAlertAction(title: "Back", style: .default, handler: {_ in
                     cancelled = true
                 }))
             } else {
-                print(metadata?.description ?? "No metadata")
-                self.facility?.imagePath = filename
+                // no errors, add imagePath to facility
+                self.facility!.imagePath = filename
             }
         }
         if cancelled {
             return false
         }
         
-        
-        
         return true
     }
     
-    func getImageFromFirebase() -> UIImage? {
-        var image: UIImage?
+    func getImageFromFirebase() {
         guard let facility = facility,
-                let imagePath = facility.imagePath else {return nil}
+                let imagePath = facility.imagePath else {return}
         let storageRef = Storage.storage().reference().child(imagePath)
-        let downloadTask = storageRef.getData(maxSize: 20000000, completion: {data, error in
+        let downloadTask = storageRef.getData(maxSize: 20 * 1024 * 1024, completion: {data, error in
             if error != nil {
                 self.displayError(title: "Image Download Failed", message: "Could not fetch image from server. Please reopen form.")
             } else {
                 if let data = data {
-                    image = UIImage(data: data)
+                    self.imgDisplay.image = UIImage(data: data)
                 }
             }
         })
-        return image
+        // display image when loaded
+        
     }
     
     func showImagePickerOptions() {

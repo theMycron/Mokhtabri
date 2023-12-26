@@ -1,6 +1,11 @@
 import Foundation
 
 class MedicalFacility: User {
+    var defaultFirebaseImageFilename: String {
+        // format filename with lowercased letters and underscores instead of spaces
+        return "facilityImages/\(name.lowercased().replacingOccurrences(of: " ", with: "_"))_\(city.lowercased().replacingOccurrences(of: " ", with: "_")).jpg"
+    }
+    
     var name: String
     var phone: String
     var city: String
@@ -57,9 +62,8 @@ class MedicalFacility: User {
         try container.encode(type, forKey: .type)
         try container.encode(openingTime, forKey: .openingTime)
         try container.encode(closingTime, forKey: .closingTime)
-        if imagePath != nil {
-            try container.encode(imagePath, forKey: .image)
-        }
+        try container.encode(imagePath, forKey: .image)
+        
 //        try container.encode(medicalServices, forKey: .medicalServices)
 //        try container.encode(bookings, forKey: .bookings)
         try super.encode(to: encoder)
