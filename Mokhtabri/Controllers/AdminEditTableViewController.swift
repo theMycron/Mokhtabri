@@ -242,7 +242,13 @@ class AdminEditTableViewController: UITableViewController, UIImagePickerControll
                 }))
             } else {
                 // no errors, add imagePath to facility
-                self.facility!.imagePath = filename
+                storageRef.downloadURL(completion: {(url, error) in
+                    if error != nil {
+                        cancelled = true
+                    } else if let downloadURL = url {
+                        self.facility!.imageDownloadURL = downloadURL
+                    }
+                })
             }
         }
         if cancelled {
@@ -254,19 +260,22 @@ class AdminEditTableViewController: UITableViewController, UIImagePickerControll
     
     func getImageFromFirebase() {
         guard let facility = facility,
-                let imagePath = facility.imagePath else {return}
-        let storageRef = Storage.storage().reference().child(imagePath)
-        let downloadTask = storageRef.getData(maxSize: 20 * 1024 * 1024, completion: {data, error in
-            if error != nil {
-                self.displayError(title: "Image Download Failed", message: "Could not fetch image from server. Please reopen form.")
-            } else {
-                if let data = data {
-                    self.imgDisplay.image = UIImage(data: data)
+                let downloadURL = facility.imageDownloadURL else {return}
+        do {
+            let storageRef = try Storage.storage().reference(for: downloadURL)
+            let downloadTask = storageRef.getData(maxSize: 20 * 1024 * 1024, completion: {data, error in
+                if error != nil {
+                    self.displayError(title: "Image Download Failed", message: "Could not fetch image from server. Please reopen form.")
+                } else {
+                    if let data = data {
+                        // display image when loaded
+                        self.imgDisplay.image = UIImage(data: data)
+                    }
                 }
-            }
-        })
-        // display image when loaded
-        
+            })
+        } catch {
+            print("ERROR: could not get image from URL.")
+        }
     }
     
     func showImagePickerOptions() {
