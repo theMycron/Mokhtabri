@@ -115,7 +115,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         Auth.auth().signIn(withEmail: emailTxt.text!, password: passwordTxt.text!) { [weak self] authResult, errorMessgae in
             
             
-            guard let strongSelf = self else {return}
+            guard self != nil else {return}
             
             if let errorMessgae = errorMessgae{
                 print(errorMessgae.localizedDescription)
@@ -130,18 +130,48 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     //double check that the user logged in and have information
     func checkUserInfo(){
         if Auth.auth().currentUser != nil {
-            //print the id to ensure
-            print(Auth.auth().currentUser?.uid) 
-            //print(Auth.auth().currentUser?.displayName)
+            guard let email = Auth.auth().currentUser?.email else {
+                print("email is null")
+                return
+            }
+
+            let viewControllerIdentifier: String
+            var isTabBarController: Bool = true
+
+            if email.contains("admin@gmail"){
+                viewControllerIdentifier = "AdminView"
+                // admin screen has no tab bar controller, so do not instantiate as tab bar controller
+                isTabBarController = false
+            } else if email.contains("@mokhtabri"){
+                viewControllerIdentifier = "LabTabBarController"
+            } else {
+                viewControllerIdentifier = "PatientTabBarController"
+            }
             
-            //set the value inside the user defaults
-            self.defaults.set(true, forKey: "Logged In")
             
-            //pass the user the overview
-            let mainSB = UIStoryboard(name: "Main", bundle: nil)
-            let vc = mainSB.instantiateViewController(withIdentifier: "PatientRegistration")
-            vc.modalPresentationStyle = .overFullScreen
-           self.present(vc, animated: true)
+            let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+            if isTabBarController {
+                let viewController = mainStoryboard.instantiateViewController(withIdentifier: viewControllerIdentifier) as! UITabBarController
+                self.view.window?.rootViewController = viewController
+                self.view.window?.makeKeyAndVisible()
+            } else {
+                let viewController = mainStoryboard.instantiateViewController(withIdentifier: viewControllerIdentifier) as! UINavigationController
+                self.view.window?.rootViewController = viewController
+                self.view.window?.makeKeyAndVisible()
+            }
+            
+            
+//
+//            let storyboard = UIStoryboard(name: storyboardName, bundle: nil)
+//            guard let viewController = storyboard.instantiateViewController(withIdentifier: viewControllerIdentifier) as? UINavigationController else {
+//                return
+//            }
+//
+//            viewController.modalPresentationStyle = .fullScreen
+//            self.present(viewController, animated: true) {
+//                // Dismiss the previous view controller in settings
+//                self.navigationController?.viewControllers = [viewController]
+//            }
             
             
          
@@ -158,20 +188,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
             //let userID: String = Auth.auth().currentUser!.uid
             
             
-           
-            
-            
-        }else{
-            //set the user as false inside user defaults
-            self.defaults.set(false, forKey: "Logged In")
-            
-            //redirect user
-            let login = UIStoryboard(name: "Main", bundle: nil)
-            let loginVc = login.instantiateViewController(withIdentifier: "login")
-            loginVc.modalPresentationStyle = .overFullScreen
-            self.present(loginVc, animated: true)
-           
-
         }
         
         
