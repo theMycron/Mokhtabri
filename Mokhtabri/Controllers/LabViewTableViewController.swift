@@ -18,13 +18,17 @@ class LabViewTableViewController: UITableViewController, UISearchResultsUpdating
         // remove later
         AppData.loadData()
         
-        filterFacilities(scope: 0)
+        filterServices(scope: 0)
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
+    }
+    
+    @IBAction func btnLogOutPressed(_ sender: Any) {
+        logoutAlert()
     }
     func embedSearch(){
         // might need to use a different controller for the search functionality
@@ -43,15 +47,17 @@ class LabViewTableViewController: UITableViewController, UISearchResultsUpdating
 
     // MARK: - Table view data source
     func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
-        filterFacilities(scope: selectedScope)
+        filterServices(scope: selectedScope)
     }
 
-    func filterFacilities(scope: Int) {
+    func filterServices(scope: Int) {
         switch scope {
         case 0:
             displayedServices = AppData.services
         case 1:
             displayedServices = AppData.services.compactMap{(($0 as? Test) != nil) ? $0 : nil}
+        //case 2:
+            //displayedServices = AppData.services.compactMap((($0 as? Package) != nil) ? $0 : nil)
         
         default:
             return
@@ -76,7 +82,7 @@ class LabViewTableViewController: UITableViewController, UISearchResultsUpdating
                 }
             }*/
         } else {
-            filterFacilities(scope: scope)
+            filterServices(scope: scope)
         }
         tableView.reloadData()
     }
@@ -110,7 +116,7 @@ class LabViewTableViewController: UITableViewController, UISearchResultsUpdating
             displayedServices.append(facility)
             AppData.addService(service: facility)
         }
-        filterFacilities(scope: search.searchBar.selectedScopeButtonIndex) // refresh view
+        filterServices(scope: search.searchBar.selectedScopeButtonIndex) // refresh view
         AppData.saveData()
     }
     
