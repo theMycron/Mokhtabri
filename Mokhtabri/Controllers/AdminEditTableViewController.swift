@@ -90,7 +90,7 @@ class AdminEditTableViewController: UITableViewController, UIImagePickerControll
     override func viewDidLoad() {
         super.viewDidLoad()
         // this delegate will control the sheet, and will stop the user from dismissing if changes were made
-        navigationController?.presentationController?.delegate = self
+        presentationController?.delegate = self
         updateView()
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -193,7 +193,7 @@ class AdminEditTableViewController: UITableViewController, UIImagePickerControll
         if let facility = facility {
             oldId = facility.uuid
         }
-        facility = MedicalFacility(name: name, phone: phone, city: city, website: website, alwaysOpen: alwaysopen, type: type, openingTime: openingTime, closingTime: closingTime, username: username, password: password)
+        facility = MedicalFacility(name: name, phone: phone, city: city, website: website, alwaysOpen: alwaysopen, type: type, openingTime: openingTime, closingTime: closingTime, image: facility?.imageDownloadURL, username: username, password: password)
         if let oldId = oldId {
             facility!.uuid = oldId // replace new uuid with old one if editing to ensure they are the same facility
         }
@@ -217,15 +217,20 @@ class AdminEditTableViewController: UITableViewController, UIImagePickerControll
         if let image = imgDisplay.image,
            image.isEqual(UIImage(named: "noPhoto")){
             let alert = UIAlertController(title: "Missing Image", message: "Are you sure you want to save without an image?", preferredStyle: .alert)
+            // if user wants to add image, cancel upload
             alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: {_ in
                 cancelled = true
             }))
+            // if user wants to continue without image, cancel upload and consider it successful
             alert.addAction(UIAlertAction(title: "Continue", style: .default))
+            self.present(alert, animated: true)
+            if cancelled {
+                return false
+            }
+            return true
         }
         // dont continue if user wants to choose image
-        if cancelled {
-            return false
-        }
+        
         // get selected image and upload to firebase
         guard let image = imgDisplay.image?.jpegData(compressionQuality: 0.9) else {return false}
         // format filename with lowercased letters and underscores instead of spaces
@@ -234,26 +239,26 @@ class AdminEditTableViewController: UITableViewController, UIImagePickerControll
         let storageRef = Storage.storage().reference().child(filename)
         // upload image
         // This function is ASYNCRONOUS, which means it may take time to upload while the app continues running
-        let currentUploadTask = storageRef.putData(image) {(metadata, error) in
+        _ = storageRef.putData(image) {(metadata, error) in
             if error != nil {
                 // handle errors
                 let alert = UIAlertController(title: "Image Upload Failed", message: "The image could not be uploaded to the server.", preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: "Back", style: .default, handler: {_ in
-                    cancelled = true
-                }))
+                alert.addAction(UIAlertAction(title: "OK", style: .default))
+                self.present(alert, animated: true)
             } else {
                 // no errors, add imagePath to facility
                 storageRef.downloadURL(completion: {(url, error) in
                     if error != nil {
-                        cancelled = true
+                        let alert = UIAlertController(title: "Image Upload Failed", message: "The image could not be uploaded to the server.", preferredStyle: .alert)
+                        alert.addAction(UIAlertAction(title: "OK", style: .default))
+                        self.present(alert, animated: true)
                     } else if let downloadURL = url {
                         self.facility!.imageDownloadURL = downloadURL
+                        // update facility in appdata
+                        AppData.editUser(user: self.facility!)
                     }
                 })
             }
-        }
-        if cancelled {
-            return false
         }
         
         return true
