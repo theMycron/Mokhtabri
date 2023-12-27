@@ -1,6 +1,11 @@
 import Foundation
 
 class MedicalFacility: User {
+    var defaultFirebaseImageFilename: String {
+        // format filename with lowercased letters and underscores instead of spaces
+        return "facilityImages/\(name.lowercased().replacingOccurrences(of: " ", with: "_"))_\(city.lowercased().replacingOccurrences(of: " ", with: "_")).jpg"
+    }
+    
     var name: String
     var phone: String
     var city: String
@@ -12,7 +17,7 @@ class MedicalFacility: User {
 //    var medicalServices: [MedicalService]
 //    var medicalService: MedicalService
 //    var bookings: [Booking]
-    var image: Data? // Property to store an image
+    var imageDownloadURL: URL?
     
     override var description: String {
         return """
@@ -29,10 +34,10 @@ class MedicalFacility: User {
     }
 
     enum CodingKeys: Codable, CodingKey {
-        case name, phone, city, website, alwaysOpen, type, openingTime, closingTime, medicalServices, bookings, image
+        case name, phone, city, website, alwaysOpen, type, openingTime, closingTime, medicalServices, image
     }
     
-    init(name: String, phone: String, city: String, website: String, alwaysOpen: Bool, type: FacilityType, openingTime: DateComponents, closingTime: DateComponents, username: String, password: String) {
+    init(name: String, phone: String, city: String, website: String, alwaysOpen: Bool, type: FacilityType, openingTime: DateComponents, closingTime: DateComponents, image: URL? = nil, username: String, password: String) {
         self.name = name
         self.phone = phone
         self.city = city
@@ -43,7 +48,7 @@ class MedicalFacility: User {
         self.closingTime = closingTime
 //        self.medicalServices = []
 //        self.bookings = []
-        self.image = nil // Initialize the image property
+        self.imageDownloadURL = image // Initialize the image property
         super.init(username: username, password: password, userType: UserType.lab)
     }
     
@@ -57,6 +62,8 @@ class MedicalFacility: User {
         try container.encode(type, forKey: .type)
         try container.encode(openingTime, forKey: .openingTime)
         try container.encode(closingTime, forKey: .closingTime)
+        try container.encode(imageDownloadURL, forKey: .image)
+        
 //        try container.encode(medicalServices, forKey: .medicalServices)
 //        try container.encode(bookings, forKey: .bookings)
         try super.encode(to: encoder)
@@ -72,25 +79,10 @@ class MedicalFacility: User {
         self.type = try values.decode(FacilityType.self, forKey: .type)
         self.openingTime = try values.decode(DateComponents.self, forKey: .openingTime)
         self.closingTime = try values.decode(DateComponents.self, forKey: .closingTime)
+        self.imageDownloadURL = try values.decode(URL?.self, forKey: .image)
 //        self.medicalServices = try values.decode([MedicalService].self, forKey: .medicalServices)
 //        self.bookings = try values.decode([Booking].self, forKey: .bookings)
-        
-        // Decode image as base64-encoded data
-        if let imageBase64 = try values.decodeIfPresent(String.self, forKey: .image) {
-            self.image = Data(base64Encoded: imageBase64)
-        } else {
-            self.image = nil
-        }
-
         try super.init(from: decoder)
-    }
-    
-    // Encode the image as base64-encoded string
-    func encodeImage() -> String? {
-        if let image = self.image {
-            return image.base64EncodedString()
-        }
-        return nil
     }
     
     static func < (lhs: MedicalFacility, rhs: MedicalFacility) -> Bool {

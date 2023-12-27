@@ -38,7 +38,7 @@ class AppData {
     }
     static func getUser(uuid: UUID) -> User? {
         let allUsers: [User] = admin + patients + facilities
-        return allUsers.first(where: { $0.id == uuid })
+        return allUsers.first(where: { $0.uuid == uuid })
     }
     
     static func addUser(user: User) {
