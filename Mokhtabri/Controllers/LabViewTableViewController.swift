@@ -17,6 +17,7 @@ class LabViewTableViewController: UITableViewController, UISearchResultsUpdating
         
         // remove later
         AppData.loadData()
+        tableView.reloadData()
         
         filterServices(scope: 0)
 
@@ -26,6 +27,7 @@ class LabViewTableViewController: UITableViewController, UISearchResultsUpdating
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
+    
     
     @IBAction func btnLogOutPressed(_ sender: Any) {
         logoutAlert()
@@ -51,18 +53,16 @@ class LabViewTableViewController: UITableViewController, UISearchResultsUpdating
     }
 
     func filterServices(scope: Int) {
-        switch scope {
-        case 0:
-            displayedServices = AppData.services
-        case 1:
-            displayedServices = AppData.services.compactMap{(($0 as? Test) != nil) ? $0 : nil}
-        //case 2:
-            //displayedServices = AppData.services.compactMap((($0 as? Package) != nil) ? $0 : nil)
-        
-        default:
-            return
-        }
-        tableView.reloadData()
+       switch scope {
+       case 0:
+           displayedServices = AppData.services
+       case 1:
+           displayedServices = AppData.services.filter { $0.serviceType == .test }
+       case 2:
+           displayedServices = AppData.services.filter { $0.serviceType == .package }
+       default:
+           return
+       }
     }
     
     func updateSearchResults(for searchController: UISearchController) {
@@ -72,15 +72,15 @@ class LabViewTableViewController: UITableViewController, UISearchResultsUpdating
                 displayedServices = AppData.services.filter{
                     return $0.name.lowercased().contains(query)
                 }
-            } /*else if scope == 1 {
-                displayedFacilities = AppData.services.filter{
-                    return $0.type == FacilityType.hospital && ($0.name.lowercased().contains(query) || $0.city.lowercased().contains(query))
+            } else if scope == 1 {
+                displayedServices = AppData.services.filter{
+                   return $0.name.lowercased().contains(query) //|| $0.city.lowercased().contains(query))
                 }
-            } else if scope == 2 {
-                displayedFacilities = AppData.services.filter{
+            } /*else if scope == 2 {
+                displayedServices = AppData.services.filter{
                     return $0.type == FacilityType.lab && ($0.name.lowercased().contains(query) || $0.city.lowercased().contains(query))
-                }
-            }*/
+                }*/
+            
         } else {
             filterServices(scope: scope)
         }

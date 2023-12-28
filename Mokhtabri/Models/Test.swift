@@ -22,9 +22,9 @@ class Test: MedicalService {
         case category
     }
     
-    init(category: Category, name: String, price: Float, description: String, instructions: String, forMedicalFacility: MedicalFacility) {
+    init(category: Category, name: String, price: Float, description: String, instructions: String, forMedicalFacility: MedicalFacility, serviceType: ServiceType) {
         self.category = category
-        super.init(name: name, price: price, description: description, instructions: instructions, forMedicalFacility: forMedicalFacility)
+        super.init(name: name, price: price, description: description, instructions: instructions, forMedicalFacility: forMedicalFacility, serviceType: serviceType)
     }
     
     required init(from decoder: Decoder) throws {

@@ -8,6 +8,7 @@ class MedicalService: Codable, Equatable, Comparable, CustomStringConvertible {
     var instructions: String
     var forMedicalFacility: MedicalFacility
     var image: Data? // Property to store an image
+    var serviceType: ServiceType
     
     var description: String {
         return """
@@ -21,12 +22,15 @@ class MedicalService: Codable, Equatable, Comparable, CustomStringConvertible {
                 """
     }
     
-
+    enum ServiceType: String {
+       case test = "Test"
+       case package = "Package"
+    }
     enum CodingKeys: Codable, CodingKey {
-        case id, name, price, description, instructions, forMedicalFacility, image // Include 'image' in the CodingKeys
+        case id, name, price, description, instructions, forMedicalFacility, image, serviceType // Include 'image' in the CodingKeys
     }
     
-    init(name: String, price: Float, description: String, instructions: String, forMedicalFacility: MedicalFacility) {
+    init(name: String, price: Float, description: String, instructions: String, forMedicalFacility: MedicalFacility, serviceType: ServiceType) {
         self.id = UUID()
         self.name = name
         self.price = price
@@ -34,6 +38,7 @@ class MedicalService: Codable, Equatable, Comparable, CustomStringConvertible {
         self.instructions = instructions
         self.forMedicalFacility = forMedicalFacility
         self.image = nil // Initialize the image property
+        self.serviceType = serviceType
     }
     
     static func == (lhs: MedicalService, rhs: MedicalService) -> Bool {
@@ -64,6 +69,7 @@ class MedicalService: Codable, Equatable, Comparable, CustomStringConvertible {
         self.serviceDescription = try container.decode(String.self, forKey: .description)
         self.instructions = try container.decode(String.self, forKey: .instructions)
         self.forMedicalFacility = try container.decode(MedicalFacility.self, forKey: .forMedicalFacility)
+        self.serviceType = ServiceType(rawValue: try container.decode(String.self, forKey: .serviceType)) ?? .test
         
         // Decode image as base64-encoded data
         if let imageBase64 = try container.decodeIfPresent(String.self, forKey: .image) {

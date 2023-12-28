@@ -23,6 +23,14 @@ class LabEditTableTableViewController: UITableViewController, UIAdaptivePresenta
     
     @IBOutlet weak var segmentedControl: UISegmentedControl!
     
+    @IBOutlet weak var DateExpiry: UIDatePicker!
+    
+    @IBOutlet weak var cellSelect: UITableViewCell!
+    
+    @IBOutlet weak var cellCategory: UITableViewCell!
+    
+    @IBOutlet weak var viewselecter: UITableViewCell!
+    
     
     var service: MedicalService?
     
@@ -49,11 +57,36 @@ class LabEditTableTableViewController: UITableViewController, UIAdaptivePresenta
     }
     
     
+
+
+    
+    @IBAction func segmetedSelect(_ sender: UISegmentedControl) {
+        switch sender.selectedSegmentIndex{
+        case 0:
+            DateExpiry.isHidden = true
+            cellSelect.isHidden = true
+            txtPhone.isHidden = false
+            txtName.isHidden = false
+            viewselecter.isHidden = true
+        case 1 :
+            DateExpiry.isHidden = false
+            cellSelect.isHidden = false
+            txtPhone.isHidden = false
+            txtName.isHidden = false
+            viewselecter.isHidden = false
+            
+        default:
+            break
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableView.reloadData()
         // this delegate will control the sheet, and will stop the user from dismissing if changes were made
         navigationController?.presentationController?.delegate = self
         updateView()
+        
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -61,7 +94,6 @@ class LabEditTableTableViewController: UITableViewController, UIAdaptivePresenta
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
     
-
     @IBAction func btnCancelPressed(_ sender: Any) {
         // dismiss modal without saving
         performSegue(withIdentifier: "unwindToView", sender: self)
@@ -76,32 +108,22 @@ class LabEditTableTableViewController: UITableViewController, UIAdaptivePresenta
         let price: Float? = Float(txtPhone.text ?? "")
         let description :String? = txtDescription.text
         let instructions :String? = txtInstruction.text
-        //let city: String? = txtCity.text
-       // let website: String? = txtWebsite.text
-       // let type: FacilityType = segmentType.selectedSegmentIndex == 0 ? FacilityType.hospital : FacilityType.lab
-       // let alwaysopen: Bool = toggleAlwaysOpen.isOn
-        
-      //  let calendar = Calendar.current
-       // let openingTimeRaw: Date = timeOpening.date
-       // var openingTime: DateComponents = DateComponents()
-       // openingTime = calendar.dateComponents(in: calendar.timeZone, from: openingTimeRaw)
-      //  let closingTimeRaw: Date = timeClosing.date
-       // var closingTime: DateComponents = DateComponents()
-       // closingTime = calendar.dateComponents(in: calendar.timeZone, from: closingTimeRaw)
-        
-      /*  let username: String? = txtUsername.text
-        let password: String? = txtPassword.text
-        let confirm: String? = txtConfirm.text
-        guard password == confirm else {
-            // throw error if not matching
-            return
-        } */
+        var selectedServiceType: MedicalService.ServiceType? {
+           switch segmentedControl.selectedSegmentIndex {
+           case 0:
+               return .test
+           case 1:
+               return .package
+           default:
+               return nil
+           }
+        }
         // TODO: add image as well
         
         
         //i Changed price type from Float to String
         
-        service = MedicalService(name: name ?? "", price: price ?? 0.0 , description: description ?? "", instructions: instructions ?? "", forMedicalFacility: AppData.alhilal)
+        service = MedicalService(name: name ?? "", price: price ?? 0.0 , description: description ?? "", instructions: instructions ?? "", forMedicalFacility: AppData.alhilal, serviceType : selectedServiceType! )
         if let facility = service {
             oldId = facility.id
         }
@@ -110,8 +132,10 @@ class LabEditTableTableViewController: UITableViewController, UIAdaptivePresenta
             service!.id = oldId
         }
         // if facility was created successfully, add to appdata and save
+        AppData.services.removeAll()
         AppData.services.append(service!)
         AppData.saveData()
+        tableView.reloadData()
         performSegue(withIdentifier: "unwindToView", sender: self)
         
     }
