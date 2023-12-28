@@ -65,7 +65,30 @@ class PatientViewBookingDetailsTableViewController: UITableViewController {
     }
     
     func updatePackage(){
-        
+        guard let year = booking?.bookingDate.year,let month = booking?.bookingDate.month, let day = booking?.bookingDate.day, let branch = booking?.ofMedicalService.forMedicalFacility.city, let specialInfo = booking?.ofMedicalService.instructions else {
+            return
+        }
+        let package = booking?.ofMedicalService as! Package
+        let packageTests = package.tests
+        var list = ""
+        for test in packageTests {
+            list += "-\(test.name)\n"
+        }
+        info.text = "\(branch) branch\nBooking Date: \(day)-\(month)-\(year)\nSpecial Information: \(specialInfo)\n Tests Included:\n\(list) "
+
+    }
+    
+    @IBAction func cancelClicked(_ sender: Any) {
+        confirmation(title: "Confirm Cancellation", message: "Do you want to confirm the cancellation of your \(booking?.ofMedicalService.name ?? "") booking?"){
+            self.booking?.status = .Cancelled
+            for bookin in AppData.bookings {
+                if bookin.id == self.booking?.id{
+                    bookin.status = .Cancelled
+                }
+            }
+            self.checkBtn()
+            self.status.text = "\(self.booking?.status ?? .Cancelled)"
+        }
     }
     
     func checkBtn(){

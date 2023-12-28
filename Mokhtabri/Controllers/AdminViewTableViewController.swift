@@ -115,7 +115,7 @@ class AdminViewTableViewController: UITableViewController, UISearchResultsUpdati
             AppData.addUser(user: facility)
         }
         filterFacilities(scope: search.searchBar.selectedScopeButtonIndex) // refresh view
-        AppData.saveData()
+//        AppData.saveData()
     }
     
     @IBSegueAction func editFacility(_ coder: NSCoder, sender: Any?) -> AdminEditTableViewController? {

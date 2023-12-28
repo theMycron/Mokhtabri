@@ -85,6 +85,7 @@ class PatientHospitalSelectTableViewController: UITableViewController {
         }else {
             if indexPath.row == 1 {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "infocell", for: indexPath) as! PatientViewInfoTableViewCell
+                
                 if selectedHospital?.alwaysOpen == true {
                     if let hospitalName = selectedHospital?.name, let hospitalCity = selectedHospital?.city {
                         cell.info.text = "\(hospitalName) - \(hospitalCity) - Open 24 Hours"

@@ -66,7 +66,7 @@ class LabBookingInfoTableViewController: UITableViewController {
             return
         }
         
-        let patientDescription = " Patient Full Name: \(patientF)  \(patientL) \n Patient Identification Number: \(iden) \n Patient Mobile Number: \(phone)\(status)"
+        let patientDescription = " Patient Full Name: \(patientF)  \(patientL) \n Patient Identification Number: \(iden) \n Patient Mobile Number: \(phone)"
         var time = ""
         if (openb){
             time = "Always Open"

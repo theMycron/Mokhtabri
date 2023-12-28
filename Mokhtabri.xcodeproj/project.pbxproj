@@ -11,6 +11,7 @@
 		44214DE02B26CA4D000DAA0A /* LabBookingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44214DDE2B26CA4D000DAA0A /* LabBookingTableViewCell.swift */; };
 		44214DE12B26CA4D000DAA0A /* LabHistoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44214DDF2B26CA4D000DAA0A /* LabHistoryTableViewController.swift */; };
 		442AB0FE2B27195E00C05BA6 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 442AB0FD2B27195E00C05BA6 /* Persistence.swift */; };
+		442D0DAC2B3AAEE40078F957 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 442D0DAB2B3AAEE40078F957 /* Kingfisher */; };
 		443BA9F32B20338300794C5A /* AppData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443BA9F22B20338300794C5A /* AppData.swift */; };
 		443CD4312B26CCF300A26971 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 44214DE62B26CCE1000DAA0A /* Main.storyboard */; };
 		443CD4322B26CCF500A26971 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 443CD4302B26CCEE00A26971 /* LaunchScreen.storyboard */; };
@@ -37,6 +38,7 @@
 		449FD76B2B28886200808C7B /* AdminEditTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 449FD76A2B28886200808C7B /* AdminEditTableViewController.swift */; };
 		44A530D02B287AF3001B2CA3 /* HelperFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A530CF2B287AF3001B2CA3 /* HelperFunctions.swift */; };
 		44F198D72B1DE2B400EDEA0B /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 44F198D62B1DE2B400EDEA0B /* Colors.xcassets */; };
+		882DEA272B35E2B200E46594 /* NavViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 882DEA262B35E2B200E46594 /* NavViewController.swift */; };
 		883968992B2CA03E008911FB /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 883968982B2CA03E008911FB /* GoogleService-Info.plist */; };
 		8839689C2B2CA090008911FB /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 8839689B2B2CA090008911FB /* FirebaseAnalytics */; };
 		8839689E2B2CA090008911FB /* FirebaseAnalyticsOnDeviceConversion in Frameworks */ = {isa = PBXBuildFile; productRef = 8839689D2B2CA090008911FB /* FirebaseAnalyticsOnDeviceConversion */; };
@@ -202,6 +204,7 @@
 		449FD76A2B28886200808C7B /* AdminEditTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminEditTableViewController.swift; sourceTree = "<group>"; };
 		44A530CF2B287AF3001B2CA3 /* HelperFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelperFunctions.swift; sourceTree = "<group>"; };
 		44F198D62B1DE2B400EDEA0B /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
+		882DEA262B35E2B200E46594 /* NavViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NavViewController.swift; path = Mokhtabri/Storyboards/NavViewController.swift; sourceTree = SOURCE_ROOT; };
 		883968982B2CA03E008911FB /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		8844CE2D2B2F795E009366DF /* RegisterForm1ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterForm1ViewController.swift; sourceTree = "<group>"; };
 		8DE802CA2B2DF11B007328FF /* PatientUpdateProfileTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientUpdateProfileTableViewController.swift; sourceTree = "<group>"; };
@@ -250,6 +253,7 @@
 				F2239F892B31A80E00D38282 /* FirebaseDatabaseSwift in Frameworks */,
 				F2239FD92B323AF600D38282 /* FirebaseAnalytics in Frameworks */,
 				F2239F712B31A67300D38282 /* FirebaseStorage in Frameworks */,
+				442D0DAC2B3AAEE40078F957 /* Kingfisher in Frameworks */,
 				F2239F752B31A80E00D38282 /* FirebaseAnalytics in Frameworks */,
 				F223A00D2B323AF600D38282 /* FirebaseStorageCombine-Community in Frameworks */,
 				F223A0092B323AF600D38282 /* FirebaseRemoteConfigSwift in Frameworks */,
@@ -398,6 +402,7 @@
 		448FF7332B16040B00B3CA1D /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				882DEA262B35E2B200E46594 /* NavViewController.swift */,
 				8DE802CA2B2DF11B007328FF /* PatientUpdateProfileTableViewController.swift */,
 				F2F60A1D2B271CD0005B74C6 /* LabBookingInfoTableViewController.swift */,
 				F2F60A1B2B27186A005B74C6 /* SettingsTableViewController.swift */,
@@ -602,6 +607,7 @@
 				F223A0082B323AF600D38282 /* FirebaseRemoteConfigSwift */,
 				F223A00A2B323AF600D38282 /* FirebaseStorage */,
 				F223A00C2B323AF600D38282 /* FirebaseStorageCombine-Community */,
+				442D0DAB2B3AAEE40078F957 /* Kingfisher */,
 			);
 			productName = Mokhtabri;
 			productReference = 448FF71C2B15F90200B3CA1D /* Mokhtabri.app */;
@@ -633,6 +639,7 @@
 			mainGroup = 448FF7132B15F90200B3CA1D;
 			packageReferences = (
 				8839689A2B2CA090008911FB /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				442D0DAA2B3AAEE30078F957 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 			);
 			productRefGroup = 448FF71D2B15F90200B3CA1D /* Products */;
 			projectDirPath = "";
@@ -692,6 +699,7 @@
 				8844CE2E2B2F795E009366DF /* RegisterForm1ViewController.swift in Sources */,
 				F23FB21A2B2F2BF300B3F5E2 /* PatientBookingTableViewController.swift in Sources */,
 				446112352B1DABB0002F815C /* AdminViewTableViewController.swift in Sources */,
+				882DEA272B35E2B200E46594 /* NavViewController.swift in Sources */,
 				44214DE12B26CA4D000DAA0A /* LabHistoryTableViewController.swift in Sources */,
 				4461122F2B1D90C7002F815C /* LoginViewController.swift in Sources */,
 				449FD76B2B28886200808C7B /* AdminEditTableViewController.swift in Sources */,
@@ -910,6 +918,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		442D0DAA2B3AAEE30078F957 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.0.0;
+			};
+		};
 		8839689A2B2CA090008911FB /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
@@ -921,6 +937,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		442D0DAB2B3AAEE40078F957 /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 442D0DAA2B3AAEE30078F957 /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
+		};
 		8839689B2B2CA090008911FB /* FirebaseAnalytics */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 8839689A2B2CA090008911FB /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;

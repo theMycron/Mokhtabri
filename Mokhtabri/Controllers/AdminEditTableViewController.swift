@@ -7,6 +7,7 @@
 
 import UIKit
 import FirebaseStorage
+import Kingfisher
 
 class AdminEditTableViewController: UITableViewController, UIImagePickerControllerDelegate & UINavigationControllerDelegate {
 
@@ -54,6 +55,8 @@ class AdminEditTableViewController: UITableViewController, UIImagePickerControll
         super.init(coder: coder)
     }
     
+    
+    // fills input fields based on selected facility (when editing a facility)
     func updateView() {
         guard let facility = facility else {return}
         txtName.text = facility.name
@@ -78,13 +81,16 @@ class AdminEditTableViewController: UITableViewController, UIImagePickerControll
         txtUsername.text = facility.username
         txtPassword.text = facility.password
         txtConfirm.text = facility.password
+        
+        // load image
+        getImageFromFirebase()
     }
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // this delegate will control the sheet, and will stop the user from dismissing if changes were made
-        navigationController?.presentationController?.delegate = self
+        presentationController?.delegate = self
         updateView()
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -100,7 +106,7 @@ class AdminEditTableViewController: UITableViewController, UIImagePickerControll
     }
     
     @IBAction func btnSavePressed(_ sender: Any) {
-        
+        // validate fields and save
         // do not continue if there was an invalid input
         guard validateFields() else {
             return
@@ -181,14 +187,20 @@ class AdminEditTableViewController: UITableViewController, UIImagePickerControll
             return false
         }
         
-        // TODO: add image as well
+        
+        
         // if editing an existing facility, save id to replace it
         if let facility = facility {
             oldId = facility.uuid
         }
-        facility = MedicalFacility(name: name, phone: phone, city: city, website: website, alwaysOpen: alwaysopen, type: type, openingTime: openingTime, closingTime: closingTime, username: username, password: password)
+        facility = MedicalFacility(name: name, phone: phone, city: city, website: website, alwaysOpen: alwaysopen, type: type, openingTime: openingTime, closingTime: closingTime, image: facility?.imageDownloadURL, username: username, password: password)
         if let oldId = oldId {
             facility!.uuid = oldId // replace new uuid with old one if editing to ensure they are the same facility
+        }
+        
+        
+        if !uploadImageToFirebase() {
+            return false
         }
         return true
     }
@@ -196,6 +208,68 @@ class AdminEditTableViewController: UITableViewController, UIImagePickerControll
     
     @IBAction func btnAddPhotoPressed(_ sender: Any) {
         showImagePickerOptions()
+    }
+    
+    
+    func uploadImageToFirebase() -> Bool {
+        // display warning if no image was selected, can proceed with no image
+        var cancelled: Bool = false
+        if let image = imgDisplay.image,
+           image.isEqual(UIImage(named: "noPhoto")){
+            let alert = UIAlertController(title: "Missing Image", message: "Are you sure you want to save without an image?", preferredStyle: .alert)
+            // if user wants to add image, cancel upload
+            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: {_ in
+                cancelled = true
+            }))
+            // if user wants to continue without image, cancel upload and consider it successful
+            alert.addAction(UIAlertAction(title: "Continue", style: .default))
+            self.present(alert, animated: true)
+            if cancelled {
+                return false
+            }
+            return true
+        }
+        // dont continue if user wants to choose image
+        
+        // get selected image and upload to firebase
+        guard let image = imgDisplay.image?.jpegData(compressionQuality: 0.9) else {return false}
+        // format filename with lowercased letters and underscores instead of spaces
+        let filename = facility!.defaultFirebaseImageFilename
+        
+        let storageRef = Storage.storage().reference().child(filename)
+        // upload image
+        // This function is ASYNCRONOUS, which means it may take time to upload while the app continues running
+        _ = storageRef.putData(image) {(metadata, error) in
+            if error != nil {
+                // handle errors
+                let alert = UIAlertController(title: "Image Upload Failed", message: "The image could not be uploaded to the server.", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "OK", style: .default))
+                self.present(alert, animated: true)
+            } else {
+                // no errors, add imagePath to facility
+                storageRef.downloadURL(completion: {(url, error) in
+                    if error != nil {
+                        let alert = UIAlertController(title: "Image Upload Failed", message: "The image could not be uploaded to the server.", preferredStyle: .alert)
+                        alert.addAction(UIAlertAction(title: "OK", style: .default))
+                        self.present(alert, animated: true)
+                    } else if let downloadURL = url {
+                        self.facility!.imageDownloadURL = downloadURL
+                        // update facility in appdata
+                        AppData.editUser(user: self.facility!)
+                    }
+                })
+            }
+        }
+        
+        return true
+    }
+    
+    func getImageFromFirebase() {
+        guard let facility = facility,
+                let downloadURL = facility.imageDownloadURL else {return}
+        // Use KingFisher library to store and cache the image
+        imgDisplay.kf.indicatorType = .activity
+        imgDisplay.kf.setImage(with: downloadURL)
     }
     
     func showImagePickerOptions() {
@@ -230,6 +304,7 @@ class AdminEditTableViewController: UITableViewController, UIImagePickerControll
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         let image = info[.originalImage] as!UIImage
         imgDisplay.image = image
+        madeChanges()
         self.dismiss(animated: true)
     }
     

@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class AdminViewTableViewCell: UITableViewCell {
 
@@ -21,7 +22,16 @@ class AdminViewTableViewCell: UITableViewCell {
         lblName.text = facility.name
         lblCity.text = facility.city
         lblType.text = facility.type.rawValue
-        // TODO: add image
+        // add image using KingFisher library
+        displayImage(facility: facility)
+    }
+    
+    func displayImage(facility: MedicalFacility) {
+        imgDisplay.kf.indicatorType = .activity
+        // downsample image to save resources
+        let size: CGSize = CGSize(width: imgDisplay.bounds.size.width*2 , height: imgDisplay.bounds.size.height*2)
+        let processor: ImageProcessor = DownsamplingImageProcessor(size: size)
+        imgDisplay.kf.setImage(with: facility.imageDownloadURL, options: [.processor(processor), .cacheOriginalImage])
     }
     
     override func awakeFromNib() {

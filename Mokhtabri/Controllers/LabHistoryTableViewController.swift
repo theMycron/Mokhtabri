@@ -8,11 +8,43 @@
 import UIKit
 
 class LabHistoryTableViewController: UITableViewController, UISearchBarDelegate, UISearchResultsUpdating {
+    
     func updateSearchResults(for searchController: UISearchController) {
         // let scope = searchController.searchBar.selectedScopeButtonIndex
-        
+        guard let term = searchController.searchBar.text?.lowercased() else {
+            reloadOriginalData()
+            return
+        }
+        if term.isEmpty {
+            reloadOriginalData()
+        } else {
+            switch selectedSegmentIndex {
+            case 0:
+                activeBookings = activeBookings.filter{
+                    $0.forPatient.name.lowercased().contains(term) || $0.ofMedicalService.name.lowercased().contains(term)
+                }
+                
+            case 1: break
+            case 2: break
+            default:
+                break
+            }
+        }
+        tableView.reloadData()
         
     }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        reloadOriginalData()
+    }
+
+    
+    func reloadOriginalData() {
+        // Assuming 'bookings' is your original data source
+        categorizeBookings()  // This method should reset activeBookings, completedBookings, etc., based on the original 'bookings' data
+        tableView.reloadData()
+    }
+
     
     @IBAction func segmentedControl(_ sender: UISegmentedControl) {
         selectedSegmentIndex = sender.selectedSegmentIndex
@@ -58,6 +90,7 @@ class LabHistoryTableViewController: UITableViewController, UISearchBarDelegate,
         //scope
         navigationItem.searchController?.searchBar.scopeButtonTitles = ["Active", "Completed","Cancelled"]
         navigationItem.searchController?.automaticallyShowsScopeBar = false
+        navigationItem.searchController?.searchBar.delegate = self
     }
     
     // MARK: - Table view data source
@@ -193,9 +226,28 @@ class LabHistoryTableViewController: UITableViewController, UISearchBarDelegate,
         if editingStyle == .delete {
             // Delete the row from the data source
             confirmation(title: "Delete Confirmation", message: "Are you sure you want to delete this booking, if the booking is active it will lead to automatic cancellation"){
-                self.bookings.remove(at: indexPath.row)
+                
+                
+                let bookingToRemove: Booking
+                switch self.selectedSegmentIndex {
+                case 0:
+                    bookingToRemove = self.activeBookings[indexPath.row]
+                    self.activeBookings.remove(at: indexPath.row)
+                case 1:
+                    bookingToRemove = self.completedBookings[indexPath.row]
+                    self.completedBookings.remove(at: indexPath.row)
+                case 2:
+                    bookingToRemove = self.cancelledBookings[indexPath.row]
+                    self.cancelledBookings.remove(at: indexPath.row)
+                default:
+                    return // Or handle default case appropriately
+                }
+                // Find the booking in AppData.bookings
+                if let indexInAppData = AppData.bookings.firstIndex(where: { $0.id == bookingToRemove.id }) {
+                    AppData.bookings.remove(at: indexInAppData)
+                    self.bookings.remove(at: indexInAppData)
+                }
                 self.categorizeBookings()
-                AppData.bookings.remove(at: indexPath.row)
                 tableView.deleteRows(at: [indexPath], with: .fade)
             }
 

@@ -2,7 +2,7 @@
 //  RegisterForm1ViewController.swift
 //  Mokhtabri
 //
-//  Created by Maram Eskafi on 17/12/2023.
+//  Created by Maryam Eskafi on 17/12/2023.
 //
 
 import Foundation
@@ -13,7 +13,6 @@ class RegisterForm1ViewController: UIViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        datePicker.datePickerMode = .date
     
         firstname.delegate = self
         lastname.delegate = self
@@ -65,8 +64,63 @@ class RegisterForm1ViewController: UIViewController, UITextFieldDelegate {
     @IBAction func registerBtnTapped(_ sender: Any) {
         
         validateFields()
+        //validateEmailAndCheckRegistration()
+        backToLogin()
+    
+           
+      
        
     }
+//    func validateEmailAndCheckRegistration() {
+//        guard let emailText = email.text, !emailText.isEmpty else {
+//            // Handle empty email field
+//            return
+//        }
+//
+//        // Validate email format
+//        if !isValidEmail(emailText) {
+//            // Handle invalid email format
+//            return
+//        }
+//
+//        // Check if email is already registered
+//        Auth.auth().fetchSignInMethods(forEmail: emailText) { (signInMethods, error) in
+//            if let error = error {
+//                // Handle error in fetching sign-in methods
+//                print("Error fetching sign-in methods:", error.localizedDescription)
+//                
+//                if error.localizedDescription.contains("There is no user record corresponding to this identifier.") {
+//                    // Proceed with registration process
+//                    // ...
+//                    // Register the user with Firebase Authentication
+//                } else {
+//                    // Handle other error cases
+//                    print("Error:", error.localizedDescription)
+//                }
+//            } else {
+//                // Email is already registered
+//                // Display alert indicating email is already in use
+//                let alertController = UIAlertController(title: "Email Already Registered",
+//                                                        message: "The email address is already registered.",
+//                                                        preferredStyle: .alert)
+//                let okAction = UIAlertAction(title: "OK", style: .default)
+//                alertController.addAction(okAction)
+//                self.present(alertController, animated: true, completion: nil)
+//            }
+//        }
+//    }
+//
+//    // Email format validation
+//    func isValidEmail(_ email: String) -> Bool {
+//        // Implement your email format validation logic
+//        // Return true if the email is valid, false otherwise
+//        // Example implementation:
+//        let emailRegex = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}"
+//        let emailPredicate = NSPredicate(format: "SELF MATCHES %@", emailRegex)
+//        return emailPredicate.evaluate(with: email)
+//    }
+
+    
     
     
     
@@ -223,7 +277,7 @@ class RegisterForm1ViewController: UIViewController, UITextFieldDelegate {
                 
                 
                 //if user is not created, display the error.
-                print("Error \(error?.localizedDescription)")
+                print("Error \(String(describing: error?.localizedDescription))")
                 //set the user as false inside user defaults
                 self.defaults.set(false, forKey: "Logged In")
                
@@ -270,6 +324,22 @@ class RegisterForm1ViewController: UIViewController, UITextFieldDelegate {
         
     }
     
+    
+    func backToLogin(){
+        let alertController = UIAlertController(title: "Successfully Registered!",
+                                                message: "Please proceed to the login page to complete the signing-in process.",
+                                                preferredStyle: .alert)
+
+        let okAction = UIAlertAction(title: "OK", style: .default) { [weak self] _ in
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let viewController = storyboard.instantiateViewController(withIdentifier: "login")
+            self?.view.window?.rootViewController = viewController
+            self?.view.window?.makeKeyAndVisible()
+        }
+
+        alertController.addAction(okAction)
+        present(alertController, animated: true, completion: nil)
+    }
     
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
