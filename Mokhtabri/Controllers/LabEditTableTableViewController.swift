@@ -82,6 +82,8 @@ class LabEditTableTableViewController: UITableViewController, UIAdaptivePresenta
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        DateExpiry.isHidden = true
+        cellSelect.isHidden = true
         tableView.reloadData()
         // this delegate will control the sheet, and will stop the user from dismissing if changes were made
         navigationController?.presentationController?.delegate = self

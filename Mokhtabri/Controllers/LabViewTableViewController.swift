@@ -43,7 +43,7 @@ class LabViewTableViewController: UITableViewController, UISearchResultsUpdating
         search.searchBar.searchFieldBackgroundPositionAdjustment = .zero
         
         
-        search.searchBar.scopeButtonTitles = ["All", "Tests", "Packages"]
+        search.searchBar.scopeButtonTitles = ["Tests", "Packages"]
         search.searchBar.showsScopeBar = true
     }
 
@@ -54,11 +54,10 @@ class LabViewTableViewController: UITableViewController, UISearchResultsUpdating
 
     func filterServices(scope: Int) {
        switch scope {
+       
        case 0:
-           displayedServices = AppData.services
-       case 1:
            displayedServices = AppData.services.filter { $0.serviceType == .test }
-       case 2:
+       case 1:
            displayedServices = AppData.services.filter { $0.serviceType == .package }
        default:
            return
