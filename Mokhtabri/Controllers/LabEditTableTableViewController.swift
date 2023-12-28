@@ -21,7 +21,8 @@ class LabEditTableTableViewController: UITableViewController, UIAdaptivePresenta
     
     @IBOutlet weak var txtInstruction: UITextField!
     
-
+    @IBOutlet weak var segmentedControl: UISegmentedControl!
+    
     
     var service: MedicalService?
     
@@ -42,32 +43,9 @@ class LabEditTableTableViewController: UITableViewController, UIAdaptivePresenta
         txtName.text = service.name
         txtPhone.text = "\(service.price)"
         txtDescription.text = description
-        //trying something
-        
-        //..........
         txtDescription.text = service.serviceDescription
         txtInstruction.text = service.instructions
-     //   txtCity.text = facility.city
-       // txtWebsite.text = facility.website
-    /*    if facility.type == FacilityType.hospital {
-            segmentType.selectedSegmentIndex = 0
-        } else {
-            segmentType.selectedSegmentIndex = 1
-        }*/
-        
-      //  toggleAlwaysOpen.isOn = facility.alwaysOpen
-       // print(toggleAlwaysOpen.isOn)
-      /*  if !facility.alwaysOpen {
-            let calendar = Calendar.current
-            let openingComponents: DateComponents = facility.openingTime
-            let closingComponents: DateComponents = facility.closingTime
-            timeOpening.date = calendar.date(from: openingComponents)!
-            timeClosing.date = calendar.date(from: closingComponents)!
-        }
-        txtUsername.text = facility.username
-        txtPassword.text = facility.password
-        txtConfirm.text = facility.password
-        */
+     
     }
     
     
