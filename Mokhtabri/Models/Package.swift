@@ -37,10 +37,10 @@ class Package: MedicalService {
         case expiryDate, tests
     }
     
-    init(expiryDate: DateComponents, tests: [Test], name: String, price: Float, description: String, instructions: String, forMedicalFacility: MedicalFacility) {
+    init(expiryDate: DateComponents, tests: [Test], name: String, price: Float, description: String, instructions: String, forMedicalFacility: MedicalFacility, serviceType: ServiceType) {
         self.expiryDate = expiryDate
         self.tests = tests
-        super.init(name: name, price: price, description: description, instructions: instructions, forMedicalFacility: forMedicalFacility)
+        super.init(name: name, price: price, description: description, instructions: instructions, forMedicalFacility: forMedicalFacility, serviceType: serviceType)
     }
     
     required init(from decoder: Decoder) throws {

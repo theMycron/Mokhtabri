@@ -48,12 +48,15 @@
 		883968A72B2CA428008911FB /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 883968A62B2CA428008911FB /* FirebaseAuth */; };
 		8844CE2E2B2F795E009366DF /* RegisterForm1ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8844CE2D2B2F795E009366DF /* RegisterForm1ViewController.swift */; };
 		8DE802CB2B2DF11B007328FF /* PatientUpdateProfileTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DE802CA2B2DF11B007328FF /* PatientUpdateProfileTableViewController.swift */; };
+		B137B0EA2B351BB40065260E /* LabEditTableTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B137B0E92B351BB40065260E /* LabEditTableTableViewController.swift */; };
 		D6FD0EF32B31AF4A00BBCBDC /* PatientHomeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6FD0EF22B31AF4A00BBCBDC /* PatientHomeTableViewController.swift */; };
 		D6FD0EF52B31AFA500BBCBDC /* PatientHospitalSelectTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6FD0EF42B31AFA500BBCBDC /* PatientHospitalSelectTableViewController.swift */; };
 		D6FD0EF72B31B11100BBCBDC /* PatientHospitalViewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6FD0EF62B31B11100BBCBDC /* PatientHospitalViewTableViewCell.swift */; };
 		D6FD0EF92B31B73500BBCBDC /* imgTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6FD0EF82B31B73500BBCBDC /* imgTableViewCell.swift */; };
 		D6FD0EFB2B31B7E300BBCBDC /* PatientViewInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6FD0EFA2B31B7E300BBCBDC /* PatientViewInfoTableViewCell.swift */; };
 		D6FD0EFD2B31B83A00BBCBDC /* segmentedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6FD0EFC2B31B83A00BBCBDC /* segmentedTableViewCell.swift */; };
+		DF17C6402B341950007BFBF1 /* LabViewTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF17C63F2B341950007BFBF1 /* LabViewTableViewController.swift */; };
+		DF2F1F7D2B395EB600C97E40 /* LabViewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF2F1F7C2B395EB600C97E40 /* LabViewTableViewCell.swift */; };
 		F2239F3D2B310D0900D38282 /* PatientBookTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2239F3C2B310D0900D38282 /* PatientBookTableViewController.swift */; };
 		F2239F3F2B31A67300D38282 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = F2239F3E2B31A67300D38282 /* FirebaseAnalytics */; };
 		F2239F412B31A67300D38282 /* FirebaseAnalyticsOnDeviceConversion in Frameworks */ = {isa = PBXBuildFile; productRef = F2239F402B31A67300D38282 /* FirebaseAnalyticsOnDeviceConversion */; };
@@ -205,12 +208,15 @@
 		883968982B2CA03E008911FB /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		8844CE2D2B2F795E009366DF /* RegisterForm1ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterForm1ViewController.swift; sourceTree = "<group>"; };
 		8DE802CA2B2DF11B007328FF /* PatientUpdateProfileTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientUpdateProfileTableViewController.swift; sourceTree = "<group>"; };
+		B137B0E92B351BB40065260E /* LabEditTableTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabEditTableTableViewController.swift; sourceTree = "<group>"; };
 		D6FD0EF22B31AF4A00BBCBDC /* PatientHomeTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientHomeTableViewController.swift; sourceTree = "<group>"; };
 		D6FD0EF42B31AFA500BBCBDC /* PatientHospitalSelectTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientHospitalSelectTableViewController.swift; sourceTree = "<group>"; };
 		D6FD0EF62B31B11100BBCBDC /* PatientHospitalViewTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientHospitalViewTableViewCell.swift; sourceTree = "<group>"; };
 		D6FD0EF82B31B73500BBCBDC /* imgTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = imgTableViewCell.swift; sourceTree = "<group>"; };
 		D6FD0EFA2B31B7E300BBCBDC /* PatientViewInfoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientViewInfoTableViewCell.swift; sourceTree = "<group>"; };
 		D6FD0EFC2B31B83A00BBCBDC /* segmentedTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = segmentedTableViewCell.swift; sourceTree = "<group>"; };
+		DF17C63F2B341950007BFBF1 /* LabViewTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabViewTableViewController.swift; sourceTree = "<group>"; };
+		DF2F1F7C2B395EB600C97E40 /* LabViewTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabViewTableViewCell.swift; sourceTree = "<group>"; };
 		F2239F3C2B310D0900D38282 /* PatientBookTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientBookTableViewController.swift; sourceTree = "<group>"; };
 		F23FB2192B2F2BF300B3F5E2 /* PatientBookingTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientBookingTableViewController.swift; sourceTree = "<group>"; };
 		F23FB21B2B2F2D4700B3F5E2 /* PatientBookingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientBookingTableViewCell.swift; sourceTree = "<group>"; };
@@ -353,6 +359,7 @@
 				D6FD0EF62B31B11100BBCBDC /* PatientHospitalViewTableViewCell.swift */,
 				D6FD0EFA2B31B7E300BBCBDC /* PatientViewInfoTableViewCell.swift */,
 				D6FD0EFC2B31B83A00BBCBDC /* segmentedTableViewCell.swift */,
+				DF2F1F7C2B395EB600C97E40 /* LabViewTableViewCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -410,6 +417,8 @@
 				F2239F3C2B310D0900D38282 /* PatientBookTableViewController.swift */,
 				D6FD0EF22B31AF4A00BBCBDC /* PatientHomeTableViewController.swift */,
 				D6FD0EF42B31AFA500BBCBDC /* PatientHospitalSelectTableViewController.swift */,
+				DF17C63F2B341950007BFBF1 /* LabViewTableViewController.swift */,
+				B137B0E92B351BB40065260E /* LabEditTableTableViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -672,6 +681,7 @@
 				D6FD0EF52B31AFA500BBCBDC /* PatientHospitalSelectTableViewController.swift in Sources */,
 				448FF7202B15F90200B3CA1D /* AppDelegate.swift in Sources */,
 				446C067A2B1C9302006A6A5E /* Booking.swift in Sources */,
+				DF2F1F7D2B395EB600C97E40 /* LabViewTableViewCell.swift in Sources */,
 				D6FD0EF32B31AF4A00BBCBDC /* PatientHomeTableViewController.swift in Sources */,
 				44214DE02B26CA4D000DAA0A /* LabBookingTableViewCell.swift in Sources */,
 				446C06742B1C92E3006A6A5E /* Patient.swift in Sources */,
@@ -698,10 +708,12 @@
 				443CE4BC2B1DAD8B0024D74B /* AdminViewTableViewCell.swift in Sources */,
 				F23FB21C2B2F2D4700B3F5E2 /* PatientBookingTableViewCell.swift in Sources */,
 				446112312B1D99CF002F815C /* MedicalService.swift in Sources */,
+				B137B0EA2B351BB40065260E /* LabEditTableTableViewController.swift in Sources */,
 				446C06722B1C92DB006A6A5E /* User.swift in Sources */,
 				446112332B1D9B5B002F815C /* Category.swift in Sources */,
 				F23FB21E2B2F374200B3F5E2 /* PatientViewBookingDetailsTableViewController.swift in Sources */,
 				D6FD0EF92B31B73500BBCBDC /* imgTableViewCell.swift in Sources */,
+				DF17C6402B341950007BFBF1 /* LabViewTableViewController.swift in Sources */,
 				D6FD0EFD2B31B83A00BBCBDC /* segmentedTableViewCell.swift in Sources */,
 				443BA9F32B20338300794C5A /* AppData.swift in Sources */,
 			);
@@ -834,11 +846,12 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Mokhtabri/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UILaunchStoryboardName = LabServices.storyboard;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UIStatusBarStyle = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -862,11 +875,12 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Mokhtabri/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UILaunchStoryboardName = LabServices.storyboard;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UIStatusBarStyle = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
