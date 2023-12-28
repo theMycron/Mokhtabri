@@ -82,6 +82,7 @@ class LabEditTableTableViewController: UITableViewController, UIAdaptivePresenta
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        viewselecter.isHidden = true
         DateExpiry.isHidden = true
         cellSelect.isHidden = true
         tableView.reloadData()
@@ -124,20 +125,15 @@ class LabEditTableTableViewController: UITableViewController, UIAdaptivePresenta
         
         
         //i Changed price type from Float to String
-        
-        service = MedicalService(name: name ?? "", price: price ?? 0.0 , description: description ?? "", instructions: instructions ?? "", forMedicalFacility: AppData.alhilal, serviceType : selectedServiceType! )
         if let facility = service {
             oldId = facility.id
         }
+        service = MedicalService(name: name ?? "", price: price ?? 0.0 , description: description ?? "", instructions: instructions ?? "", forMedicalFacility: AppData.alhilal, serviceType : selectedServiceType! )
+        
         
         if let oldId = oldId {
             service!.id = oldId
         }
-        // if facility was created successfully, add to appdata and save
-        AppData.services.removeAll()
-        AppData.services.append(service!)
-        AppData.saveData()
-        tableView.reloadData()
         performSegue(withIdentifier: "unwindToView", sender: self)
         
     }

@@ -22,7 +22,7 @@ class MedicalService: Codable, Equatable, Comparable, CustomStringConvertible {
                 """
     }
     
-    enum ServiceType: String {
+    enum ServiceType:  String, Codable {
        case test = "Test"
        case package = "Package"
     }
@@ -58,6 +58,7 @@ class MedicalService: Codable, Equatable, Comparable, CustomStringConvertible {
         try container.encode(serviceDescription, forKey: .description)
         try container.encode(instructions, forKey: .instructions)
         try container.encode(forMedicalFacility, forKey: .forMedicalFacility)
+        try container.encode(serviceType, forKey: .serviceType)
         try container.encode(encodeImage(), forKey: .image)
     }
     

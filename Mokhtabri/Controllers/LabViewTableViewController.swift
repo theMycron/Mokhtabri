@@ -62,6 +62,7 @@ class LabViewTableViewController: UITableViewController, UISearchResultsUpdating
        default:
            return
        }
+        tableView.reloadData()
     }
     
     func updateSearchResults(for searchController: UISearchController) {
@@ -104,8 +105,6 @@ class LabViewTableViewController: UITableViewController, UISearchResultsUpdating
         else {return}
         
         // replace old facility with updated one or just add it if it is new
-        
-        
         if let indexPath = tableView.indexPathForSelectedRow {
             displayedServices.remove(at: indexPath.section)
             displayedServices.insert(facility, at: indexPath.section)
