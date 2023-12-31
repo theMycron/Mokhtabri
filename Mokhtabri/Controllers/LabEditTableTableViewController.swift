@@ -31,9 +31,9 @@ class LabEditTableTableViewController: UITableViewController, UIAdaptivePresenta
     
     @IBOutlet weak var viewselecter: UITableViewCell!
     
+    @IBOutlet weak var txtCategory: UITextField!
     
     var service: MedicalService?
-    
     var hasChanges: Bool = false
     
     init?(coder: NSCoder, facility: MedicalService?) {
@@ -53,6 +53,11 @@ class LabEditTableTableViewController: UITableViewController, UIAdaptivePresenta
         txtDescription.text = description
         txtDescription.text = service.serviceDescription
         txtInstruction.text = service.instructions
+        
+        if service is Test{
+            var test: Test = service as! Test
+            txtCategory.text = test.category.name
+        }
      
     }
     
@@ -64,27 +69,30 @@ class LabEditTableTableViewController: UITableViewController, UIAdaptivePresenta
         switch sender.selectedSegmentIndex{
         case 0:
             DateExpiry.isHidden = true
-            cellSelect.isHidden = true
+            //cellSelect.isHidden = true
             txtPhone.isHidden = false
             txtName.isHidden = false
             viewselecter.isHidden = true
+//            cellCategory.isHidden = false
         case 1 :
             DateExpiry.isHidden = false
-            cellSelect.isHidden = false
+           // cellSelect.isHidden = false
             txtPhone.isHidden = false
             txtName.isHidden = false
             viewselecter.isHidden = false
+//            cellCategory.isHidden = true
             
         default:
             break
         }
+        updateCells()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         viewselecter.isHidden = true
         DateExpiry.isHidden = true
-        cellSelect.isHidden = true
+        //cellSelect.isHidden = true
         tableView.reloadData()
         // this delegate will control the sheet, and will stop the user from dismissing if changes were made
         navigationController?.presentationController?.delegate = self
@@ -142,9 +150,8 @@ class LabEditTableTableViewController: UITableViewController, UIAdaptivePresenta
         
     }
     
-    @IBAction func toggleChanged(_ sender: Any) {
-        updateCells()
-        madeChanges()
+    @IBSegueAction func selectTestsSegue(_ coder: NSCoder) -> LabSelectTestsTableViewController? {
+        return LabSelectTestsTableViewController(coder: coder )
     }
     
     func updateCells() {
@@ -155,14 +162,23 @@ class LabEditTableTableViewController: UITableViewController, UIAdaptivePresenta
     
     // MARK: - Table view data source
 
-  /*  override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+   override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         // hide opening time and closing time cells if facility is initially set to always open
-        if indexPath.section == 2 && (indexPath.row == 1 || indexPath.row == 2) {
-            return toggleAlwaysOpen.isOn ? 0 : super.tableView(tableView, heightForRowAt: indexPath)
+        if indexPath.section == 1 && (indexPath.row == 4) {
+            return (segmentedControl.selectedSegmentIndex == 0) ? 0 : super.tableView(tableView, heightForRowAt: indexPath)
         }
+        if indexPath.section == 1 && (indexPath.row == 3) {
+            return (segmentedControl.selectedSegmentIndex == 1) ? 0 : super.tableView(tableView, heightForRowAt: indexPath)
+        }
+       if indexPath.section == 0  {
+           return (segmentedControl.selectedSegmentIndex == 0) ? 0 : super.tableView(tableView, heightForRowAt: indexPath)
+       }
+       if indexPath.section == 3  {
+           return (segmentedControl.selectedSegmentIndex == 0) ? 0 : super.tableView(tableView, heightForRowAt: indexPath)
+       }
         return super.tableView(tableView, heightForRowAt: indexPath)
     }
-    */
+    
     
     @IBAction func madeChanges() {
         hasChanges = true
