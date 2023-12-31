@@ -21,6 +21,8 @@ class AppData {
     static var hospitals = [alhilal,alsalam,royal]
     static var labs: [MedicalFacility] = [BML, expMed, gulfLab, manara]
     
+    static var loggedInUser: User?
+    
     static func wipe() {
         admin = []
         patients = []
