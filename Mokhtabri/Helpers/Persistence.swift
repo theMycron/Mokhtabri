@@ -13,6 +13,7 @@ extension AppData {
         case admins, patients, facilities, bookings, services, categories
     }
     
+    // get the URL for data storage
     fileprivate static func archiveURL(_ fileName: FileName) -> URL {
         let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
         return documentsDirectory.appendingPathComponent(fileName.rawValue).appendingPathExtension("plist")
@@ -23,7 +24,6 @@ extension AppData {
         saveUsers(toFile: .admins)
         saveUsers(toFile: .patients)
         saveUsers(toFile: .facilities)
-        saveCategories()
         saveServices()
         saveBookings()
     }
@@ -34,7 +34,6 @@ extension AppData {
         loadUsers(fromFile: .admins)
         loadUsers(fromFile: .patients)
         loadUsers(fromFile: .facilities)
-        loadCategories()
         loadServices()
         loadBookings()
     }
@@ -88,19 +87,6 @@ extension AppData {
             print("could not write bookings")
         }
     }
-    fileprivate static func saveCategories() {
-        guard categories.count > 0 else {return}
-        let archiveURL = archiveURL(.categories)
-        let propertyListEncoder = PropertyListEncoder()
-        do {
-            let encodedData = try propertyListEncoder.encode(categories)
-            try encodedData.write(to: archiveURL, options: .noFileProtection)
-        } catch EncodingError.invalidValue {
-            print("could not encode categories")
-        } catch {
-            print("could not write categories")
-        }
-    }
     
     
     
@@ -125,18 +111,6 @@ extension AppData {
                 decodedData = try propertyListDecoder.decode([User].self, from: retrievedData)
                 admin.append(contentsOf: decodedData)
             }
-        } catch {
-            print("could not load data: \(error)")
-        }
-    }
-    fileprivate static func loadCategories() {
-        let archiveURL = archiveURL(.categories)
-        let propertyListDecoder = PropertyListDecoder()
-        guard let retrievedData = try? Data(contentsOf: archiveURL) else { return }
-        do {
-            var decodedData: [Category] = []
-            decodedData = try propertyListDecoder.decode([Category].self, from: retrievedData)
-            categories.append(contentsOf: decodedData)
         } catch {
             print("could not load data: \(error)")
         }

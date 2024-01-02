@@ -10,7 +10,7 @@ import UIKit
 class PatientBookTableViewController: UITableViewController {
     var SamplePatient = Patient(firstName: "Noora", lastName: "Qasim", phone: "38084876", cpr: "031003257", email: "nooraw376@gmail.com", gender: .female, dateOfBirth: DateComponents(calendar: Calendar.current, year:2003, month: 10, day: 12), username: "nqasim", password: "123")
     var sampleTest : MedicalService =
-    Test(category: Category(name: "Blood Test"), name: "VitaminB12", price: 10, description: "blood test for vitaminb12", instructions: "fasting 8-12 hours prior is mandatory", forMedicalFacility:  MedicalFacility(name: "Al Hilal Hospital", phone: "12345689", city: "East Riffa", website: "Alhilal.com", alwaysOpen: false, type: .hospital, openingTime: DateComponents(calendar: Calendar.current, hour: 9, minute: 0), closingTime: DateComponents(calendar: Calendar.current, hour: 21, minute: 0), username: "AlHihalEastRiffa", password: "alhilal"))
+    Test(category: "Blood Test", name: "VitaminB12", price: 10, description: "blood test for vitaminb12", instructions: "fasting 8-12 hours prior is mandatory", forMedicalFacility:  MedicalFacility(name: "Al Hilal Hospital", phone: "12345689", city: "East Riffa", website: "Alhilal.com", alwaysOpen: false, type: .hospital, openingTime: DateComponents(calendar: Calendar.current, hour: 9, minute: 0), closingTime: DateComponents(calendar: Calendar.current, hour: 21, minute: 0), username: "AlHihalEastRiffa", password: "alhilal"))
     
     @IBOutlet weak var btn: UIBarButtonItem!
     @IBOutlet weak var hospitalName: UILabel!

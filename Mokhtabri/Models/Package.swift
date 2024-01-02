@@ -10,8 +10,9 @@ import Foundation
 class Package: MedicalService {
     var expiryDate: DateComponents? // use 'year', 'month' and 'day' components, may not expire
     var tests: [Test]
-    
-    override var description: String {
+    var imageDownloadURL: URL? // Property to store an image download link
+    // returns a formatted string for the expiryDate
+    var formattedExpiryDate: String {
         // get the expiry date if it is not nil
         var listedExpiryDate = ""
         if let date = expiryDate {
@@ -19,6 +20,10 @@ class Package: MedicalService {
         } else {
             listedExpiryDate = "None"
         }
+        return listedExpiryDate
+    }
+    
+    override var description: String {
         // get all tests and place them in a string
         var listedTests = ""
         for test in tests {
@@ -27,26 +32,29 @@ class Package: MedicalService {
         return """
                 \(super.description)
                 Type: Package
-                Expiry Date: \(listedExpiryDate)
+                Expiry Date: \(formattedExpiryDate)
                 - List of Tests -
                 \(listedTests)
                 """
     }
     
     enum CodingKeys: Codable, CodingKey {
-        case expiryDate, tests
+        case expiryDate, tests, image
     }
     
-    init(expiryDate: DateComponents, tests: [Test], name: String, price: Float, description: String, instructions: String, forMedicalFacility: MedicalFacility) {
+    init(expiryDate: DateComponents, tests: [Test], name: String, price: Float, description: String, instructions: String, forMedicalFacility: MedicalFacility, imageDownloadURL: URL? = nil) {
         self.expiryDate = expiryDate
         self.tests = tests
+        self.imageDownloadURL = imageDownloadURL // Initialize the image property
         super.init(name: name, price: price, description: description, instructions: instructions, forMedicalFacility: forMedicalFacility)
     }
     
+    // required custom decoder
     required init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
-        self.expiryDate = try values.decodeIfPresent(DateComponents.self, forKey: .expiryDate)!
-        self.tests = try values.decodeIfPresent([Test].self, forKey: .tests)!
+        self.expiryDate = try values.decodeIfPresent(DateComponents.self, forKey: .expiryDate)
+        self.tests = try values.decode([Test].self, forKey: .tests)
+        self.imageDownloadURL = try values.decodeIfPresent(URL.self, forKey: .image)
         try super.init(from: decoder)
     }
     

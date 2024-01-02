@@ -4,10 +4,9 @@ class MedicalService: Codable, Equatable, Comparable, CustomStringConvertible {
     var id: UUID
     var name: String
     var price: Float
-    var serviceDescription: String
+    var serviceDescription: String // different from the CustomStringCovertible description
     var instructions: String
     var forMedicalFacility: MedicalFacility
-    var image: Data? // Property to store an image
     
     var description: String {
         return """
@@ -33,7 +32,6 @@ class MedicalService: Codable, Equatable, Comparable, CustomStringConvertible {
         self.serviceDescription = description
         self.instructions = instructions
         self.forMedicalFacility = forMedicalFacility
-        self.image = nil // Initialize the image property
     }
     
     static func == (lhs: MedicalService, rhs: MedicalService) -> Bool {
@@ -53,7 +51,6 @@ class MedicalService: Codable, Equatable, Comparable, CustomStringConvertible {
         try container.encode(serviceDescription, forKey: .description)
         try container.encode(instructions, forKey: .instructions)
         try container.encode(forMedicalFacility, forKey: .forMedicalFacility)
-        try container.encode(encodeImage(), forKey: .image)
     }
     
     required init(from decoder: Decoder) throws {
@@ -65,19 +62,7 @@ class MedicalService: Codable, Equatable, Comparable, CustomStringConvertible {
         self.instructions = try container.decode(String.self, forKey: .instructions)
         self.forMedicalFacility = try container.decode(MedicalFacility.self, forKey: .forMedicalFacility)
         
-        // Decode image as base64-encoded data
-        if let imageBase64 = try container.decodeIfPresent(String.self, forKey: .image) {
-            self.image = Data(base64Encoded: imageBase64)
-        } else {
-            self.image = nil
-        }
     }
     
-    // Encode the image as base64-encoded string
-    func encodeImage() -> String? {
-        if let image = self.image {
-            return image.base64EncodedString()
-        }
-        return nil
-    }
+    
 }
