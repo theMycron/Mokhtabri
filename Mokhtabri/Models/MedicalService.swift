@@ -52,7 +52,7 @@ class MedicalService: Codable, Equatable, Comparable, CustomStringConvertible {
         try container.encode(instructions, forKey: .instructions)
         try container.encode(forMedicalFacility, forKey: .forMedicalFacility)
     }
-    
+
     required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.id = try container.decode(UUID.self, forKey: .id)
@@ -61,7 +61,7 @@ class MedicalService: Codable, Equatable, Comparable, CustomStringConvertible {
         self.serviceDescription = try container.decode(String.self, forKey: .description)
         self.instructions = try container.decode(String.self, forKey: .instructions)
         self.forMedicalFacility = try container.decode(MedicalFacility.self, forKey: .forMedicalFacility)
-        
+
     }
     
     

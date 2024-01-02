@@ -49,13 +49,23 @@ class Package: MedicalService {
         super.init(name: name, price: price, description: description, instructions: instructions, forMedicalFacility: forMedicalFacility)
     }
     
+    override func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(expiryDate, forKey: .expiryDate)
+        try container.encode(tests, forKey: .tests)
+        try container.encode(imageDownloadURL, forKey: .image)
+        let superEncoder = container.superEncoder()
+        try super.encode(to: superEncoder)
+    }
+    
     // required custom decoder
     required init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         self.expiryDate = try values.decodeIfPresent(DateComponents.self, forKey: .expiryDate)
         self.tests = try values.decode([Test].self, forKey: .tests)
         self.imageDownloadURL = try values.decodeIfPresent(URL.self, forKey: .image)
-        try super.init(from: decoder)
+        let superDecoder = try values.superDecoder()
+        try super.init(from: superDecoder)
     }
     
     

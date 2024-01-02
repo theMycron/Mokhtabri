@@ -10,7 +10,7 @@ import Foundation
 extension AppData {
     
     fileprivate enum FileName: String {
-        case admins, patients, facilities, bookings, services, categories
+        case admins, patients, facilities, bookings, packages, tests, categories
     }
     
     // get the URL for data storage
@@ -24,7 +24,8 @@ extension AppData {
         saveUsers(toFile: .admins)
         saveUsers(toFile: .patients)
         saveUsers(toFile: .facilities)
-        saveServices()
+        saveServices(toFile: .packages)
+        saveServices(toFile: .tests)
         saveBookings()
     }
     
@@ -34,7 +35,8 @@ extension AppData {
         loadUsers(fromFile: .admins)
         loadUsers(fromFile: .patients)
         loadUsers(fromFile: .facilities)
-        loadServices()
+        loadServices(fromFile: .packages)
+        loadServices(fromFile: .tests)
         loadBookings()
     }
     
@@ -61,13 +63,21 @@ extension AppData {
             print("could not write users")
         }
     }
-    fileprivate static func saveServices() {
-        guard services.count > 0 else {return}
-        let archiveURL = archiveURL(.services)
+    fileprivate static func saveServices(toFile: FileName) {
+        let archiveURL = archiveURL(toFile)
         let propertyListEncoder = PropertyListEncoder()
         do {
-            let encodedData = try propertyListEncoder.encode(services)
-            try encodedData.write(to: archiveURL, options: .noFileProtection)
+            if toFile == .tests {
+                guard tests.count > 0 else {return}
+                let encodedData = try propertyListEncoder.encode(tests)
+                try encodedData.write(to: archiveURL, options: .noFileProtection)
+            } else if toFile == .packages {
+                guard packages.count > 0 else {return}
+                let encodedData = try propertyListEncoder.encode(packages)
+                try encodedData.write(to: archiveURL, options: .noFileProtection)
+            }
+//            let encodedData = try propertyListEncoder.encode(services)
+//            try encodedData.write(to: archiveURL, options: .noFileProtection)
         } catch EncodingError.invalidValue {
             print("could not encode services")
         } catch {
@@ -115,14 +125,23 @@ extension AppData {
             print("could not load data: \(error)")
         }
     }
-    fileprivate static func loadServices() {
-        let archiveURL = archiveURL(.services)
+    fileprivate static func loadServices(fromFile: FileName) {
+        let archiveURL = archiveURL(fromFile)
         let propertyListDecoder = PropertyListDecoder()
         guard let retrievedData = try? Data(contentsOf: archiveURL) else { return }
         do {
-            var decodedData: [MedicalService] = []
-            decodedData = try propertyListDecoder.decode([MedicalService].self, from: retrievedData)
-            services.append(contentsOf: decodedData)
+            if fromFile == .tests {
+                var decodedData: [Test] = []
+                decodedData = try propertyListDecoder.decode([Test].self, from: retrievedData)
+                tests.append(contentsOf: decodedData)
+            } else if fromFile == .packages {
+                var decodedData: [Package] = []
+                decodedData = try propertyListDecoder.decode([Package].self, from: retrievedData)
+                packages.append(contentsOf: decodedData)
+            }
+//            var decodedData: [MedicalService] = []
+//            decodedData = try propertyListDecoder.decode([MedicalService].self, from: retrievedData)
+//            services.append(contentsOf: decodedData)
         } catch {
             print("could not load data: \(error)")
         }

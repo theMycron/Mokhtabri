@@ -13,6 +13,8 @@ class AppData {
     static var admin: [User] = []
     static var facilities: [MedicalFacility] = []
     static var services: [MedicalService] = []
+    static var tests: [Test] = [test1,test2,test3]
+    static var packages: [Package] = [Pack1,Pack2,Pack3]
     static var bookings: [Booking] = []
     static var categories: [Category] = []
     // with sample data
@@ -119,13 +121,13 @@ class AppData {
         
         
         Booking(forPatient: patient1
-                , ofMedicalService: test2,bookingDate: DateComponents(calendar: Calendar.current, year: 2023, month: 2, day: 15)),
+                , ofMedicalService: Pack2 ,bookingDate: DateComponents(calendar: Calendar.current, year: 2023, month: 2, day: 15)),
         
         
         Booking(forPatient: patient1
                 , ofMedicalService: test3,bookingDate: DateComponents(calendar: Calendar.current, year: 2023, month: 3, day: 20)),
         
-        Booking(forPatient: pat3, ofMedicalService: test4, bookingDate: DateComponents(calendar: Calendar.current, year: 2024, month: 09, day: 17))
+        Booking(forPatient: pat3, ofMedicalService: Pack1, bookingDate: DateComponents(calendar: Calendar.current, year: 2024, month: 09, day: 17))
     ]
     
 
