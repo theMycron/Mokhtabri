@@ -116,11 +116,7 @@ class AdminEditTableViewController: UITableViewController, UIImagePickerControll
         
     }
     
-    func displayError(title: String, message: String) {
-        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default))
-        present(alert, animated: true)
-    }
+    
     
     func validateFields() -> Bool {
         // create new facility and save, show alert if data is invalid

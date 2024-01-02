@@ -62,9 +62,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
             return
         }
         
-      
-        
-       
         if passwordTxt.text?.isEmpty == true{
             //prompt an alert to the user
             let alert = UIAlertController(title: "Empty Field", message: "Please Enter Your Password", preferredStyle: .alert)
@@ -109,23 +106,16 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     }
     
     func login(){
-        
-     
         //force unwrap tp avoid the crash
-        Auth.auth().signIn(withEmail: emailTxt.text!, password: passwordTxt.text!) { [weak self] authResult, errorMessgae in
-            
-            
+        Auth.auth().signIn(withEmail: emailTxt.text!, password: passwordTxt.text!) { [weak self] authResult, errorMessage in
             guard self != nil else {return}
             
-            if let errorMessgae = errorMessgae{
-                print(errorMessgae.localizedDescription)
-                
-               
+            if let errorMessage = errorMessage{
+                print(errorMessage.localizedDescription)
             }
             //double check the information
             self!.checkUserInfo()
         }
-        
     }
     //double check that the user logged in and have information
     func checkUserInfo(){
@@ -137,18 +127,35 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
 
             let viewControllerIdentifier: String
             var isTabBarController: Bool = true
-
-            if email.contains("admin@gmail"){
+            
+            //find the email of the user in the AppData
+            let allUsers = AppData.admin + AppData.patients + AppData.facilities
+            let matchingUser = allUsers.filter { $0.username == email } // find email
+            // display error if no matching user found
+            // assume that all users have unique emails
+            guard matchingUser.count > 0 else {
+                displayError(title: "Email Not Found", message: "The email you entered was not found in the system. Please double check your email.")
+                return
+            }
+            let loggedInUser = matchingUser[0]
+            
+            // set logged in user in appdata to corresponding user type and select proper context for them
+            if loggedInUser.userType == .admin {
+                AppData.loggedInUser = loggedInUser
                 viewControllerIdentifier = "AdminView"
                 // admin screen has no tab bar controller, so do not instantiate as tab bar controller
                 isTabBarController = false
-            } else if email.contains("@mokhtabri"){
+            } else if loggedInUser is MedicalFacility {
+                AppData.loggedInUser = loggedInUser as! MedicalFacility
                 viewControllerIdentifier = "LabTabBarController"
-            } else {
+            } else if loggedInUser is Patient {
+                AppData.loggedInUser = loggedInUser as! Patient
                 viewControllerIdentifier = "PatientTabBarController"
+            } else {
+                fatalError("Invalid user type, could not log in")
             }
             
-            
+            // take user to their corresponding context
             let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
             if isTabBarController {
                 let viewController = mainStoryboard.instantiateViewController(withIdentifier: viewControllerIdentifier) as! UITabBarController
