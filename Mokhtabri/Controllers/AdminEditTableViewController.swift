@@ -169,6 +169,10 @@ class AdminEditTableViewController: UITableViewController, UIImagePickerControll
             displayError(title: "Invalid Email", message: "Please enter a valid email address for the facility (ending in @mokhtabri.com)")
             return false
         }
+        guard !AppData.isEmailInUse(email: username) else {
+            displayError(title: "Email In Use", message: "The email you entered is being used by another user. Please try a different email.")
+            return false
+        }
         
         guard let password: String = txtPassword.text,
               !password.isEmpty else {
@@ -189,7 +193,7 @@ class AdminEditTableViewController: UITableViewController, UIImagePickerControll
         
         
         
-        // if editing an existing facility, save id to replace it
+        // if editing an existing facility, save id to replace it later
         if let facility = facility {
             oldId = facility.uuid
         }
@@ -198,7 +202,7 @@ class AdminEditTableViewController: UITableViewController, UIImagePickerControll
             facility!.uuid = oldId // replace new uuid with old one if editing to ensure they are the same facility
         }
         
-        
+        // upload image
         if !uploadImageToFirebase() {
             return false
         }

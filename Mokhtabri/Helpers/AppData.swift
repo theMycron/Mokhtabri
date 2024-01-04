@@ -82,6 +82,17 @@ class AppData {
         }
     }
     
+    // return true if email already exists, used for registering a new user
+    static func isEmailInUse(email: String) -> Bool {
+        var inUse: Bool = false
+        let allUsers: [User] = AppData.admin + AppData.facilities + AppData.patients
+        let matchingUsers: [User] = allUsers.filter{ $0.username == email }
+        if (matchingUsers.count > 0) {
+            inUse = true
+        }
+        return inUse
+    }
+    
     /*
      For user deletion, Ms. Maleeha only allowed deletion if the user did not have
      a relationship with another object. In our case, that would if a patient had a booking.
