@@ -243,7 +243,7 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <segue destination="rMP-c3-mMW" kind="presentation" destinationCreationSelector="selectTestsSegue:" id="2Q7-4a-3wa"/>
+                                            <segue destination="xSU-aX-gNJ" kind="presentation" id="JeX-Vo-MTH"/>
                                         </connections>
                                     </tableViewCell>
                                 </cells>
@@ -425,7 +425,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bgQ-pZ-sJt" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6009.9236641221369" y="-181.69014084507043"/>
+            <point key="canvasLocation" x="5167" y="-196"/>
         </scene>
         <!--Medical Services-->
         <scene sceneID="B5B-b2-boO">
@@ -535,24 +535,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mFb-EU-vy5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1947" y="-202"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="Cfl-4I-sMV">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="rMP-c3-mMW" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="U5b-r6-kIw">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="56"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="xSU-aX-gNJ" kind="relationship" relationship="rootViewController" id="OIk-MQ-Yhi"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="vWv-BO-eTD" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="5083.2061068702287" y="-181.69014084507043"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>

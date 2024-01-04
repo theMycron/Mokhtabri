@@ -309,7 +309,7 @@ class LabEditTableTableViewController: UITableViewController, UIAdaptivePresenta
     }
     
     func getImageFromFirebase() {
-        guard let service = service,
+        guard let service: Package = service as? Package,
                 let downloadURL = service.imageDownloadURL else {return}
         // Use KingFisher library to store and cache the image
         imgDisplay.kf.indicatorType = .activity
