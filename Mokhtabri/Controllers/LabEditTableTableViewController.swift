@@ -57,7 +57,7 @@ class LabEditTableTableViewController: UITableViewController, UIAdaptivePresenta
         
         if service is Test{
             let test: Test = service as! Test
-            txtCategory.text = test.category.name
+            txtCategory.text = test.category
             segmentedControl.selectedSegmentIndex = 0
         }
         if service is Package{
@@ -131,6 +131,9 @@ class LabEditTableTableViewController: UITableViewController, UIAdaptivePresenta
         let price: Float? = Float(txtPhone.text ?? "")
         let description :String? = txtDescription.text
         let instructions :String? = txtInstruction.text
+        let category: String? = txtCategory.text
+        let expiryDate: Date = DateExpiry.date
+        var expiryDateComponents: DateComponents = Calendar.current.dateComponents(in: Calendar.current.timeZone, from: expiryDate)
         var selectedServiceType: MedicalService.ServiceType? {
            switch segmentedControl.selectedSegmentIndex {
            case 0:
@@ -148,7 +151,13 @@ class LabEditTableTableViewController: UITableViewController, UIAdaptivePresenta
         if let facility = service {
             oldId = facility.id
         }
-        service = MedicalService(name: name ?? "", price: price ?? 0.0 , description: description ?? "", instructions: instructions ?? "", forMedicalFacility: AppData.alhilal, serviceType : selectedServiceType! )
+        if (selectedServiceType == .test) {
+            service = Test(category: category!,name: name ?? "", price: price ?? 0.0 , description: description ?? "", instructions: instructions ?? "", forMedicalFacility: AppData.alhilal, serviceType : selectedServiceType! )
+            // TODO: change facility to logged in facility
+        } else if (selectedServiceType == .package) {
+            service = Package(expiryDate: expiryDateComponents, tests: [],name: name ?? "", price: price ?? 0.0 , description: description ?? "", instructions: instructions ?? "", forMedicalFacility: AppData.alhilal, serviceType : selectedServiceType! )
+            uploadImageToFirebase()
+        }
         
         
         if let oldId = oldId {
@@ -291,16 +300,20 @@ class LabEditTableTableViewController: UITableViewController, UIAdaptivePresenta
                 self.present(alert, animated: true)
             } else {
                 // no errors, add imagePath to facility
-                storageRef.downloadURL(completion: {(url, error) in
-                    if error != nil {
-                        let alert = UIAlertController(title: "Image Upload Failed", message: "The image could not be uploaded to the server.", preferredStyle: .alert)
-                        alert.addAction(UIAlertAction(title: "OK", style: .default))
-                        self.present(alert, animated: true)
-                    } else if let downloadURL = url {
-                        self.service!.imageDownloadURL = downloadURL
-                        // update facility in appdata
-                        AppData.editService(service: self.service!)
-                    }
+                storageRef.downloadURL(completion: { result in
+                   switch result {
+                   case .failure( _):
+                       let alert = UIAlertController(title: "Image Upload Failed", message: "The image could not be uploaded to the server.", preferredStyle: .alert)
+                       alert.addAction(UIAlertAction(title: "OK", style: .default))
+                       self.present(alert, animated: true)
+                   case .success(let url):
+                       if (self.service is Package) {
+                           var package = self.service as! Package
+                           package.imageDownloadURL = url
+                           // update facility in appdata
+                           AppData.editService(service: package)
+                       }
+                   }
                 })
             }
         }

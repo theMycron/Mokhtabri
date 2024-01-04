@@ -27,8 +27,8 @@ class MedicalService: Codable, Equatable, Comparable, CustomStringConvertible {
     }
     
     enum ServiceType:  String, Codable {
-       case test = "Test"
-       case package = "Package"
+        case test = "Test"
+        case package = "Package"
     }
     enum CodingKeys: Codable, CodingKey {
         case id, name, price, description, instructions, forMedicalFacility, image, serviceType // Include 'image' in the CodingKeys
@@ -41,8 +41,6 @@ class MedicalService: Codable, Equatable, Comparable, CustomStringConvertible {
         self.serviceDescription = description
         self.instructions = instructions
         self.forMedicalFacility = forMedicalFacility
-        self.image = nil // Initialize the image property
-        self.imageDownloadURL = image 
         self.serviceType = serviceType
     }
     
@@ -64,10 +62,8 @@ class MedicalService: Codable, Equatable, Comparable, CustomStringConvertible {
         try container.encode(instructions, forKey: .instructions)
         try container.encode(forMedicalFacility, forKey: .forMedicalFacility)
         try container.encode(serviceType, forKey: .serviceType)
-        try container.encode(encodeImage(), forKey: .image)
-        try container.encode(imageDownloadURL, forKey: .image)
     }
-
+    
     required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.id = try container.decode(UUID.self, forKey: .id)
@@ -77,8 +73,7 @@ class MedicalService: Codable, Equatable, Comparable, CustomStringConvertible {
         self.instructions = try container.decode(String.self, forKey: .instructions)
         self.forMedicalFacility = try container.decode(MedicalFacility.self, forKey: .forMedicalFacility)
         self.serviceType = ServiceType(rawValue: try container.decode(String.self, forKey: .serviceType)) ?? .test
-        self.serviceType = ServiceType(rawValue: try container.decode(String.self, forKey: .serviceType)) ?? .test
-        self.imageDownloadURL = try container.decode(URL?.self, forKey: .image)
         
     }
     
+}

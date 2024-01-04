@@ -82,29 +82,52 @@ class AppData {
     }
     
     //this method to manage services
-    static func getService(serviceID: UUID) -> MedicalService? {
-       return services.first(where: { $0.id == serviceID })
-    }
+//    static func getService(serviceID: UUID) -> MedicalService? {
+//       return services.first(where: { $0.id == serviceID })
+//    }
 
     static func addService(service: MedicalService) {
-       services.append(service)
-       saveData()
+        if (service is Test) {
+            tests.append(service as! Test)
+            saveData()
+        } else if (service is Package) {
+            packages.append(service as! Package)
+            saveData()
+        }
     }
 
     static func editService(service: MedicalService) {
-       if let serviceIndex = services.firstIndex(of: service) {
-           services.remove(at: serviceIndex)
-           services.insert(service, at: serviceIndex)
-           saveData()
-       }
+        if (service is Test) {
+            let test = service as! Test
+            if let serviceIndex = tests.firstIndex(of: test) {
+                tests.remove(at: serviceIndex)
+                tests.insert(test, at: serviceIndex)
+                saveData()
+            }
+        } else if (service is Package) {
+            let package = service as! Package
+            if let serviceIndex = packages.firstIndex(of: package) {
+                packages.remove(at: serviceIndex)
+                packages.insert(package, at: serviceIndex)
+                saveData()
+            }
+        }
     }
 
     static func deleteService(service: MedicalService) -> Bool {
-       if let serviceIndex = services.firstIndex(of: service) {
-           services.remove(at: serviceIndex)
-           saveData()
-           return true
-       }
+        if (service is Test) {
+            if let serviceIndex = tests.firstIndex(of: service as! Test) {
+                tests.remove(at: serviceIndex)
+                saveData()
+                return true
+            }
+        } else if (service is Package) {
+            if let serviceIndex = packages.firstIndex(of: service as! Package) {
+                packages.remove(at: serviceIndex)
+                saveData()
+                return true
+            }
+        }
        return false
     }
     /*
@@ -165,17 +188,17 @@ class AppData {
      
     static var royal = MedicalFacility(name: "Royal Bahrain Hospital", phone: "17246800", city: "Salmaniya", website: "www.royalbarainhospital.com", alwaysOpen: true, type: .hospital, openingTime: DateComponents(calendar: Calendar.current, hour: 0, minute: 0), closingTime: DateComponents(calendar: Calendar.current, hour: 0, minute: 0), username: "royal", password: "1432")
     
-    static var test1 = Test(category: Category(name: "Blood Test"), name: "VitaminB12", price: 10, description: "blood test for vitaminb12", instructions: "fasting 8-12 hours prior is mandatory", forMedicalFacility:  alhilal , serviceType: MedicalService.ServiceType(rawValue: "Test")!)
+    static var test1 = Test(category: "Blood Test", name: "VitaminB12", price: 10, description: "blood test for vitaminb12", instructions: "fasting 8-12 hours prior is mandatory", forMedicalFacility:  alhilal , serviceType: MedicalService.ServiceType(rawValue: "Test")!)
     
-    static var test2 =  Test(category: Category(name: "Viral Test"), name: "Covid 19 PCR", price: 15, description: "Covid 19 Test", instructions: "None", forMedicalFacility: alhilal , serviceType: MedicalService.ServiceType(rawValue: "Test")!)
+    static var test2 =  Test(category: "Viral Test", name: "Covid 19 PCR", price: 15, description: "Covid 19 Test", instructions: "None", forMedicalFacility: alhilal , serviceType: MedicalService.ServiceType(rawValue: "Test")!)
     
-    static var test3 = Test(category: Category(name: "Blood Test"), name: "Vitamin D", price: 10, description: "blood test for vitamin D", instructions: "fasting 8-12 hours prior is mandatory", forMedicalFacility:  alhilal , serviceType: MedicalService.ServiceType(rawValue: "Test")!)
+    static var test3 = Test(category: "Blood Test", name: "Vitamin D", price: 10, description: "blood test for vitamin D", instructions: "fasting 8-12 hours prior is mandatory", forMedicalFacility:  alhilal , serviceType: MedicalService.ServiceType(rawValue: "Test")!)
     
     static var test4 = Package(expiryDate: DateComponents(calendar: Calendar.current, day: 29), tests: [test1,test3], name: "ALH Vitamin D & B12", price: 5, description: "Dual", instructions: "Fasting is mandatory", forMedicalFacility: alhilal , serviceType: MedicalService.ServiceType(rawValue: "Test")!)
     
-    static var test5 = Test(category: Category(name: "Blood Test"), name: "RBC Level", price: 4, description: "Blood test to check the Red Blood Cells level in the blood", instructions: "No instructions", forMedicalFacility: alsalam , serviceType: MedicalService.ServiceType(rawValue: "Test")!)
+    static var test5 = Test(category: "Blood Test", name: "RBC Level", price: 4, description: "Blood test to check the Red Blood Cells level in the blood", instructions: "No instructions", forMedicalFacility: alsalam , serviceType: MedicalService.ServiceType(rawValue: "Test")!)
     
-    static var test6 = Test(category: Category(name: "Blood Test"), name: "Iron and HB level", price: 4, description: "Blood test to check the Iron and Haemoglobin level", instructions: "No instructions", forMedicalFacility: alsalam, serviceType: MedicalService.ServiceType(rawValue: "Test")!)
+    static var test6 = Test(category: "Blood Test", name: "Iron and HB level", price: 4, description: "Blood test to check the Iron and Haemoglobin level", instructions: "No instructions", forMedicalFacility: alsalam, serviceType: MedicalService.ServiceType(rawValue: "Test")!)
     
     static var Pack1 = Package(expiryDate: DateComponents(calendar: Calendar.current, day: 29), tests: [test1,test2], name: "Vitamin B12 and Covid 19", price: 8, description: "Covid test and blood test for Vitamin B12", instructions: "Fasting is mandatory for 8 - 10 hours", forMedicalFacility: BML, serviceType: MedicalService.ServiceType(rawValue: "Package")!)
     

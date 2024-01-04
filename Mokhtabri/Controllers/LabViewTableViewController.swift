@@ -57,9 +57,9 @@ class LabViewTableViewController: UITableViewController, UISearchResultsUpdating
        switch scope {
        
        case 0:
-           displayedServices = AppData.services.filter { $0.serviceType == .test }
+           displayedServices = AppData.tests
        case 1:
-           displayedServices = AppData.services.filter { $0.serviceType == .package }
+           displayedServices = AppData.packages
        default:
            return
        }
@@ -70,11 +70,11 @@ class LabViewTableViewController: UITableViewController, UISearchResultsUpdating
         let scope = search.searchBar.selectedScopeButtonIndex
         if let query = searchController.searchBar.text?.lowercased().trimmingCharacters(in: .whitespaces), !query.isEmpty {
             if scope == 0 {
-                displayedServices = AppData.services.filter{
+                displayedServices = AppData.tests.filter{
                     return $0.name.lowercased().contains(query)
                 }
             } else if scope == 1 {
-                displayedServices = AppData.services.filter{
+                displayedServices = AppData.packages.filter{
                    return $0.name.lowercased().contains(query) //|| $0.city.lowercased().contains(query))
                 }
             } /*else if scope == 2 {

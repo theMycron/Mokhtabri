@@ -47,7 +47,7 @@ class Package: MedicalService {
         self.tests = tests
         self.imageDownloadURL = imageDownloadURL // Initialize the image property
         super.init(name: name, price: price, description: description, instructions: instructions, forMedicalFacility: forMedicalFacility, serviceType: serviceType)
-    
+    }
     override func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(expiryDate, forKey: .expiryDate)
