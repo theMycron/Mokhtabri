@@ -8,12 +8,12 @@ class MedicalService: Codable, Equatable, Comparable, CustomStringConvertible {
     var id: UUID
     var name: String
     var price: Float
-    var serviceDescription: String
+    var serviceDescription: String // different from the CustomStringCovertible description
     var instructions: String
     var forMedicalFacility: MedicalFacility
-    var image: Data? // Property to store an image
     var serviceType: ServiceType
-    var imageDownloadURL: URL?
+    
+    
     var description: String {
         return """
                 -- Service Info --
@@ -67,7 +67,7 @@ class MedicalService: Codable, Equatable, Comparable, CustomStringConvertible {
         try container.encode(encodeImage(), forKey: .image)
         try container.encode(imageDownloadURL, forKey: .image)
     }
-    
+
     required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.id = try container.decode(UUID.self, forKey: .id)
@@ -77,21 +77,8 @@ class MedicalService: Codable, Equatable, Comparable, CustomStringConvertible {
         self.instructions = try container.decode(String.self, forKey: .instructions)
         self.forMedicalFacility = try container.decode(MedicalFacility.self, forKey: .forMedicalFacility)
         self.serviceType = ServiceType(rawValue: try container.decode(String.self, forKey: .serviceType)) ?? .test
+        self.serviceType = ServiceType(rawValue: try container.decode(String.self, forKey: .serviceType)) ?? .test
         self.imageDownloadURL = try container.decode(URL?.self, forKey: .image)
         
-        // Decode image as base64-encoded data
-        if let imageBase64 = try container.decodeIfPresent(String.self, forKey: .image) {
-            self.image = Data(base64Encoded: imageBase64)
-        } else {
-            self.image = nil
-        }
     }
     
-    // Encode the image as base64-encoded string
-    func encodeImage() -> String? {
-        if let image = self.image {
-            return image.base64EncodedString()
-        }
-        return nil
-    }
-}

@@ -8,13 +8,13 @@
 import Foundation
 
 class Test: MedicalService {
-    var category: Category
+    var category: String
     
     override var description: String {
         return """
                 \(super.description)
                 Type: Test
-                Category: \(category.name)
+                Category: \(category)
                 """
     }
     
@@ -27,9 +27,18 @@ class Test: MedicalService {
         super.init(name: name, price: price, description: description, instructions: instructions, forMedicalFacility: forMedicalFacility, serviceType: serviceType)
     }
     
+    override func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(category, forKey: .category)
+        let superEncoder = container.superEncoder()
+        try super.encode(to: superEncoder)
+    }
+    
+    // required custom decoder
     required init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
-        self.category = try values.decodeIfPresent(Category.self, forKey: .category)!
-        try super.init(from: decoder)
+        self.category = try values.decode(String.self, forKey: .category)
+        let superDecoder = try values.superDecoder()
+        try super.init(from: superDecoder)
     }
 }

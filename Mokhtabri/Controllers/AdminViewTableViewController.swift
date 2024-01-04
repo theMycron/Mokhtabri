@@ -14,7 +14,20 @@ class AdminViewTableViewController: UITableViewController, UISearchResultsUpdati
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        // code to
+//        let urls = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+//        let documentsDirectory = urls[0]
+        
+        // simulator appdata in: file:///Users/202100937/Library/Developer/CoreSimulator/Devices/5E73E433-8F87-439B-9657-088DFF95DA7C/data/Containers/Data/Application/A1376A02-B099-497C-9014-9CE60A3D3B54/Documents/
+        // TESTING PERSISTENCE
+//        AppData.bookings = AppData.sampleBookings
+//        AppData.tests = AppData.listOfTests.compactMap {$0 as? Test}
+//        AppData.packages = AppData.listOfTests.compactMap {$0 as? Package}
+//        AppData.facilities = AppData.labs
+//        AppData.saveData()
+        
+        
+        
         embedSearch()
         
         // remove later
