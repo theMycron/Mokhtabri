@@ -68,7 +68,7 @@ class PatientBookTableViewController: UITableViewController {
                 let selectedDateComponents = calendar.dateComponents([.year, .month, .day], from: selectedDate)
                 let newBooking = Booking(forPatient: self.SamplePatient, ofMedicalService: self.sampleTest, bookingDate: selectedDateComponents)
                 AppData.bookings.append(newBooking)
-                self.testName.text = "\(AppData.bookings.count)"
+               
             }
         }else{
             confirmation(title: "Invalid", message: "Please select Valid Date"){
