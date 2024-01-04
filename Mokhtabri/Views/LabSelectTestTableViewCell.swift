@@ -24,6 +24,10 @@ class LabSelectTestTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
+        super.setSelected(selected, animated: animated)
+        self.accessoryType = selected ? .checkmark : .none
     }
+    
+     
 
 }

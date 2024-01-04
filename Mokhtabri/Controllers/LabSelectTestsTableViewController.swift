@@ -26,7 +26,8 @@ class LabSelectTestsTableViewController: UITableViewController {
     var displayedTests: [Test]
     override func viewDidLoad() {
         super.viewDidLoad()
-
+            tableView.allowsMultipleSelection = true
+            tableView.allowsMultipleSelectionDuringEditing = true
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
