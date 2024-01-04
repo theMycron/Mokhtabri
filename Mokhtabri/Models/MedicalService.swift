@@ -1,6 +1,10 @@
 import Foundation
 
 class MedicalService: Codable, Equatable, Comparable, CustomStringConvertible {
+    var defaultFirebaseImageFilename: String {
+        // format filename with lowercased letters and underscores instead of spaces
+        return "serviceImages/\(name.lowercased().replacingOccurrences(of: " ", with: "_"))_\(description.lowercased().replacingOccurrences(of: " ", with: "_")).jpg"
+    }
     var id: UUID
     var name: String
     var price: Float
@@ -9,7 +13,7 @@ class MedicalService: Codable, Equatable, Comparable, CustomStringConvertible {
     var forMedicalFacility: MedicalFacility
     var image: Data? // Property to store an image
     var serviceType: ServiceType
-    
+    var imageDownloadURL: URL?
     var description: String {
         return """
                 -- Service Info --
@@ -30,7 +34,7 @@ class MedicalService: Codable, Equatable, Comparable, CustomStringConvertible {
         case id, name, price, description, instructions, forMedicalFacility, image, serviceType // Include 'image' in the CodingKeys
     }
     
-    init(name: String, price: Float, description: String, instructions: String, forMedicalFacility: MedicalFacility, serviceType: ServiceType) {
+    init(name: String, price: Float, description: String, instructions: String, forMedicalFacility: MedicalFacility, serviceType: ServiceType, image: URL? = nil) {
         self.id = UUID()
         self.name = name
         self.price = price
@@ -38,6 +42,7 @@ class MedicalService: Codable, Equatable, Comparable, CustomStringConvertible {
         self.instructions = instructions
         self.forMedicalFacility = forMedicalFacility
         self.image = nil // Initialize the image property
+        self.imageDownloadURL = image 
         self.serviceType = serviceType
     }
     
@@ -60,6 +65,7 @@ class MedicalService: Codable, Equatable, Comparable, CustomStringConvertible {
         try container.encode(forMedicalFacility, forKey: .forMedicalFacility)
         try container.encode(serviceType, forKey: .serviceType)
         try container.encode(encodeImage(), forKey: .image)
+        try container.encode(imageDownloadURL, forKey: .image)
     }
     
     required init(from decoder: Decoder) throws {
@@ -71,6 +77,7 @@ class MedicalService: Codable, Equatable, Comparable, CustomStringConvertible {
         self.instructions = try container.decode(String.self, forKey: .instructions)
         self.forMedicalFacility = try container.decode(MedicalFacility.self, forKey: .forMedicalFacility)
         self.serviceType = ServiceType(rawValue: try container.decode(String.self, forKey: .serviceType)) ?? .test
+        self.imageDownloadURL = try container.decode(URL?.self, forKey: .image)
         
         // Decode image as base64-encoded data
         if let imageBase64 = try container.decodeIfPresent(String.self, forKey: .image) {

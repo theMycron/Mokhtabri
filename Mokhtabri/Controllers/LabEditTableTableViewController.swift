@@ -6,8 +6,9 @@
 //
 
 import UIKit
+import FirebaseStorage
 
-class LabEditTableTableViewController: UITableViewController, UIAdaptivePresentationControllerDelegate {
+class LabEditTableTableViewController: UITableViewController, UIAdaptivePresentationControllerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
     @IBOutlet weak var btnSave: UIBarButtonItem!
     
@@ -55,9 +56,15 @@ class LabEditTableTableViewController: UITableViewController, UIAdaptivePresenta
         txtInstruction.text = service.instructions
         
         if service is Test{
-            var test: Test = service as! Test
+            let test: Test = service as! Test
             txtCategory.text = test.category.name
         }
+        if service is Package{
+            let package: Package = service as! Package
+            if let expiryDateComponents = package.expiryDate {
+               let date = Calendar.current.date(from: expiryDateComponents)
+                DateExpiry.date = date ?? date!
+            }        }
      
     }
     
@@ -239,5 +246,102 @@ class LabEditTableTableViewController: UITableViewController, UIAdaptivePresenta
         // Pass the selected object to the new view controller.
     }
     */
+    
+    func uploadImageToFirebase() -> Bool {
+        // display warning if no image was selected, can proceed with no image
+        var cancelled: Bool = false
+        if let image = imgDisplay.image,
+           image.isEqual(UIImage(named: "noPhoto")){
+            let alert = UIAlertController(title: "Missing Image", message: "Are you sure you want to save without an image?", preferredStyle: .alert)
+            // if user wants to add image, cancel upload
+            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: {_ in
+                cancelled = true
+            }))
+            // if user wants to continue without image, cancel upload and consider it successful
+            alert.addAction(UIAlertAction(title: "Continue", style: .default))
+            self.present(alert, animated: true)
+            if cancelled {
+                return false
+            }
+            return true
+        }
+        // dont continue if user wants to choose image
+        
+        // get selected image and upload to firebase
+        guard let image = imgDisplay.image?.jpegData(compressionQuality: 0.9) else {return false}
+        // format filename with lowercased letters and underscores instead of spaces
+        let filename = service!.defaultFirebaseImageFilename
+        
+        let storageRef = Storage.storage().reference().child(filename)
+        // upload image
+        // This function is ASYNCRONOUS, which means it may take time to upload while the app continues running
+        _ = storageRef.putData(image) {(metadata, error) in
+            if error != nil {
+                // handle errors
+                let alert = UIAlertController(title: "Image Upload Failed", message: "The image could not be uploaded to the server.", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "OK", style: .default))
+                self.present(alert, animated: true)
+            } else {
+                // no errors, add imagePath to facility
+                storageRef.downloadURL(completion: {(url, error) in
+                    if error != nil {
+                        let alert = UIAlertController(title: "Image Upload Failed", message: "The image could not be uploaded to the server.", preferredStyle: .alert)
+                        alert.addAction(UIAlertAction(title: "OK", style: .default))
+                        self.present(alert, animated: true)
+                    } else if let downloadURL = url {
+                        self.service!.imageDownloadURL = downloadURL
+                        // update facility in appdata
+                        AppData.editService(service: self.service!)
+                    }
+                })
+            }
+        }
+        
+        return true
+    }
+    
+    func getImageFromFirebase() {
+        guard let service = service,
+                let downloadURL = service.imageDownloadURL else {return}
+        // Use KingFisher library to store and cache the image
+        imgDisplay.kf.indicatorType = .activity
+        imgDisplay.kf.setImage(with: downloadURL)
+    }
+    
+    func showImagePickerOptions() {
+        let alert = UIAlertController(title: "Select Image", message: "Select image from library or capture from camera", preferredStyle: .actionSheet)
+        let cameraAction = UIAlertAction(title: "Camera", style: .default) { [weak self] (action) in
+            guard let self = self else {return}
+            let cameraPicker = self.imagePicker(sourceType: .camera)
+            cameraPicker.delegate = self
+            self.present(cameraPicker, animated: true)
+        }
+        
+        let libraryAction = UIAlertAction(title: "Library", style: .default) { [weak self] (action) in
+            guard let self = self else {return}
+            let libraryPicker = self.imagePicker(sourceType: .photoLibrary)
+            libraryPicker.delegate = self
+            self.present(libraryPicker, animated: true)
+        }
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+        alert.addAction(cameraAction)
+        alert.addAction(libraryAction)
+        alert.addAction(cancelAction)
+        self.present(alert, animated: true)
+    }
+    
+    func imagePicker(sourceType: UIImagePickerController.SourceType) -> UIImagePickerController {
+        let imagePicker = UIImagePickerController()
+        imagePicker.sourceType = sourceType
+        return imagePicker
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        let image = info[.originalImage] as!UIImage
+        imgDisplay.image = image
+        madeChanges()
+        self.dismiss(animated: true)
+    }
 
 }

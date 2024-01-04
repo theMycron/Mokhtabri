@@ -21,6 +21,7 @@ class LabSelectTestsTableViewController: UITableViewController {
     }
     
     let facility = AppData.alhilal
+
     
     
     var displayedTests: [Test]
