@@ -47,6 +47,12 @@ class AdminEditTableViewController: UITableViewController, UIImagePickerControll
     
     init?(coder: NSCoder, facility: MedicalFacility?) {
         self.facility = facility
+        
+//        var packages = [
+//            Package(expiryDate: <#T##DateComponents#>, tests: <#T##[Test]#>, name: <#T##String#>, price: <#T##Float#>, description: <#T##String#>, instructions: <#T##String#>, forMedicalFacility: <#T##MedicalFacility#>)
+//        ]
+//        AppData.packages.append(contentsOf: packages)
+        
         super.init(coder: coder)
     }
     

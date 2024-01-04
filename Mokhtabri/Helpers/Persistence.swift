@@ -19,6 +19,73 @@ extension AppData {
         return documentsDirectory.appendingPathComponent(fileName.rawValue).appendingPathExtension("plist")
     }
     
+    static func loadSampleData() {
+        // make sure there is no existing data before loading sample data
+        guard facilities.count > 0,
+              patients.count > 0,
+              bookings.count > 0,
+              admin.count > 0,
+              tests.count > 0,
+              packages.count > 0
+        else { return }
+        
+        // load facilities sample data
+        if let fileUrl = Bundle.main.url(forResource: "facilities", withExtension: "plist"),
+        let data = try? Data(contentsOf: fileUrl) {
+            let propertyListDecoder = PropertyListDecoder()
+            do {
+                let result: [MedicalFacility] = try propertyListDecoder.decode([MedicalFacility].self, from: data)
+                AppData.facilities = result
+            } catch {
+                print("could not load sample data: \(error)")
+            }
+        }
+        // load bookings sample data
+        if let fileUrl = Bundle.main.url(forResource: "bookings", withExtension: "plist"),
+        let data = try? Data(contentsOf: fileUrl) {
+            let propertyListDecoder = PropertyListDecoder()
+            do {
+                let result: [Booking] = try propertyListDecoder.decode([Booking].self, from: data)
+                AppData.bookings = result
+            } catch {
+                print("could not load sample data: \(error)")
+            }
+        }
+        // load patients sample data
+        if let fileUrl = Bundle.main.url(forResource: "patients", withExtension: "plist"),
+        let data = try? Data(contentsOf: fileUrl) {
+            let propertyListDecoder = PropertyListDecoder()
+            do {
+                let result: [Patient] = try propertyListDecoder.decode([Patient].self, from: data)
+                AppData.patients = result
+            } catch {
+                print("could not load sample data: \(error)")
+            }
+        }
+        // load tests sample data
+        if let fileUrl = Bundle.main.url(forResource: "tests", withExtension: "plist"),
+        let data = try? Data(contentsOf: fileUrl) {
+            let propertyListDecoder = PropertyListDecoder()
+            do {
+                let result: [Test] = try propertyListDecoder.decode([Test].self, from: data)
+                AppData.tests = result
+            } catch {
+                print("could not load sample data: \(error)")
+            }
+        }
+        // load packages sample data
+        if let fileUrl = Bundle.main.url(forResource: "packages", withExtension: "plist"),
+        let data = try? Data(contentsOf: fileUrl) {
+            let propertyListDecoder = PropertyListDecoder()
+            do {
+                let result: [Package] = try propertyListDecoder.decode([Package].self, from: data)
+                AppData.packages = result
+            } catch {
+                print("could not load sample data: \(error)")
+            }
+        }
+    }
+    
     // use this function to save data after any data manipulation happens
     static func saveData() {
         saveUsers(toFile: .admins)
@@ -38,6 +105,7 @@ extension AppData {
         loadServices(fromFile: .packages)
         loadServices(fromFile: .tests)
         loadBookings()
+        loadSampleData() // only loads if previous loads did not load anything (no data saved)
     }
     
     fileprivate static func saveUsers(toFile: FileName) {
