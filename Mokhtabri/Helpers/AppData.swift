@@ -24,6 +24,8 @@ class AppData {
     static var hospitals = [alhilal,alsalam,royal]
     static var labs: [MedicalFacility] = [BML, expMed, gulfLab, manara]
     
+    
+    
     static var loggedInUser: User?
     
     static func wipe() {
@@ -124,6 +126,8 @@ class AppData {
     
     static var pat3 = Patient(firstName: "Ahmed", lastName: "Faisal", phone: "33992299", cpr: "910200000", email: "AhFai@gmail.com", gender: Gender.male, dateOfBirth: DateComponents(calendar: Calendar.current, year: 1991, month: 04, day: 25), username: "AhmFAi", password: "87651234")
     
+    
+    
     //bookings sample
     static var sampleBookings = [
         
@@ -200,11 +204,12 @@ class AppData {
     
     static func load(){
         if bookings.isEmpty {
+            //TODO fix this later and add it as a constructor
             test1.storageLink = "gs://fir-testing-512eb.appspot.com/Vitamin-B12.jpg"
             Pack1.storageLink = "gs://fir-testing-512eb.appspot.com/covid19.webp"
             test2.storageLink = "gs://fir-testing-512eb.appspot.com/pcr.jpeg"
             Pack4.storageLink = "gs://fir-testing-512eb.appspot.com/packageImages/Immune-System.png"
-            
+            test3.storageLink = "gs://fir-testing-512eb.appspot.com/testImages/vitamind.jpeg"
             bookings = sampleBookings
            // sampleBookings[0].ofMedicalService.storageLink = "gs://fir-testing-512eb.appspot.com/Vitamin-B12.jpg"
             services = listOfTests

@@ -8,7 +8,7 @@
 import UIKit
 
 class LabHistoryTableViewController: UITableViewController, UISearchBarDelegate, UISearchResultsUpdating {
-    
+    var loggedInUser: User?
     func updateSearchResults(for searchController: UISearchController) {
         // let scope = searchController.searchBar.selectedScopeButtonIndex
         guard let term = searchController.searchBar.text?.lowercased() else {
@@ -73,12 +73,20 @@ class LabHistoryTableViewController: UITableViewController, UISearchBarDelegate,
         super.viewDidLoad()
         bookings = AppData.bookings
         categorizeBookings()
-        
-        
+
         
         
         // Set up the search controller
         embedSearch()
+        if AppData.loggedInUser == nil {
+            loggedInUser = AppData.facilities[0]
+        }else {
+            guard let user = AppData.loggedInUser else{
+                return
+            }
+            loggedInUser = user
+        }
+        
         //tableView.reloadData()
     }
     
@@ -141,6 +149,10 @@ class LabHistoryTableViewController: UITableViewController, UISearchBarDelegate,
             // Handle the case where one or more components are nil (optional)
             cell.bookingDate.text = "Booking date: N/A" // Or any other suitable placeholder
         }
+        guard let img = booking.ofMedicalService.photo else{
+            return cell
+        }
+        cell.photo.image = img
         
         return cell
     }
@@ -205,9 +217,12 @@ class LabHistoryTableViewController: UITableViewController, UISearchBarDelegate,
         
     }*/
     func categorizeBookings() {
-        activeBookings = bookings.filter { $0.status == .Active } // Replace .active with your actual status value for active bookings
-        completedBookings = bookings.filter { $0.status == .Completed } // Replace .completed with your actual status value for completed bookings
-        cancelledBookings = bookings.filter { $0.status == .Cancelled } // Replace .cancelled with your actual status value for cancelled bookings
+        guard let loggedInUser = loggedInUser else{
+            return
+        }
+        activeBookings = bookings.filter { $0.status == .Active && $0.ofMedicalService.forMedicalFacility == loggedInUser} // Replace .active with your actual status value for active bookings
+        completedBookings = bookings.filter { $0.status == .Completed && $0.ofMedicalService.forMedicalFacility == loggedInUser } // Replace .completed with your actual status value for completed bookings
+        cancelledBookings = bookings.filter { $0.status == .Cancelled && $0.ofMedicalService.forMedicalFacility == loggedInUser} // Replace .cancelled with your actual status value for cancelled bookings
     }
     
     override func viewDidAppear(_ animated: Bool) {

@@ -10,6 +10,7 @@ import UIKit
 class LabBookingInfoTableViewController: UITableViewController {
     
     
+    @IBOutlet weak var image: UIImageView!
     
     @IBOutlet weak var btnContent: UIView!
     
@@ -60,7 +61,7 @@ class LabBookingInfoTableViewController: UITableViewController {
     // MARK: - Table view data source
   
     func updateData(){
-        
+
         //take away optionals
         guard let price = cbooking?.ofMedicalService.price, let status = cbooking?.status,let patientF = cbooking?.forPatient.firstName, let patientL = cbooking?.forPatient.lastName, let openb = cbooking?.ofMedicalService.forMedicalFacility.alwaysOpen, let iden = cbooking?.forPatient.cpr, let phone = cbooking?.forPatient.phone, let city = cbooking?.ofMedicalService.forMedicalFacility.city, let date = cbooking?.bookingDate, let info = cbooking?.ofMedicalService.instructions else {
             return
@@ -102,7 +103,10 @@ class LabBookingInfoTableViewController: UITableViewController {
         if let priceString = format.string(from: NSNumber(value: price)) {
             priceLabel.text = "\(priceString)"
         }
-        
+        guard let img = cbooking?.ofMedicalService.photo else{
+            return
+        }
+        image.image = img
         
     }
   

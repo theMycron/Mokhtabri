@@ -13,7 +13,8 @@ class LabBookingTableViewCell: UITableViewCell {
         super.awakeFromNib()
         // Initialization code
     }
-
+    @IBOutlet weak var photo: UIImageView!
+    
     @IBOutlet weak var name: UILabel!
     
     @IBOutlet weak var bookingDate: UILabel!
