@@ -23,6 +23,7 @@ class PatientBookingTableViewController: UITableViewController, UISearchResultsU
         super.viewDidLoad()
         embedSearch()
         categorizeBookings()
+        //AppData.loadServicesImages(AppData)
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -80,7 +81,9 @@ class PatientBookingTableViewController: UITableViewController, UISearchResultsU
         cell.hospitalName.text = booking.ofMedicalService.forMedicalFacility.name
         cell.price.text = "\(booking.ofMedicalService.price) BHD"
         cell.type.text = "Test"
-        
+        if let img = booking.ofMedicalService.photo {
+            cell.img.image = img
+        }
         //gonna fix in a minute
        // if(booking.ofMedicalService.)
 

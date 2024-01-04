@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import Kingfisher
+import FirebaseStorage
 
 class PatientBookingTableViewCell: UITableViewCell {
 
@@ -25,5 +27,14 @@ class PatientBookingTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        self.imageView?.kf.cancelDownloadTask()  // Cancel the download task
+        self.imageView?.image = nil  // Reset the image to nil or a placeholder
+    }
+
+    
+    
+  
 
 }

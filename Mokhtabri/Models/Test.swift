@@ -9,7 +9,7 @@ import Foundation
 
 class Test: MedicalService {
     var category: String
-    
+    var imageDownloadURL: URL?
     override var description: String {
         return """
                 \(super.description)

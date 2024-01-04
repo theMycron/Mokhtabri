@@ -1,4 +1,5 @@
 import Foundation
+import UIKit
 
 class MedicalService: Codable, Equatable, Comparable, CustomStringConvertible {
     var id: UUID
@@ -7,7 +8,7 @@ class MedicalService: Codable, Equatable, Comparable, CustomStringConvertible {
     var serviceDescription: String // different from the CustomStringCovertible description
     var instructions: String
     var forMedicalFacility: MedicalFacility
-    
+    var photo: UIImage?
     var description: String {
         return """
                 -- Service Info --
@@ -19,7 +20,8 @@ class MedicalService: Codable, Equatable, Comparable, CustomStringConvertible {
                 Owned By Facility: \(forMedicalFacility.name)
                 """
     }
-    
+    //var imageDownloadURL: URL?
+    var storageLink: String?
 
     enum CodingKeys: Codable, CodingKey {
         case id, name, price, description, instructions, forMedicalFacility, image // Include 'image' in the CodingKeys
@@ -63,6 +65,7 @@ class MedicalService: Codable, Equatable, Comparable, CustomStringConvertible {
         self.forMedicalFacility = try container.decode(MedicalFacility.self, forKey: .forMedicalFacility)
 
     }
+    
     
     
 }

@@ -8,6 +8,7 @@
 import Foundation
 import FirebaseFirestore
 import FirebaseStorage
+import Kingfisher
 
 class AppData {
     static var admin: [User] = []
@@ -19,7 +20,7 @@ class AppData {
     static var categories: [Category] = []
     // with sample data
     static var patients: [Patient] = [patient1, patient2, pat3]
-    static var listOfTests = [test1,test2,test3,test4,test5,test6,Pack1,Pack2,Pack3]
+    static var listOfTests = [test1,test2,test3,test4,test5,test6,Pack1,Pack2,Pack3,Pack4]
     static var hospitals = [alhilal,alsalam,royal]
     static var labs: [MedicalFacility] = [BML, expMed, gulfLab, manara]
     
@@ -130,16 +131,17 @@ class AppData {
         Booking(forPatient: pat3, ofMedicalService: Pack1, bookingDate: DateComponents(calendar: Calendar.current, year: 2024, month: 09, day: 17))
     ]
     
-
+    
     
     static var alhilal = MedicalFacility(name: "ALHilal Hospital", phone: "12345689", city: "East Riffa", website: "Alhilal.com", alwaysOpen: false, type: .hospital, openingTime: DateComponents(calendar: Calendar.current, hour: 9, minute: 0), closingTime: DateComponents(calendar: Calendar.current, hour: 21, minute: 0), username: "alhilalER", password: "alhilal")
     
     
     static var alsalam = MedicalFacility(name: "Alsalam Hospital", phone: "13101010", city: "Riffa", website: "https://www.alsalam.care", alwaysOpen: true, type: .hospital, openingTime: DateComponents(calendar: Calendar.current, hour: 0, minute: 0), closingTime: DateComponents(calendar: Calendar.current, hour: 0, minute: 0), username: "alsalam", password: "1234")
-     
+    
     static var royal = MedicalFacility(name: "Royal Bahrain Hospital", phone: "17246800", city: "Salmaniya", website: "www.royalbarainhospital.com", alwaysOpen: true, type: .hospital, openingTime: DateComponents(calendar: Calendar.current, hour: 0, minute: 0), closingTime: DateComponents(calendar: Calendar.current, hour: 0, minute: 0), username: "royal", password: "1432")
     
     static var test1 = Test(category: "Blood Test", name: "VitaminB12", price: 10, description: "blood test for vitaminb12", instructions: "fasting 8-12 hours prior is mandatory", forMedicalFacility:  alhilal)
+    
     
     static var test2 =  Test(category: "Viral Test", name: "Covid 19 PCR", price: 15, description: "Covid 19 Test", instructions: "None", forMedicalFacility: alhilal)
     
@@ -150,6 +152,19 @@ class AppData {
     static var test5 = Test(category: "Blood Test", name: "RBC Level", price: 4, description: "Blood test to check the Red Blood Cells level in the blood", instructions: "No instructions", forMedicalFacility: alsalam)
     
     static var test6 = Test(category: "Blood Test", name: "Iron and HB level", price: 4, description: "Blood test to check the Iron and Haemoglobin level", instructions: "No instructions", forMedicalFacility: alsalam)
+    
+    
+    
+    static var test7 = Test(category: "Blood Test", name: "CBC Count", price: 3, description: "Blood test to check the CBC Count", instructions: "No instructions", forMedicalFacility: alsalam)
+    
+    static var test8 = Test(category: "Blood Test", name: "Immunogloblin A", price: 3, description: "Blood test to check the Immunogloblin A levels", instructions: "No instructions", forMedicalFacility: alsalam)
+    
+    static var test9 = Test(category: "Blood Test", name: "Immunogloblin G", price: 3, description: "Blood test to check the Immunogloblin G levels", instructions: "No instructions", forMedicalFacility: alsalam)
+    
+    static var test10 = Test(category: "Blood Test", name: "Immunogloblin M", price: 3, description: "Blood test to check the Immunogloblin M levels", instructions: "No instructions", forMedicalFacility: alsalam)
+    
+    static var Pack4 = Package(expiryDate: DateComponents(calendar: Calendar.current, day: 29), tests: [test7,test8,test9,test10], name: "Immune System Test", price: 10, description: "Check blood to determine health of immune system", instructions: "Fasting is mandatory for 8 - 10 hours", forMedicalFacility: alsalam)
+    
     
     static var Pack1 = Package(expiryDate: DateComponents(calendar: Calendar.current, day: 29), tests: [test1,test2], name: "Vitamin B12 and Covid 19", price: 8, description: "Covid test and blood test for Vitamin B12", instructions: "Fasting is mandatory for 8 - 10 hours", forMedicalFacility: BML)
     
@@ -169,15 +184,61 @@ class AppData {
     static var manara = MedicalFacility(name: "Manara Medical Laboratories", phone: "17722999", city: "Zinj", website: "https://www.eurofins.com/", alwaysOpen: false, type: .lab, openingTime: DateComponents(calendar: Calendar.current, hour: 8, minute: 0), closingTime: DateComponents(calendar: Calendar.current, hour: 20, minute: 0), username: "mmL", password: "manara123")
     
     
-
     
-
+    
+    
     
     static func load(){
         if bookings.isEmpty {
+            test1.storageLink = "gs://fir-testing-512eb.appspot.com/Vitamin-B12.jpg"
+            Pack1.storageLink = "gs://fir-testing-512eb.appspot.com/covid19.webp"
+            test2.storageLink = "gs://fir-testing-512eb.appspot.com/pcr.jpeg"
+            Pack4.storageLink = "gs://fir-testing-512eb.appspot.com/packageImages/Immune-System.png"
+            
             bookings = sampleBookings
+           // sampleBookings[0].ofMedicalService.storageLink = "gs://fir-testing-512eb.appspot.com/Vitamin-B12.jpg"
             services = listOfTests
             facilities = hospitals
             patients = [patient1]
+            loadServicesImages(){
+                
+            }
+            
         }
-    }}
+    }
+    
+    static func loadServicesImages(completion: @escaping () -> Void) {
+        let group = DispatchGroup()
+
+        for service in AppData.services { // Assume servicesArray is your array of MedicalService
+            if let storageLink = service.storageLink {
+                group.enter()
+                let storageRef = Storage.storage().reference(forURL: storageLink)
+                storageRef.downloadURL { (url, error) in
+                    if let error = error {
+                        print("Error getting download URL: \(error.localizedDescription)")
+                        group.leave()
+                    } else if let url = url {
+                        KingfisherManager.shared.retrieveImage(with: url) { result in
+                            switch result {
+                            case .success(let value):
+                                service.photo = value.image
+                            case .failure(let error):
+                                print("Error downloading image: \(error.localizedDescription)")
+                                service.photo = nil // or set a default image
+                            }
+                            group.leave()
+                        }
+                    }
+                }
+            }
+        }
+
+        group.notify(queue: .main) {
+            completion()
+        }
+    }
+
+    
+
+}
