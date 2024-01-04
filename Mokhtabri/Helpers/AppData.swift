@@ -82,15 +82,14 @@ class AppData {
         }
     }
     
-    // return true if email already exists, used for registering a new user
-    static func isEmailInUse(email: String) -> Bool {
-        var inUse: Bool = false
+    // return user if email exists, used for registering a new user
+    static func getUserFromEmail(email: String) -> User? {
         let allUsers: [User] = AppData.admin + AppData.facilities + AppData.patients
         let matchingUsers: [User] = allUsers.filter{ $0.username == email }
         if (matchingUsers.count > 0) {
-            inUse = true
+            return matchingUsers[0]
         }
-        return inUse
+        return nil
     }
     
     /*

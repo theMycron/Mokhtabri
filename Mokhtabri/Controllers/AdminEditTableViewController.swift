@@ -106,14 +106,33 @@ class AdminEditTableViewController: UITableViewController, UIImagePickerControll
     }
     
     @IBAction func btnSavePressed(_ sender: Any) {
+        validateImage()
         // validate fields and save
         // do not continue if there was an invalid input
+        
+    }
+    
+    func proceedWithImage() {
+        
         guard validateFields() else {
             return
         }
         
         performSegue(withIdentifier: "unwindToView", sender: self)
-        
+    }
+    
+    func validateImage() {
+        // display warning if no image was selected, can proceed with no image
+        if imgDisplay.image == nil {
+            let alert = UIAlertController(title: "Missing Image", message: "Are you sure you want to save without an image?", preferredStyle: .alert)
+            // if user wants to add image, cancel upload
+            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+            // if user wants to continue without image, cancel upload and consider it successful
+            alert.addAction(UIAlertAction(title: "Continue", style: .default, handler: {_ in
+                self.proceedWithImage()
+            }))
+            self.present(alert, animated: true)
+        }
     }
     
     func displayError(title: String, message: String) {
@@ -163,15 +182,19 @@ class AdminEditTableViewController: UITableViewController, UIImagePickerControll
             displayError(title: "Missing Email", message: "Please enter an email.")
             return false
         }
+        // check if email is valid format
         let emailRegex = "[A-Za-z0-9._%+-]+@mokhtabri\\.com"
         let emailPredicate = NSPredicate(format: "SELF MATCHES %@", emailRegex)
         guard emailPredicate.evaluate(with: username) else {
             displayError(title: "Invalid Email", message: "Please enter a valid email address for the facility (ending in @mokhtabri.com)")
             return false
         }
-        guard !AppData.isEmailInUse(email: username) else {
-            displayError(title: "Email In Use", message: "The email you entered is being used by another user. Please try a different email.")
-            return false
+        // check if email already in use
+        if let usedEmail = AppData.getUserFromEmail(email: username)?.username  {
+            if (usedEmail != facility?.username) {
+                displayError(title: "Email In Use", message: "The email you entered is being used by another user. Please try a different email.")
+                return false
+            }
         }
         
         guard let password: String = txtPassword.text,
@@ -202,6 +225,7 @@ class AdminEditTableViewController: UITableViewController, UIImagePickerControll
             facility!.uuid = oldId // replace new uuid with old one if editing to ensure they are the same facility
         }
         
+        
         // upload image
         if !uploadImageToFirebase() {
             return false
@@ -216,27 +240,11 @@ class AdminEditTableViewController: UITableViewController, UIImagePickerControll
     
     
     func uploadImageToFirebase() -> Bool {
-        // display warning if no image was selected, can proceed with no image
-        var cancelled: Bool = false
-        if let image = imgDisplay.image,
-           image.isEqual(UIImage(named: "noPhoto")){
-            let alert = UIAlertController(title: "Missing Image", message: "Are you sure you want to save without an image?", preferredStyle: .alert)
-            // if user wants to add image, cancel upload
-            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: {_ in
-                cancelled = true
-            }))
-            // if user wants to continue without image, cancel upload and consider it successful
-            alert.addAction(UIAlertAction(title: "Continue", style: .default))
-            self.present(alert, animated: true)
-            if cancelled {
-                return false
-            }
-            return true
-        }
-        // dont continue if user wants to choose image
+        
+        
         
         // get selected image and upload to firebase
-        guard let image = imgDisplay.image?.jpegData(compressionQuality: 0.9) else {return false}
+        guard let image = imgDisplay.image?.jpegData(compressionQuality: 0.9) else {return true}
         // format filename with lowercased letters and underscores instead of spaces
         let filename = facility!.defaultFirebaseImageFilename
         
