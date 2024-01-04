@@ -3,7 +3,7 @@ import Foundation
 class MedicalService: Codable, Equatable, Comparable, CustomStringConvertible {
     var defaultFirebaseImageFilename: String {
         // format filename with lowercased letters and underscores instead of spaces
-        return "serviceImages/\(name.lowercased().replacingOccurrences(of: " ", with: "_"))_\(description.lowercased().replacingOccurrences(of: " ", with: "_")).jpg"
+        return "serviceImages/\(name.lowercased().replacingOccurrences(of: " ", with: "_")).jpg"
     }
     var id: UUID
     var name: String

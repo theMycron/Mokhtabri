@@ -58,13 +58,18 @@ class LabEditTableTableViewController: UITableViewController, UIAdaptivePresenta
         if service is Test{
             let test: Test = service as! Test
             txtCategory.text = test.category.name
+            segmentedControl.selectedSegmentIndex = 0
         }
         if service is Package{
             let package: Package = service as! Package
             if let expiryDateComponents = package.expiryDate {
                let date = Calendar.current.date(from: expiryDateComponents)
                 DateExpiry.date = date ?? date!
-            }        }
+                getImageFromFirebase()
+                segmentedControl.selectedSegmentIndex = 1
+            }
+            
+        }
      
     }
     
@@ -154,7 +159,10 @@ class LabEditTableTableViewController: UITableViewController, UIAdaptivePresenta
     }
     
     @IBAction func btnAddPhotoPressed(_ sender: Any) {
-        
+        let imagePickerController = UIImagePickerController()
+        imagePickerController.delegate = self
+        imagePickerController.sourceType = .photoLibrary
+        present(imagePickerController, animated: true, completion: nil)
     }
     
     @IBSegueAction func selectTestsSegue(_ coder: NSCoder) -> LabSelectTestsTableViewController? {
