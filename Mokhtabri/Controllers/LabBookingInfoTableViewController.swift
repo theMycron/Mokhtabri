@@ -134,6 +134,13 @@ class LabBookingInfoTableViewController: UITableViewController {
         if let index = AppData.bookings.firstIndex(where: { $0.id == cbooking.id }) {
             AppData.bookings[index].status = .Completed
         }
+        
+        if let index = AppData.listOfBookingsLab.firstIndex(where: { $0.id == cbooking.id }) {
+            AppData.listOfBookingsLab[index].status = .Completed
+        }
+        if let index = AppData.listOfBookingsPatient.firstIndex(where: { $0.id == cbooking.id }) {
+            AppData.listOfBookingsPatient[index].status = .Completed
+        }
     }
 
     func updateStatus2() {
@@ -145,6 +152,13 @@ class LabBookingInfoTableViewController: UITableViewController {
 
         if let index = AppData.bookings.firstIndex(where: { $0.id == cbooking.id }) {
             AppData.bookings[index].status = .Cancelled
+        }
+        
+        if let index = AppData.listOfBookingsLab.firstIndex(where: { $0.id == cbooking.id }) {
+            AppData.listOfBookingsLab[index].status = .Cancelled
+        }
+        if let index = AppData.listOfBookingsPatient.firstIndex(where: { $0.id == cbooking.id }) {
+            AppData.listOfBookingsPatient[index].status = .Cancelled
         }
     }
     
