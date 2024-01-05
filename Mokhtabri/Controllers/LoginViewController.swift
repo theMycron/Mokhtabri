@@ -87,14 +87,14 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         // Set the desired minimum password length
         let minimumPasswordLength = 8
 
-        if passwordLength < minimumPasswordLength {
+       /* if passwordLength < minimumPasswordLength {
             // Password length is less than the desired length
             // Display an alert or show an error message to the user
             let alert = UIAlertController(title: "Invalid Password", message: "Password should be at least \(minimumPasswordLength) characters long for more security.", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
             present(alert, animated: true)
             return
-        }
+        }*/
         guard let email = emailTxt.text else {
             // Email text field is empty
             return
