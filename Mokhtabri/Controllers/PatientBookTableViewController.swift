@@ -9,8 +9,7 @@ import UIKit
 
 class PatientBookTableViewController: UITableViewController {
     var SamplePatient = Patient(firstName: "Noora", lastName: "Qasim", phone: "38084876", cpr: "031003257", email: "nooraw376@gmail.com", gender: .female, dateOfBirth: DateComponents(calendar: Calendar.current, year:2003, month: 10, day: 12), username: "nqasim", password: "123")
-    var sampleTest : MedicalService =
-    Test(category: "Blood Test", name: "VitaminB12", price: 10, description: "blood test for vitaminb12", instructions: "fasting 8-12 hours prior is mandatory", forMedicalFacility:  MedicalFacility(name: "Al Hilal Hospital", phone: "12345689", city: "East Riffa", website: "Alhilal.com", alwaysOpen: false, type: .hospital, openingTime: DateComponents(calendar: Calendar.current, hour: 9, minute: 0), closingTime: DateComponents(calendar: Calendar.current, hour: 21, minute: 0), username: "AlHihalEastRiffa", password: "alhilal"))
+    var sampleTest : MedicalService?
     
     @IBOutlet weak var btn: UIBarButtonItem!
     @IBOutlet weak var hospitalName: UILabel!
@@ -46,6 +45,9 @@ class PatientBookTableViewController: UITableViewController {
     }
     
     func updateView(){
+        guard let sampleTest = sampleTest else{
+            return
+        }
         branch.text = "\(sampleTest.forMedicalFacility.city)"
         price.text = "\(sampleTest.price) BHD"
         hospitalName.text = "\(sampleTest.forMedicalFacility.name)"
@@ -60,13 +62,16 @@ class PatientBookTableViewController: UITableViewController {
     }
 
     @IBAction func bookClicked(_ sender: Any) {
+        guard let sampleTest = sampleTest else {
+            return
+        }
         let selectedDate = datePicker.date
             let currentDate = Date()
         if selectedDate >= currentDate{
             confirmation(title: "Confirm Booking", message: "Do you want to confirm your booking of the \(sampleTest.name) test/package"){
                 let calendar = Calendar.current
                 let selectedDateComponents = calendar.dateComponents([.year, .month, .day], from: selectedDate)
-                let newBooking = Booking(forPatient: self.SamplePatient, ofMedicalService: self.sampleTest, bookingDate: selectedDateComponents)
+                let newBooking = Booking(forPatient: self.SamplePatient, ofMedicalService: sampleTest, bookingDate: selectedDateComponents)
                 AppData.bookings.append(newBooking)
                
             }
@@ -79,10 +84,16 @@ class PatientBookTableViewController: UITableViewController {
     }
     
     func updateDes(){
+        guard let sampleTest = sampleTest else {
+            return
+        }
         Description.text = "Special Instructions:\(sampleTest.instructions)"
     }
     
     func updateDes2(){
+        guard let sampleTest = sampleTest else {
+            return
+        }
         let package = sampleTest as! Package
             var tests = ""
         for t in package.tests {

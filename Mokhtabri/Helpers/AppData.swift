@@ -15,12 +15,12 @@ class AppData {
     static var facilities: [MedicalFacility] = []
     static var services: [MedicalService] = []
     static var tests: [Test] = [test1,test2,test3]
-    static var packages: [Package] = [Pack1,Pack2,Pack3]
+    static var packages: [Package] = [Pack3,Pack4,test4]
     static var bookings: [Booking] = []
     static var categories: [Category] = []
     // with sample data
     static var patients: [Patient] = [patient1, patient2, pat3]
-    static var listOfTests = [test1,test2,test3,test4,test5,test6,Pack1,Pack2,Pack3,Pack4]
+    static var listOfTests = [test1,test2,test3,test4,test5,test6,Pack3,Pack4]
     static var hospitals = [alhilal,alsalam,royal]
     static var labs: [MedicalFacility] = [BML, expMed, gulfLab, manara]
     
@@ -136,13 +136,13 @@ class AppData {
         
         
         Booking(forPatient: patient1
-                , ofMedicalService: Pack2 ,bookingDate: DateComponents(calendar: Calendar.current, year: 2023, month: 2, day: 15)),
+                , ofMedicalService: test4 ,bookingDate: DateComponents(calendar: Calendar.current, year: 2023, month: 2, day: 15)),
         
         
         Booking(forPatient: patient1
                 , ofMedicalService: test3,bookingDate: DateComponents(calendar: Calendar.current, year: 2023, month: 3, day: 20)),
         
-        Booking(forPatient: pat3, ofMedicalService: Pack1, bookingDate: DateComponents(calendar: Calendar.current, year: 2024, month: 09, day: 17))
+        Booking(forPatient: pat3, ofMedicalService: Pack4, bookingDate: DateComponents(calendar: Calendar.current, year: 2024, month: 09, day: 17))
     ]
     
     
@@ -154,37 +154,37 @@ class AppData {
     
     static var royal = MedicalFacility(name: "Royal Bahrain Hospital", phone: "17246800", city: "Salmaniya", website: "www.royalbarainhospital.com", alwaysOpen: true, type: .hospital, openingTime: DateComponents(calendar: Calendar.current, hour: 0, minute: 0), closingTime: DateComponents(calendar: Calendar.current, hour: 0, minute: 0), username: "royal", password: "1432")
     
-    static var test1 = Test(category: "Blood Test", name: "VitaminB12", price: 10, description: "blood test for vitaminb12", instructions: "fasting 8-12 hours prior is mandatory", forMedicalFacility:  alhilal)
+    static var test1 = Test(category: "Blood Test", name: "VitaminB12", price: 10, description: "blood test for vitaminb12", instructions: "fasting 8-12 hours prior is mandatory", forMedicalFacility:  alhilal, storageLink: "gs://fir-testing-512eb.appspot.com/Vitamin-B12.jpg")
     
     
-    static var test2 =  Test(category: "Viral Test", name: "Covid 19 PCR", price: 15, description: "Covid 19 Test", instructions: "None", forMedicalFacility: alhilal)
+    static var test2 =  Test(category: "Viral Test", name: "Covid 19 PCR", price: 15, description: "Covid 19 Test", instructions: "None", forMedicalFacility: alhilal,storageLink: "gs://fir-testing-512eb.appspot.com/testImages/covid19AlHilal.jpeg")
     
-    static var test3 = Test(category: "Blood Test", name: "Vitamin D", price: 10, description: "blood test for vitamin D", instructions: "fasting 8-12 hours prior is mandatory", forMedicalFacility:  alhilal)
+    static var test3 = Test(category: "Blood Test", name: "Vitamin D", price: 10, description: "blood test for vitamin D", instructions: "fasting 8-12 hours prior is mandatory", forMedicalFacility:  alhilal,storageLink: "gs://fir-testing-512eb.appspot.com/testImages/Vitamin-D-Article.jpg")
     
-    static var test4 = Package(expiryDate: DateComponents(calendar: Calendar.current, day: 29), tests: [test1,test3], name: "ALH Vitamin D & B12", price: 5, description: "Dual", instructions: "Fasting is mandatory", forMedicalFacility: alhilal)
+    static var test4 = Package(expiryDate: DateComponents(calendar: Calendar.current, day: 29), tests: [test1,test3], name: "ALH Vitamin D & B12", price: 10, description: "Dual", instructions: "Fasting is mandatory", forMedicalFacility: alhilal,storageLink: "gs://fir-testing-512eb.appspot.com/testImages/hilalvitaminB12&D.jpeg")
     
-    static var test5 = Test(category: "Blood Test", name: "RBC Level", price: 4, description: "Blood test to check the Red Blood Cells level in the blood", instructions: "No instructions", forMedicalFacility: alsalam)
+    static var test5 = Test(category: "Blood Test", name: "RBC Level", price: 4, description: "Blood test to check the Red Blood Cells level in the blood", instructions: "No instructions", forMedicalFacility: alsalam, storageLink: "gs://fir-testing-512eb.appspot.com/testImages/rbc-alsalam.jpeg")
     
-    static var test6 = Test(category: "Blood Test", name: "Iron and HB level", price: 4, description: "Blood test to check the Iron and Haemoglobin level", instructions: "No instructions", forMedicalFacility: alsalam)
-    
-    
-    
-    static var test7 = Test(category: "Blood Test", name: "CBC Count", price: 3, description: "Blood test to check the CBC Count", instructions: "No instructions", forMedicalFacility: alsalam)
-    
-    static var test8 = Test(category: "Blood Test", name: "Immunogloblin A", price: 3, description: "Blood test to check the Immunogloblin A levels", instructions: "No instructions", forMedicalFacility: alsalam)
-    
-    static var test9 = Test(category: "Blood Test", name: "Immunogloblin G", price: 3, description: "Blood test to check the Immunogloblin G levels", instructions: "No instructions", forMedicalFacility: alsalam)
-    
-    static var test10 = Test(category: "Blood Test", name: "Immunogloblin M", price: 3, description: "Blood test to check the Immunogloblin M levels", instructions: "No instructions", forMedicalFacility: alsalam)
-    
-    static var Pack4 = Package(expiryDate: DateComponents(calendar: Calendar.current, day: 29), tests: [test7,test8,test9,test10], name: "Immune System Test", price: 10, description: "Check blood to determine health of immune system", instructions: "Fasting is mandatory for 8 - 10 hours", forMedicalFacility: alsalam)
+    static var test6 = Test(category: "Blood Test", name: "Iron and HB level", price: 4, description: "Blood test to check the Iron and Haemoglobin level", instructions: "No instructions", forMedicalFacility: alsalam, storageLink: "gs://fir-testing-512eb.appspot.com/ironTest.jpeg")
     
     
-    static var Pack1 = Package(expiryDate: DateComponents(calendar: Calendar.current, day: 29), tests: [test1,test2], name: "Vitamin B12 and Covid 19", price: 8, description: "Covid test and blood test for Vitamin B12", instructions: "Fasting is mandatory for 8 - 10 hours", forMedicalFacility: BML)
     
-    static var Pack2 = Package(expiryDate: DateComponents(calendar: Calendar.current, day: 31), tests: [test2,test3], name: "Vitamin D and Covid 19", price: 8, description: "Covid test and blood test for Vitamin D", instructions: "Fasting is mandatory for 8 hours", forMedicalFacility: expMed)
+    static var test7 = Test(category: "Blood Test", name: "CBC Count", price: 3, description: "Blood test to check the CBC Count", instructions: "No instructions", forMedicalFacility: alsalam, storageLink: "gs://fir-testing-512eb.appspot.com/testImages/cbc-test.jpg")
     
-    static var Pack3 = Package(expiryDate: DateComponents(calendar: Calendar.current, day: 27), tests: [test5,test6], name: "Iron deficiency Pack", price: 8, description: "Blood test to check for iron deficiency", instructions: "No instructions", forMedicalFacility: gulfLab)
+    static var test8 = Test(category: "Blood Test", name: "Immunogloblin A", price: 3, description: "Blood test to check the Immunogloblin A levels", instructions: "No instructions", forMedicalFacility: alsalam, storageLink: "gs://fir-testing-512eb.appspot.com/testImages/immuno.jpeg")
+    
+    static var test9 = Test(category: "Blood Test", name: "Immunogloblin G", price: 3, description: "Blood test to check the Immunogloblin G levels", instructions: "No instructions", forMedicalFacility: alsalam, storageLink: "gs://fir-testing-512eb.appspot.com/testImages/immuno.jpeg")
+    
+    static var test10 = Test(category: "Blood Test", name: "Immunogloblin M", price: 3, description: "Blood test to check the Immunogloblin M levels", instructions: "No instructions", forMedicalFacility: alsalam, storageLink: "gs://fir-testing-512eb.appspot.com/testImages/immuno.jpeg")
+    
+    static var Pack4 = Package(expiryDate: DateComponents(calendar: Calendar.current, day: 29), tests: [test7,test8,test9,test10], name: "Immune System Test", price: 10, description: "Check blood to determine health of immune system", instructions: "Fasting is mandatory for 8 - 10 hours", forMedicalFacility: alsalam, storageLink: "gs://fir-testing-512eb.appspot.com/packageImages/Immune-System.png")
+    
+    
+   // static var Pack1 = Package(expiryDate: DateComponents(calendar: Calendar.current, day: 29), tests: [test1,test2], name: "Vitamin B12 and Covid 19", price: 8, description: "Covid test and blood test for Vitamin B12", instructions: "Fasting is mandatory for 8 - 10 hours", forMedicalFacility: BML)
+    
+   // static var Pack2 = Package(expiryDate: DateComponents(calendar: Calendar.current, day: 31), tests: [test2,test3], name: "Vitamin D and Covid 19", price: 8, description: "Covid test and blood test for Vitamin D", instructions: "Fasting is mandatory for 8 hours", forMedicalFacility: expMed)
+    
+    static var Pack3 = Package(expiryDate: DateComponents(calendar: Calendar.current, day: 27), tests: [test5,test6], name: "Iron deficiency Pack", price: 8, description: "Blood test to check for iron deficiency", instructions: "No instructions", forMedicalFacility: alsalam, storageLink: "gs://fir-testing-512eb.appspot.com/ironTest.jpeg")
     
     
     // labs declaration
@@ -205,11 +205,6 @@ class AppData {
     static func load(){
         if bookings.isEmpty {
             //TODO fix this later and add it as a constructor
-            test1.storageLink = "gs://fir-testing-512eb.appspot.com/Vitamin-B12.jpg"
-            Pack1.storageLink = "gs://fir-testing-512eb.appspot.com/covid19.webp"
-            test2.storageLink = "gs://fir-testing-512eb.appspot.com/pcr.jpeg"
-            Pack4.storageLink = "gs://fir-testing-512eb.appspot.com/packageImages/Immune-System.png"
-            test3.storageLink = "gs://fir-testing-512eb.appspot.com/testImages/vitamind.jpeg"
             bookings = sampleBookings
            // sampleBookings[0].ofMedicalService.storageLink = "gs://fir-testing-512eb.appspot.com/Vitamin-B12.jpg"
             services = listOfTests
@@ -225,8 +220,9 @@ class AppData {
     static func loadServicesImages(completion: @escaping () -> Void) {
         let group = DispatchGroup()
 
-        for service in AppData.services { // Assume servicesArray is your array of MedicalService
-            if let storageLink = service.storageLink {
+        //loops through the array of services
+        for service in AppData.services {
+            let storageLink = service.storageLink
                 group.enter()
                 let storageRef = Storage.storage().reference(forURL: storageLink)
                 storageRef.downloadURL { (url, error) in
@@ -240,12 +236,12 @@ class AppData {
                                 service.photo = value.image
                             case .failure(let error):
                                 print("Error downloading image: \(error.localizedDescription)")
-                                service.photo = nil // or set a default image
+                                service.photo = nil 
                             }
                             group.leave()
                         }
                     }
-                }
+                
             }
         }
 

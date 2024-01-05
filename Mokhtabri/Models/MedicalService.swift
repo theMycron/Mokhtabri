@@ -21,19 +21,20 @@ class MedicalService: Codable, Equatable, Comparable, CustomStringConvertible {
                 """
     }
     //var imageDownloadURL: URL?
-    var storageLink: String?
+    var storageLink: String
 
     enum CodingKeys: Codable, CodingKey {
         case id, name, price, description, instructions, forMedicalFacility, image, storageLink // Include 'image' in the CodingKeys
     }
     
-    init(name: String, price: Float, description: String, instructions: String, forMedicalFacility: MedicalFacility) {
+    init(name: String, price: Float, description: String, instructions: String, forMedicalFacility: MedicalFacility, storageLink: String) {
         self.id = UUID()
         self.name = name
         self.price = price
         self.serviceDescription = description
         self.instructions = instructions
         self.forMedicalFacility = forMedicalFacility
+        self.storageLink = storageLink
     }
     
     static func == (lhs: MedicalService, rhs: MedicalService) -> Bool {
