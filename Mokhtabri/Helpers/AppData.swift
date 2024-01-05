@@ -9,6 +9,7 @@ import Foundation
 import FirebaseFirestore
 import FirebaseStorage
 import Kingfisher
+import FirebaseAuth
 
 class AppData {
     static var admin: [User] = []
@@ -27,7 +28,10 @@ class AppData {
     static var listOfBookingsLab: [Booking] = []
     
     
-    static var loggedInUser: User?
+    static var loggedInUser: User? 
+    //loggedInUser = Auth.auth().currentUser!.uid
+   
+    
     
     static func wipe() {
         admin = []
@@ -48,6 +52,14 @@ class AppData {
         let allUsers: [User] = admin + patients + facilities
         return allUsers.first(where: { $0.uuid == uuid })
     }
+    
+    
+   // getUser(username: Auth.auth().currentUser!.email)
+    
+    
+
+    
+    
     
     static func addUser(user: User) {
         if user is Patient {
