@@ -23,7 +23,8 @@ class AppData {
     static var listOfTests = [test1,test2,test3,test4,test5,test6,Pack3,Pack4]
     static var hospitals = [alhilal,alsalam,royal]
     static var labs: [MedicalFacility] = [BML, expMed, gulfLab, manara]
-    
+    static var listOfBookingsPatient: [Booking] = []
+    static var listOfBookingsLab: [Booking] = []
     
     
     static var loggedInUser: User?
@@ -206,6 +207,8 @@ class AppData {
         if bookings.isEmpty {
             //TODO fix this later and add it as a constructor
             bookings = sampleBookings
+            listOfBookingsLab = sampleBookings
+            listOfBookingsPatient = sampleBookings
            // sampleBookings[0].ofMedicalService.storageLink = "gs://fir-testing-512eb.appspot.com/Vitamin-B12.jpg"
             services = listOfTests
             facilities = hospitals

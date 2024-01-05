@@ -68,7 +68,7 @@ class PatientBookingTableViewController: UITableViewController, UISearchResultsU
         }
     }
 //declare
-    var listOfBookings = AppData.bookings
+    var listOfBookings = AppData.listOfBookingsPatient
     var activeBookings : [Booking] = []
     var completedBookings : [Booking] = []
     var cancelledBookings : [Booking] = []
@@ -120,7 +120,7 @@ class PatientBookingTableViewController: UITableViewController, UISearchResultsU
         super.viewWillAppear(animated)
         // Update the list of bookings
         
-        listOfBookings = AppData.bookings
+        listOfBookings = AppData.listOfBookingsPatient
         categorizeBookings()
         // Reload the table view
         tableView.reloadData()
@@ -159,9 +159,12 @@ class PatientBookingTableViewController: UITableViewController, UISearchResultsU
                 }
                 
                 // Find the booking in AppData.bookings
-                if let indexInAppData = AppData.bookings.firstIndex(where: { $0.id == bookingToRemove.id }) {
-                    AppData.bookings.remove(at: indexInAppData)
+                if let indexInAppData = AppData.listOfBookingsPatient.firstIndex(where: { $0.id == bookingToRemove.id }) {
+                    AppData.listOfBookingsPatient.remove(at: indexInAppData)
                     self.listOfBookings.remove(at: indexInAppData)
+                }
+                if let index = AppData.listOfBookingsLab.firstIndex(where: {$0.id == bookingToRemove.id}){
+                    AppData.listOfBookingsLab[index].status = .Cancelled
                 }
                 self.categorizeBookings()
                 tableView.deleteRows(at: [indexPath], with: .fade)
@@ -186,7 +189,7 @@ class PatientBookingTableViewController: UITableViewController, UISearchResultsU
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        listOfBookings = AppData.bookings
+        listOfBookings = AppData.listOfBookingsPatient
         categorizeBookings()
         tableView.reloadData()
     }
