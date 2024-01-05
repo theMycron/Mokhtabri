@@ -13,16 +13,27 @@ class PatientBookingTableViewController: UITableViewController, UISearchResultsU
     }
     
 
+    
+
     @IBOutlet weak var segmentOutlet: UISegmentedControl!
     @IBAction func segmentedControl(_ sender: UISegmentedControl) {
         selectedSegement = sender.selectedSegmentIndex
         categorizeBookings()
         tableView.reloadData()
     }
+    
+    var loggedInUser : User?
     override func viewDidLoad() {
         super.viewDidLoad()
         embedSearch()
         categorizeBookings()
+        
+        
+        loggedInUser = AppData.patients[0]
+        guard let user = AppData.loggedInUser else{
+            return
+        }
+        loggedInUser = user
         //AppData.loadServicesImages(AppData)
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -160,14 +171,17 @@ class PatientBookingTableViewController: UITableViewController, UISearchResultsU
     
     
     func categorizeBookings(){
+        guard let user = loggedInUser else {
+            return
+        }
         activeBookings = listOfBookings.filter{
-            $0.status == .Active
+            $0.status == .Active && $0.forPatient == user
         }
         completedBookings = listOfBookings.filter{
-            $0.status == .Completed
+            $0.status == .Completed && $0.forPatient == user
         }
         cancelledBookings = listOfBookings.filter{
-            $0.status == .Cancelled
+            $0.status == .Cancelled && $0.forPatient == user
         }
     }
     

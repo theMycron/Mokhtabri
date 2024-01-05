@@ -8,7 +8,7 @@
 import UIKit
 
 class PatientBookTableViewController: UITableViewController {
-    var SamplePatient = Patient(firstName: "Noora", lastName: "Qasim", phone: "38084876", cpr: "031003257", email: "nooraw376@gmail.com", gender: .female, dateOfBirth: DateComponents(calendar: Calendar.current, year:2003, month: 10, day: 12), username: "nqasim", password: "123")
+    var loggedInPatient: Patient?
     var sampleTest : MedicalService?
     
     @IBOutlet weak var btn: UIBarButtonItem!
@@ -24,7 +24,11 @@ class PatientBookTableViewController: UITableViewController {
         super.viewDidLoad()
         btn.isHidden = false
         updateView()
-
+        loggedInPatient = AppData.patients[0]
+        guard let user = AppData.loggedInUser else{
+            return
+        }
+        loggedInPatient = AppData.patients.filter{$0.username == AppData.loggedInUser?.username}[0]
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -65,13 +69,16 @@ class PatientBookTableViewController: UITableViewController {
         guard let sampleTest = sampleTest else {
             return
         }
+        guard let loggedInPatient = loggedInPatient else{
+            return
+        }
         let selectedDate = datePicker.date
             let currentDate = Date()
         if selectedDate >= currentDate{
             confirmation(title: "Confirm Booking", message: "Do you want to confirm your booking of the \(sampleTest.name) test/package"){
                 let calendar = Calendar.current
                 let selectedDateComponents = calendar.dateComponents([.year, .month, .day], from: selectedDate)
-                let newBooking = Booking(forPatient: self.SamplePatient, ofMedicalService: sampleTest, bookingDate: selectedDateComponents)
+                let newBooking = Booking(forPatient: loggedInPatient, ofMedicalService: sampleTest, bookingDate: selectedDateComponents)
                 AppData.bookings.append(newBooking)
                
             }
