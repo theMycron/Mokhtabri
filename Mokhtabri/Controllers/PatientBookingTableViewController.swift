@@ -9,10 +9,34 @@ import UIKit
 
 class PatientBookingTableViewController: UITableViewController, UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
-        
+        guard let term = searchController.searchBar.text?.lowercased() else {
+            reloadOriginalData()
+            return
+        }
+        if term.isEmpty{
+            reloadOriginalData()
+        }else{
+            switch selectedSegement {
+            case 0: activeBookings = activeBookings.filter{$0.ofMedicalService.name.lowercased().contains(term) || $0.ofMedicalService.forMedicalFacility.name.lowercased().contains(term) }
+                
+            case 1: completedBookings =  completedBookings.filter{
+               $0.ofMedicalService.name.lowercased().contains(term) || $0.ofMedicalService.forMedicalFacility.name.lowercased().contains(term)
+            }
+                
+            case 2: cancelledBookings =  cancelledBookings.filter{
+               $0.ofMedicalService.name.lowercased().contains(term) || $0.ofMedicalService.forMedicalFacility.name.lowercased().contains(term)
+            }
+            default: break
+            }
+            tableView.reloadData()
+        }
     }
     
-
+    func reloadOriginalData(){
+        categorizeBookings()
+        
+        tableView.reloadData()
+    }
     
 
     @IBOutlet weak var segmentOutlet: UISegmentedControl!

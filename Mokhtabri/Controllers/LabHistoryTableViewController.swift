@@ -24,9 +24,12 @@ class LabHistoryTableViewController: UITableViewController, UISearchBarDelegate,
                     $0.forPatient.name.lowercased().contains(term) || $0.ofMedicalService.name.lowercased().contains(term)
                 }
                 
-            case 1: break
-            case 2: break
-            default:
+            case 1:                 completedBookings = completedBookings.filter{
+                $0.forPatient.name.lowercased().contains(term) || $0.ofMedicalService.name.lowercased().contains(term)
+            }
+            case 2: cancelledBookings = cancelledBookings.filter{
+                $0.forPatient.name.lowercased().contains(term) || $0.ofMedicalService.name.lowercased().contains(term)
+            }            default:
                 break
             }
         }
