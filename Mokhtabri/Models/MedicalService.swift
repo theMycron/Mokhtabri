@@ -24,7 +24,7 @@ class MedicalService: Codable, Equatable, Comparable, CustomStringConvertible {
     var storageLink: String?
 
     enum CodingKeys: Codable, CodingKey {
-        case id, name, price, description, instructions, forMedicalFacility, image // Include 'image' in the CodingKeys
+        case id, name, price, description, instructions, forMedicalFacility, image, storageLink // Include 'image' in the CodingKeys
     }
     
     init(name: String, price: Float, description: String, instructions: String, forMedicalFacility: MedicalFacility) {
@@ -53,6 +53,7 @@ class MedicalService: Codable, Equatable, Comparable, CustomStringConvertible {
         try container.encode(serviceDescription, forKey: .description)
         try container.encode(instructions, forKey: .instructions)
         try container.encode(forMedicalFacility, forKey: .forMedicalFacility)
+        try container.encode(storageLink, forKey: .storageLink)
     }
 
     required init(from decoder: Decoder) throws {
@@ -64,6 +65,7 @@ class MedicalService: Codable, Equatable, Comparable, CustomStringConvertible {
         self.instructions = try container.decode(String.self, forKey: .instructions)
         self.forMedicalFacility = try container.decode(MedicalFacility.self, forKey: .forMedicalFacility)
 
+        self.storageLink = try container.decode(String.self, forKey: .storageLink)
     }
     
     
