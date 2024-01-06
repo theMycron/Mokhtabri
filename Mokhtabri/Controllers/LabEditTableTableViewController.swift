@@ -150,10 +150,10 @@ class LabEditTableTableViewController: UITableViewController, UIAdaptivePresenta
             oldId = service.id
         }
         if (selectedServiceType == .test) {
-            service = Test(category: category!,name: name ?? "", price: price ?? 0.0 , description: description ?? "", instructions: instructions ?? "", forMedicalFacility: AppData.alhilal, serviceType : selectedServiceType! )
+            service = Test(category: category!,name: name ?? "", price: price ?? 0.0 , description: description ?? "", instructions: instructions ?? "", forMedicalFacility: AppData.alhilal, serviceType : selectedServiceType!, storageLink: "gs://fir-testing-512eb.appspot.com/testImages/immuno.jpeg" )
             // TODO: change service to logged in service
         } else if (selectedServiceType == .package) {
-            service = Package(expiryDate: expiryDateComponents, tests: [],name: name ?? "", price: price ?? 0.0 , description: description ?? "", instructions: instructions ?? "", forMedicalFacility: AppData.alhilal, serviceType : selectedServiceType! )
+            service = Package(expiryDate: expiryDateComponents, tests: [],name: name ?? "", price: price ?? 0.0 , description: description ?? "", instructions: instructions ?? "", forMedicalFacility: AppData.alhilal, serviceType : selectedServiceType!, storageLink: "gs://fir-testing-512eb.appspot.com/testImages/immuno.jpeg" )
             _=uploadImageToFirebase()
         }
         
