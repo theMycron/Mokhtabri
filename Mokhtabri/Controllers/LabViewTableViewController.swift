@@ -9,7 +9,9 @@ import UIKit
 
 class LabViewTableViewController: UITableViewController, UISearchResultsUpdating, UISearchBarDelegate {
    //yousif to do
-    var displayedServices: [MedicalService] = AppData.services
+    var loggedInFacillity = AppData.loggedInUser as! MedicalFacility
+    
+    var displayedServices: [MedicalService] = []
     let search = UISearchController()
 
     override func viewDidLoad() {
@@ -17,6 +19,9 @@ class LabViewTableViewController: UITableViewController, UISearchResultsUpdating
         embedSearch()
         
         AppData.loadData()
+        
+        displayedServices = AppData.tests.filter{$0.forMedicalFacility == loggedInFacillity} + AppData.packages.filter{$0.forMedicalFacility == loggedInFacillity}
+        
         tableView.reloadData()
         
         filterServices(scope: 0)
@@ -52,9 +57,9 @@ class LabViewTableViewController: UITableViewController, UISearchResultsUpdating
        switch scope {
        
        case 0:
-           displayedServices = AppData.tests
+           displayedServices = AppData.tests.filter{$0.forMedicalFacility == loggedInFacillity}
        case 1:
-           displayedServices = AppData.packages
+           displayedServices = AppData.packages.filter{$0.forMedicalFacility == loggedInFacillity}
        default:
            return
        }
@@ -67,11 +72,11 @@ class LabViewTableViewController: UITableViewController, UISearchResultsUpdating
             if scope == 0 {
                 displayedServices = AppData.tests.filter{
                     return $0.name.lowercased().contains(query)
-                }
+                }.filter{$0.forMedicalFacility == loggedInFacillity}
             } else if scope == 1 {
                 displayedServices = AppData.packages.filter{
                    return $0.name.lowercased().contains(query)
-                }
+                }.filter{$0.forMedicalFacility == loggedInFacillity}
             }
             
         } else {
@@ -141,7 +146,8 @@ class LabViewTableViewController: UITableViewController, UISearchResultsUpdating
             displayedServices.remove(at: indexPath.section)
             tableView.deleteSections([indexPath.section], with: .fade)
             tableView.endUpdates()
-            AppData.services = displayedServices
+            let service = displayedServices[indexPath.section]
+            _=AppData.deleteService(service: service)
             AppData.saveData()
         }
     }

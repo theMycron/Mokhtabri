@@ -169,11 +169,17 @@ class AppData {
     
     static func deleteUser(user: User) -> Bool {
         if user is Patient {
-            
+            if let userIndex = patients.firstIndex(of: user as! Patient) {
+                patients.remove(at: userIndex)
+                saveData()
+                return true
+            }
         } else if user is MedicalFacility {
-            
-        } else {
-            
+            if let userIndex = facilities.firstIndex(of: user as! MedicalFacility) {
+                facilities.remove(at: userIndex)
+                saveData()
+                return true
+            }
         }
         
         return false
