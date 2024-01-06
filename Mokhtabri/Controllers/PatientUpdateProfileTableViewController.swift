@@ -13,30 +13,28 @@ class PatientUpdateProfileTableViewController: UITableViewController {
     @IBOutlet weak var usernameField: UITextField!
     @IBOutlet weak var firstnameField: UITextField!
     @IBOutlet weak var lastnameFIeld: UITextField!
-    @IBOutlet weak var phoneField: UITextField!
-    @IBOutlet weak var emailField: UITextField!
     
     // declare var
     var p = AppData.patient1
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        // update the data
+        update()
+    }
+    
+    
+    func update() {
         usernameField.text = p.username
         usernameField.textColor = UIColor.black
         firstnameField.text = p.firstName
         firstnameField.textColor = UIColor.black
         lastnameFIeld.text = p.lastName
         lastnameFIeld.textColor = UIColor.black
-
-        phoneField.textColor = UIColor.black
-        emailField.textColor = UIColor.black
         
         usernameField.clearsOnBeginEditing = false
         firstnameField.clearsOnBeginEditing = false
         lastnameFIeld.clearsOnBeginEditing = false
-        phoneField.clearsOnBeginEditing = false
-        emailField.clearsOnBeginEditing = false
-
     }
 
     // MARK: - Table view data source
@@ -48,7 +46,7 @@ class PatientUpdateProfileTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 5
+        return 3
     }
     
     @IBAction func UpdateBtn(_ sender: Any) {
@@ -57,15 +55,11 @@ class PatientUpdateProfileTableViewController: UITableViewController {
             let updatedUsername = self.usernameField.text
             let updatedFirstname = self.firstnameField.text
             let updatedLastname = self.lastnameFIeld.text
-            let updatedPhone = self.phoneField.text
-            let updatedEmail = self.emailField.text
             
             // Check for nil or empty strings if necessary, depending on your validation requirements
             guard let username = updatedUsername, !username.isEmpty,
                   let firstname = updatedFirstname, !firstname.isEmpty,
-                  let lastname = updatedLastname, !lastname.isEmpty,
-                  let phone = updatedPhone, !phone.isEmpty,
-                  let email = updatedEmail, !email.isEmpty else {
+                  let lastname = updatedLastname, !lastname.isEmpty else {
                 let errorAlert = UIAlertController(title: "Error", message: "Please don't leave any fields blank.", preferredStyle: .alert)
                 errorAlert.addAction(UIAlertAction(title: "Dismiss", style: .default))
                 self.present(errorAlert, animated: true)
@@ -80,9 +74,9 @@ class PatientUpdateProfileTableViewController: UITableViewController {
             confirmAlert.addAction(UIAlertAction(title: "Dismiss", style: .default) { [weak self] _ in
                 self?.performSegue(withIdentifier: "Settings", sender: nil)
             })
-
-
         }
+        
+
     }
     
     
