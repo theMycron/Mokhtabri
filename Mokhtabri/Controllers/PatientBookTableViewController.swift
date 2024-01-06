@@ -24,11 +24,11 @@ class PatientBookTableViewController: UITableViewController {
         super.viewDidLoad()
         btn.isHidden = false
         updateView()
-        loggedInPatient = AppData.patients[0]
-        guard let user = AppData.loggedInUser else{
+        loggedInPatient = AppData.patient1
+        guard AppData.loggedInUser != nil else{
             return
         }
-        loggedInPatient = AppData.patients.filter{$0.username == AppData.loggedInUser?.username}[0]
+        loggedInPatient =  AppData.patients.filter{$0.username == AppData.loggedInUser?.username}[0]
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 

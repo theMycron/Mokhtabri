@@ -217,11 +217,9 @@ class AppData {
     
     static func load(){
         if bookings.isEmpty {
-            //TODO fix this later and add it as a constructor
             bookings = sampleBookings
             listOfBookingsLab = sampleBookings
             listOfBookingsPatient = sampleBookings
-           // sampleBookings[0].ofMedicalService.storageLink = "gs://fir-testing-512eb.appspot.com/Vitamin-B12.jpg"
             services = listOfTests
             facilities = hospitals
             patients = [patient1]

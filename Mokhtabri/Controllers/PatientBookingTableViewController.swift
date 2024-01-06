@@ -53,7 +53,7 @@ class PatientBookingTableViewController: UITableViewController, UISearchResultsU
         categorizeBookings()
         
         
-        loggedInUser = AppData.patients[0]
+        loggedInUser = AppData.patient1
         guard let user = AppData.loggedInUser else{
             return
         }
