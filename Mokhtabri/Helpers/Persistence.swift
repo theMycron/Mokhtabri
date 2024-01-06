@@ -24,66 +24,33 @@ extension AppData {
         guard facilities.count > 0,
               patients.count > 0,
               bookings.count > 0,
-              admin.count > 0,
               tests.count > 0,
               packages.count > 0
         else { return }
         
-        // load facilities sample data
-        if let fileUrl = Bundle.main.url(forResource: "facilities", withExtension: "plist"),
-        let data = try? Data(contentsOf: fileUrl) {
-            let propertyListDecoder = PropertyListDecoder()
-            do {
-                let result: [MedicalFacility] = try propertyListDecoder.decode([MedicalFacility].self, from: data)
-                AppData.facilities = result
-            } catch {
-                print("could not load sample data: \(error)")
-            }
-        }
-        // load bookings sample data
-        if let fileUrl = Bundle.main.url(forResource: "bookings", withExtension: "plist"),
-        let data = try? Data(contentsOf: fileUrl) {
-            let propertyListDecoder = PropertyListDecoder()
-            do {
-                let result: [Booking] = try propertyListDecoder.decode([Booking].self, from: data)
-                AppData.bookings = result
-            } catch {
-                print("could not load sample data: \(error)")
-            }
-        }
-        // load patients sample data
-        if let fileUrl = Bundle.main.url(forResource: "patients", withExtension: "plist"),
-        let data = try? Data(contentsOf: fileUrl) {
-            let propertyListDecoder = PropertyListDecoder()
-            do {
-                let result: [Patient] = try propertyListDecoder.decode([Patient].self, from: data)
-                AppData.patients = result
-            } catch {
-                print("could not load sample data: \(error)")
-            }
-        }
-        // load tests sample data
-        if let fileUrl = Bundle.main.url(forResource: "tests", withExtension: "plist"),
-        let data = try? Data(contentsOf: fileUrl) {
-            let propertyListDecoder = PropertyListDecoder()
-            do {
-                let result: [Test] = try propertyListDecoder.decode([Test].self, from: data)
-                AppData.tests = result
-            } catch {
-                print("could not load sample data: \(error)")
-            }
-        }
-        // load packages sample data
-        if let fileUrl = Bundle.main.url(forResource: "packages", withExtension: "plist"),
-        let data = try? Data(contentsOf: fileUrl) {
-            let propertyListDecoder = PropertyListDecoder()
-            do {
-                let result: [Package] = try propertyListDecoder.decode([Package].self, from: data)
-                AppData.packages = result
-            } catch {
-                print("could not load sample data: \(error)")
-            }
-        }
+        AppData.patients = AppData.samplePatients
+        AppData.facilites = AppData.sampleFacilities
+        AppData.tests = AppData.generateSampleTests(forFacilities: AppData.facilites)
+        AppData.packages = AppData.samplePackages
+        AppData.bookings = AppData.sampleBookings
+        //load additional bookings with tests
+        // have to do this because sample tests are loaded dynamically (using a function instead of a static list)
+        AppData.bookings.append(
+            Booking(forPatient: samplePatients[0], ofMedicalService: AppData.tests[3], bookingDate: DateComponents(calendar: Calendar.current, year: 2024, month: 1, day: 1), BookingStatus.Completed)
+        )
+        AppData.bookings.append(
+            Booking(forPatient: samplePatients[0], ofMedicalService: AppData.tests[14], bookingDate: DateComponents(calendar: Calendar.current, year: 2024, month: 2, day: 1), BookingStatus.Active)
+        )
+        AppData.bookings.append(
+            Booking(forPatient: samplePatients[0], ofMedicalService: AppData.tests[17], bookingDate: DateComponents(calendar: Calendar.current, year: 2024, month: 2, day: 16), BookingStatus.Cancelled)
+        )
+        AppData.bookings.append(
+            Booking(forPatient: samplePatients[0], ofMedicalService: AppData.tests[19], bookingDate: DateComponents(calendar: Calendar.current, year: 2024, month: 1, day: 16), BookingStatus.Cancelled)
+        )
+        AppData.bookings.append(
+            Booking(forPatient: samplePatients[1], ofMedicalService: AppData.tests[0], bookingDate: DateComponents(calendar: Calendar.current, year: 2024, month: 1, day: 4), BookingStatus.Completed)
+        )
+
     }
     
     // use this function to save data after any data manipulation happens
@@ -105,7 +72,7 @@ extension AppData {
         loadServices(fromFile: .packages)
         loadServices(fromFile: .tests)
         loadBookings()
-        loadSampleData() // only loads if previous loads did not load anything (no data saved)
+        loadSampleData() // only loads if no data is found
     }
     
     fileprivate static func saveUsers(toFile: FileName) {
