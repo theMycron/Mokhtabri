@@ -13,9 +13,9 @@ class Patient: User {
     var name: String {
         return "\(firstName) \(lastName)"
     }
-    var phone: String
+    //var phone: String
     var cpr: String
-    var email: String
+   // var email: String
     var gender: Gender
     var dateOfBirth: DateComponents // use 'year', 'month' and 'day' components
     
@@ -26,9 +26,7 @@ class Patient: User {
                 - Patient Info -
                 Name: \(name)
                 Gender: \(gender.rawValue)
-                Phone Number: \(phone)
                 CPR: \(cpr)
-                Email: \(email)
                 Age: \(age)
                 """
     }
@@ -58,12 +56,10 @@ class Patient: User {
         case firstName, lastName, phone, cpr, email, gender, dateOfBirth, bookings
     }
     
-    init(firstName: String, lastName: String, phone: String, cpr: String, email: String, gender: Gender, dateOfBirth: DateComponents, username: String, password: String) {
+    init(firstName: String, lastName: String, cpr: String, gender: Gender, dateOfBirth: DateComponents, username: String, password: String) {
         self.firstName = firstName
         self.lastName = lastName
-        self.phone = phone
         self.cpr = cpr
-        self.email = email
         self.gender = gender
         self.dateOfBirth = dateOfBirth
 //        self.bookings = []
@@ -74,9 +70,7 @@ class Patient: User {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(firstName, forKey: .firstName)
         try container.encode(lastName, forKey: .lastName)
-        try container.encode(phone, forKey: .phone)
         try container.encode(cpr, forKey: .cpr)
-        try container.encode(email, forKey: .email)
         try container.encode(gender, forKey: .gender)
         try container.encode(dateOfBirth, forKey: .dateOfBirth)
 //        try container.encode(bookings, forKey: .bookings)
@@ -88,9 +82,7 @@ class Patient: User {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         self.firstName = try values.decodeIfPresent(String.self, forKey: .firstName)!
         self.lastName = try values.decodeIfPresent(String.self, forKey: .lastName)!
-        self.phone = try values.decodeIfPresent(String.self, forKey: .phone)!
         self.cpr = try values.decodeIfPresent(String.self, forKey: .cpr)!
-        self.email = try values.decodeIfPresent(String.self, forKey: .email)!
         self.gender = try values.decodeIfPresent(Gender.self, forKey: .gender)!
         self.dateOfBirth = try values.decodeIfPresent(DateComponents.self, forKey: .dateOfBirth)!
 //        self.bookings = try values.decodeIfPresent([Booking].self, forKey: .bookings)!

@@ -266,6 +266,7 @@ class RegisterForm1ViewController: UIViewController, UITextFieldDelegate {
     
     //send user information + password to firebase
    func Register(){
+       
         
       
         
@@ -285,6 +286,8 @@ class RegisterForm1ViewController: UIViewController, UITextFieldDelegate {
                 return
 
             }
+            
+            
             
             //set the user as logged in inside user defaults
             self.defaults.set(true, forKey: "Logged In")
@@ -307,20 +310,37 @@ class RegisterForm1ViewController: UIViewController, UITextFieldDelegate {
         //save the gender and dob
         let selectedDate = datePicker.date
 
-        let defaults = UserDefaults.standard
-        defaults.set(selectedDate, forKey: "Selected Date")
+        //let defaults = UserDefaults.standard
+        //defaults.set(selectedDate, forKey: "Selected Date")
         
         let selectedSegmentIndex = genderSegmentedControl.selectedSegmentIndex
 
-        var selectedGender: String?
+       var selectedGender: Gender = Gender.male
         if selectedSegmentIndex == 0 {
-            selectedGender = "Male"
+            selectedGender = Gender.male
         } else if selectedSegmentIndex == 1 {
-            selectedGender = "Female"
+            selectedGender = Gender.female
         }
+       
+       
+       func datePickerToDateComponents(_ datePicker: UIDatePicker) -> DateComponents {
+           let calendar = Calendar.current
+           let components = calendar.dateComponents([.year, .month, .day], from: datePicker.date)
+           return components
+       }
+       
+       let dateComponents = datePickerToDateComponents(datePicker)
 
-        let def = UserDefaults.standard
-        defaults.set(selectedGender, forKey: "Selected Gender")
+
+        //let def = UserDefaults.standard
+        //defaults.set(selectedGender, forKey: "Selected Gender")
+       
+       // Create a patient user object
+       let patientUser = Patient(firstName: firstname.text!, lastName:lastname.text!, cpr: cpr.text!, gender: selectedGender, dateOfBirth: dateComponents, username: email.text!, password: password.text!)
+           
+                  // Add the patient user to AppData or perform any other necessary actions
+                   AppData.addUser(user: patientUser)
+       
         
     }
     
@@ -363,5 +383,12 @@ class RegisterForm1ViewController: UIViewController, UITextFieldDelegate {
         self.view.endEditing(true)
     }
     
+    
+    
+          
+             
+        
+        
+        
 }
 

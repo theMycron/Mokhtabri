@@ -133,11 +133,11 @@ class AppData {
     
     
     //patient sample
-    static var patient1 = Patient(firstName: "Noora", lastName: "Qasim", phone: "12345678", cpr: "031003257", email: "nooraw376@gmail.com", gender: Gender.female, dateOfBirth: DateComponents(calendar: Calendar.current, year: 2003, month: 10, day: 12), username: "NooraW", password: "12345#78")
+    static var patient1 = Patient(firstName: "Noora", lastName: "Qasim", cpr: "031003257", gender: Gender.female, dateOfBirth: DateComponents(calendar: Calendar.current, year: 2003, month: 10, day: 12), username: "NooraW", password: "12345#78")
     
-    static var patient2 = Patient(firstName: "Fatima", lastName: "Naser", phone: "87654321", cpr: "020500000", email: "fatima@gmail.com", gender: Gender.female, dateOfBirth: DateComponents(calendar: Calendar.current, year: 2002, month: 05, day: 09), username: "FatimaN", password: "1234#678")
+    static var patient2 = Patient(firstName: "Fatima", lastName: "Naser", cpr: "020500000", gender: Gender.female, dateOfBirth: DateComponents(calendar: Calendar.current, year: 2002, month: 05, day: 09), username: "FatimaN", password: "1234#678")
     
-    static var pat3 = Patient(firstName: "Ahmed", lastName: "Faisal", phone: "33992299", cpr: "910200000", email: "AhFai@gmail.com", gender: Gender.male, dateOfBirth: DateComponents(calendar: Calendar.current, year: 1991, month: 04, day: 25), username: "AhmFAi", password: "87651234")
+    static var pat3 = Patient(firstName: "Ahmed", lastName: "Faisal", cpr: "910200000", gender: Gender.male, dateOfBirth: DateComponents(calendar: Calendar.current, year: 1991, month: 04, day: 25), username: "AhmFAi", password: "87651234")
     
     
     

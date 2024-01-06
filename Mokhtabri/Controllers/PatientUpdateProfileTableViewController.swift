@@ -27,9 +27,8 @@ class PatientUpdateProfileTableViewController: UITableViewController {
         firstnameField.textColor = UIColor.black
         lastnameFIeld.text = p.lastName
         lastnameFIeld.textColor = UIColor.black
-        phoneField.text = p.phone
+
         phoneField.textColor = UIColor.black
-        emailField.text = p.email
         emailField.textColor = UIColor.black
         
         usernameField.clearsOnBeginEditing = false
@@ -75,8 +74,6 @@ class PatientUpdateProfileTableViewController: UITableViewController {
             self.p.username = username
             self.p.firstName = firstname
             self.p.lastName = lastname
-            self.p.phone = phone
-            self.p.email = email
             
             // confirmation alert
             let confirmAlert = UIAlertController(title: "Confirmation", message: "Data changed successfully", preferredStyle: .alert)
