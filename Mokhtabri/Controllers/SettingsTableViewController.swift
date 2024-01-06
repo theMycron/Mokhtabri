@@ -18,17 +18,8 @@ class SettingsTableViewController: UITableViewController{
     
     
     @IBAction func logoutBtn(_ sender: Any) {
-        confirmation(title: "Log out", message: "Are you sure you want to log out of your account?") { [weak self] in
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            guard let viewController = storyboard.instantiateViewController(withIdentifier: "login") as? LoginViewController else {
-                return
-            }
-            viewController.modalPresentationStyle = .fullScreen
-            self?.present(viewController, animated: true) {
-                // Dismiss the previous view controller in settings
-                self?.navigationController?.viewControllers = [viewController]
-            }
-        }
+
+        logoutAlert()
     }
     
 
