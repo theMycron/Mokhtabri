@@ -16,17 +16,12 @@ class LabViewTableViewController: UITableViewController, UISearchResultsUpdating
         super.viewDidLoad()
         embedSearch()
         
-        // remove later
         AppData.loadData()
         tableView.reloadData()
         
         filterServices(scope: 0)
 
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
+        
     }
     
     
@@ -75,12 +70,9 @@ class LabViewTableViewController: UITableViewController, UISearchResultsUpdating
                 }
             } else if scope == 1 {
                 displayedServices = AppData.packages.filter{
-                   return $0.name.lowercased().contains(query) //|| $0.city.lowercased().contains(query))
+                   return $0.name.lowercased().contains(query)
                 }
-            } /*else if scope == 2 {
-                displayedServices = AppData.services.filter{
-                    return $0.type == FacilityType.lab && ($0.name.lowercased().contains(query) || $0.city.lowercased().contains(query))
-                }*/
+            }
             
         } else {
             filterServices(scope: scope)
@@ -99,21 +91,21 @@ class LabViewTableViewController: UITableViewController, UISearchResultsUpdating
     }
     // this is my checkpoint for now
     
-    //Edit AdminEditTableViewController name
+    //Edit LabEditTableTableViewController name
     @IBAction func unwindFromEdit(unwindSegue: UIStoryboardSegue) {
         guard let source = unwindSegue.source as? LabEditTableTableViewController,
-              let facility = source.service
+              let service = source.service
         else {return}
         
-        // replace old facility with updated one or just add it if it is new
+        // replace old service with updated one or just add it if it is new
         if let indexPath = tableView.indexPathForSelectedRow {
             displayedServices.remove(at: indexPath.section)
-            displayedServices.insert(facility, at: indexPath.section)
+            displayedServices.insert(service, at: indexPath.section)
             tableView.deselectRow(at: indexPath, animated: true)
-            AppData.editService(service: facility)
+            AppData.editService(service: service)
         } else {
-            displayedServices.append(facility)
-            AppData.addService(service: facility)
+            displayedServices.append(service)
+            AppData.addService(service: service)
         }
         filterServices(scope: search.searchBar.selectedScopeButtonIndex) // refresh view
         AppData.saveData()
@@ -124,8 +116,8 @@ class LabViewTableViewController: UITableViewController, UISearchResultsUpdating
         guard let cell = sender as? UITableViewCell, let indexPath = tableView.indexPath(for: cell) else {
             return nil
         }
-        let facility = displayedServices[indexPath.section]
-        return LabEditTableTableViewController(coder: coder, facility: facility)
+        let service = displayedServices[indexPath.section]
+        return LabEditTableTableViewController(coder: coder, service: service)
     }
     
     
@@ -134,8 +126,8 @@ class LabViewTableViewController: UITableViewController, UISearchResultsUpdating
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> LabViewTableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "LabViewCell", for: indexPath) as! LabViewTableViewCell
 
-        let facility: MedicalService = displayedServices[indexPath.section]
-        cell.update(with: facility)
+        let service: MedicalService = displayedServices[indexPath.section]
+        cell.update(with: service)
 
         return cell
     }
@@ -155,48 +147,5 @@ class LabViewTableViewController: UITableViewController, UISearchResultsUpdating
     }
     
 
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
+    
 }

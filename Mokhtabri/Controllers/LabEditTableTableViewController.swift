@@ -37,8 +37,8 @@ class LabEditTableTableViewController: UITableViewController, UIAdaptivePresenta
     var service: MedicalService?
     var hasChanges: Bool = false
     
-    init?(coder: NSCoder, facility: MedicalService?) {
-        self.service = facility
+    init?(coder: NSCoder, service: MedicalService?) {
+        self.service = service
         super.init(coder: coder)
     }
     
@@ -81,18 +81,14 @@ class LabEditTableTableViewController: UITableViewController, UIAdaptivePresenta
         switch sender.selectedSegmentIndex{
         case 0:
             DateExpiry.isHidden = true
-            //cellSelect.isHidden = true
             txtPhone.isHidden = false
             txtName.isHidden = false
             viewselecter.isHidden = true
-//            cellCategory.isHidden = false
         case 1 :
             DateExpiry.isHidden = false
-           // cellSelect.isHidden = false
             txtPhone.isHidden = false
             txtName.isHidden = false
             viewselecter.isHidden = false
-//            cellCategory.isHidden = true
             
         default:
             break
@@ -112,17 +108,12 @@ class LabEditTableTableViewController: UITableViewController, UIAdaptivePresenta
             viewselecter.isHidden = true
             DateExpiry.isHidden = true
         }
-        //cellSelect.isHidden = true
         tableView.reloadData()
         // this delegate will control the sheet, and will stop the user from dismissing if changes were made
         navigationController?.presentationController?.delegate = self
         updateView()
         
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
 
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
     
     @IBAction func btnCancelPressed(_ sender: Any) {
@@ -131,7 +122,7 @@ class LabEditTableTableViewController: UITableViewController, UIAdaptivePresenta
     }
     
     @IBAction func btnSavePressed(_ sender: Any) {
-        // create new facility and save, show alert if data is invalid
+        // create new service and save, show alert if data is invalid
         // TODO: implement input validation
         var oldId: UUID?
         
@@ -141,7 +132,7 @@ class LabEditTableTableViewController: UITableViewController, UIAdaptivePresenta
         let instructions :String? = txtInstruction.text
         let category: String? = txtCategory.text
         let expiryDate: Date = DateExpiry.date
-        var expiryDateComponents: DateComponents = Calendar.current.dateComponents(in: Calendar.current.timeZone, from: expiryDate)
+        let expiryDateComponents: DateComponents = Calendar.current.dateComponents(in: Calendar.current.timeZone, from: expiryDate)
         var selectedServiceType: MedicalService.ServiceType? {
            switch segmentedControl.selectedSegmentIndex {
            case 0:
@@ -155,16 +146,15 @@ class LabEditTableTableViewController: UITableViewController, UIAdaptivePresenta
         // TODO: add image as well
         
         
-        //i Changed price type from Float to String
-        if let facility = service {
-            oldId = facility.id
+        if let service = service {
+            oldId = service.id
         }
         if (selectedServiceType == .test) {
             service = Test(category: category!,name: name ?? "", price: price ?? 0.0 , description: description ?? "", instructions: instructions ?? "", forMedicalFacility: AppData.alhilal, serviceType : selectedServiceType! )
-            // TODO: change facility to logged in facility
+            // TODO: change service to logged in service
         } else if (selectedServiceType == .package) {
             service = Package(expiryDate: expiryDateComponents, tests: [],name: name ?? "", price: price ?? 0.0 , description: description ?? "", instructions: instructions ?? "", forMedicalFacility: AppData.alhilal, serviceType : selectedServiceType! )
-            uploadImageToFirebase()
+            _=uploadImageToFirebase()
         }
         
         
@@ -187,15 +177,15 @@ class LabEditTableTableViewController: UITableViewController, UIAdaptivePresenta
     }
     
     func updateCells() {
-        // used to update opening time and closing time cells when 24 hour is enabled
+        // used to update
         tableView.beginUpdates()
         tableView.endUpdates()
     }
     
     // MARK: - Table view data source
 
+    //this function hides views that are not needed between package and test page
    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        // hide opening time and closing time cells if facility is initially set to always open
         if indexPath.section == 1 && (indexPath.row == 4) {
             return (segmentedControl.selectedSegmentIndex == 0) ? 0 : super.tableView(tableView, heightForRowAt: indexPath)
         }
@@ -254,7 +244,7 @@ class LabEditTableTableViewController: UITableViewController, UIAdaptivePresenta
                 alert.addAction(UIAlertAction(title: "OK", style: .default))
                 self.present(alert, animated: true)
             } else {
-                // no errors, add imagePath to facility
+                // no errors, add imagePath to service
                 storageRef.downloadURL(completion: { result in
                    switch result {
                    case .failure( _):
@@ -263,9 +253,9 @@ class LabEditTableTableViewController: UITableViewController, UIAdaptivePresenta
                        self.present(alert, animated: true)
                    case .success(let url):
                        if (self.service is Package) {
-                           var package = self.service as! Package
+                           let package = self.service as! Package
                            package.imageDownloadURL = url
-                           // update facility in appdata
+                           // update service in appdata
                            AppData.editService(service: package)
                        }
                    }
