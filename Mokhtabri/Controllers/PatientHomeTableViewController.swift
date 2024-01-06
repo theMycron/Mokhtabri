@@ -13,8 +13,11 @@ class PatientHomeTableViewController: UITableViewController,UISearchBarDelegate,
         super.viewDidLoad()
         embedSearch()
 
-        filterTests()
-        filterPackages()
+     //   filterTests()
+      //  filterPackages()
+        AppData.loadServicesImages() {
+            
+        }
         filterLabs()
         //filterHospital()
     }
@@ -50,7 +53,7 @@ class PatientHomeTableViewController: UITableViewController,UISearchBarDelegate,
     var services: [MedicalService] = AppData.services
     var labs: [MedicalFacility] = AppData.labs
     var hospitals: [MedicalFacility] = AppData.hospitals
-    var tests: [Test] = []
+    var tests: [Test] = AppData.tests
     func filterTests() {
         for service in services {
             if service is Test {
@@ -58,7 +61,7 @@ class PatientHomeTableViewController: UITableViewController,UISearchBarDelegate,
             }
         }
     }
-    var packages: [Package] = []
+    var packages: [Package] = AppData.packages
     func filterPackages() {
         for service in services {
             if service is Package {

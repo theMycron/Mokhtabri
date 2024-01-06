@@ -20,6 +20,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         UNUserNotificationCenter.current().delegate = self
         FirebaseApp.configure()
         AppData.load()
+        
+       // AppData.loadData()
+       // AppData.saveData()
         return true
     }
     

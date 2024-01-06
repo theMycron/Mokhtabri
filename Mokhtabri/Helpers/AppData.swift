@@ -15,7 +15,7 @@ class AppData {
     static var admin: [User] = [User(username: "admin@gmail.com", password: "12345678", userType: .admin)]
     static var facilities: [MedicalFacility] = []
     static var services: [MedicalService] = []
-    static var tests: [Test] = [test1,test2,test3]
+    static var tests: [Test] = [test1,test2,test3,test5,test6,test7,test8,test9,test10]
     static var packages: [Package] = [Pack3,Pack4,test4]
     static var bookings: [Booking] = []
     static var categories: [Category] = []
@@ -40,6 +40,8 @@ class AppData {
         services = []
         bookings = []
         categories = []
+        tests = []
+        packages = []
     }
     
     // Methods to manage users
@@ -278,8 +280,9 @@ class AppData {
         if bookings.isEmpty {
             bookings = sampleBookings
             listOfBookingsLab = sampleBookings
-            listOfBookingsPatient = sampleBookings
-            services = listOfTests
+           listOfBookingsPatient = sampleBookings
+          //  services = listOfTests
+            
             facilities = hospitals
             patients = [patient1]
             loadServicesImages(){
@@ -290,10 +293,17 @@ class AppData {
     }
     
     static func loadServicesImages(completion: @escaping () -> Void) {
+        var services : [MedicalService] = []
+        for s in tests {
+            services.append(s)
+        }
+        for s in packages{
+            services.append(s)
+        }
         let group = DispatchGroup()
 
         //loops through the array of services
-        for service in AppData.services {
+        for service in services {
             let storageLink = service.storageLink
                 group.enter()
                 let storageRef = Storage.storage().reference(forURL: storageLink)
@@ -309,6 +319,47 @@ class AppData {
                             case .failure(let error):
                                 print("Error downloading image: \(error.localizedDescription)")
                                 service.photo = nil 
+                            }
+                            group.leave()
+                        }
+                    }
+                
+            }
+        }
+
+        group.notify(queue: .main) {
+            completion()
+        }
+    }
+    
+    static func loadBookingImages(completion: @escaping () -> Void) {
+        var services : [MedicalService] = []
+        for booking in listOfBookingsLab{
+            services.append(booking.ofMedicalService)
+        }
+        
+        for booking in listOfBookingsPatient{
+            services.append(booking.ofMedicalService)
+        }
+        let group = DispatchGroup()
+
+        //loops through the array of services
+        for service in services {
+            let storageLink = service.storageLink
+                group.enter()
+                let storageRef = Storage.storage().reference(forURL: storageLink)
+                storageRef.downloadURL { (url, error) in
+                    if let error = error {
+                        print("Error getting download URL: \(error.localizedDescription)")
+                        group.leave()
+                    } else if let url = url {
+                        KingfisherManager.shared.retrieveImage(with: url) { result in
+                            switch result {
+                            case .success(let value):
+                                service.photo = value.image
+                            case .failure(let error):
+                                print("Error downloading image: \(error.localizedDescription)")
+                                service.photo = nil
                             }
                             group.leave()
                         }

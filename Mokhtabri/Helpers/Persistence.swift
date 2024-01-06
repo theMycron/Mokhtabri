@@ -10,7 +10,7 @@ import Foundation
 extension AppData {
     
     fileprivate enum FileName: String {
-        case admins, patients, facilities, bookings, packages, tests, categories
+        case admins, patients, facilities, bookings, packages, tests, categories, bookingsLab, bookingsPatient
     }
     
     // get the URL for data storage
@@ -26,7 +26,8 @@ extension AppData {
         saveUsers(toFile: .facilities)
         saveServices(toFile: .packages)
         saveServices(toFile: .tests)
-        saveBookings()
+        saveBookings(toFile: .bookingsLab)
+        saveBookings(toFile: .bookingsPatient)
     }
     
     // loadData will wipe all AppData arrays to prevent duplication, make sure to call it only once at app startup
@@ -37,18 +38,15 @@ extension AppData {
         loadUsers(fromFile: .facilities)
         loadServices(fromFile: .packages)
         loadServices(fromFile: .tests)
-        loadBookings()
+        loadBookings(fromFile: .bookingsLab)
+        loadBookings(fromFile: .bookingsPatient)
         services = []
-        for s in tests {
-            services.append(s)
-        }
-        for s in packages{
-            services.append(s)
-        }
-        loadServicesImages(){
+        AppData.loadServicesImages() {
             
         }
-        
+        AppData.loadBookingImages() {
+            
+        }
     }
     
     fileprivate static func saveUsers(toFile: FileName) {
@@ -95,13 +93,20 @@ extension AppData {
             print("could not write services")
         }
     }
-    fileprivate static func saveBookings() {
-        guard bookings.count > 0 else {return}
-        let archiveURL = archiveURL(.bookings)
+    fileprivate static func saveBookings(toFile: FileName) {
+        let archiveURL = archiveURL(toFile)
         let propertyListEncoder = PropertyListEncoder()
         do {
-            let encodedData = try propertyListEncoder.encode(bookings)
-            try encodedData.write(to: archiveURL, options: .noFileProtection)
+            if toFile == .bookingsLab {
+                guard listOfBookingsLab.count > 0 else {return}
+                let encodentData = try propertyListEncoder.encode(listOfBookingsLab)
+                try encodentData.write(to: archiveURL, options: .noFileProtection)
+            }else if toFile == .bookingsPatient{
+                guard listOfBookingsLab.count > 0 else {return}
+                let encodentData = try propertyListEncoder.encode(listOfBookingsPatient)
+                try encodentData.write(to: archiveURL, options: .noFileProtection)
+            }
+        
         } catch EncodingError.invalidValue {
             print("could not encode bookings")
         } catch {
@@ -157,14 +162,23 @@ extension AppData {
             print("could not load data: \(error)")
         }
     }
-    fileprivate static func loadBookings() {
-        let archiveURL = archiveURL(.bookings)
+    fileprivate static func loadBookings(fromFile: FileName) {
+        let archiveURL = archiveURL(fromFile)
         let propertyListDecoder = PropertyListDecoder()
         guard let retrievedData = try? Data(contentsOf: archiveURL) else { return }
         do {
-            var decodedData: [Booking] = []
-            decodedData = try propertyListDecoder.decode([Booking].self, from: retrievedData)
-            bookings.append(contentsOf: decodedData)
+            if fromFile == .bookingsLab{
+                
+                
+                var decodedData: [Booking] = []
+                decodedData = try propertyListDecoder.decode([Booking].self, from: retrievedData)
+                listOfBookingsLab.append(contentsOf: decodedData)}
+            
+            else if fromFile == .bookingsPatient{
+                    var decodedData: [Booking] = []
+                    decodedData = try propertyListDecoder.decode([Booking].self, from: retrievedData)
+                    listOfBookingsPatient.append(contentsOf: decodedData)
+                }
         } catch {
             print("could not load data: \(error)")
         }

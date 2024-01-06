@@ -86,6 +86,7 @@ class PatientBookTableViewController: UITableViewController {
                 AppData.bookings.append(newBooking)
                 AppData.listOfBookingsLab.append(newBooking)
                 AppData.listOfBookingsPatient.append(newBooking)
+                AppData.saveData()
             }
         }else{
             confirmation(title: "Invalid", message: "Please select Valid Date"){
