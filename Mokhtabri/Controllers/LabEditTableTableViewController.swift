@@ -70,6 +70,11 @@ class LabEditTableTableViewController: UITableViewController, UIAdaptivePresenta
             }
             
         }
+        
+        guard let img = service.photo else {
+            return
+        }
+        imgDisplay.image = img
      
     }
     
@@ -150,10 +155,10 @@ class LabEditTableTableViewController: UITableViewController, UIAdaptivePresenta
             oldId = service.id
         }
         if (selectedServiceType == .test) {
-            service = Test(category: category!,name: name ?? "", price: price ?? 0.0 , description: description ?? "", instructions: instructions ?? "", forMedicalFacility: AppData.alhilal, serviceType : selectedServiceType!, storageLink: "gs://fir-testing-512eb.appspot.com/testImages/immuno.jpeg" )
+            service = Test(category: category!,name: name ?? "", price: price ?? 0.0 , description: description ?? "", instructions: instructions ?? "", forMedicalFacility: AppData.loggedInUser as! MedicalFacility, serviceType : selectedServiceType!, storageLink: "gs://fir-testing-512eb.appspot.com/testImages/immuno.jpeg" )
             // TODO: change service to logged in service
         } else if (selectedServiceType == .package) {
-            service = Package(expiryDate: expiryDateComponents, tests: [],name: name ?? "", price: price ?? 0.0 , description: description ?? "", instructions: instructions ?? "", forMedicalFacility: AppData.alhilal, serviceType : selectedServiceType!, storageLink: "gs://fir-testing-512eb.appspot.com/testImages/immuno.jpeg" )
+            service = Package(expiryDate: expiryDateComponents, tests: [],name: name ?? "", price: price ?? 0.0 , description: description ?? "", instructions: instructions ?? "", forMedicalFacility: AppData.loggedInUser as! MedicalFacility, serviceType : selectedServiceType!, storageLink: "gs://fir-testing-512eb.appspot.com/testImages/immuno.jpeg" )
             _=uploadImageToFirebase()
         }
         
@@ -192,9 +197,9 @@ class LabEditTableTableViewController: UITableViewController, UIAdaptivePresenta
         if indexPath.section == 1 && (indexPath.row == 3) {
             return (segmentedControl.selectedSegmentIndex == 1) ? 0 : super.tableView(tableView, heightForRowAt: indexPath)
         }
-       if indexPath.section == 0  {
-           return (segmentedControl.selectedSegmentIndex == 0) ? 0 : super.tableView(tableView, heightForRowAt: indexPath)
-       }
+//       if indexPath.section == 0  {
+//           return (segmentedControl.selectedSegmentIndex == 0) ? 0 : super.tableView(tableView, heightForRowAt: indexPath)
+//       }
        if indexPath.section == 3  {
            return (segmentedControl.selectedSegmentIndex == 0) ? 0 : super.tableView(tableView, heightForRowAt: indexPath)
        }
