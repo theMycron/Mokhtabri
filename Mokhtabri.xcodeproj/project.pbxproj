@@ -363,12 +363,9 @@
 				D6FD0EF62B31B11100BBCBDC /* PatientHospitalViewTableViewCell.swift */,
 				D6FD0EFA2B31B7E300BBCBDC /* PatientViewInfoTableViewCell.swift */,
 				D6FD0EFC2B31B83A00BBCBDC /* segmentedTableViewCell.swift */,
-
 				DF2F1F7C2B395EB600C97E40 /* LabViewTableViewCell.swift */,
 				DFD20CAC2B415A2D009A7048 /* LabSelectTestTableViewCell.swift */,
-
 				8D8192162B496047006EA015 /* HomeViewPTTableViewCell.swift */,
-
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -856,8 +853,9 @@
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Mokhtabri/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "Mokhtabri would like to use your camera";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchStoryboardName = LabServices.storyboard;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UIStatusBarStyle = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -885,8 +883,9 @@
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Mokhtabri/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "Mokhtabri would like to use your camera";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchStoryboardName = LabServices.storyboard;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UIStatusBarStyle = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
