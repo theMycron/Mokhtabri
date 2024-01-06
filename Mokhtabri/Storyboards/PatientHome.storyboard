@@ -195,7 +195,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="S2x-Mg-JLK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3983.969465648855" y="-297.18309859154931"/>
+            <point key="canvasLocation" x="4161" y="-319"/>
         </scene>
         <!--Home-->
         <scene sceneID="zte-CR-sWg">
@@ -212,7 +212,7 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="etj-Do-EBW" kind="relationship" relationship="rootViewController" id="9qr-IC-fQD"/>
+                        <segue destination="etj-Do-EBW" kind="relationship" relationship="rootViewController" id="dtK-tb-EuI"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="K4j-CW-jCx" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -385,8 +385,8 @@
                     </tableView>
                     <navigationItem key="navigationItem" id="xEV-yD-j5I">
                         <nil key="title"/>
-                        <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="tUx-wv-ay6">
-                            <rect key="frame" x="16" y="5" width="361" height="34"/>
+                        <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="Qin-fm-5fN">
+                            <rect key="frame" x="16" y="6" width="361" height="32"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <segments>
                                 <segment title="All"/>
@@ -396,14 +396,13 @@
                                 <segment title="Packages"/>
                             </segments>
                             <connections>
-                                <action selector="segementClick:" destination="etj-Do-EBW" eventType="valueChanged" id="pn0-mM-iTA"/>
-                                <action selector="segmentedValueChanged:" destination="etj-Do-EBW" eventType="valueChanged" id="D8L-iz-Go8"/>
+                                <action selector="segmentClick2:" destination="etj-Do-EBW" eventType="valueChanged" id="ZHr-pH-QOD"/>
                             </connections>
                         </segmentedControl>
                     </navigationItem>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
-                        <outlet property="Filter" destination="tUx-wv-ay6" id="G7C-yy-TCz"/>
+                        <outlet property="Filter2" destination="Qin-fm-5fN" id="wOf-1V-k62"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6Vr-R6-h7G" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -554,12 +553,18 @@
                                 <segment title="Tests"/>
                                 <segment title="Packages"/>
                             </segments>
+                            <connections>
+                                <action selector="segmentClick:" destination="VN1-Il-3Jm" eventType="valueChanged" id="Rg5-NQ-SQd"/>
+                            </connections>
                         </segmentedControl>
                     </navigationItem>
+                    <connections>
+                        <outlet property="segmentedControl" destination="PbL-9L-rnl" id="3Jl-gp-n0t"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UnY-Im-cQ2" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3126" y="-319"/>
+            <point key="canvasLocation" x="3269" y="-319"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>

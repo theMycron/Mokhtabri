@@ -23,10 +23,15 @@ class PatientHomeTableViewController: UITableViewController,UISearchBarDelegate,
     func updateSearchResults(for searchController: UISearchController) {
         
     }
-    @IBAction func segementClick(_ sender: Any) {
-    }
-    @IBOutlet weak var Filter: UISegmentedControl!
+
     
+    @IBAction func segmentClick2(_ sender: UISegmentedControl) {
+        selectedSegmentIndex = sender.selectedSegmentIndex
+        tableView.reloadData()
+    }
+    
+    
+    @IBOutlet weak var Filter2: UISegmentedControl!    
     // declaring elements
     
     // search bar
@@ -84,7 +89,7 @@ class PatientHomeTableViewController: UITableViewController,UISearchBarDelegate,
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        if Filter.selectedSegmentIndex == 0 {
+        if selectedSegmentIndex == 0 {
             return 4
         } else {
             return 1
@@ -92,13 +97,13 @@ class PatientHomeTableViewController: UITableViewController,UISearchBarDelegate,
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if Filter.selectedSegmentIndex == 1 {
+        if Filter2.selectedSegmentIndex == 1 {
             return hospitals.count
-        } else if Filter.selectedSegmentIndex == 2 {
+        } else if Filter2.selectedSegmentIndex == 2 {
             return labs.count
-        } else if Filter.selectedSegmentIndex == 3 {
+        } else if Filter2.selectedSegmentIndex == 3 {
             return tests.count
-        } else if Filter.selectedSegmentIndex == 4 {
+        } else if Filter2.selectedSegmentIndex == 4 {
             return packages.count
         }else {
             if section == 0 {
@@ -117,7 +122,7 @@ class PatientHomeTableViewController: UITableViewController,UISearchBarDelegate,
     // change data
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         // for tests
-        if Filter.selectedSegmentIndex == 3 {
+        if selectedSegmentIndex == 3 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "PatientBooking", for: indexPath) as! HomeViewPTTableViewCell
             
             let service = tests[indexPath.row]
@@ -131,7 +136,7 @@ class PatientHomeTableViewController: UITableViewController,UISearchBarDelegate,
             return cell
         } 
         // for labs
-        else if Filter.selectedSegmentIndex == 2 {
+        else if selectedSegmentIndex == 2 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "HospitCell", for: indexPath) as! PatientHospitalViewTableViewCell
             let lab = labs[indexPath.row]
             cell.HospitalName.text = lab.name
@@ -149,7 +154,7 @@ class PatientHomeTableViewController: UITableViewController,UISearchBarDelegate,
             
             return cell
         } // for packages
-        else if Filter.selectedSegmentIndex == 4 {
+        else if selectedSegmentIndex == 4 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "PatientBooking", for: indexPath) as! HomeViewPTTableViewCell
             
             let service = packages[indexPath.row]
@@ -260,29 +265,26 @@ class PatientHomeTableViewController: UITableViewController,UISearchBarDelegate,
         if let destination = segue.destination as?
             PatientHospitalSelectTableViewController, let selectedRow = tableView.indexPathForSelectedRow {
 
-            if Filter.selectedSegmentIndex == 0 {
+            if Filter2.selectedSegmentIndex == 0 {
                 if selectedRow.section == 0 {
                     destination.selectedHospital = hospitals[selectedRow.row]
                } else {
                    destination.selectedHospital = labs[selectedRow.row]
                }
-            } else if Filter.selectedSegmentIndex == 1 {
+            } else if Filter2.selectedSegmentIndex == 1 {
                 destination.selectedHospital = hospitals[selectedRow.row]
             } else {
                 destination.selectedHospital = labs[selectedRow.row]
-            }
-            //destination.selectedHospital = facility[selectedRow.row]
-            
+            } 
         } else if let destination = segue.destination as? PatientBookTableViewController, let selected = tableView.indexPathForSelectedRow {
-            if Filter.selectedSegmentIndex == 0 {
-                //to do, change to 2 later
+            if Filter2.selectedSegmentIndex == 0 {
                  if selected.section == 2 {
                     destination.sampleTest = tests[selected.row]
                 } else {
                     destination.sampleTest = packages[selected.row]
                 }
 
-            } else if Filter.selectedSegmentIndex == 3 {
+            } else if Filter2.selectedSegmentIndex == 3 {
                 destination.sampleTest = tests[selected.row]
             }
             else {
@@ -293,7 +295,7 @@ class PatientHomeTableViewController: UITableViewController,UISearchBarDelegate,
     }
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        if Filter.selectedSegmentIndex == 0 {
+        if Filter2.selectedSegmentIndex == 0 {
             if section == 0 {
                 return "Hospitals"
             } else if section == 1 {
