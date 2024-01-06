@@ -46,6 +46,7 @@
 		883968A42B2CA090008911FB /* FirebaseAppCheck in Frameworks */ = {isa = PBXBuildFile; productRef = 883968A32B2CA090008911FB /* FirebaseAppCheck */; };
 		883968A72B2CA428008911FB /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 883968A62B2CA428008911FB /* FirebaseAuth */; };
 		8844CE2E2B2F795E009366DF /* RegisterForm1ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8844CE2D2B2F795E009366DF /* RegisterForm1ViewController.swift */; };
+		8D8192172B496047006EA015 /* HomeViewPTTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D8192162B496047006EA015 /* HomeViewPTTableViewCell.swift */; };
 		8DE802CB2B2DF11B007328FF /* PatientUpdateProfileTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DE802CA2B2DF11B007328FF /* PatientUpdateProfileTableViewController.swift */; };
 		D6FD0EF32B31AF4A00BBCBDC /* PatientHomeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6FD0EF22B31AF4A00BBCBDC /* PatientHomeTableViewController.swift */; };
 		D6FD0EF52B31AFA500BBCBDC /* PatientHospitalSelectTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6FD0EF42B31AFA500BBCBDC /* PatientHospitalSelectTableViewController.swift */; };
@@ -202,6 +203,7 @@
 		882DEA262B35E2B200E46594 /* NavViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NavViewController.swift; path = Mokhtabri/Storyboards/NavViewController.swift; sourceTree = SOURCE_ROOT; };
 		883968982B2CA03E008911FB /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		8844CE2D2B2F795E009366DF /* RegisterForm1ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterForm1ViewController.swift; sourceTree = "<group>"; };
+		8D8192162B496047006EA015 /* HomeViewPTTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewPTTableViewCell.swift; sourceTree = "<group>"; };
 		8DE802CA2B2DF11B007328FF /* PatientUpdateProfileTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientUpdateProfileTableViewController.swift; sourceTree = "<group>"; };
 		D6FD0EF22B31AF4A00BBCBDC /* PatientHomeTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientHomeTableViewController.swift; sourceTree = "<group>"; };
 		D6FD0EF42B31AFA500BBCBDC /* PatientHospitalSelectTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientHospitalSelectTableViewController.swift; sourceTree = "<group>"; };
@@ -341,7 +343,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		
 		443CE4BD2B1DADFA0024D74B /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -352,6 +353,7 @@
 				D6FD0EF62B31B11100BBCBDC /* PatientHospitalViewTableViewCell.swift */,
 				D6FD0EFA2B31B7E300BBCBDC /* PatientViewInfoTableViewCell.swift */,
 				D6FD0EFC2B31B83A00BBCBDC /* segmentedTableViewCell.swift */,
+				8D8192162B496047006EA015 /* HomeViewPTTableViewCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -376,7 +378,6 @@
 		448FF71E2B15F90200B3CA1D /* Mokhtabri */ = {
 			isa = PBXGroup;
 			children = (
-				4408DE9B2B417CCB00E6546E /* SampleData */,
 				883968982B2CA03E008911FB /* GoogleService-Info.plist */,
 				443CE4BD2B1DADFA0024D74B /* Views */,
 				448FF7372B16043900B3CA1D /* Delegates */,
@@ -669,6 +670,7 @@
 				446C06782B1C92F3006A6A5E /* Package.swift in Sources */,
 				F2F60A242B28FF04005B74C6 /* Alerts.swift in Sources */,
 				D6FD0EF52B31AFA500BBCBDC /* PatientHospitalSelectTableViewController.swift in Sources */,
+				8D8192172B496047006EA015 /* HomeViewPTTableViewCell.swift in Sources */,
 				448FF7202B15F90200B3CA1D /* AppDelegate.swift in Sources */,
 				446C067A2B1C9302006A6A5E /* Booking.swift in Sources */,
 				D6FD0EF32B31AF4A00BBCBDC /* PatientHomeTableViewController.swift in Sources */,

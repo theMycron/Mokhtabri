@@ -93,7 +93,7 @@ class PatientHomeTableViewController: UITableViewController,UISearchBarDelegate,
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if Filter.selectedSegmentIndex == 1 {
-            return facility.count
+            return hospitals.count
         } else if Filter.selectedSegmentIndex == 2 {
             return labs.count
         } else if Filter.selectedSegmentIndex == 3 {
@@ -116,17 +116,22 @@ class PatientHomeTableViewController: UITableViewController,UISearchBarDelegate,
     
     // change data
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        // for hospitals
+        // for tests
         if Filter.selectedSegmentIndex == 3 {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "PatientBooking", for: indexPath) as! PatientBookingTableViewCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "PatientBooking", for: indexPath) as! HomeViewPTTableViewCell
             
             let service = tests[indexPath.row]
             cell.TestName.text = service.name
             cell.hospitalName.text = service.forMedicalFacility.name
             cell.price.text = "\(service.price)BHD"
-
+            guard let img1 = service.photo else {
+                return cell
+            }
+            cell.img.image = img1
             return cell
-        } else if Filter.selectedSegmentIndex == 2 {
+        } 
+        // for labs
+        else if Filter.selectedSegmentIndex == 2 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "HospitCell", for: indexPath) as! PatientHospitalViewTableViewCell
             let lab = labs[indexPath.row]
             cell.HospitalName.text = lab.name
@@ -139,21 +144,22 @@ class PatientHomeTableViewController: UITableViewController,UISearchBarDelegate,
                 else {
                     return cell
                 }
-                cell.openingTime.text = "From \(hour) am - \(chour) pm"
+                cell.openingTime.text = "From \(hour):00 - \(chour):00"
             }
             
             return cell
-        }
-        
-        // for packages
+        } // for packages
         else if Filter.selectedSegmentIndex == 4 {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "PatientBooking", for: indexPath) as! PatientBookingTableViewCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "PatientBooking", for: indexPath) as! HomeViewPTTableViewCell
             
             let service = packages[indexPath.row]
             cell.TestName.text = service.name
             cell.hospitalName.text = service.forMedicalFacility.name
             cell.price.text = "\(service.price)BHD"
-
+            guard let img = service.photo else {
+                return cell
+            }
+            cell.img.image = img
             return cell
         } else {
             if indexPath.section == 0 {
@@ -176,21 +182,29 @@ class PatientHomeTableViewController: UITableViewController,UISearchBarDelegate,
                 return cell
             } // for tests
             else if indexPath.section == 2 {
-                let cell = tableView.dequeueReusableCell(withIdentifier: "PatientBooking", for: indexPath) as! PatientBookingTableViewCell
+                let cell = tableView.dequeueReusableCell(withIdentifier: "PatientBooking", for: indexPath) as! HomeViewPTTableViewCell
                 
                 let service = tests[indexPath.row]
                 cell.TestName.text = service.name
                 cell.hospitalName.text = service.forMedicalFacility.name
                 cell.price.text = "\(service.price)BHD"
+                guard let img = service.photo else {
+                    return cell
+                }
+                cell.img.image = img
                 return cell
             }
             // for packages
             else if indexPath.section == 3 {
-                let cell = tableView.dequeueReusableCell(withIdentifier: "PatientBooking", for: indexPath) as! PatientBookingTableViewCell
+                let cell = tableView.dequeueReusableCell(withIdentifier: "PatientBooking", for: indexPath) as! HomeViewPTTableViewCell
                 let service = packages[indexPath.row]
                 cell.TestName.text = service.name
                 cell.hospitalName.text = service.forMedicalFacility.name
                 cell.price.text = "\(service.price)BHD"
+                guard let img = service.photo else {
+                    return cell
+                }
+                cell.img.image = img
                 return cell
             } else {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "HospitCell", for: indexPath) as! PatientHospitalViewTableViewCell
@@ -247,13 +261,13 @@ class PatientHomeTableViewController: UITableViewController,UISearchBarDelegate,
             PatientHospitalSelectTableViewController, let selectedRow = tableView.indexPathForSelectedRow {
 
             if Filter.selectedSegmentIndex == 0 {
-                if selectedRow.section == 2 {
-                    destination.selectedHospital = facility[selectedRow.row]
+                if selectedRow.section == 0 {
+                    destination.selectedHospital = hospitals[selectedRow.row]
                } else {
                    destination.selectedHospital = labs[selectedRow.row]
                }
             } else if Filter.selectedSegmentIndex == 1 {
-                destination.selectedHospital = facility[selectedRow.row]
+                destination.selectedHospital = hospitals[selectedRow.row]
             } else {
                 destination.selectedHospital = labs[selectedRow.row]
             }
@@ -262,7 +276,7 @@ class PatientHomeTableViewController: UITableViewController,UISearchBarDelegate,
         } else if let destination = segue.destination as? PatientBookTableViewController, let selected = tableView.indexPathForSelectedRow {
             if Filter.selectedSegmentIndex == 0 {
                 //to do, change to 2 later
-                 if selected.section == 1 {
+                 if selected.section == 2 {
                     destination.sampleTest = tests[selected.row]
                 } else {
                     destination.sampleTest = packages[selected.row]
@@ -334,56 +348,5 @@ class PatientHomeTableViewController: UITableViewController,UISearchBarDelegate,
         }
         
     }
-    
-    func categorizeView() {
-        
-    }
- 
-    
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
