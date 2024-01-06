@@ -27,7 +27,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="393" height="158"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qaT-oP-46D">
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qaT-oP-46D">
                                                     <rect key="frame" x="76" y="0.0" width="241" height="158"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
@@ -188,6 +188,7 @@
                         <outlet property="btn" destination="Imu-aE-yXT" id="l2g-wF-fxi"/>
                         <outlet property="datePicker" destination="rh1-pl-5K4" id="WMM-ZL-TJj"/>
                         <outlet property="hospitalName" destination="Vns-UQ-DUH" id="t9q-lN-6ZL"/>
+                        <outlet property="image" destination="qaT-oP-46D" id="b0O-AQ-4WB"/>
                         <outlet property="price" destination="vXP-Pm-9yg" id="8of-Rb-pf8"/>
                         <outlet property="testName" destination="y8U-lx-uRt" id="NJx-8C-P0H"/>
                     </connections>
@@ -298,7 +299,7 @@
                                     <segue destination="VN1-Il-3Jm" kind="show" id="nCe-d1-ovo"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="blue" indentationWidth="10" reuseIdentifier="PatientBooking" rowHeight="96" id="ocq-0e-ZcJ" customClass="PatientBookingTableViewCell" customModule="Mokhtabri" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="blue" indentationWidth="10" reuseIdentifier="PatientBooking" rowHeight="96" id="ocq-0e-ZcJ" customClass="HomeViewPTTableViewCell" customModule="Mokhtabri" customModuleProvider="target">
                                 <rect key="frame" x="20" y="151.33333206176758" width="353" height="96"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ocq-0e-ZcJ" id="Hfx-NN-OF4">
@@ -368,9 +369,10 @@
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <outlet property="TestName" destination="GwX-TB-M4E" id="9fD-KZ-tyl"/>
-                                    <outlet property="hospitalName" destination="aHn-CP-v5L" id="Jqb-Hz-xsV"/>
-                                    <outlet property="price" destination="E86-je-gkm" id="8V2-qx-rTT"/>
+                                    <outlet property="TestName" destination="GwX-TB-M4E" id="vnK-fD-v64"/>
+                                    <outlet property="hospitalName" destination="aHn-CP-v5L" id="RsW-dB-9IT"/>
+                                    <outlet property="img" destination="MUw-ff-7Fh" id="mcN-Mr-P5U"/>
+                                    <outlet property="price" destination="E86-je-gkm" id="8PD-EX-b6M"/>
                                     <segue destination="9wZ-KK-PTm" kind="show" id="zhV-r1-C5h"/>
                                 </connections>
                             </tableViewCell>

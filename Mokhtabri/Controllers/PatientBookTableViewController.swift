@@ -9,6 +9,7 @@ import UIKit
 
 class PatientBookTableViewController: UITableViewController {
     var loggedInPatient: Patient?
+    @IBOutlet weak var image: UIImageView!
     var sampleTest : MedicalService?
     
     @IBOutlet weak var btn: UIBarButtonItem!
@@ -62,7 +63,10 @@ class PatientBookTableViewController: UITableViewController {
         }else{
             updateDes2()
         }
-        
+        guard let img1 = sampleTest.photo else {
+            return
+        }
+        image.image = img1
     }
 
     @IBAction func bookClicked(_ sender: Any) {
