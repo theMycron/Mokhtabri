@@ -42,11 +42,13 @@ class Package: MedicalService {
         case expiryDate, tests, image
     }
     
-    init(expiryDate: DateComponents, tests: [Test], name: String, price: Float, description: String, instructions: String, forMedicalFacility: MedicalFacility, serviceType: ServiceType, imageDownloadURL: URL? = nil) {
+    init(expiryDate: DateComponents, tests: [Test], name: String, price: Float, description: String, instructions: String, forMedicalFacility: MedicalFacility, serviceType: ServiceType, imageDownloadURL: URL? = nil, storageLink: String) {
+
         self.expiryDate = expiryDate
         self.tests = tests
         self.imageDownloadURL = imageDownloadURL // Initialize the image property
-        super.init(name: name, price: price, description: description, instructions: instructions, forMedicalFacility: forMedicalFacility, serviceType: serviceType)
+        super.init(name: name, price: price, description: description, instructions: instructions, forMedicalFacility: forMedicalFacility, serviceType: serviceType,storageLink: storageLink)
+
     }
     override func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)

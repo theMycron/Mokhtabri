@@ -9,7 +9,7 @@ import Foundation
 
 class Test: MedicalService {
     var category: String
-    
+    var imageDownloadURL: URL?
     override var description: String {
         return """
                 \(super.description)
@@ -22,9 +22,11 @@ class Test: MedicalService {
         case category
     }
     
-    init(category: String, name: String, price: Float, description: String, instructions: String, forMedicalFacility: MedicalFacility, serviceType: ServiceType) {
+    init(category: String, name: String, price: Float, description: String, instructions: String, forMedicalFacility: MedicalFacility, serviceType: ServiceType, storageLink : String) {
+
         self.category = category
-        super.init(name: name, price: price, description: description, instructions: instructions, forMedicalFacility: forMedicalFacility, serviceType: serviceType)
+        super.init(name: name, price: price, description: description, instructions: instructions, forMedicalFacility: forMedicalFacility, serviceType: serviceType, storageLink: storageLink)
+
     }
     
     override func encode(to encoder: Encoder) throws {

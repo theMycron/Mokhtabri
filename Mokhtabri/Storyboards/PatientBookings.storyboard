@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="l6Z-Yi-xhX">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22155" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="l6Z-Yi-xhX">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22131"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -168,10 +169,10 @@
                             <tableViewSection id="GfD-Zn-jCc">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="c4P-eG-Cbj">
-                                        <rect key="frame" x="20" y="18" width="353" height="43.666667938232422"/>
+                                        <rect key="frame" x="20" y="18" width="353" height="47.666667938232422"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="c4P-eG-Cbj" id="IZ3-CQ-Gd4">
-                                            <rect key="frame" x="0.0" y="0.0" width="353" height="43.666667938232422"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="353" height="47.666667938232422"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Status" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CFC-eh-IBP">
@@ -185,7 +186,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="158" id="RuL-Ig-GKp">
-                                        <rect key="frame" x="20" y="61.666667938232422" width="353" height="158"/>
+                                        <rect key="frame" x="20" y="65.666667938232422" width="353" height="158"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="RuL-Ig-GKp" id="1Ph-HM-eYs">
                                             <rect key="frame" x="0.0" y="0.0" width="353" height="158"/>
@@ -199,7 +200,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="77" id="cwU-g8-t7d">
-                                        <rect key="frame" x="20" y="219.66666793823242" width="353" height="77"/>
+                                        <rect key="frame" x="20" y="223.66666793823242" width="353" height="77"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="cwU-g8-t7d" id="27M-HV-3nN">
                                             <rect key="frame" x="0.0" y="0.0" width="353" height="77"/>
@@ -224,18 +225,18 @@
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="left" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="PatientInfo" rowHeight="156" id="Sr6-7e-YVc" customClass="PatientInfoTableViewCell" customModule="Mokhtabri" customModuleProvider="target">
-                                        <rect key="frame" x="20" y="296.66666793823242" width="353" height="156"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="left" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="PatientInfo" rowHeight="299" id="Sr6-7e-YVc" customClass="PatientInfoTableViewCell" customModule="Mokhtabri" customModuleProvider="target">
+                                        <rect key="frame" x="20" y="300.66666793823242" width="353" height="299"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Sr6-7e-YVc" id="PS0-eE-RAJ">
-                                            <rect key="frame" x="0.0" y="0.0" width="353" height="156"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="353" height="299"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="MqR-tH-mA4">
-                                                    <rect key="frame" x="20" y="11" width="313" height="134"/>
+                                                    <rect key="frame" x="20" y="12" width="313" height="275"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="wordWrap" numberOfLines="9" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tas-on-Cyb">
-                                                            <rect key="frame" x="0.0" y="0.0" width="313" height="134"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="313" height="275"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
@@ -277,6 +278,7 @@
                     <connections>
                         <outlet property="btn" destination="0HN-AR-51R" id="FNU-xj-hVK"/>
                         <outlet property="celltrial" destination="Sr6-7e-YVc" id="6sC-cK-NHY"/>
+                        <outlet property="images" destination="xDy-9N-fGa" id="HS3-kp-01T"/>
                         <outlet property="info" destination="tas-on-Cyb" id="coy-WD-cvR"/>
                         <outlet property="price" destination="u94-81-J3J" id="LKG-E5-Org"/>
                         <outlet property="status" destination="CFC-eh-IBP" id="gm6-LJ-btd"/>

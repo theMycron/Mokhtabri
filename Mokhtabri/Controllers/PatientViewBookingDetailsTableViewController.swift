@@ -9,6 +9,7 @@ import UIKit
 
 class PatientViewBookingDetailsTableViewController: UITableViewController {
     
+    @IBOutlet weak var images: UIImageView!
     @IBOutlet weak var celltrial: PatientInfoTableViewCell!
     var booking : Booking?
     @IBOutlet weak var info: UILabel!
@@ -62,6 +63,11 @@ class PatientViewBookingDetailsTableViewController: UITableViewController {
             return
         }
         info.text = "\(branch) branch\nBooking Date: \(day)-\(month)-\(year)\nSpecial Information: \(specialInfo)"
+        
+        guard let img = booking?.ofMedicalService.photo else {
+            return
+        }
+        images.image = img
     }
     
     func updatePackage(){
@@ -75,7 +81,10 @@ class PatientViewBookingDetailsTableViewController: UITableViewController {
             list += "-\(test.name)\n"
         }
         info.text = "\(branch) branch\nBooking Date: \(day)-\(month)-\(year)\nSpecial Information: \(specialInfo)\n Tests Included:\n\(list) "
-
+        guard let img = booking?.ofMedicalService.photo else {
+            return
+        }
+        images.image = img
     }
     
     @IBAction func cancelClicked(_ sender: Any) {

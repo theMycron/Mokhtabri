@@ -141,6 +141,7 @@ class PatientHomeTableViewController: UITableViewController,UISearchBarDelegate,
                 }
                 cell.openingTime.text = "From \(hour) am - \(chour) pm"
             }
+            
             return cell
         }
         

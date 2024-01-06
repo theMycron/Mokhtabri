@@ -7,6 +7,8 @@
 
 import UIKit
 import FirebaseAuth
+import Foundation
+
 
 class LoginViewController: UIViewController, UITextFieldDelegate {
     
@@ -40,6 +42,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         //start validating
        
             validateFields()
+          
+        
          
     }
     
@@ -83,14 +87,14 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         // Set the desired minimum password length
         let minimumPasswordLength = 8
 
-        if passwordLength < minimumPasswordLength {
+       /* if passwordLength < minimumPasswordLength {
             // Password length is less than the desired length
             // Display an alert or show an error message to the user
-            let alert = UIAlertController(title: "Weak Password", message: "Password should be at least \(minimumPasswordLength) characters long for more security.", preferredStyle: .alert)
+            let alert = UIAlertController(title: "Invalid Password", message: "Password should be at least \(minimumPasswordLength) characters long for more security.", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
             present(alert, animated: true)
             return
-        }
+        }*/
         guard let email = emailTxt.text else {
             // Email text field is empty
             return
@@ -102,7 +106,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         if !emailPredicate.evaluate(with: email) {
             showInvalidEmailAlert()
         }
-        
+       
         
         //start login process after validation
         login()
@@ -110,11 +114,18 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     
     func login(){
         
-     
-        //force unwrap tp avoid the crash
-        Auth.auth().signIn(withEmail: emailTxt.text!, password: passwordTxt.text!) { [weak self] authResult, errorMessgae in
+        //let texts = Helper.shared.getTextFromTextField(textFields:[emailTxt,passwordTxt])
+        //let email = texts[0]
+        //let password = texts[1]
+        //FirebaseAuth.Auth.auth().signIn(withEmail: email, password: password, completion: {authResult, error in
+          //  guard error == nil else{
+               // Helper.shared.showAlert(Controller: self, title: "Invalid credentials", message : "Check your email or password")
+               // return
+           // }
+       // })
+        /*Auth.auth().signIn(withEmail: emailTxt.text!, password: passwordTxt.text!) { [weak self] authResult, errorMessgae in
             
-            
+             
             guard self != nil else {return}
             
             if let errorMessgae = errorMessgae{
@@ -124,20 +135,43 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
             }
             //double check the information
             self!.checkUserInfo()
-        }
+        }*/
+      // print(Auth.auth().currentUser!.uid)
         
+        
+        guard let email = emailTxt.text, let password = passwordTxt.text else {
+              return
+          }
+
+          Auth.auth().signIn(withEmail: email, password: password) { [weak self] authResult, error in
+              guard let self = self else { return }
+
+              if let error = error {
+                  // Show error message when authentication fails
+                  self.showInvalidCredentialsAlert()
+                  print("Authentication failed: \(error.localizedDescription)")
+                  return
+              }
+
+              // Authentication successful, proceed to check user info
+              self.checkUserInfo()
+          }
     }
+    
     //double check that the user logged in and have information
     func checkUserInfo(){
+        
+        
+        
         if Auth.auth().currentUser != nil {
             guard let email = Auth.auth().currentUser?.email else {
                 print("email is null")
                 return
             }
-
+            
             let viewControllerIdentifier: String
             var isTabBarController: Bool = true
-
+            
             if email.contains("admin@gmail"){
                 viewControllerIdentifier = "AdminView"
                 // admin screen has no tab bar controller, so do not instantiate as tab bar controller
@@ -161,37 +195,48 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
             }
             
             
-//
-//            let storyboard = UIStoryboard(name: storyboardName, bundle: nil)
-//            guard let viewController = storyboard.instantiateViewController(withIdentifier: viewControllerIdentifier) as? UINavigationController else {
-//                return
-//            }
-//
-//            viewController.modalPresentationStyle = .fullScreen
-//            self.present(viewController, animated: true) {
-//                // Dismiss the previous view controller in settings
-//                self.navigationController?.viewControllers = [viewController]
-//            }
+            //
+            //            let storyboard = UIStoryboard(name: storyboardName, bundle: nil)
+            //            guard let viewController = storyboard.instantiateViewController(withIdentifier: viewControllerIdentifier) as? UINavigationController else {
+            //                return
+            //            }
+            //
+            //            viewController.modalPresentationStyle = .fullScreen
+            //            self.present(viewController, animated: true) {
+            //                // Dismiss the previous view controller in settings
+            //                self.navigationController?.viewControllers = [viewController]
+            //            }
             
             
-         
+            
             
             //let storyboard = UIStoryboard(name: "PatientHome", bundle: nil)
-           // guard let viewController = storyboard.instantiateViewController(withIdentifier: "PatientHome") as? PatientHomeTableViewController else {
-                //return
+            // guard let viewController = storyboard.instantiateViewController(withIdentifier: "PatientHome") as? PatientHomeTableViewController else {
+            //return
             //}
             //viewController.modalPresentationStyle = .fullScreen
             //self.present(viewController, animated: true) {
-                // Dismiss the previous view controller in settings
-                //self.navigationController?.viewControllers = [viewController]
+            // Dismiss the previous view controller in settings
+            //self.navigationController?.viewControllers = [viewController]
             //}
-            //let userID: String = Auth.auth().currentUser!.uid
+            // let userID: String = Auth.auth().currentUser!.uid
             
             
         }
         
         
         
+    }
+    
+    func showInvalidCredentialsAlert() {
+        let alertController = UIAlertController(title: "Invalid Credentials",
+                                                message: "The username or password you entered were invalid. Please try again.",
+                                                preferredStyle: .alert)
+
+        let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+        alertController.addAction(okAction)
+
+        present(alertController, animated: true, completion: nil)
     }
     
     override func viewDidAppear(_ animated: Bool) {

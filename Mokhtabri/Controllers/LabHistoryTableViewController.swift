@@ -8,7 +8,7 @@
 import UIKit
 
 class LabHistoryTableViewController: UITableViewController, UISearchBarDelegate, UISearchResultsUpdating {
-    
+    var loggedInUser: User?
     func updateSearchResults(for searchController: UISearchController) {
         // let scope = searchController.searchBar.selectedScopeButtonIndex
         guard let term = searchController.searchBar.text?.lowercased() else {
@@ -24,9 +24,12 @@ class LabHistoryTableViewController: UITableViewController, UISearchBarDelegate,
                     $0.forPatient.name.lowercased().contains(term) || $0.ofMedicalService.name.lowercased().contains(term)
                 }
                 
-            case 1: break
-            case 2: break
-            default:
+            case 1:                 completedBookings = completedBookings.filter{
+                $0.forPatient.name.lowercased().contains(term) || $0.ofMedicalService.name.lowercased().contains(term)
+            }
+            case 2: cancelledBookings = cancelledBookings.filter{
+                $0.forPatient.name.lowercased().contains(term) || $0.ofMedicalService.name.lowercased().contains(term)
+            }            default:
                 break
             }
         }
@@ -57,7 +60,7 @@ class LabHistoryTableViewController: UITableViewController, UISearchBarDelegate,
     var patient = Patient(firstName: "Noora", lastName: "Qasim", phone: "12345678", cpr: "031003257", email: "nooraw376@gmail.com", gender: Gender.female, dateOfBirth: DateComponents(calendar: Calendar.current, year: 2003, month: 10, day: 12), username: "NooraW", password: "12345#")
     
     // Create an array to store the bookings
-    var bookings = AppData.bookings
+    var bookings = AppData.listOfBookingsLab
     var searchBar: UISearchBar!
     //var selectedRow = 0
     var selectedSegmentIndex = 0
@@ -71,14 +74,22 @@ class LabHistoryTableViewController: UITableViewController, UISearchBarDelegate,
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        bookings = AppData.bookings
+        bookings = AppData.listOfBookingsLab
         categorizeBookings()
-        
-        
+
         
         
         // Set up the search controller
         embedSearch()
+        if AppData.loggedInUser == nil {
+            loggedInUser = AppData.facilities[0]
+        }else {
+            guard let user = AppData.loggedInUser else{
+                return
+            }
+            loggedInUser = user
+        }
+        
         //tableView.reloadData()
     }
     
@@ -141,6 +152,10 @@ class LabHistoryTableViewController: UITableViewController, UISearchBarDelegate,
             // Handle the case where one or more components are nil (optional)
             cell.bookingDate.text = "Booking date: N/A" // Or any other suitable placeholder
         }
+        guard let img = booking.ofMedicalService.photo else{
+            return cell
+        }
+        cell.photo.image = img
         
         return cell
     }
@@ -205,20 +220,23 @@ class LabHistoryTableViewController: UITableViewController, UISearchBarDelegate,
         
     }*/
     func categorizeBookings() {
-        activeBookings = bookings.filter { $0.status == .Active } // Replace .active with your actual status value for active bookings
-        completedBookings = bookings.filter { $0.status == .Completed } // Replace .completed with your actual status value for completed bookings
-        cancelledBookings = bookings.filter { $0.status == .Cancelled } // Replace .cancelled with your actual status value for cancelled bookings
+        guard let loggedInUser = loggedInUser else{
+            return
+        }
+        activeBookings = bookings.filter { $0.status == .Active && $0.ofMedicalService.forMedicalFacility == loggedInUser} // Replace .active with your actual status value for active bookings
+        completedBookings = bookings.filter { $0.status == .Completed && $0.ofMedicalService.forMedicalFacility == loggedInUser } // Replace .completed with your actual status value for completed bookings
+        cancelledBookings = bookings.filter { $0.status == .Cancelled && $0.ofMedicalService.forMedicalFacility == loggedInUser} // Replace .cancelled with your actual status value for cancelled bookings
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        bookings = AppData.bookings
+        bookings = AppData.listOfBookingsLab
         categorizeBookings()
         tableView.reloadData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        bookings = AppData.bookings // Re-fetch the bookings
+        bookings = AppData.listOfBookingsLab // Re-fetch the bookings
         categorizeBookings()
         tableView.reloadData()
     }
@@ -243,9 +261,14 @@ class LabHistoryTableViewController: UITableViewController, UISearchBarDelegate,
                     return // Or handle default case appropriately
                 }
                 // Find the booking in AppData.bookings
-                if let indexInAppData = AppData.bookings.firstIndex(where: { $0.id == bookingToRemove.id }) {
-                    AppData.bookings.remove(at: indexInAppData)
+                if let indexInAppData = AppData.listOfBookingsLab.firstIndex(where: { $0.id == bookingToRemove.id }) {
+                    AppData.listOfBookingsLab.remove(at: indexInAppData)
                     self.bookings.remove(at: indexInAppData)
+                }
+                if let index1 = AppData.listOfBookingsPatient.firstIndex(where: {
+                    $0.id == bookingToRemove.id
+                }){
+                    AppData.listOfBookingsPatient[index1].status = .Cancelled
                 }
                 self.categorizeBookings()
                 tableView.deleteRows(at: [indexPath], with: .fade)

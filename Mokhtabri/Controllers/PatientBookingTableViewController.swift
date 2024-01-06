@@ -9,7 +9,33 @@ import UIKit
 
 class PatientBookingTableViewController: UITableViewController, UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
+        guard let term = searchController.searchBar.text?.lowercased() else {
+            reloadOriginalData()
+            return
+        }
+        if term.isEmpty{
+            reloadOriginalData()
+        }else{
+            switch selectedSegement {
+            case 0: activeBookings = activeBookings.filter{$0.ofMedicalService.name.lowercased().contains(term) || $0.ofMedicalService.forMedicalFacility.name.lowercased().contains(term) }
+                
+            case 1: completedBookings =  completedBookings.filter{
+               $0.ofMedicalService.name.lowercased().contains(term) || $0.ofMedicalService.forMedicalFacility.name.lowercased().contains(term)
+            }
+                
+            case 2: cancelledBookings =  cancelledBookings.filter{
+               $0.ofMedicalService.name.lowercased().contains(term) || $0.ofMedicalService.forMedicalFacility.name.lowercased().contains(term)
+            }
+            default: break
+            }
+            tableView.reloadData()
+        }
+    }
+    
+    func reloadOriginalData(){
+        categorizeBookings()
         
+        tableView.reloadData()
     }
     
 
@@ -19,10 +45,20 @@ class PatientBookingTableViewController: UITableViewController, UISearchResultsU
         categorizeBookings()
         tableView.reloadData()
     }
+    
+    var loggedInUser : User?
     override func viewDidLoad() {
         super.viewDidLoad()
         embedSearch()
         categorizeBookings()
+        
+        
+        loggedInUser = AppData.patient1
+        guard let user = AppData.loggedInUser else{
+            return
+        }
+        loggedInUser = user
+        //AppData.loadServicesImages(AppData)
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -56,7 +92,7 @@ class PatientBookingTableViewController: UITableViewController, UISearchResultsU
         }
     }
 //declare
-    var listOfBookings = AppData.bookings
+    var listOfBookings = AppData.listOfBookingsPatient
     var activeBookings : [Booking] = []
     var completedBookings : [Booking] = []
     var cancelledBookings : [Booking] = []
@@ -80,7 +116,9 @@ class PatientBookingTableViewController: UITableViewController, UISearchResultsU
         cell.hospitalName.text = booking.ofMedicalService.forMedicalFacility.name
         cell.price.text = "\(booking.ofMedicalService.price) BHD"
         cell.type.text = "Test"
-        
+        if let img = booking.ofMedicalService.photo {
+            cell.img.image = img
+        }
         //gonna fix in a minute
        // if(booking.ofMedicalService.)
 
@@ -106,7 +144,7 @@ class PatientBookingTableViewController: UITableViewController, UISearchResultsU
         super.viewWillAppear(animated)
         // Update the list of bookings
         
-        listOfBookings = AppData.bookings
+        listOfBookings = AppData.listOfBookingsPatient
         categorizeBookings()
         // Reload the table view
         tableView.reloadData()
@@ -145,9 +183,12 @@ class PatientBookingTableViewController: UITableViewController, UISearchResultsU
                 }
                 
                 // Find the booking in AppData.bookings
-                if let indexInAppData = AppData.bookings.firstIndex(where: { $0.id == bookingToRemove.id }) {
-                    AppData.bookings.remove(at: indexInAppData)
+                if let indexInAppData = AppData.listOfBookingsPatient.firstIndex(where: { $0.id == bookingToRemove.id }) {
+                    AppData.listOfBookingsPatient.remove(at: indexInAppData)
                     self.listOfBookings.remove(at: indexInAppData)
+                }
+                if let index = AppData.listOfBookingsLab.firstIndex(where: {$0.id == bookingToRemove.id}){
+                    AppData.listOfBookingsLab[index].status = .Cancelled
                 }
                 self.categorizeBookings()
                 tableView.deleteRows(at: [indexPath], with: .fade)
@@ -157,19 +198,22 @@ class PatientBookingTableViewController: UITableViewController, UISearchResultsU
     
     
     func categorizeBookings(){
+        guard let user = loggedInUser else {
+            return
+        }
         activeBookings = listOfBookings.filter{
-            $0.status == .Active
+            $0.status == .Active && $0.forPatient == user
         }
         completedBookings = listOfBookings.filter{
-            $0.status == .Completed
+            $0.status == .Completed && $0.forPatient == user
         }
         cancelledBookings = listOfBookings.filter{
-            $0.status == .Cancelled
+            $0.status == .Cancelled && $0.forPatient == user
         }
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        listOfBookings = AppData.bookings
+        listOfBookings = AppData.listOfBookingsPatient
         categorizeBookings()
         tableView.reloadData()
     }
