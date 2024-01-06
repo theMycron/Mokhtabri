@@ -8,6 +8,7 @@
 import UIKit
 import FirebaseStorage
 import Kingfisher
+import FirebaseAuth
 
 class AdminEditTableViewController: UITableViewController, UIImagePickerControllerDelegate & UINavigationControllerDelegate {
 
@@ -223,8 +224,17 @@ class AdminEditTableViewController: UITableViewController, UIImagePickerControll
         facility = MedicalFacility(name: name, phone: phone, city: city, website: website, alwaysOpen: alwaysopen, type: type, openingTime: openingTime, closingTime: closingTime, image: facility?.imageDownloadURL, username: username, password: password)
         if let oldId = oldId {
             facility!.uuid = oldId // replace new uuid with old one if editing to ensure they are the same facility
+        } else {
+            //if this is a new facility, add to firebase
+            Auth.auth().createUser(withEmail: username, password: password) { (authResult, error) in
+                //check the auth result to make sure that the user is created
+                guard let _ = authResult?.user, error == nil else{
+                    //if user is not created, display the error.
+                    print("Error \(String(describing: error?.localizedDescription))")
+                    return
+                }
+            }
         }
-        
         
         // upload image
         if !uploadImageToFirebase() {
@@ -286,6 +296,7 @@ class AdminEditTableViewController: UITableViewController, UIImagePickerControll
     
     func showImagePickerOptions() {
         let alert = UIAlertController(title: "Select Image", message: "Select image from library or capture from camera", preferredStyle: .actionSheet)
+        // camera causes a crash using simulator, disabled now
         let cameraAction = UIAlertAction(title: "Camera", style: .default) { [weak self] (action) in
             guard let self = self else {return}
             let cameraPicker = self.imagePicker(sourceType: .camera)
