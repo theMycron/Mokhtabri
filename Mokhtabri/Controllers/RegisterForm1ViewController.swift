@@ -273,7 +273,7 @@ class RegisterForm1ViewController: UIViewController, UITextFieldDelegate {
         Auth.auth().createUser(withEmail: email.text!, password: password.text!) { (authResult, error) in
             
             //check the auth result to make sure that the user is created
-            guard let user = authResult?.user, error == nil else{
+            guard let _ = authResult?.user, error == nil else{
                 
                 
                 

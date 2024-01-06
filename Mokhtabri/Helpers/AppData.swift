@@ -12,7 +12,7 @@ import Kingfisher
 import FirebaseAuth
 
 class AppData {
-    static var admin: [User] = []
+    static var admin: [User] = [User(username: "admin@gmail.com", password: "12345678", userType: .admin)]
     static var facilities: [MedicalFacility] = []
     static var services: [MedicalService] = []
     static var tests: [Test] = [test1,test2,test3]
@@ -189,14 +189,14 @@ class AppData {
     
     //patient sample
 
-    static var patient1 = Patient(firstName: "Noora", lastName: "Qasim", cpr: "031003257", gender: Gender.female, dateOfBirth: DateComponents(calendar: Calendar.current, year: 2003, month: 10, day: 12), username: "NooraW", password: "12345#78")
+    static var patient1 = Patient(firstName: "Noora", lastName: "Qasim", cpr: "031003257", gender: Gender.female, dateOfBirth: DateComponents(calendar: Calendar.current, year: 2003, month: 10, day: 12), username: "nooraw376@gmail.com", password: "12345678")
 
     
 
     
-    static var patient2 = Patient(firstName: "Fatima", lastName: "Naser", cpr: "020500000", gender: Gender.female, dateOfBirth: DateComponents(calendar: Calendar.current, year: 2002, month: 05, day: 09), username: "FatimaN", password: "1234#678")
+    static var patient2 = Patient(firstName: "Fatima", lastName: "Naser", cpr: "020500000", gender: Gender.female, dateOfBirth: DateComponents(calendar: Calendar.current, year: 2002, month: 05, day: 09), username: "fateman376@gmail.com", password: "12345678")
     
-    static var pat3 = Patient(firstName: "Ahmed", lastName: "Faisal", cpr: "910200000", gender: Gender.male, dateOfBirth: DateComponents(calendar: Calendar.current, year: 1991, month: 04, day: 25), username: "AhmFAi", password: "87651234")
+    static var pat3 = Patient(firstName: "Ahmed", lastName: "Faisal", cpr: "910200000", gender: Gender.male, dateOfBirth: DateComponents(calendar: Calendar.current, year: 1991, month: 04, day: 25), username: "hamoodhaboob@gmail.com", password: "12345678")
     
     
     
@@ -219,12 +219,12 @@ class AppData {
     
     
     
-    static var alhilal = MedicalFacility(name: "ALHilal Hospital", phone: "12345689", city: "East Riffa", website: "Alhilal.com", alwaysOpen: false, type: .hospital, openingTime: DateComponents(calendar: Calendar.current, hour: 9, minute: 0), closingTime: DateComponents(calendar: Calendar.current, hour: 21, minute: 0), username: "alhilalER", password: "alhilal")
+    static var alhilal = MedicalFacility(name: "ALHilal Hospital", phone: "12345689", city: "East Riffa", website: "Alhilal.com", alwaysOpen: false, type: .hospital, openingTime: DateComponents(calendar: Calendar.current, hour: 9, minute: 0), closingTime: DateComponents(calendar: Calendar.current, hour: 21, minute: 0), username: "alhilal@mokhtabri.com", password: "12345678")
     
     
-    static var alsalam = MedicalFacility(name: "Alsalam Hospital", phone: "13101010", city: "Riffa", website: "https://www.alsalam.care", alwaysOpen: true, type: .hospital, openingTime: DateComponents(calendar: Calendar.current, hour: 0, minute: 0), closingTime: DateComponents(calendar: Calendar.current, hour: 0, minute: 0), username: "alsalam", password: "1234")
+    static var alsalam = MedicalFacility(name: "Alsalam Hospital", phone: "13101010", city: "Riffa", website: "https://www.alsalam.care", alwaysOpen: true, type: .hospital, openingTime: DateComponents(calendar: Calendar.current, hour: 0, minute: 0), closingTime: DateComponents(calendar: Calendar.current, hour: 0, minute: 0), username: "alsalam@mokhtabri.com", password: "12345678")
     
-    static var royal = MedicalFacility(name: "Royal Bahrain Hospital", phone: "17246800", city: "Salmaniya", website: "www.royalbarainhospital.com", alwaysOpen: true, type: .hospital, openingTime: DateComponents(calendar: Calendar.current, hour: 0, minute: 0), closingTime: DateComponents(calendar: Calendar.current, hour: 0, minute: 0), username: "royal", password: "1432")
+    static var royal = MedicalFacility(name: "Royal Bahrain Hospital", phone: "17246800", city: "Salmaniya", website: "www.royalbarainhospital.com", alwaysOpen: true, type: .hospital, openingTime: DateComponents(calendar: Calendar.current, hour: 0, minute: 0), closingTime: DateComponents(calendar: Calendar.current, hour: 0, minute: 0), username: "royalbh@mokhtabri.com", password: "12345678")
     
     static var test1 = Test(category: "Blood Test", name: "VitaminB12", price: 10, description: "blood test for vitaminb12", instructions: "fasting 8-12 hours prior is mandatory", forMedicalFacility:  alhilal,serviceType: .test, storageLink: "gs://fir-testing-512eb.appspot.com/Vitamin-B12.jpg")
     
@@ -261,13 +261,13 @@ class AppData {
     
     // labs declaration
     
-    static var BML = MedicalFacility(name: "Bahrain Medical Laboratory", phone: "17255522", city: "Salmaniya", website: "https://bahrainmedicallab.com/", alwaysOpen: false, type: .lab, openingTime: DateComponents(calendar: Calendar.current, hour: 7, minute: 0), closingTime: DateComponents(calendar: Calendar.current, hour: 21, minute: 0), username: "BMLab", password: "Bahrain22")
+    static var BML = MedicalFacility(name: "Bahrain Medical Laboratory", phone: "17255522", city: "Salmaniya", website: "https://bahrainmedicallab.com/", alwaysOpen: false, type: .lab, openingTime: DateComponents(calendar: Calendar.current, hour: 7, minute: 0), closingTime: DateComponents(calendar: Calendar.current, hour: 21, minute: 0), username: "bhmedlab@mokhtabri.com", password: "12345678")
     
-    static var expMed = MedicalFacility(name: "Express Med Labs", phone: "77298888", city: "Zinj", website: "https://www.expressmedlabs.com/", alwaysOpen: false, type: .lab, openingTime: DateComponents(calendar: Calendar.current, hour: 8, minute: 0), closingTime: DateComponents(calendar: Calendar.current, hour: 20, minute: 0), username: "expMed", password: "Zinj1234")
+    static var expMed = MedicalFacility(name: "Express Med Labs", phone: "77298888", city: "Zinj", website: "https://www.expressmedlabs.com/", alwaysOpen: false, type: .lab, openingTime: DateComponents(calendar: Calendar.current, hour: 8, minute: 0), closingTime: DateComponents(calendar: Calendar.current, hour: 20, minute: 0), username: "expressmed@mokhtabri.com", password: "12345678")
     
-    static var gulfLab = MedicalFacility(name: "Gulf Medical Laboratories", phone: "17263999", city: "Manama", website: "https://www.gulflab.com/", alwaysOpen: false, type: .lab, openingTime: DateComponents(calendar: Calendar.current, hour: 8, minute: 0), closingTime: DateComponents(calendar: Calendar.current, hour: 20, minute: 0), username: "gLab", password: "gulfLabs")
+    static var gulfLab = MedicalFacility(name: "Gulf Medical Laboratories", phone: "17263999", city: "Manama", website: "https://www.gulflab.com/", alwaysOpen: false, type: .lab, openingTime: DateComponents(calendar: Calendar.current, hour: 8, minute: 0), closingTime: DateComponents(calendar: Calendar.current, hour: 20, minute: 0), username: "gulflab@mokhtabri.com", password: "12345678")
     
-    static var manara = MedicalFacility(name: "Manara Medical Laboratories", phone: "17722999", city: "Zinj", website: "https://www.eurofins.com/", alwaysOpen: false, type: .lab, openingTime: DateComponents(calendar: Calendar.current, hour: 8, minute: 0), closingTime: DateComponents(calendar: Calendar.current, hour: 20, minute: 0), username: "mmL", password: "manara123")
+    static var manara = MedicalFacility(name: "Manara Medical Laboratories", phone: "17722999", city: "Zinj", website: "https://www.eurofins.com/", alwaysOpen: false, type: .lab, openingTime: DateComponents(calendar: Calendar.current, hour: 8, minute: 0), closingTime: DateComponents(calendar: Calendar.current, hour: 20, minute: 0), username: "manara@mokhtabri.com", password: "12345678")
     
     
     
