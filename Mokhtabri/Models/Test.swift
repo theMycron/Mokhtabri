@@ -22,9 +22,11 @@ class Test: MedicalService {
         case category
     }
     
-    init(category: String, name: String, price: Float, description: String, instructions: String, forMedicalFacility: MedicalFacility, storageLink : String) {
+    init(category: String, name: String, price: Float, description: String, instructions: String, forMedicalFacility: MedicalFacility, serviceType: ServiceType, storageLink : String) {
+
         self.category = category
-        super.init(name: name, price: price, description: description, instructions: instructions, forMedicalFacility: forMedicalFacility, storageLink: storageLink)
+        super.init(name: name, price: price, description: description, instructions: instructions, forMedicalFacility: forMedicalFacility, serviceType: serviceType, storageLink: storageLink)
+
     }
     
     override func encode(to encoder: Encoder) throws {

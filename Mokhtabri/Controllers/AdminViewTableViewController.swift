@@ -174,7 +174,8 @@ class AdminViewTableViewController: UITableViewController, UISearchResultsUpdati
             displayedFacilities.remove(at: indexPath.section)
             tableView.deleteSections([indexPath.section], with: .fade)
             tableView.endUpdates()
-            AppData.facilities = displayedFacilities
+            let facility = displayedFacilities[indexPath.section]
+            _=AppData.deleteUser(user: facility)
             AppData.saveData()
         }
     }
