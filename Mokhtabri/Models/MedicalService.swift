@@ -2,12 +2,19 @@ import Foundation
 import UIKit
 
 class MedicalService: Codable, Equatable, Comparable, CustomStringConvertible {
+    var defaultFirebaseImageFilename: String {
+        // format filename with lowercased letters and underscores instead of spaces
+        return "serviceImages/\(name.lowercased().replacingOccurrences(of: " ", with: "_")).jpg"
+    }
     var id: UUID
     var name: String
     var price: Float
     var serviceDescription: String // different from the CustomStringCovertible description
     var instructions: String
     var forMedicalFacility: MedicalFacility
+    var serviceType: ServiceType
+    
+    
     var photo: UIImage?
     var description: String {
         return """
@@ -20,20 +27,28 @@ class MedicalService: Codable, Equatable, Comparable, CustomStringConvertible {
                 Owned By Facility: \(forMedicalFacility.name)
                 """
     }
+    
+    enum ServiceType:  String, Codable {
+        case test = "Test"
+        case package = "Package"
+    }
     //var imageDownloadURL: URL?
     var storageLink: String
 
     enum CodingKeys: Codable, CodingKey {
-        case id, name, price, description, instructions, forMedicalFacility, image, storageLink // Include 'image' in the CodingKeys
+        case id, name, price, description, instructions, forMedicalFacility, image, serviceType,storageLink // Include 'image' in the CodingKeys
+        
     }
     
-    init(name: String, price: Float, description: String, instructions: String, forMedicalFacility: MedicalFacility, storageLink: String) {
+    init(name: String, price: Float, description: String, instructions: String, forMedicalFacility: MedicalFacility, serviceType: ServiceType, image: URL? = nil, storageLink: String) {
+
         self.id = UUID()
         self.name = name
         self.price = price
         self.serviceDescription = description
         self.instructions = instructions
         self.forMedicalFacility = forMedicalFacility
+        self.serviceType = serviceType
         self.storageLink = storageLink
     }
     
@@ -54,9 +69,10 @@ class MedicalService: Codable, Equatable, Comparable, CustomStringConvertible {
         try container.encode(serviceDescription, forKey: .description)
         try container.encode(instructions, forKey: .instructions)
         try container.encode(forMedicalFacility, forKey: .forMedicalFacility)
+        try container.encode(serviceType, forKey: .serviceType)
         try container.encode(storageLink, forKey: .storageLink)
     }
-
+    
     required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.id = try container.decode(UUID.self, forKey: .id)
@@ -65,6 +81,8 @@ class MedicalService: Codable, Equatable, Comparable, CustomStringConvertible {
         self.serviceDescription = try container.decode(String.self, forKey: .description)
         self.instructions = try container.decode(String.self, forKey: .instructions)
         self.forMedicalFacility = try container.decode(MedicalFacility.self, forKey: .forMedicalFacility)
+        self.serviceType = ServiceType(rawValue: try container.decode(String.self, forKey: .serviceType)) ?? .test
+        
 
         self.storageLink = try container.decode(String.self, forKey: .storageLink)
     }

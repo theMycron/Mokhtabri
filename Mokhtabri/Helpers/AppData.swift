@@ -97,6 +97,55 @@ class AppData {
         }
     }
     
+    //this method to manage services
+//    static func getService(serviceID: UUID) -> MedicalService? {
+//       return services.first(where: { $0.id == serviceID })
+//    }
+
+    static func addService(service: MedicalService) {
+        if (service is Test) {
+            tests.append(service as! Test)
+            saveData()
+        } else if (service is Package) {
+            packages.append(service as! Package)
+            saveData()
+        }
+    }
+
+    static func editService(service: MedicalService) {
+        if (service is Test) {
+            let test = service as! Test
+            if let serviceIndex = tests.firstIndex(of: test) {
+                tests.remove(at: serviceIndex)
+                tests.insert(test, at: serviceIndex)
+                saveData()
+            }
+        } else if (service is Package) {
+            let package = service as! Package
+            if let serviceIndex = packages.firstIndex(of: package) {
+                packages.remove(at: serviceIndex)
+                packages.insert(package, at: serviceIndex)
+                saveData()
+            }
+        }
+    }
+
+    static func deleteService(service: MedicalService) -> Bool {
+        if (service is Test) {
+            if let serviceIndex = tests.firstIndex(of: service as! Test) {
+                tests.remove(at: serviceIndex)
+                saveData()
+                return true
+            }
+        } else if (service is Package) {
+            if let serviceIndex = packages.firstIndex(of: service as! Package) {
+                packages.remove(at: serviceIndex)
+                saveData()
+                return true
+            }
+        }
+       return false
+    }
     // return user if email exists, used for registering a new user
     static func getUserFromEmail(email: String) -> User? {
         let allUsers: [User] = AppData.admin + AppData.facilities + AppData.patients
