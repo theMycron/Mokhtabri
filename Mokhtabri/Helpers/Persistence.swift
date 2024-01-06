@@ -38,6 +38,17 @@ extension AppData {
         loadServices(fromFile: .packages)
         loadServices(fromFile: .tests)
         loadBookings()
+        services = []
+        for s in tests {
+            services.append(s)
+        }
+        for s in packages{
+            services.append(s)
+        }
+        loadServicesImages(){
+            
+        }
+        
     }
     
     fileprivate static func saveUsers(toFile: FileName) {
