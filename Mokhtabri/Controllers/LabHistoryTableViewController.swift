@@ -24,9 +24,12 @@ class LabHistoryTableViewController: UITableViewController, UISearchBarDelegate,
                     $0.forPatient.name.lowercased().contains(term) || $0.ofMedicalService.name.lowercased().contains(term)
                 }
                 
-            case 1: break
-            case 2: break
-            default:
+            case 1:                 completedBookings = completedBookings.filter{
+                $0.forPatient.name.lowercased().contains(term) || $0.ofMedicalService.name.lowercased().contains(term)
+            }
+            case 2: cancelledBookings = cancelledBookings.filter{
+                $0.forPatient.name.lowercased().contains(term) || $0.ofMedicalService.name.lowercased().contains(term)
+            }            default:
                 break
             }
         }
@@ -57,7 +60,7 @@ class LabHistoryTableViewController: UITableViewController, UISearchBarDelegate,
     var patient = Patient(firstName: "Noora", lastName: "Qasim", cpr: "031003257",gender: Gender.female, dateOfBirth: DateComponents(calendar: Calendar.current, year: 2003, month: 10, day: 12), username: "NooraW", password: "12345#")
     
     // Create an array to store the bookings
-    var bookings = AppData.bookings
+    var bookings = AppData.listOfBookingsLab
     var searchBar: UISearchBar!
     //var selectedRow = 0
     var selectedSegmentIndex = 0
@@ -71,7 +74,7 @@ class LabHistoryTableViewController: UITableViewController, UISearchBarDelegate,
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        bookings = AppData.bookings
+        bookings = AppData.listOfBookingsLab
         categorizeBookings()
 
         
@@ -226,14 +229,14 @@ class LabHistoryTableViewController: UITableViewController, UISearchBarDelegate,
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        bookings = AppData.bookings
+        bookings = AppData.listOfBookingsLab
         categorizeBookings()
         tableView.reloadData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        bookings = AppData.bookings // Re-fetch the bookings
+        bookings = AppData.listOfBookingsLab // Re-fetch the bookings
         categorizeBookings()
         tableView.reloadData()
     }
@@ -258,9 +261,14 @@ class LabHistoryTableViewController: UITableViewController, UISearchBarDelegate,
                     return // Or handle default case appropriately
                 }
                 // Find the booking in AppData.bookings
-                if let indexInAppData = AppData.bookings.firstIndex(where: { $0.id == bookingToRemove.id }) {
-                    AppData.bookings.remove(at: indexInAppData)
+                if let indexInAppData = AppData.listOfBookingsLab.firstIndex(where: { $0.id == bookingToRemove.id }) {
+                    AppData.listOfBookingsLab.remove(at: indexInAppData)
                     self.bookings.remove(at: indexInAppData)
+                }
+                if let index1 = AppData.listOfBookingsPatient.firstIndex(where: {
+                    $0.id == bookingToRemove.id
+                }){
+                    AppData.listOfBookingsPatient[index1].status = .Cancelled
                 }
                 self.categorizeBookings()
                 tableView.deleteRows(at: [indexPath], with: .fade)
