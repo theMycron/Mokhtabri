@@ -58,7 +58,7 @@ class PatientHospitalSelectTableViewController: UITableViewController {
     }
     
     func loadData() {
-        let listOfAllTests = AppData.services
+        let listOfAllTests = AppData.tests + AppData.packages
         guard let hospital = selectedHospital else {
             return
         }

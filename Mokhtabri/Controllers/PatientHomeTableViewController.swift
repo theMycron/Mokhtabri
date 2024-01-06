@@ -42,9 +42,9 @@ class PatientHomeTableViewController: UITableViewController,UISearchBarDelegate,
     
     //sample data
     var facility:  [MedicalFacility] = AppData.facilities
-    var services: [MedicalService] = AppData.services
-    var labs: [MedicalFacility] = AppData.labs
-    var hospitals: [MedicalFacility] = AppData.hospitals
+    var services: [MedicalService] = AppData.tests + AppData.packages
+    var labs: [MedicalFacility] = AppData.facilities.filter { $0.type == FacilityType.lab }
+    var hospitals: [MedicalFacility] = AppData.facilities.filter { $0.type == FacilityType.hospital }
     var tests: [Test] = []
     func filterTests() {
         for service in services {

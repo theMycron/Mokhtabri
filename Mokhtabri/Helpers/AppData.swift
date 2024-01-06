@@ -30,9 +30,9 @@ class AppData {
         admin = []
         patients = []
         facilities = []
-        services = []
+        tests = []
+        packages = []
         bookings = []
-        categories = []
     }
     
     // Methods to manage users
@@ -126,23 +126,22 @@ class AppData {
         Patient(firstName: "Yousif", lastName: "Alhawaj", phone: "45389445", cpr: "031039304", email: "alyasfy@gmail.com", gender: Gender.male, dateOfBirth: DateComponents(calendar: Calendar.current, year: 2003, month: 10, day: 20), username: "yousifito", password: "12345678"),
         Patient(firstName: "Ali", lastName: "Abdul", phone: "94000334", cpr: "000100001", email: "aliabdul@gmail.com", gender: Gender.male, dateOfBirth: DateComponents(calendar: Calendar.current, year: 2000, month: 01, day: 01), username: "alooyi", password: "12345678")
     ]
-
     // facilities sample
     static let sampleFacilities: [MedicalFacility] = [
-        MedicalFacility(name: "Al Hilal Hospital", phone: "17344700", city: "Muharraq", website: "alhilalhealthcare.com", alwaysOpen: true, type: FacilityType.hospital, openingTime: DateComponents(calendar: Calendar.current, hour: 8, minute: 0), closingTime: DateComponents(calendar: Calendar.current, hour: 20, minute: 0), image: "https://firebasestorage.googleapis.com:443/v0/b/fir-testing-512eb.appspot.com/o/facilityImages%2Fal_hilal_hospital_muharraq.jpg?alt=media&token=1a2e89e9-f01d-49c7-8ec0-90a4da303cfa", username: "alhilal@mokhtabri.com", password: "alhilalalhilal"),
-        MedicalFacility(name: "Bahrain Medical Laboratory", phone: "17255522", city: "Manama", website: "bahrainmedicallab.com", alwaysOpen: false, type: FacilityType.lab, openingTime: DateComponents(calendar: Calendar.current, hour: 7, minute: 30), closingTime: DateComponents(calendar: Calendar.current, hour: 21, minute: 0), image: "https://firebasestorage.googleapis.com:443/v0/b/fir-testing-512eb.appspot.com/o/facilityImages%2Fbahrain_medical_laboratory_manama.jpg?alt=media&token=da4dd4ae-a3b1-49c1-b976-2defdc135524", username: "bhmedlabs@mokhtabri.com", password: "bhmedlabsbh"),
-        MedicalFacility(name: "Al Borg Diagnostics", phone: "17100088", city: "Manama", website: "alborgdx.com", alwaysOpen: false, type: FacilityType.lab, openingTime: DateComponents(calendar: Calendar.current, hour: 8, minute: 0), closingTime: DateComponents(calendar: Calendar.current, hour: 21, minute: 0), image: "https://firebasestorage.googleapis.com:443/v0/b/fir-testing-512eb.appspot.com/o/facilityImages%2Fal_borg_diagnostics_manama.jpg?alt=media&token=b3726451-3ace-4988-92ef-9689eed685be", username: "alborg@mokhtabri.com", password: "alborgborg"),
-        MedicalFacility(name: "Manara Medical Laboratories", phone: "17722999", city: "Manama", website: "eurofins.com", alwaysOpen: false, type: FacilityType.lab, openingTime: DateComponents(calendar: Calendar.current, hour: 8, minute: 30), closingTime: DateComponents(calendar: Calendar.current, hour: 20, minute: 30), image: "https://firebasestorage.googleapis.com:443/v0/b/fir-testing-512eb.appspot.com/o/facilityImages%2Fmanara_medical_laboratories_manama.jpg?alt=media&token=2cf7a6fd-3073-4c70-aa09-9330e43d081c", username: "manara@mokhtabri.com", password: "euromanara"),
-        MedicalFacility(name: "ExpressMed Diagnostics", phone: "77248888", city: "Manama", website: "expressmedlabs.com", alwaysOpen: false, type: FacilityType.lab, openingTime: DateComponents(calendar: Calendar.current, hour: 8, minute: 0), closingTime: DateComponents(calendar: Calendar.current, hour: 20, minute: 0), image: "https://firebasestorage.googleapis.com:443/v0/b/fir-testing-512eb.appspot.com/o/facilityImages%2Fexpressmed_diagnostics_manama.jpg?alt=media&token=52327add-e906-47d5-a14e-e3f8d31e4708", username: "expressmed@mokhtabri.com", password: "expressdiag"),
-        MedicalFacility(name: "Royal Bahrain Hospital", phone: "17491749", city: "Janabiyah", website: "royalbahrainhospital.com", alwaysOpen: false, type: FacilityType.hospital, openingTime: DateComponents(calendar: Calendar.current, hour: 9, minute: 0), closingTime: DateComponents(calendar: Calendar.current, hour: 21, minute: 0), image: "https://firebasestorage.googleapis.com:443/v0/b/fir-testing-512eb.appspot.com/o/facilityImages%2Froyal_bahrain_hospital_janabiyah.jpg?alt=media&token=345a741a-02ad-4add-b03b-f3928554257f", username: "royalhospital@mokhtabri.com", password: "royaltyhealth"),
-        MedicalFacility(name: "Middle East Hospital", phone: "17362233", city: "Manama", website: "mehospital.com", alwaysOpen: true, type: FacilityType.hospital, openingTime: DateComponents(calendar: Calendar.current, hour: 9, minute: 0), closingTime: DateComponents(calendar: Calendar.current, hour: 21, minute: 0), image: "https://firebasestorage.googleapis.com:443/v0/b/fir-testing-512eb.appspot.com/o/facilityImages%2Fmiddle_east_hospital_manama.jpg?alt=media&token=e0f2f062-9376-4c20-82e7-41fd0335411f", username: "mehospital@mokhtabri.com", password: "middleeastern"),
-        MedicalFacility(name: "Awali Hospital", phone: "17757600", city: "Awali", website: "awalihospital.com", alwaysOpen: true, type: FacilityType.hospital, openingTime: DateComponents(calendar: Calendar.current, hour: 9, minute: 0), closingTime: DateComponents(calendar: Calendar.current, hour: 21, minute: 0), image: "https://firebasestorage.googleapis.com:443/v0/b/fir-testing-512eb.appspot.com/o/facilityImages%2Fawali_hospital_awali.jpg?alt=media&token=72106dba-8e4d-4326-b673-042ec640b2af", username: "awalihp@mokhtabri.com", password: "theawalihp"),
-        MedicalFacility(name: "AlSalam Specialist Hospital", phone: "13101010", city: "Riffa", website: "alsalam.care", alwaysOpen: true, type: FacilityType.hospital, openingTime: DateComponents(calendar: Calendar.current, hour: 9, minute: 0), closingTime: DateComponents(calendar: Calendar.current, hour: 21, minute: 0), image: "https://firebasestorage.googleapis.com:443/v0/b/fir-testing-512eb.appspot.com/o/facilityImages%2Falsalam_specialist_hospital_riffa.jpg?alt=media&token=0eb9f54f-c47f-4c40-bf3e-a1361ec7a69f", username: "alsalam@mokhtabri.com", password: "salamalekom")
+        MedicalFacility(name: "Al Hilal Hospital", phone: "17344700", city: "Muharraq", website: "alhilalhealthcare.com", alwaysOpen: true, type: FacilityType.hospital, openingTime: DateComponents(calendar: Calendar.current, hour: 8, minute: 0), closingTime: DateComponents(calendar: Calendar.current, hour: 20, minute: 0), image: URL(string: "https://firebasestorage.googleapis.com:443/v0/b/fir-testing-512eb.appspot.com/o/facilityImages%2Fal_hilal_hospital_muharraq.jpg?alt=media&token=1a2e89e9-f01d-49c7-8ec0-90a4da303cfa"), username: "alhilal@mokhtabri.com", password: "alhilalalhilal"),
+        MedicalFacility(name: "Bahrain Medical Laboratory", phone: "17255522", city: "Manama", website: "bahrainmedicallab.com", alwaysOpen: false, type: FacilityType.lab, openingTime: DateComponents(calendar: Calendar.current, hour: 7, minute: 30), closingTime: DateComponents(calendar: Calendar.current, hour: 21, minute: 0), image: URL(string: "https://firebasestorage.googleapis.com:443/v0/b/fir-testing-512eb.appspot.com/o/facilityImages%2Fbahrain_medical_laboratory_manama.jpg?alt=media&token=da4dd4ae-a3b1-49c1-b976-2defdc135524"), username: "bhmedlabs@mokhtabri.com", password: "bhmedlabsbh"),
+        MedicalFacility(name: "Al Borg Diagnostics", phone: "17100088", city: "Manama", website: "alborgdx.com", alwaysOpen: false, type: FacilityType.lab, openingTime: DateComponents(calendar: Calendar.current, hour: 8, minute: 0), closingTime: DateComponents(calendar: Calendar.current, hour: 21, minute: 0), image: URL(string: "https://firebasestorage.googleapis.com:443/v0/b/fir-testing-512eb.appspot.com/o/facilityImages%2Fal_borg_diagnostics_manama.jpg?alt=media&token=b3726451-3ace-4988-92ef-9689eed685be"), username: "alborg@mokhtabri.com", password: "alborgborg"),
+        MedicalFacility(name: "Manara Medical Laboratories", phone: "17722999", city: "Manama", website: "eurofins.com", alwaysOpen: false, type: FacilityType.lab, openingTime: DateComponents(calendar: Calendar.current, hour: 8, minute: 30), closingTime: DateComponents(calendar: Calendar.current, hour: 20, minute: 30), image: URL(string:  "https://firebasestorage.googleapis.com:443/v0/b/fir-testing-512eb.appspot.com/o/facilityImages%2Fmanara_medical_laboratories_manama.jpg?alt=media&token=2cf7a6fd-3073-4c70-aa09-9330e43d081c"), username: "manara@mokhtabri.com", password: "euromanara"),
+        MedicalFacility(name: "ExpressMed Diagnostics", phone: "77248888", city: "Manama", website: "expressmedlabs.com", alwaysOpen: false, type: FacilityType.lab, openingTime: DateComponents(calendar: Calendar.current, hour: 8, minute: 0), closingTime: DateComponents(calendar: Calendar.current, hour: 20, minute: 0), image: URL(string: "https://firebasestorage.googleapis.com:443/v0/b/fir-testing-512eb.appspot.com/o/facilityImages%2Fexpressmed_diagnostics_manama.jpg?alt=media&token=52327add-e906-47d5-a14e-e3f8d31e4708"), username: "expressmed@mokhtabri.com", password: "expressdiag"),
+        MedicalFacility(name: "Royal Bahrain Hospital", phone: "17491749", city: "Janabiyah", website: "royalbahrainhospital.com", alwaysOpen: false, type: FacilityType.hospital, openingTime: DateComponents(calendar: Calendar.current, hour: 9, minute: 0), closingTime: DateComponents(calendar: Calendar.current, hour: 21, minute: 0), image: URL(string: "https://firebasestorage.googleapis.com:443/v0/b/fir-testing-512eb.appspot.com/o/facilityImages%2Froyal_bahrain_hospital_janabiyah.jpg?alt=media&token=345a741a-02ad-4add-b03b-f3928554257f"), username: "royalhospital@mokhtabri.com", password: "royaltyhealth"),
+        MedicalFacility(name: "Middle East Hospital", phone: "17362233", city: "Manama", website: "mehospital.com", alwaysOpen: true, type: FacilityType.hospital, openingTime: DateComponents(calendar: Calendar.current, hour: 9, minute: 0), closingTime: DateComponents(calendar: Calendar.current, hour: 21, minute: 0), image: URL(string: "https://firebasestorage.googleapis.com:443/v0/b/fir-testing-512eb.appspot.com/o/facilityImages%2Fmiddle_east_hospital_manama.jpg?alt=media&token=e0f2f062-9376-4c20-82e7-41fd0335411f"), username: "mehospital@mokhtabri.com", password: "middleeastern"),
+        MedicalFacility(name: "Awali Hospital", phone: "17757600", city: "Awali", website: "awalihospital.com", alwaysOpen: true, type: FacilityType.hospital, openingTime: DateComponents(calendar: Calendar.current, hour: 9, minute: 0), closingTime: DateComponents(calendar: Calendar.current, hour: 21, minute: 0), image: URL(string: "https://firebasestorage.googleapis.com:443/v0/b/fir-testing-512eb.appspot.com/o/facilityImages%2Fawali_hospital_awali.jpg?alt=media&token=72106dba-8e4d-4326-b673-042ec640b2af"), username: "awalihp@mokhtabri.com", password: "theawalihp"),
+        MedicalFacility(name: "AlSalam Specialist Hospital", phone: "13101010", city: "Riffa", website: "alsalam.care", alwaysOpen: true, type: FacilityType.hospital, openingTime: DateComponents(calendar: Calendar.current, hour: 9, minute: 0), closingTime: DateComponents(calendar: Calendar.current, hour: 21, minute: 0), image: URL(string: "https://firebasestorage.googleapis.com:443/v0/b/fir-testing-512eb.appspot.com/o/facilityImages%2Falsalam_specialist_hospital_riffa.jpg?alt=media&token=0eb9f54f-c47f-4c40-bf3e-a1361ec7a69f"), username: "alsalam@mokhtabri.com", password: "salamalekom")
     ]
 
     //tests sample
     // this function will generate a list of predefined tests for all sample facilites
-    func generateSampleTests(forFacilities: [MedicalFacility]) -> [Test] {
+    static func generateSampleTests(forFacilities: [MedicalFacility]) -> [Test] {
         var list: [Test] = []
         // add tests for all facilities
         for facility in forFacilities {
@@ -161,41 +160,41 @@ class AppData {
     // packages use a selection of predefined tests instead of actual tests related to the package (to save time)
     // use alborg facility to demonstrate packages
     static let samplePackages = [
-        Package(expiryDate: DateComponents, tests: [
+        Package(expiryDate: DateComponents(calendar: Calendar.current, year: 2024, month: 05, day: 05), tests: [
             Test(category: "Blood Test", name: "Vitamin B12", price: 3, description: "Vitamin B12 is an important component of the human body. It should be tested for normal levels in order to live a healthy life.", instructions: "Fasting 8-12 hours prior is mandatory.", forMedicalFacility: sampleFacilities[0]),
             Test(category: "Viral Test", name: "COVID-19 PCR", price: 4, description: "COVID-19 is a notorious pandemic that took the world by storm. This test checks for the existence of this pathogen from a nasal insertion.", instructions: "None", forMedicalFacility: sampleFacilities[0]),
             Test(category: "Blood Test", name: "Vitamin D", price: 2, description: "Vitamin D has a strong effect on one's health. Check your Vitamin D levels to ensure you have healthy skin and a healthy life.", instructions: "Fasting 8-12 hours prior is mandatory.", forMedicalFacility: sampleFacilities[0])
-        ], name: "Mini Comprehensive Checkup", price: 3, description: "Great cost-effective medical package for a multitude of various tests.", instructions: "Fasting 8-12 hours is mandatory.", forMedicalFacility: sampleFacilities[0], imageDownloadURL: "https://firebasestorage.googleapis.com/v0/b/fir-testing-512eb.appspot.com/o/serviceImages%2Falhilal_mini_comprehensive_checkup.jpg?alt=media&token=f2660d68-8997-48a8-b972-42711b615f32"),
-        Package(expiryDate: DateComponents, tests: [
+        ], name: "Mini Comprehensive Checkup", price: 3, description: "Great cost-effective medical package for a multitude of various tests.", instructions: "Fasting 8-12 hours is mandatory.", forMedicalFacility: sampleFacilities[0], imageDownloadURL:    URL(string: "https://firebasestorage.googleapis.com/v0/b/fir-testing-512eb.appspot.com/o/serviceImages%2Falhilal_mini_comprehensive_checkup.jpg?alt=media&token=f2660d68-8997-48a8-b972-42711b615f32")),
+        Package(expiryDate: DateComponents(calendar: Calendar.current, year: 2024, month: 03, day: 03), tests: [
             Test(category: "Blood Test", name: "Vitamin B12", price: 3, description: "Vitamin B12 is an important component of the human body. It should be tested for normal levels in order to live a healthy life.", instructions: "Fasting 8-12 hours prior is mandatory.", forMedicalFacility: sampleFacilities[0]),
             Test(category: "Viral Test", name: "COVID-19 PCR", price: 4, description: "COVID-19 is a notorious pandemic that took the world by storm. This test checks for the existence of this pathogen from a nasal insertion.", instructions: "None", forMedicalFacility: sampleFacilities[0]),
             Test(category: "Blood Test", name: "Vitamin D", price: 2, description: "Vitamin D has a strong effect on one's health. Check your Vitamin D levels to ensure you have healthy skin and a healthy life.", instructions: "Fasting 8-12 hours prior is mandatory.", forMedicalFacility: sampleFacilities[0])
-        ], name: "Bahraini Health Package", price: 6, description: "Great cost-effective medical package for a multitude of various tests.", instructions: "Fasting 8-12 hours is mandatory.", forMedicalFacility: sampleFacilities[0], imageDownloadURL: "https://firebasestorage.googleapis.com/v0/b/fir-testing-512eb.appspot.com/o/serviceImages%2Falhilal_bahraini_health_package.jpg?alt=media&token=793d2312-3283-4eb5-9236-15a2dc006aae"),
-        Package(expiryDate: DateComponents, tests: [
+        ], name: "Bahraini Health Package", price: 6, description: "Great cost-effective medical package for a multitude of various tests.", instructions: "Fasting 8-12 hours is mandatory.", forMedicalFacility: sampleFacilities[0], imageDownloadURL: URL(string: "https://firebasestorage.googleapis.com/v0/b/fir-testing-512eb.appspot.com/o/serviceImages%2Falhilal_bahraini_health_package.jpg?alt=media&token=793d2312-3283-4eb5-9236-15a2dc006aae")),
+        Package(expiryDate: DateComponents(calendar: Calendar.current, year: 2024, month: 09, day: 05), tests: [
             Test(category: "Blood Test", name: "Vitamin B12", price: 3, description: "Vitamin B12 is an important component of the human body. It should be tested for normal levels in order to live a healthy life.", instructions: "Fasting 8-12 hours prior is mandatory.", forMedicalFacility: sampleFacilities[1]),
             Test(category: "Viral Test", name: "COVID-19 PCR", price: 4, description: "COVID-19 is a notorious pandemic that took the world by storm. This test checks for the existence of this pathogen from a nasal insertion.", instructions: "None", forMedicalFacility: sampleFacilities[1]),
             Test(category: "Blood Test", name: "Vitamin D", price: 2, description: "Vitamin D has a strong effect on one's health. Check your Vitamin D levels to ensure you have healthy skin and a healthy life.", instructions: "Fasting 8-12 hours prior is mandatory.", forMedicalFacility: sampleFacilities[1])
         ], name: "General Check-up Proﬁle 1", price: 20, description: "Great cost-effective medical package for a multitude of various tests.", instructions: "Fasting 8-12 hours is mandatory.", forMedicalFacility: sampleFacilities[1]),
-        Package(expiryDate: DateComponents, tests: [
+        Package(expiryDate: DateComponents(calendar: Calendar.current, year: 2024, month: 12, day: 25), tests: [
             Test(category: "Blood Test", name: "Vitamin B12", price: 3, description: "Vitamin B12 is an important component of the human body. It should be tested for normal levels in order to live a healthy life.", instructions: "Fasting 8-12 hours prior is mandatory.", forMedicalFacility: sampleFacilities[2]),
             Test(category: "Viral Test", name: "COVID-19 PCR", price: 4, description: "COVID-19 is a notorious pandemic that took the world by storm. This test checks for the existence of this pathogen from a nasal insertion.", instructions: "None", forMedicalFacility: sampleFacilities[2]),
             Test(category: "Blood Test", name: "Vitamin D", price: 2, description: "Vitamin D has a strong effect on one's health. Check your Vitamin D levels to ensure you have healthy skin and a healthy life.", instructions: "Fasting 8-12 hours prior is mandatory.", forMedicalFacility: sampleFacilities[2])
-        ], name: "Hair Full Profile", price: 30, description: "Great cost-effective medical package for hair loss issues.", instructions: "None", forMedicalFacility: sampleFacilities[2], imageDownloadURL: "https://firebasestorage.googleapis.com/v0/b/fir-testing-512eb.appspot.com/o/serviceImages%2Falborg_full_hair_profile.jpg?alt=media&token=6850dccb-3994-483f-8d7d-cfd275de1389"),
-        Package(expiryDate: DateComponents, tests: [
+        ], name: "Hair Full Profile", price: 30, description: "Great cost-effective medical package for hair loss issues.", instructions: "None", forMedicalFacility: sampleFacilities[2], imageDownloadURL: URL(string: "https://firebasestorage.googleapis.com/v0/b/fir-testing-512eb.appspot.com/o/serviceImages%2Falborg_full_hair_profile.jpg?alt=media&token=6850dccb-3994-483f-8d7d-cfd275de1389")),
+        Package(expiryDate: DateComponents(calendar: Calendar.current, year: 2024, month: 04, day: 05), tests: [
             Test(category: "Blood Test", name: "Vitamin B12", price: 3, description: "Vitamin B12 is an important component of the human body. It should be tested for normal levels in order to live a healthy life.", instructions: "Fasting 8-12 hours prior is mandatory.", forMedicalFacility: sampleFacilities[2]),
             Test(category: "Viral Test", name: "COVID-19 PCR", price: 4, description: "COVID-19 is a notorious pandemic that took the world by storm. This test checks for the existence of this pathogen from a nasal insertion.", instructions: "None", forMedicalFacility: sampleFacilities[2]),
             Test(category: "Blood Test", name: "Vitamin D", price: 2, description: "Vitamin D has a strong effect on one's health. Check your Vitamin D levels to ensure you have healthy skin and a healthy life.", instructions: "Fasting 8-12 hours prior is mandatory.", forMedicalFacility: sampleFacilities[2])
-        ], name: "Virology Profile", price: 25, description: "Great cost-effective medical package for viral diseases.", instructions: "None", forMedicalFacility: sampleFacilities[2], imageDownloadURL: "https://firebasestorage.googleapis.com/v0/b/fir-testing-512eb.appspot.com/o/serviceImages%2Falborg_virology_profile.jpg?alt=media&token=2227ae3c-fd5f-4db9-b0f3-ab58699bbce9"),
-        Package(expiryDate: DateComponents, tests: [
+        ], name: "Virology Profile", price: 25, description: "Great cost-effective medical package for viral diseases.", instructions: "None", forMedicalFacility: sampleFacilities[2], imageDownloadURL: URL(string: "https://firebasestorage.googleapis.com/v0/b/fir-testing-512eb.appspot.com/o/serviceImages%2Falborg_virology_profile.jpg?alt=media&token=2227ae3c-fd5f-4db9-b0f3-ab58699bbce9")),
+        Package(expiryDate: DateComponents(calendar: Calendar.current, year: 2024, month: 01, day: 05), tests: [
             Test(category: "Blood Test", name: "Vitamin B12", price: 3, description: "Vitamin B12 is an important component of the human body. It should be tested for normal levels in order to live a healthy life.", instructions: "Fasting 8-12 hours prior is mandatory.", forMedicalFacility: sampleFacilities[2]),
             Test(category: "Viral Test", name: "COVID-19 PCR", price: 4, description: "COVID-19 is a notorious pandemic that took the world by storm. This test checks for the existence of this pathogen from a nasal insertion.", instructions: "None", forMedicalFacility: sampleFacilities[2]),
             Test(category: "Blood Test", name: "Vitamin D", price: 2, description: "Vitamin D has a strong effect on one's health. Check your Vitamin D levels to ensure you have healthy skin and a healthy life.", instructions: "Fasting 8-12 hours prior is mandatory.", forMedicalFacility: sampleFacilities[2])
-        ], name: "Pro Package", price: 45, description: "Great cost-effective medical package for various different medical issues.", instructions: "None", forMedicalFacility: sampleFacilities[2], imageDownloadURL: "https://firebasestorage.googleapis.com/v0/b/fir-testing-512eb.appspot.com/o/serviceImages%2Falborg_pro_profile.jpg?alt=media&token=ef393cc8-9032-40b0-9a0e-ee6a03ed0445"),
-        Package(expiryDate: DateComponents, tests: [
+        ], name: "Pro Package", price: 45, description: "Great cost-effective medical package for various different medical issues.", instructions: "None", forMedicalFacility: sampleFacilities[2], imageDownloadURL: URL(string: "https://firebasestorage.googleapis.com/v0/b/fir-testing-512eb.appspot.com/o/serviceImages%2Falborg_pro_profile.jpg?alt=media&token=ef393cc8-9032-40b0-9a0e-ee6a03ed0445")),
+        Package(expiryDate: DateComponents(calendar: Calendar.current, year: 2024, month: 02, day: 10), tests: [
             Test(category: "Blood Test", name: "Vitamin B12", price: 3, description: "Vitamin B12 is an important component of the human body. It should be tested for normal levels in order to live a healthy life.", instructions: "Fasting 8-12 hours prior is mandatory.", forMedicalFacility: sampleFacilities[2]),
             Test(category: "Viral Test", name: "COVID-19 PCR", price: 4, description: "COVID-19 is a notorious pandemic that took the world by storm. This test checks for the existence of this pathogen from a nasal insertion.", instructions: "None", forMedicalFacility: sampleFacilities[2]),
             Test(category: "Blood Test", name: "Vitamin D", price: 2, description: "Vitamin D has a strong effect on one's health. Check your Vitamin D levels to ensure you have healthy skin and a healthy life.", instructions: "Fasting 8-12 hours prior is mandatory.", forMedicalFacility: sampleFacilities[2])
-        ], name: "Thyroid", price: 12, description: "Great cost-effective medical package for thyroid related issues.", instructions: "None", forMedicalFacility: sampleFacilities[2], imageDownloadURL: "https://firebasestorage.googleapis.com/v0/b/fir-testing-512eb.appspot.com/o/serviceImages%2Falborg_thyroid.jpg?alt=media&token=cc8aecc7-3df6-433b-9d6d-240ead10aa37"),
+        ], name: "Thyroid", price: 12, description: "Great cost-effective medical package for thyroid related issues.", instructions: "None", forMedicalFacility: sampleFacilities[2], imageDownloadURL: URL(string: "https://firebasestorage.googleapis.com/v0/b/fir-testing-512eb.appspot.com/o/serviceImages%2Falborg_thyroid.jpg?alt=media&token=cc8aecc7-3df6-433b-9d6d-240ead10aa37")),
     ]
 
     //bookings sample
@@ -205,16 +204,16 @@ class AppData {
     // in the loadSampleData() function.
     static let sampleBookings = [
         
-        Booking(forPatient: samplePatients[0], ofMedicalService: samplePackages[3], bookingDate: DateComponents(calendar: Calendar.current, year: 2024, month: 1, day: 5), BookingStatus.Completed),
-        Booking(forPatient: samplePatients[0], ofMedicalService: samplePackages[4] ,bookingDate: DateComponents(calendar: Calendar.current, year: 2024, month: 2, day: 15), BookingStatus.Active),
-        Booking(forPatient: samplePatients[0], ofMedicalService: samplePackages[4],bookingDate: DateComponents(calendar: Calendar.current, year: 2024, month: 1, day: 2), BookingStatus.Completed),
-        Booking(forPatient: samplePatients[0], ofMedicalService: samplePackages[5],bookingDate: DateComponents(calendar: Calendar.current, year: 2024, month: 2, day: 11), BookingStatus.Cancelled),
-        Booking(forPatient: samplePatients[0], ofMedicalService: samplePackages[3],bookingDate: DateComponents(calendar: Calendar.current, year: 2024, month: 2, day: 5), BookingStatus.Cancelled),
-        Booking(forPatient: samplePatients[2], ofMedicalService: samplePackages[1], bookingDate: DateComponents(calendar: Calendar.current, year: 2024, month: 3, day: 17), BookingStatus.Active),
-        Booking(forPatient: samplePatients[4], ofMedicalService: samplePackages[2], bookingDate: DateComponents(calendar: Calendar.current, year: 2024, month: 4, day: 26), BookingStatus.Active),
-        Booking(forPatient: samplePatients[1], ofMedicalService: samplePackages[5], bookingDate: DateComponents(calendar: Calendar.current, year: 2024, month: 1, day: 7), BookingStatus.Completed),
-        Booking(forPatient: samplePatients[1], ofMedicalService: samplePackages[4], bookingDate: DateComponents(calendar: Calendar.current, year: 2024, month: 2, day: 16), BookingStatus.Cancelled),
-        Booking(forPatient: samplePatients[3], ofMedicalService: samplePackages[1], bookingDate: DateComponents(calendar: Calendar.current, year: 2024, month: 2, day: 5), BookingStatus.Active),
+        Booking(forPatient: samplePatients[0], ofMedicalService: samplePackages[3], bookingDate: DateComponents(calendar: Calendar.current, year: 2024, month: 1, day: 5), status: BookingStatus.Completed),
+        Booking(forPatient: samplePatients[0], ofMedicalService: samplePackages[4] ,bookingDate: DateComponents(calendar: Calendar.current, year: 2024, month: 2, day: 15), status: BookingStatus.Active),
+        Booking(forPatient: samplePatients[0], ofMedicalService: samplePackages[4],bookingDate: DateComponents(calendar: Calendar.current, year: 2024, month: 1, day: 2), status: BookingStatus.Completed),
+        Booking(forPatient: samplePatients[0], ofMedicalService: samplePackages[5],bookingDate: DateComponents(calendar: Calendar.current, year: 2024, month: 2, day: 11), status: BookingStatus.Cancelled),
+        Booking(forPatient: samplePatients[0], ofMedicalService: samplePackages[3],bookingDate: DateComponents(calendar: Calendar.current, year: 2024, month: 2, day: 5), status: BookingStatus.Cancelled),
+        Booking(forPatient: samplePatients[2], ofMedicalService: samplePackages[1], bookingDate: DateComponents(calendar: Calendar.current, year: 2024, month: 3, day: 17), status: BookingStatus.Active),
+        Booking(forPatient: samplePatients[4], ofMedicalService: samplePackages[2], bookingDate: DateComponents(calendar: Calendar.current, year: 2024, month: 4, day: 26), status: BookingStatus.Active),
+        Booking(forPatient: samplePatients[1], ofMedicalService: samplePackages[5], bookingDate: DateComponents(calendar: Calendar.current, year: 2024, month: 1, day: 7), status: BookingStatus.Completed),
+        Booking(forPatient: samplePatients[1], ofMedicalService: samplePackages[4], bookingDate: DateComponents(calendar: Calendar.current, year: 2024, month: 2, day: 16), status: BookingStatus.Cancelled),
+        Booking(forPatient: samplePatients[3], ofMedicalService: samplePackages[1], bookingDate: DateComponents(calendar: Calendar.current, year: 2024, month: 2, day: 5), status: BookingStatus.Active),
     ]
     
     // **** old sample data **** 
@@ -286,7 +285,8 @@ class AppData {
         //     services = listOfTests
         //     facilities = hospitals
         //     patients = [samplePatients[0]]
-            loadServicesImages()
+        loadServicesImages() {
+            
             
         }
     }
@@ -296,29 +296,30 @@ class AppData {
         // FIXME: the services array was removed in favor
         // of separate tests and packages arrays.
         // they can be combined into one array before usage here.
-        for service in AppData.services { // Assume servicesArray is your array of MedicalService
-            if let storageLink = service.storageLink {
-                group.enter()
-                let storageRef = Storage.storage().reference(forURL: storageLink)
-                storageRef.downloadURL { (url, error) in
-                    if let error = error {
-                        print("Error getting download URL: \(error.localizedDescription)")
-                        group.leave()
-                    } else if let url = url {
-                        KingfisherManager.shared.retrieveImage(with: url) { result in
-                            switch result {
-                            case .success(let value):
-                                service.photo = value.image
-                            case .failure(let error):
-                                print("Error downloading image: \(error.localizedDescription)")
-                                service.photo = nil // or set a default image
-                            }
-                            group.leave()
-                        }
-                    }
-                }
-            }
-        }
+        
+//        for service in AppData.services { // Assume servicesArray is your array of MedicalService
+//            if let storageLink = service.storageLink {
+//                group.enter()
+//                let storageRef = Storage.storage().reference(forURL: storageLink)
+//                storageRef.downloadURL { (url, error) in
+//                    if let error = error {
+//                        print("Error getting download URL: \(error.localizedDescription)")
+//                        group.leave()
+//                    } else if let url = url {
+//                        KingfisherManager.shared.retrieveImage(with: url) { result in
+//                            switch result {
+//                            case .success(let value):
+//                                service.photo = value.image
+//                            case .failure(let error):
+//                                print("Error downloading image: \(error.localizedDescription)")
+//                                service.photo = nil // or set a default image
+//                            }
+//                            group.leave()
+//                        }
+//                    }
+//                }
+//            }
+//        }
 
         group.notify(queue: .main) {
             completion()

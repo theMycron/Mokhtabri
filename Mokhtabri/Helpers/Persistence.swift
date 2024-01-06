@@ -19,36 +19,42 @@ extension AppData {
         return documentsDirectory.appendingPathComponent(fileName.rawValue).appendingPathExtension("plist")
     }
     
-    static func loadSampleData() {
+    // loads sample data for the system. If no data is present and force is false, it will load.
+    // If there is data present and force is true, it will overwrite the existing data.
+    static func loadSampleData(force: Bool = false) {
         // make sure there is no existing data before loading sample data
-        guard facilities.count > 0,
-              patients.count > 0,
-              bookings.count > 0,
-              tests.count > 0,
-              packages.count > 0
-        else { return }
+        // will skip check if force is true
+        if (!force) {
+            guard facilities.count > 0,
+                  patients.count > 0,
+                  bookings.count > 0,
+                  tests.count > 0,
+                  packages.count > 0
+            else { return }
+        }
+        
         
         AppData.patients = AppData.samplePatients
-        AppData.facilites = AppData.sampleFacilities
-        AppData.tests = AppData.generateSampleTests(forFacilities: AppData.facilites)
+        AppData.facilities = AppData.sampleFacilities
+        AppData.tests = AppData.generateSampleTests(forFacilities: AppData.facilities)
         AppData.packages = AppData.samplePackages
         AppData.bookings = AppData.sampleBookings
         //load additional bookings with tests
         // have to do this because sample tests are loaded dynamically (using a function instead of a static list)
         AppData.bookings.append(
-            Booking(forPatient: samplePatients[0], ofMedicalService: AppData.tests[3], bookingDate: DateComponents(calendar: Calendar.current, year: 2024, month: 1, day: 1), BookingStatus.Completed)
+            Booking(forPatient: samplePatients[0], ofMedicalService: AppData.tests[3], bookingDate: DateComponents(calendar: Calendar.current, year: 2024, month: 1, day: 1), status: BookingStatus.Completed)
         )
         AppData.bookings.append(
-            Booking(forPatient: samplePatients[0], ofMedicalService: AppData.tests[14], bookingDate: DateComponents(calendar: Calendar.current, year: 2024, month: 2, day: 1), BookingStatus.Active)
+            Booking(forPatient: samplePatients[0], ofMedicalService: AppData.tests[14], bookingDate: DateComponents(calendar: Calendar.current, year: 2024, month: 2, day: 1), status: BookingStatus.Active)
         )
         AppData.bookings.append(
-            Booking(forPatient: samplePatients[0], ofMedicalService: AppData.tests[17], bookingDate: DateComponents(calendar: Calendar.current, year: 2024, month: 2, day: 16), BookingStatus.Cancelled)
+            Booking(forPatient: samplePatients[0], ofMedicalService: AppData.tests[17], bookingDate: DateComponents(calendar: Calendar.current, year: 2024, month: 2, day: 16), status: BookingStatus.Cancelled)
         )
         AppData.bookings.append(
-            Booking(forPatient: samplePatients[0], ofMedicalService: AppData.tests[19], bookingDate: DateComponents(calendar: Calendar.current, year: 2024, month: 1, day: 16), BookingStatus.Cancelled)
+            Booking(forPatient: samplePatients[0], ofMedicalService: AppData.tests[19], bookingDate: DateComponents(calendar: Calendar.current, year: 2024, month: 1, day: 16), status: BookingStatus.Cancelled)
         )
         AppData.bookings.append(
-            Booking(forPatient: samplePatients[1], ofMedicalService: AppData.tests[0], bookingDate: DateComponents(calendar: Calendar.current, year: 2024, month: 1, day: 4), BookingStatus.Completed)
+            Booking(forPatient: samplePatients[1], ofMedicalService: AppData.tests[0], bookingDate: DateComponents(calendar: Calendar.current, year: 2024, month: 1, day: 4), status: BookingStatus.Completed)
         )
 
     }
