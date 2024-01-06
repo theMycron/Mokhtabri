@@ -81,11 +81,11 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
             return
         }
         //Password length validation
-        let pwd = passwordTxt.text ?? ""
-        let passwordLength = pwd.count
+        
+        //let passwordLength = pwd.count
 
         // Set the desired minimum password length
-        let minimumPasswordLength = 8
+       // let minimumPasswordLength = 8
 
        /* if passwordLength < minimumPasswordLength {
             // Password length is less than the desired length
@@ -146,15 +146,21 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
           Auth.auth().signIn(withEmail: email, password: password) { [weak self] authResult, error in
               guard let self = self else { return }
 
+              
+              
               if let error = error {
                   // Show error message when authentication fails
                   self.showInvalidCredentialsAlert()
                   print("Authentication failed: \(error.localizedDescription)")
                   return
               }
-
+              
+           
+              
               // Authentication successful, proceed to check user info
               self.checkUserInfo()
+              
+              
           }
     }
     
@@ -168,6 +174,9 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                 print("email is null")
                 return
             }
+            
+            let user = AppData.getUserFromEmail(email: emailTxt.text!)
+            AppData.loggedInUser = user
             
             let viewControllerIdentifier: String
             var isTabBarController: Bool = true

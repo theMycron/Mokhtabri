@@ -63,11 +63,11 @@ class LabBookingInfoTableViewController: UITableViewController {
     func updateData(){
 
         //take away optionals
-        guard let price = cbooking?.ofMedicalService.price, let status = cbooking?.status,let patientF = cbooking?.forPatient.firstName, let patientL = cbooking?.forPatient.lastName, let openb = cbooking?.ofMedicalService.forMedicalFacility.alwaysOpen, let iden = cbooking?.forPatient.cpr, let phone = cbooking?.forPatient.phone, let city = cbooking?.ofMedicalService.forMedicalFacility.city, let date = cbooking?.bookingDate, let info = cbooking?.ofMedicalService.instructions else {
+        guard let price = cbooking?.ofMedicalService.price, let status = cbooking?.status,let patientF = cbooking?.forPatient.firstName, let patientL = cbooking?.forPatient.lastName, let openb = cbooking?.ofMedicalService.forMedicalFacility.alwaysOpen, let iden = cbooking?.forPatient.cpr, let city = cbooking?.ofMedicalService.forMedicalFacility.city, let date = cbooking?.bookingDate, let info = cbooking?.ofMedicalService.instructions else {
             return
         }
         
-        let patientDescription = " Patient Full Name: \(patientF)  \(patientL) \n Patient Identification Number: \(iden) \n Patient Mobile Number: \(phone)"
+        let patientDescription = " Patient Full Name: \(patientF)  \(patientL)"
         var time = ""
         if (openb){
             time = "Always Open"

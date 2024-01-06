@@ -57,7 +57,7 @@ class LabHistoryTableViewController: UITableViewController, UISearchBarDelegate,
     
     
     // Create a patient
-    var patient = Patient(firstName: "Noora", lastName: "Qasim", phone: "12345678", cpr: "031003257", email: "nooraw376@gmail.com", gender: Gender.female, dateOfBirth: DateComponents(calendar: Calendar.current, year: 2003, month: 10, day: 12), username: "NooraW", password: "12345#")
+    var patient = Patient(firstName: "Noora", lastName: "Qasim", cpr: "031003257",gender: Gender.female, dateOfBirth: DateComponents(calendar: Calendar.current, year: 2003, month: 10, day: 12), username: "NooraW", password: "12345#")
     
     // Create an array to store the bookings
     var bookings = AppData.listOfBookingsLab
