@@ -23,7 +23,7 @@ Sample data will be loaded if no AppData was found. The sample data includes a n
    - Password: alborgborg
 - Sample Patient (Noora)
    - Email: nooraw376@gmail.com
-   - Password: 12345#78
+   - Password: 12345678
 
 
 # List of Features and Changes from Prototype
