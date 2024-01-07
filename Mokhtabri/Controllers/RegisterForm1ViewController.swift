@@ -56,9 +56,7 @@
         @IBAction func registerBtnTapped(_ sender: Any) {
             
             validateFields()
-            backToLogin()
         }
-
 
         func validateFields(){
             //validation for firstname empty field
@@ -72,10 +70,7 @@
                 present(alert, animated: true)
                 
                 return
-                
             }
-            
-            
             
             //validation for lastname field
             if lastname.text?.isEmpty==true{
@@ -103,7 +98,6 @@
                 present(alert, animated: true)
                 
                 return
-                
             }
             guard let cpr = cpr.text else {
                 // CPR text field is empty
@@ -117,7 +111,6 @@
                 showInvalidCPRAlert()
             }
             
-            
             //validation for cpr field
             if email.text?.isEmpty==true{
                 //prompt an alert to the user
@@ -129,10 +122,6 @@
                 present(alert, animated: true)
                 
                 return
-                
-                
-                
-                
             }
             guard let email = email.text else {
                 // Email text field is empty
@@ -145,9 +134,6 @@
             if !emailPredicate.evaluate(with: email) {
                 showInvalidEmailAlert()
             }
-            
-           
-          
             
             
             //validation for password field
@@ -178,9 +164,6 @@
                 return
             }
             
-           
-            
-            
             //call the Register function if the fields are validated
             Register()
             
@@ -202,36 +185,16 @@
         
         //send user information + password to firebase
        func Register(){
-           
-            
-          
-            
             Auth.auth().createUser(withEmail: email.text!, password: password.text!) { (authResult, error) in
                 
                 //check the auth result to make sure that the user is created
                 guard let _ = authResult?.user, error == nil else{
-                    
-                    
-                    
                     //if user is not created, display the error.
                     print("Error \(String(describing: error?.localizedDescription))")
-                   
-                   
-                    
                     return
-
                 }
-                
-                
-                //redirect
-                let mainSB = UIStoryboard(name: "Main", bundle: nil)
-                let vc = mainSB.instantiateViewController(withIdentifier: "PatientRegistration")
-                vc.modalPresentationStyle = .overFullScreen
-                self.present(vc, animated: true)
-            
             }
-            
-            
+           
             let selectedSegmentIndex = genderSegmentedControl.selectedSegmentIndex
 
            var selectedGender: Gender = Gender.male
@@ -240,7 +203,6 @@
             } else if selectedSegmentIndex == 1 {
                 selectedGender = Gender.female
             }
-           
            
            func datePickerToDateComponents(_ datePicker: UIDatePicker) -> DateComponents {
                let calendar = Calendar.current
@@ -254,8 +216,9 @@
            let patientUser = Patient(firstName: firstname.text!, lastName:lastname.text!, cpr: cpr.text!, gender: selectedGender, dateOfBirth: dateComponents, username: email.text!, password: password.text!)
                
                       // Add the patient user to AppData or perform any other necessary actions
-                       AppData.addUser(user: patientUser)
+           AppData.addUser(user: patientUser)
            
+           backToLogin()
         }
         
         
@@ -296,10 +259,5 @@
         override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
             self.view.endEditing(true)
         }
-        
-        
-        
-        
-            
     }
 

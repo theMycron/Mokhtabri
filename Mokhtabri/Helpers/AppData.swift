@@ -58,13 +58,6 @@ class AppData {
     }
     
     
-   // getUser(username: Auth.auth().currentUser!.email)
-    
-    
-
-    
-    
-    
     static func addUser(user: User) {
         if user is Patient {
             patients.append(user as! Patient)
@@ -168,16 +161,6 @@ class AppData {
         return nil
     }
     
-    /*
-     For user deletion, Ms. Maleeha only allowed deletion if the user did not have
-     a relationship with another object. In our case, that would if a patient had a booking.
-     We could do the same thing, but we can also 'cascade' the deletion and delete
-     objects in the relationship. So that would mean deleting the Booking if the Patient is
-     deleted. But in that case, the facility would also lose the booking. The same goes if
-     a facility is deleted, all patients bookings would be deleted too.
-     
-     TODO: figure this out
-     */
     
     static func deleteUser(user: User) -> Bool {
         if user is Patient {
@@ -196,8 +179,132 @@ class AppData {
         
         return false
     }
+    static func loadSampleData(){
+        // ensure that no data is already present
+        guard bookings.isEmpty,
+              facilities.isEmpty,
+              patients.isEmpty,
+              tests.isEmpty,
+              packages.isEmpty
+        else {return}
+        listOfBookingsLab = sampleBookings
+        listOfBookingsPatient = sampleBookings
+        
+        facilities = hospitals + labs
+        bookings = sampleBookings
+        tests = sampleTests
+        packages = samplePackages
+        patients = [patient1,patient2,pat3]
+        loadServicesImages(){
+            
+        }
+        loadHospitalPhotos()
+        
+    }
     
+    static func loadPicture(medic: MedicalService) -> MedicalService{
+        let group = DispatchGroup()
+        group.enter()
+        KingfisherManager.shared.retrieveImage(with: medic.storageLink!) { result in
+            switch result {
+            case .success(let value):
+                medic.photo = value.image
+            
+            case .failure(let error):
+                print("Error downloading image: \(error.localizedDescription)")
+                medic.photo = nil
+            }
+            group.leave()
+            
+        }
+        group.notify(queue: .main){
+            
+        }
+        return medic
+    }
+    static func loadHospitalPhotos(){
+        let group = DispatchGroup()
+        
+        for f in facilities{
+            group.enter()
+            KingfisherManager.shared.retrieveImage(with: f.imageDownloadURL ?? URL(string: "https://firebasestorage.googleapis.com/v0/b/fir-testing-512eb.appspot.com/o/testImages%2F504276.png?alt=media&token=cb30478e-345b-4de7-b2bd-aecdb7e7765d")!){result in
+                switch result {
+                case .success(let value):
+                    f.photo = value.image
+                case .failure(let error):
+                    print("error downloading \(error)")
+                    f.photo = nil
+                }
+                group.leave()
+            }
+        }
+        group.notify(queue: .main){
+            
+        }
+    }
+    static func loadServicesImages(completion: @escaping () -> Void) {
+        var services : [MedicalService] = []
+        for s in tests {
+            services.append(s)
+        }
+        for s in packages{
+            services.append(s)
+        }
+        let group = DispatchGroup()
+        
+        //loops through the array of services
+        for service in services {
+            group.enter()
+            KingfisherManager.shared.retrieveImage(with: service.storageLink ?? URL(string: "https://firebasestorage.googleapis.com/v0/b/fir-testing-512eb.appspot.com/o/testImages%2Frbc-alsalam.jpeg?alt=media&token=71a9c05b-52fb-4b26-a2f9-b78c2604bca1")!) { result in
+                switch result {
+                case .success(let value):
+                    service.photo = value.image
+                case .failure(let error):
+                    print("Error downloading image: \(error.localizedDescription)")
+                    service.photo = nil
+                }
+                group.leave()
+            }
+        }
+
+        group.notify(queue: .main) {
+            completion()
+        }
+    }
     
+    static func loadBookingImages(completion: @escaping () -> Void) {
+        var services : [MedicalService] = []
+        for booking in listOfBookingsLab{
+            services.append(booking.ofMedicalService)
+        }
+        
+        for booking in listOfBookingsPatient{
+            services.append(booking.ofMedicalService)
+        }
+        let group = DispatchGroup()
+
+        //loops through the array of services       //loops through the array of services
+        for service in services {
+            group.enter()
+            KingfisherManager.shared.retrieveImage(with: service.storageLink ?? URL(string: "https://firebasestorage.googleapis.com/v0/b/fir-testing-512eb.appspot.com/o/testImages%2Frbc-alsalam.jpeg?alt=media&token=71a9c05b-52fb-4b26-a2f9-b78c2604bca1")!) { result in
+                switch result {
+                case .success(let value):
+                    service.photo = value.image
+                case .failure(let error):
+                    print("Error downloading image: \(error.localizedDescription)")
+                    service.photo = nil
+                }
+                group.leave()
+            }
+        }
+
+        group.notify(queue: .main) {
+            completion()
+        }
+
+    }
+    
+    // ********* SAMPLE DATA **********
     
     //patient sample
 
@@ -287,138 +394,11 @@ class AppData {
     
     static var manara = MedicalFacility(name: "Manara Medical Laboratories", phone: "17722999", city: "Manama", website: "eurofins.com", alwaysOpen: false, type: FacilityType.lab, openingTime: DateComponents(calendar: Calendar.current, hour: 8, minute: 30), closingTime: DateComponents(calendar: Calendar.current, hour: 20, minute: 30), image: URL(string:  "https://firebasestorage.googleapis.com:443/v0/b/fir-testing-512eb.appspot.com/o/facilityImages%2Fmanara_medical_laboratories_manama.jpg?alt=media&token=2cf7a6fd-3073-4c70-aa09-9330e43d081c"), username: "manara@mokhtabri.com", password: "12345678")
     
-    // new
     static let borg = MedicalFacility(name: "Al Borg Diagnostics", phone: "17100088", city: "Manama", website: "alborgdx.com", alwaysOpen: false, type: FacilityType.lab, openingTime: DateComponents(calendar: Calendar.current, hour: 8, minute: 0), closingTime: DateComponents(calendar: Calendar.current, hour: 21, minute: 0), image: URL(string: "https://firebasestorage.googleapis.com:443/v0/b/fir-testing-512eb.appspot.com/o/facilityImages%2Fal_borg_diagnostics_manama.jpg?alt=media&token=b3726451-3ace-4988-92ef-9689eed685be"), username: "alborg@mokhtabri.com", password: "12345678")
     
     
     
     
-    static func loadSampleData(){
-        // ensure that no data is already present
-        guard bookings.isEmpty,
-              facilities.isEmpty,
-              patients.isEmpty,
-              tests.isEmpty,
-              packages.isEmpty
-        else {return}
-        listOfBookingsLab = sampleBookings
-        listOfBookingsPatient = sampleBookings
-        
-        facilities = hospitals + labs
-        bookings = sampleBookings
-        tests = sampleTests
-        packages = samplePackages
-        patients = [patient1,patient2,pat3]
-        loadServicesImages(){
-            
-        }
-        loadHospitalPhotos()
-        
-    }
-    
-    static func loadPicture(medic: MedicalService) -> MedicalService{
-        let group = DispatchGroup()
-        group.enter()
-        KingfisherManager.shared.retrieveImage(with: medic.storageLink!) { result in
-            switch result {
-            case .success(let value):
-                medic.photo = value.image
-            
-            case .failure(let error):
-                print("Error downloading image: \(error.localizedDescription)")
-                medic.photo = nil
-            }
-            group.leave()
-            
-        }
-        group.notify(queue: .main){
-            
-        }
-        return medic
-    }
-    static func loadHospitalPhotos(){
-        let group = DispatchGroup()
-        
-        for f in facilities{
-            group.enter()
-            KingfisherManager.shared.retrieveImage(with: f.imageDownloadURL ?? URL(string: "https://firebasestorage.googleapis.com/v0/b/fir-testing-512eb.appspot.com/o/testImages%2F504276.png?alt=media&token=cb30478e-345b-4de7-b2bd-aecdb7e7765d")!){result in
-                switch result {
-                case .success(let value):
-                    f.photo = value.image
-                case .failure(let error):
-                    print("error downloading")
-                    f.photo = nil
-                }
-                group.leave()
-            }
-        }
-        group.notify(queue: .main){
-            
-        }
-    }
-    static func loadServicesImages(completion: @escaping () -> Void) {
-        var services : [MedicalService] = []
-        for s in tests {
-            services.append(s)
-        }
-        for s in packages{
-            services.append(s)
-        }
-        let group = DispatchGroup()
-        
-        //loops through the array of services
-        for service in services {
-            group.enter()
-            KingfisherManager.shared.retrieveImage(with: service.storageLink ?? URL(string: "https://firebasestorage.googleapis.com/v0/b/fir-testing-512eb.appspot.com/o/testImages%2Frbc-alsalam.jpeg?alt=media&token=71a9c05b-52fb-4b26-a2f9-b78c2604bca1")!) { result in
-                switch result {
-                case .success(let value):
-                    service.photo = value.image
-                case .failure(let error):
-                    print("Error downloading image: \(error.localizedDescription)")
-                    service.photo = nil
-                }
-                group.leave()
-            }
-        }
-
-        group.notify(queue: .main) {
-            completion()
-        }
-    }
-    
-    static func loadBookingImages(completion: @escaping () -> Void) {
-        var services : [MedicalService] = []
-        for booking in listOfBookingsLab{
-            services.append(booking.ofMedicalService)
-        }
-        
-        for booking in listOfBookingsPatient{
-            services.append(booking.ofMedicalService)
-        }
-        let group = DispatchGroup()
-
-        //loops through the array of services       //loops through the array of services
-        for service in services {
-            group.enter()
-            KingfisherManager.shared.retrieveImage(with: service.storageLink ?? URL(string: "https://firebasestorage.googleapis.com/v0/b/fir-testing-512eb.appspot.com/o/testImages%2Frbc-alsalam.jpeg?alt=media&token=71a9c05b-52fb-4b26-a2f9-b78c2604bca1")!) { result in
-                switch result {
-                case .success(let value):
-                    service.photo = value.image
-                case .failure(let error):
-                    print("Error downloading image: \(error.localizedDescription)")
-                    service.photo = nil
-                }
-                group.leave()
-            }
-        }
-
-        group.notify(queue: .main) {
-            completion()
-        }
-
-    }
-
-
     
 
 }

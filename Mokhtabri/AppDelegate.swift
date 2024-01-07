@@ -19,10 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         // Override point for customization after application launch.
         UNUserNotificationCenter.current().delegate = self
         FirebaseApp.configure()
-       // AppData.loadData()
-        AppData.loadSampleData()
-       // AppData.loadData()
-       // AppData.saveData()
+        AppData.loadData()
         return true
     }
     

@@ -14,31 +14,9 @@ class AdminViewTableViewController: UITableViewController, UISearchResultsUpdati
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // code to
-//        let urls = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
-//        let documentsDirectory = urls[0]
-        
-        // simulator appdata in: file:///Users/202100937/Library/Developer/CoreSimulator/Devices/5E73E433-8F87-439B-9657-088DFF95DA7C/data/Containers/Data/Application/A1376A02-B099-497C-9014-9CE60A3D3B54/Documents/
-        // TESTING PERSISTENCE
-//        AppData.bookings = AppData.sampleBookings
-//        AppData.tests = AppData.listOfTests.compactMap {$0 as? Test}
-//        AppData.packages = AppData.listOfTests.compactMap {$0 as? Package}
-//        AppData.facilities = AppData.labs
-//        AppData.saveData()
-        
-        
-        
         embedSearch()
         
-        // remove later
-        AppData.loadData()
-        
         filterFacilities(scope: 0)
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
     
     
@@ -81,6 +59,7 @@ class AdminViewTableViewController: UITableViewController, UISearchResultsUpdati
         tableView.reloadData()
     }
     
+    // this is used for search functionality
     func updateSearchResults(for searchController: UISearchController) {
         let scope = search.searchBar.selectedScopeButtonIndex
         if let query = searchController.searchBar.text?.lowercased().trimmingCharacters(in: .whitespaces), !query.isEmpty {
@@ -103,6 +82,7 @@ class AdminViewTableViewController: UITableViewController, UISearchResultsUpdati
         tableView.reloadData()
     }
     
+    
     override func numberOfSections(in tableView: UITableView) -> Int {
         return displayedFacilities.count
     }
@@ -112,6 +92,7 @@ class AdminViewTableViewController: UITableViewController, UISearchResultsUpdati
         return 1
     }
 
+    // this is called when returning from the edit view
     @IBAction func unwindFromEdit(unwindSegue: UIStoryboardSegue) {
         guard let source = unwindSegue.source as? AdminEditTableViewController,
               let facility = source.facility
@@ -131,6 +112,7 @@ class AdminViewTableViewController: UITableViewController, UISearchResultsUpdati
 //        AppData.saveData()
     }
     
+    // this is called when a cell is clicked
     @IBSegueAction func editFacility(_ coder: NSCoder, sender: Any?) -> AdminEditTableViewController? {
         guard let cell = sender as? UITableViewCell, let indexPath = tableView.indexPath(for: cell) else {
             return nil
@@ -138,6 +120,7 @@ class AdminViewTableViewController: UITableViewController, UISearchResultsUpdati
         let facility = displayedFacilities[indexPath.section]
         return AdminEditTableViewController(coder: coder, facility: facility)
     }
+    
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "AdminViewCell", for: indexPath) as! AdminViewTableViewCell
@@ -154,17 +137,12 @@ class AdminViewTableViewController: UITableViewController, UISearchResultsUpdati
         }
     
     
-    
-    
-
-    
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         // Return false if you do not want the specified item to be editable.
         return true
     }
     
-
     
     // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
@@ -179,31 +157,4 @@ class AdminViewTableViewController: UITableViewController, UISearchResultsUpdati
             AppData.saveData()
         }
     }
-    
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

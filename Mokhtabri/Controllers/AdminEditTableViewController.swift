@@ -84,6 +84,9 @@ class AdminEditTableViewController: UITableViewController, UIImagePickerControll
         txtPassword.text = facility.password
         txtConfirm.text = facility.password
         
+        // disable email field as it cannot be changed
+        txtUsername.isEnabled = false
+        
         // load image
         getImageFromFirebase()
     }
@@ -94,11 +97,6 @@ class AdminEditTableViewController: UITableViewController, UIImagePickerControll
         // this delegate will control the sheet, and will stop the user from dismissing if changes were made
         presentationController?.delegate = self
         updateView()
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
     
 
@@ -232,25 +230,6 @@ class AdminEditTableViewController: UITableViewController, UIImagePickerControll
                     }
                 }
             }
-            
-            // update email
-            if username != currentUser?.email {
-                let credentials = EmailAuthProvider.credential(withEmail: facility.username, password: facility.password)
-                currentUser?.reauthenticate(with: credentials) {(result,error)  in
-                    if error != nil {
-                        print("Error while reauthenticating user: \(String(describing: error))")
-                    } else {
-                        if result != nil {
-                            // this sends an email verification to the user to confirm updating the email.
-                            currentUser?.sendEmailVerification(beforeUpdatingEmail: username) {error in
-                                if error != nil {
-                                    print("Error while updating user email: \(String(describing: error))")
-                                }
-                            }
-                        }
-                    }
-                }
-            }
         }
         facility = MedicalFacility(name: name, phone: phone, city: city, website: website, alwaysOpen: alwaysopen, type: type, openingTime: openingTime, closingTime: closingTime, image: facility?.imageDownloadURL, username: username, password: password)
         if let oldId = oldId {
@@ -282,8 +261,6 @@ class AdminEditTableViewController: UITableViewController, UIImagePickerControll
     
     
     func uploadImageToFirebase() -> Bool {
-        
-        
         
         // get selected image and upload to firebase
         guard let image = imgDisplay.image?.jpegData(compressionQuality: 0.9) else {return true}

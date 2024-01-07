@@ -55,6 +55,7 @@ class LabEditTableTableViewController: UITableViewController, UIAdaptivePresenta
         txtDescription.text = description
         txtDescription.text = service.serviceDescription
         txtInstruction.text = service.instructions
+        
         let s1 = AppData.loadPicture(medic: service)
         guard let img = s1.photo else {
             return
@@ -68,23 +69,16 @@ class LabEditTableTableViewController: UITableViewController, UIAdaptivePresenta
         }
         if service is Package{
             let package: Package = service as! Package
-//            print(package.storageLink)
-           
-//             guard let img = s1.photo else {
-//                 return
-//             }
-//             imgDisplay.image = img
             if let expiryDateComponents = package.expiryDate {
                let date = Calendar.current.date(from: expiryDateComponents)
                 DateExpiry.date = date ?? date!
              getImageFromFirebase()
                 segmentedControl.selectedSegmentIndex = 1
             }
-            
         }
-
-     
     }
+    
+    // when returning from select tests
     @IBAction func unwindFromSelect(unwindSegue: UIStoryboardSegue){
         guard let source = unwindSegue.source as? LabSelectTestsTableViewController
               
@@ -93,13 +87,14 @@ class LabEditTableTableViewController: UITableViewController, UIAdaptivePresenta
         listOfTests = selectedTests
     }
     
+    // go to select tests only as package
     @IBSegueAction func selectTestSegue(_ coder: NSCoder) -> LabSelectTestsTableViewController? {
         let package: Package? = service as? Package
         return LabSelectTestsTableViewController(coder: coder, package: package)
     }
     
 
-    
+    // hide and unhide test/package specific cell when
     @IBAction func segmetedSelect(_ sender: UISegmentedControl) {
         switch sender.selectedSegmentIndex{
         case 0:
@@ -133,7 +128,7 @@ class LabEditTableTableViewController: UITableViewController, UIAdaptivePresenta
         }
         tableView.reloadData()
         // this delegate will control the sheet, and will stop the user from dismissing if changes were made
-        navigationController?.presentationController?.delegate = self
+        presentationController?.delegate = self
         updateView()
         
 
@@ -166,15 +161,14 @@ class LabEditTableTableViewController: UITableViewController, UIAdaptivePresenta
                return nil
            }
         }
-        // TODO: add image as well
         
         
         if let service = service {
             oldId = service.id
         }
+        // create service based on type
         if (selectedServiceType == .test) {
             service = Test(category: category!,name: name ?? "", price: price ?? 0.0 , description: description ?? "", instructions: instructions ?? "", forMedicalFacility: AppData.loggedInUser as! MedicalFacility, serviceType : selectedServiceType!, storageLink: URL(string: "https://firebasestorage.googleapis.com/v0/b/fir-testing-512eb.appspot.com/o/testImages%2Frbc-alsalam.jpeg?alt=media&token=71a9c05b-52fb-4b26-a2f9-b78c2604bca1") )
-            // TODO: change service to logged in service
         } else if (selectedServiceType == .package) {
             service = Package(expiryDate: expiryDateComponents, tests: listOfTests,name: name ?? "", price: price ?? 0.0 , description: description ?? "", instructions: instructions ?? "", forMedicalFacility: AppData.loggedInUser as! MedicalFacility, serviceType : selectedServiceType!, storageLink: URL(string: "https://firebasestorage.googleapis.com/v0/b/fir-testing-512eb.appspot.com/o/testImages%2Frbc-alsalam.jpeg?alt=media&token=71a9c05b-52fb-4b26-a2f9-b78c2604bca1")!)
             _=uploadImageToFirebase()
@@ -209,22 +203,22 @@ class LabEditTableTableViewController: UITableViewController, UIAdaptivePresenta
 
     //this function hides views that are not needed between package and test page
    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+       // remove "select tests" cell if editing test
         if indexPath.section == 1 && (indexPath.row == 4) {
             return (segmentedControl.selectedSegmentIndex == 0) ? 0 : super.tableView(tableView, heightForRowAt: indexPath)
         }
+       // remove "category" cell if editing package
         if indexPath.section == 1 && (indexPath.row == 3) {
             return (segmentedControl.selectedSegmentIndex == 1) ? 0 : super.tableView(tableView, heightForRowAt: indexPath)
         }
-//       if indexPath.section == 0  {
-//           return (segmentedControl.selectedSegmentIndex == 0) ? 0 : super.tableView(tableView, heightForRowAt: indexPath)
-//       }
+       // remove expiry date when editing test
        if indexPath.section == 3  {
            return (segmentedControl.selectedSegmentIndex == 0) ? 0 : super.tableView(tableView, heightForRowAt: indexPath)
        }
         return super.tableView(tableView, heightForRowAt: indexPath)
     }
     
-    
+    // called when changes are made to enable save button
     @IBAction func madeChanges() {
         hasChanges = true
         isModalInPresentation = hasChanges
@@ -275,14 +269,11 @@ class LabEditTableTableViewController: UITableViewController, UIAdaptivePresenta
                        alert.addAction(UIAlertAction(title: "OK", style: .default))
                        self.present(alert, animated: true)
                    case .success(let url):
-                       if (self.service is Package) {
-                           let package = self.service as! Package
-                           print("url")
-                           package.storageLink = url
-                    
+                       guard self.service != nil else {return}
+                       self.service!.storageLink = url
                            // update service in appdata
-                           AppData.editService(service: package)
-                       }
+                       AppData.editService(service: self.service!)
+                       
                    }
                 })
             }

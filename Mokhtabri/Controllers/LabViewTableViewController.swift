@@ -17,21 +17,20 @@ class LabViewTableViewController: UITableViewController, UISearchResultsUpdating
         super.viewDidLoad()
         embedSearch()
         
-        AppData.loadData()
-        
+        // set displayed services to only the ones owned by the logged in facility
         displayedServices = AppData.tests.filter{$0.forMedicalFacility.name == loggedInFacillity.name} + AppData.packages.filter{$0.forMedicalFacility.name == loggedInFacillity.name}
         
         tableView.reloadData()
         
         filterServices(scope: 0)
 
-        
     }
     
     
     @IBAction func btnLogOutPressed(_ sender: Any) {
         logoutAlert()
     }
+    
     func embedSearch(){
         // might need to use a different controller for the search functionality
         search.searchResultsUpdater = self
@@ -95,7 +94,7 @@ class LabViewTableViewController: UITableViewController, UISearchResultsUpdating
     }
     // this is my checkpoint for now
     
-    //Edit LabEditTableTableViewController name
+    // called when returning from add/edit
     @IBAction func unwindFromEdit(unwindSegue: UIStoryboardSegue) {
         guard let source = unwindSegue.source as? LabEditTableTableViewController,
               let service = source.service
@@ -115,7 +114,7 @@ class LabViewTableViewController: UITableViewController, UISearchResultsUpdating
         AppData.saveData()
     }
     
-    //-----------
+    // called when clicking a cell to edit
     @IBSegueAction func editService(_ coder: NSCoder, sender: Any?) -> LabEditTableTableViewController? {
         guard let cell = sender as? UITableViewCell, let indexPath = tableView.indexPath(for: cell) else {
             return nil
@@ -124,9 +123,8 @@ class LabViewTableViewController: UITableViewController, UISearchResultsUpdating
         return LabEditTableTableViewController(coder: coder, service: service)
     }
     
-    
 
-    
+    // configure the cells in the table view
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> LabViewTableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "LabViewCell", for: indexPath) as! LabViewTableViewCell
 
@@ -137,7 +135,7 @@ class LabViewTableViewController: UITableViewController, UISearchResultsUpdating
     }
     
     
-    
+    // for deletion
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
            let  service = displayedServices[indexPath.section]
