@@ -102,7 +102,7 @@ class PatientHospitalSelectTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if selectedIndex == 0{
             if indexPath.section == 1{
-                let cell = tableView.dequeueReusableCell(withIdentifier: "PatientBooking", for: indexPath) as! HomeViewPTTableViewCell
+                let cell = tableView.dequeueReusableCell(withIdentifier: "PatientBooking", for: indexPath) as! HospitalDetailsPrototypeTableViewCell
 
                 cell.TestName.text = tests[indexPath.row].name
                 cell.price.text = "\(tests[indexPath.row].price) BHD"
@@ -110,7 +110,7 @@ class PatientHospitalSelectTableViewController: UITableViewController {
                 guard let img = tests[indexPath.row].photo else{
                     return cell
                 }
-                //cell.img.image = img
+                cell.img.image = img
         
                 return cell
             }
@@ -137,15 +137,17 @@ class PatientHospitalSelectTableViewController: UITableViewController {
                     return cell
                 } else {
                     let cell = tableView.dequeueReusableCell(withIdentifier: "imagecell", for: indexPath) as! imgTableViewCell
-                    cell.img.image = UIImage(named: "AlHilal")
-                    cell.img.frame = CGRect(x: 76, y: 0, width: 201, height: 158)
+                    guard let img = selectedHospital?.photo else {
+                        return cell
+                    }
+                    cell.img.image = img
                     return cell
                 }
             }
 
         } else {
             if indexPath.section == 1{
-                let cell = tableView.dequeueReusableCell(withIdentifier: "PatientBooking", for: indexPath) as! HomeViewPTTableViewCell
+                let cell = tableView.dequeueReusableCell(withIdentifier: "PatientBooking", for: indexPath) as! HospitalDetailsPrototypeTableViewCell
 
                 cell.TestName.text = packages[indexPath.row].name
                 cell.price.text = "\(packages[indexPath.row].price) BHD"
@@ -153,7 +155,7 @@ class PatientHospitalSelectTableViewController: UITableViewController {
                 guard let img = packages[indexPath.row].photo else{
                     return cell
                 }
-                //cell.img.image = img
+                cell.img.image = img
                 
         
                 return cell
@@ -181,8 +183,10 @@ class PatientHospitalSelectTableViewController: UITableViewController {
                     return cell
                 } else {
                     let cell = tableView.dequeueReusableCell(withIdentifier: "imagecell", for: indexPath) as! imgTableViewCell
-                    cell.img.image = UIImage(named: "AlHilal")
-                    cell.img.frame = CGRect(x: 76, y: 0, width: 201, height: 158)
+                    guard let img = selectedHospital?.photo else {
+                        return cell
+                    }
+                    cell.img.image = img
                     return cell
                 }
             }
