@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22155" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="N1E-z0-dmh">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="N1E-z0-dmh">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22131"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -296,6 +296,7 @@
                                     <outlet property="HospitalName" destination="Ona-hD-q8H" id="KCJ-Zh-kMF"/>
                                     <outlet property="location" destination="V3J-Vh-k08" id="JIQ-9A-yzY"/>
                                     <outlet property="openingTime" destination="Jq3-Qw-vBQ" id="hJ9-bW-AGO"/>
+                                    <outlet property="photo" destination="whY-62-Y0P" id="Pzm-qG-IA8"/>
                                     <segue destination="VN1-Il-3Jm" kind="show" id="nCe-d1-ovo"/>
                                 </connections>
                             </tableViewCell>
@@ -568,7 +569,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="VQJ-Bt-x7Z"/>
+        <segue reference="zhV-r1-C5h"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="house.fill" catalog="system" width="128" height="104"/>

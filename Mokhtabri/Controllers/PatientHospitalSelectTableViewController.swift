@@ -6,6 +6,7 @@
 //
 
 import UIKit
+//check line 157 && 114
 
 class PatientHospitalSelectTableViewController: UITableViewController {
     
@@ -14,9 +15,7 @@ class PatientHospitalSelectTableViewController: UITableViewController {
        loadData()
         tableView.reloadData()    }
     
-    func filter(){
 
-    }
     
     @IBOutlet weak var segmentedControl: UISegmentedControl!
     // declare variables
@@ -151,7 +150,10 @@ class PatientHospitalSelectTableViewController: UITableViewController {
                 cell.TestName.text = packages[indexPath.row].name
                 cell.price.text = "\(packages[indexPath.row].price) BHD"
                 cell.hospitalName.text = "\(packages[indexPath.row].forMedicalFacility.name)"
-
+                guard let img = packages[indexPath.row].photo else{
+                    return cell
+                }
+                //cell.img.image = img
                 
         
                 return cell

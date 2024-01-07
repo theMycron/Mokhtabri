@@ -15,15 +15,17 @@ class AppData {
     static var admin: [User] = [User(username: "admin@gmail.com", password: "12345678", userType: .admin)]
     static var facilities: [MedicalFacility] = []
     static var services: [MedicalService] = []
-    static var tests: [Test] = [test1,test2,test3,test5,test6,test7,test8,test9,test10]
-    static var packages: [Package] = [Pack3,Pack4,test4]
+    static var tests: [Test] = []
+    static var sampleTests: [Test] = [test1,test2,test3,test5,test6,test7,test8,test9,test10]
+    static var packages: [Package] = []
+    static var samplePackages: [Package] = [Pack3,Pack4,test4]
     static var bookings: [Booking] = []
     static var categories: [Category] = []
     // with sample data
-    static var patients: [Patient] = [patient1, patient2, pat3]
+    static var patients: [Patient] = []
     static var listOfTests = [test1,test2,test3,test4,test5,test6,Pack3,Pack4]
-    static var hospitals = [alhilal,alsalam,royal]
-    static var labs: [MedicalFacility] = [BML, expMed, gulfLab, manara]
+    static var hospitals = [alhilal,alsalam,royal,middle,awali]
+    static var labs: [MedicalFacility] = [BML, expMed, gulfLab, manara,borg]
     static var listOfBookingsPatient: [Booking] = []
     static var listOfBookingsLab: [Booking] = []
     
@@ -221,13 +223,18 @@ class AppData {
     
     
     
-    static var alhilal = MedicalFacility(name: "ALHilal Hospital", phone: "12345689", city: "East Riffa", website: "Alhilal.com", alwaysOpen: false, type: .hospital, openingTime: DateComponents(calendar: Calendar.current, hour: 9, minute: 0), closingTime: DateComponents(calendar: Calendar.current, hour: 21, minute: 0), username: "alhilal@mokhtabri.com", password: "12345678")
+    static var alhilal = MedicalFacility(name: "Al Hilal Hospital", phone: "17344700", city: "Muharraq", website: "alhilalhealthcare.com", alwaysOpen: true, type: FacilityType.hospital, openingTime: DateComponents(calendar: Calendar.current, hour: 8, minute: 0), closingTime: DateComponents(calendar: Calendar.current, hour: 20, minute: 0), image: URL(string: "https://firebasestorage.googleapis.com:443/v0/b/fir-testing-512eb.appspot.com/o/facilityImages%2Fal_hilal_hospital_muharraq.jpg?alt=media&token=1a2e89e9-f01d-49c7-8ec0-90a4da303cfa"), username: "alhilal@mokhtabri.com", password: "12345678")
     
     
-    static var alsalam = MedicalFacility(name: "Alsalam Hospital", phone: "13101010", city: "Riffa", website: "https://www.alsalam.care", alwaysOpen: true, type: .hospital, openingTime: DateComponents(calendar: Calendar.current, hour: 0, minute: 0), closingTime: DateComponents(calendar: Calendar.current, hour: 0, minute: 0), username: "alsalam@mokhtabri.com", password: "12345678")
+    static var alsalam = MedicalFacility(name: "AlSalam Specialist Hospital", phone: "13101010", city: "Riffa", website: "alsalam.care", alwaysOpen: true, type: FacilityType.hospital, openingTime: DateComponents(calendar: Calendar.current, hour: 9, minute: 0), closingTime: DateComponents(calendar: Calendar.current, hour: 21, minute: 0), image: URL(string: "https://firebasestorage.googleapis.com:443/v0/b/fir-testing-512eb.appspot.com/o/facilityImages%2Falsalam_specialist_hospital_riffa.jpg?alt=media&token=0eb9f54f-c47f-4c40-bf3e-a1361ec7a69f"), username: "alsalam@mokhtabri.com", password: "12345678")
     
-    static var royal = MedicalFacility(name: "Royal Bahrain Hospital", phone: "17246800", city: "Salmaniya", website: "www.royalbarainhospital.com", alwaysOpen: true, type: .hospital, openingTime: DateComponents(calendar: Calendar.current, hour: 0, minute: 0), closingTime: DateComponents(calendar: Calendar.current, hour: 0, minute: 0), username: "royalbh@mokhtabri.com", password: "12345678")
+    static var royal = MedicalFacility(name: "Royal Bahrain Hospital", phone: "17491749", city: "Janabiyah", website: "royalbahrainhospital.com", alwaysOpen: false, type: FacilityType.hospital, openingTime: DateComponents(calendar: Calendar.current, hour: 9, minute: 0), closingTime: DateComponents(calendar: Calendar.current, hour: 21, minute: 0), image: URL(string: "https://firebasestorage.googleapis.com:443/v0/b/fir-testing-512eb.appspot.com/o/facilityImages%2Froyal_bahrain_hospital_janabiyah.jpg?alt=media&token=345a741a-02ad-4add-b03b-f3928554257f"), username: "royalbh@mokhtabri.com", password: "12345678")
+    // new
+    static let middle = MedicalFacility(name: "Middle East Hospital", phone: "17362233", city: "Manama", website: "mehospital.com", alwaysOpen: true, type: FacilityType.hospital, openingTime: DateComponents(calendar: Calendar.current, hour: 9, minute: 0), closingTime: DateComponents(calendar: Calendar.current, hour: 21, minute: 0), image: URL(string: "https://firebasestorage.googleapis.com:443/v0/b/fir-testing-512eb.appspot.com/o/facilityImages%2Fmiddle_east_hospital_manama.jpg?alt=media&token=e0f2f062-9376-4c20-82e7-41fd0335411f"), username: "mehospital@mokhtabri.com", password: "12345678")
+    static let awali = MedicalFacility(name: "Awali Hospital", phone: "17757600", city: "Awali", website: "awalihospital.com", alwaysOpen: true, type: FacilityType.hospital, openingTime: DateComponents(calendar: Calendar.current, hour: 9, minute: 0), closingTime: DateComponents(calendar: Calendar.current, hour: 21, minute: 0), image: URL(string: "https://firebasestorage.googleapis.com:443/v0/b/fir-testing-512eb.appspot.com/o/facilityImages%2Fawali_hospital_awali.jpg?alt=media&token=72106dba-8e4d-4326-b673-042ec640b2af"), username: "awalihp@mokhtabri.com", password: "12345678")
     
+    
+    // tests
     static var test1 = Test(category: "Blood Test", name: "VitaminB12", price: 10, description: "blood test for vitaminb12", instructions: "fasting 8-12 hours prior is mandatory", forMedicalFacility:  alhilal,serviceType: .test, storageLink: "gs://fir-testing-512eb.appspot.com/Vitamin-B12.jpg")
     
     
@@ -263,35 +270,59 @@ class AppData {
     
     // labs declaration
     
-    static var BML = MedicalFacility(name: "Bahrain Medical Laboratory", phone: "17255522", city: "Salmaniya", website: "https://bahrainmedicallab.com/", alwaysOpen: false, type: .lab, openingTime: DateComponents(calendar: Calendar.current, hour: 7, minute: 0), closingTime: DateComponents(calendar: Calendar.current, hour: 21, minute: 0), username: "bhmedlab@mokhtabri.com", password: "12345678")
+    static var BML = MedicalFacility(name: "Bahrain Medical Laboratory", phone: "17255522", city: "Manama", website: "bahrainmedicallab.com", alwaysOpen: false, type: FacilityType.lab, openingTime: DateComponents(calendar: Calendar.current, hour: 7, minute: 30), closingTime: DateComponents(calendar: Calendar.current, hour: 21, minute: 0), image: URL(string: "https://firebasestorage.googleapis.com:443/v0/b/fir-testing-512eb.appspot.com/o/facilityImages%2Fbahrain_medical_laboratory_manama.jpg?alt=media&token=da4dd4ae-a3b1-49c1-b976-2defdc135524"), username: "bhmedlab@mokhtabri.com", password: "12345678")
     
-    static var expMed = MedicalFacility(name: "Express Med Labs", phone: "77298888", city: "Zinj", website: "https://www.expressmedlabs.com/", alwaysOpen: false, type: .lab, openingTime: DateComponents(calendar: Calendar.current, hour: 8, minute: 0), closingTime: DateComponents(calendar: Calendar.current, hour: 20, minute: 0), username: "expressmed@mokhtabri.com", password: "12345678")
+    static var expMed = MedicalFacility(name: "ExpressMed Diagnostics", phone: "77248888", city: "Manama", website: "expressmedlabs.com", alwaysOpen: false, type: FacilityType.lab, openingTime: DateComponents(calendar: Calendar.current, hour: 8, minute: 0), closingTime: DateComponents(calendar: Calendar.current, hour: 20, minute: 0), image: URL(string: "https://firebasestorage.googleapis.com:443/v0/b/fir-testing-512eb.appspot.com/o/facilityImages%2Fexpressmed_diagnostics_manama.jpg?alt=media&token=52327add-e906-47d5-a14e-e3f8d31e4708"), username: "expressmed@mokhtabri.com", password: "12345678")
     
+    // TODO: ADD IMAGE
     static var gulfLab = MedicalFacility(name: "Gulf Medical Laboratories", phone: "17263999", city: "Manama", website: "https://www.gulflab.com/", alwaysOpen: false, type: .lab, openingTime: DateComponents(calendar: Calendar.current, hour: 8, minute: 0), closingTime: DateComponents(calendar: Calendar.current, hour: 20, minute: 0), username: "gulflab@mokhtabri.com", password: "12345678")
     
-    static var manara = MedicalFacility(name: "Manara Medical Laboratories", phone: "17722999", city: "Zinj", website: "https://www.eurofins.com/", alwaysOpen: false, type: .lab, openingTime: DateComponents(calendar: Calendar.current, hour: 8, minute: 0), closingTime: DateComponents(calendar: Calendar.current, hour: 20, minute: 0), username: "manara@mokhtabri.com", password: "12345678")
+    static var manara = MedicalFacility(name: "Manara Medical Laboratories", phone: "17722999", city: "Manama", website: "eurofins.com", alwaysOpen: false, type: FacilityType.lab, openingTime: DateComponents(calendar: Calendar.current, hour: 8, minute: 30), closingTime: DateComponents(calendar: Calendar.current, hour: 20, minute: 30), image: URL(string:  "https://firebasestorage.googleapis.com:443/v0/b/fir-testing-512eb.appspot.com/o/facilityImages%2Fmanara_medical_laboratories_manama.jpg?alt=media&token=2cf7a6fd-3073-4c70-aa09-9330e43d081c"), username: "manara@mokhtabri.com", password: "12345678")
+    
+    // new
+    static let borg = MedicalFacility(name: "Al Borg Diagnostics", phone: "17100088", city: "Manama", website: "alborgdx.com", alwaysOpen: false, type: FacilityType.lab, openingTime: DateComponents(calendar: Calendar.current, hour: 8, minute: 0), closingTime: DateComponents(calendar: Calendar.current, hour: 21, minute: 0), image: URL(string: "https://firebasestorage.googleapis.com:443/v0/b/fir-testing-512eb.appspot.com/o/facilityImages%2Fal_borg_diagnostics_manama.jpg?alt=media&token=b3726451-3ace-4988-92ef-9689eed685be"), username: "alborg@mokhtabri.com", password: "12345678")
     
     
     
     
-    
-    
-    static func load(){
-        if bookings.isEmpty {
+    static func loadSampleData(){
+        //  if bookings.isEmpty {
             bookings = sampleBookings
             listOfBookingsLab = sampleBookings
            listOfBookingsPatient = sampleBookings
           //  services = listOfTests
             
-            facilities = hospitals
-            patients = [patient1]
+            facilities = hospitals + labs
+            tests = sampleTests
+            packages = samplePackages
+            patients = [patient1,patient2,pat3]
             loadServicesImages(){
                 
             }
+            loadHospitalPhotos()
+      //  }
+    }
+    static func loadHospitalPhotos(){
+        let group = DispatchGroup()
+        
+        for f in facilities{
+            group.enter()
+            KingfisherManager.shared.retrieveImage(with: f.imageDownloadURL ?? URL(string: "https://firebasestorage.googleapis.com:443/v0/b/fir-testing-512eb.appspot.com/o/facilityImages%2Fbahrain_medical_laboratory_manama.jpg?alt=media&token=da4dd4ae-a3b1-49c1-b976-2defdc135524")!){
+                result in  
+                switch result {
+                case .success(let value):
+                    f.photo = value.image
+                case .failure(let error):
+                    print("error downloading")
+                    f.photo = nil
+                }
+                group.leave()
+            }
+        }
+        group.notify(queue: .main){
             
         }
     }
-    
     static func loadServicesImages(completion: @escaping () -> Void) {
         var services : [MedicalService] = []
         for s in tests {

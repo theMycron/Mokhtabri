@@ -9,16 +9,18 @@ import UIKit
 
 class PatientHomeTableViewController: UITableViewController,UISearchBarDelegate, UISearchResultsUpdating {
     
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         embedSearch()
-
+        AppData.loadHospitalPhotos()
      //   filterTests()
       //  filterPackages()
         AppData.loadServicesImages() {
             
         }
-        filterLabs()
+        //filterLabs()
         //filterHospital()
     }
     
@@ -51,8 +53,8 @@ class PatientHomeTableViewController: UITableViewController,UISearchBarDelegate,
     //sample data
     var facility:  [MedicalFacility] = AppData.facilities
     var services: [MedicalService] = AppData.services
-    var labs: [MedicalFacility] = AppData.labs
-    var hospitals: [MedicalFacility] = AppData.hospitals
+    var labs: [MedicalFacility] = AppData.facilities.filter{$0.type == FacilityType.lab}
+    var hospitals: [MedicalFacility] = AppData.facilities.filter{$0.type == FacilityType.hospital}
     var tests: [Test] = AppData.tests
     func filterTests() {
         for service in services {
@@ -142,6 +144,11 @@ class PatientHomeTableViewController: UITableViewController,UISearchBarDelegate,
         else if selectedSegmentIndex == 2 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "HospitCell", for: indexPath) as! PatientHospitalViewTableViewCell
             let lab = labs[indexPath.row]
+            guard let img1 = lab.photo else {
+                return cell
+            }
+            cell.photo.image = img1
+            cell.photo.image = img1
             cell.HospitalName.text = lab.name
             cell.location.text = lab.city
             if lab.alwaysOpen == true {
@@ -153,7 +160,9 @@ class PatientHomeTableViewController: UITableViewController,UISearchBarDelegate,
                     return cell
                 }
                 cell.openingTime.text = "From \(hour):00 - \(chour):00"
+
             }
+      
             
             return cell
         } // for packages
@@ -185,8 +194,12 @@ class PatientHomeTableViewController: UITableViewController,UISearchBarDelegate,
                         return cell
                     }
                     cell.openingTime.text = "From \(hour):00 - \(chour):00"
+                    
                 }
-                
+                guard let photo = hospital.photo else {
+                    return cell
+                }
+                cell.photo.image = photo
                 return cell
             } // for tests
             else if indexPath.section == 2 {
@@ -254,6 +267,10 @@ class PatientHomeTableViewController: UITableViewController,UISearchBarDelegate,
                     }
 
                 }
+                guard let photo = lab.photo else {
+                    return cell
+                }
+                cell.photo.image = photo
                 return cell
             }
         }

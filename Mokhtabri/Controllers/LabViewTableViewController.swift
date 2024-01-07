@@ -18,9 +18,9 @@ class LabViewTableViewController: UITableViewController, UISearchResultsUpdating
         super.viewDidLoad()
         embedSearch()
         
-        AppData.loadData()
+        //AppData.loadData()
         
-        displayedServices = AppData.tests.filter{$0.forMedicalFacility == loggedInFacillity} + AppData.packages.filter{$0.forMedicalFacility == loggedInFacillity}
+        displayedServices = AppData.tests.filter{$0.forMedicalFacility.name == loggedInFacillity.name} + AppData.packages.filter{$0.forMedicalFacility.name == loggedInFacillity.name}
         
         tableView.reloadData()
         

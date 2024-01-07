@@ -40,7 +40,7 @@ extension AppData {
         loadServices(fromFile: .tests)
         loadBookings(fromFile: .bookingsLab)
         loadBookings(fromFile: .bookingsPatient)
-        services = []
+        loadSampleData() // only loads if no data was found
         AppData.loadServicesImages() {
             
         }

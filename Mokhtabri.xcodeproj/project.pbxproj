@@ -46,6 +46,7 @@
 		883968A42B2CA090008911FB /* FirebaseAppCheck in Frameworks */ = {isa = PBXBuildFile; productRef = 883968A32B2CA090008911FB /* FirebaseAppCheck */; };
 		883968A72B2CA428008911FB /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 883968A62B2CA428008911FB /* FirebaseAuth */; };
 		8844CE2E2B2F795E009366DF /* RegisterForm1ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8844CE2D2B2F795E009366DF /* RegisterForm1ViewController.swift */; };
+		8D464CC82B49D89F002111D4 /* ChangePasswordTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D464CC72B49D89F002111D4 /* ChangePasswordTableViewController.swift */; };
 		8D8192172B496047006EA015 /* HomeViewPTTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D8192162B496047006EA015 /* HomeViewPTTableViewCell.swift */; };
 		8DE802CB2B2DF11B007328FF /* PatientUpdateProfileTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DE802CA2B2DF11B007328FF /* PatientUpdateProfileTableViewController.swift */; };
 		B137B0EA2B351BB40065260E /* LabEditTableTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B137B0E92B351BB40065260E /* LabEditTableTableViewController.swift */; };
@@ -208,6 +209,7 @@
 		882DEA262B35E2B200E46594 /* NavViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NavViewController.swift; path = Mokhtabri/Storyboards/NavViewController.swift; sourceTree = SOURCE_ROOT; };
 		883968982B2CA03E008911FB /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		8844CE2D2B2F795E009366DF /* RegisterForm1ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterForm1ViewController.swift; sourceTree = "<group>"; };
+		8D464CC72B49D89F002111D4 /* ChangePasswordTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordTableViewController.swift; sourceTree = "<group>"; };
 		8D8192162B496047006EA015 /* HomeViewPTTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewPTTableViewCell.swift; sourceTree = "<group>"; };
 		8DE802CA2B2DF11B007328FF /* PatientUpdateProfileTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientUpdateProfileTableViewController.swift; sourceTree = "<group>"; };
 		B137B0E92B351BB40065260E /* LabEditTableTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabEditTableTableViewController.swift; sourceTree = "<group>"; };
@@ -426,6 +428,7 @@
 				DF17C63F2B341950007BFBF1 /* LabViewTableViewController.swift */,
 				B137B0E92B351BB40065260E /* LabEditTableTableViewController.swift */,
 				DFD20CAA2B415915009A7048 /* LabSelectTestsTableViewController.swift */,
+				8D464CC72B49D89F002111D4 /* ChangePasswordTableViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -691,6 +694,7 @@
 				DF2F1F7D2B395EB600C97E40 /* LabViewTableViewCell.swift in Sources */,
 				DFD20CAB2B415915009A7048 /* LabSelectTestsTableViewController.swift in Sources */,
 				D6FD0EF32B31AF4A00BBCBDC /* PatientHomeTableViewController.swift in Sources */,
+				8D464CC82B49D89F002111D4 /* ChangePasswordTableViewController.swift in Sources */,
 				44214DE02B26CA4D000DAA0A /* LabBookingTableViewCell.swift in Sources */,
 				446C06742B1C92E3006A6A5E /* Patient.swift in Sources */,
 				D6FD0EFB2B31B7E300BBCBDC /* PatientViewInfoTableViewCell.swift in Sources */,

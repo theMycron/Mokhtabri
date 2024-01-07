@@ -36,6 +36,7 @@ class LabEditTableTableViewController: UITableViewController, UIAdaptivePresenta
     
     var service: MedicalService?
     var hasChanges: Bool = false
+    var listOfTests: [Test] = []
     
     init?(coder: NSCoder, service: MedicalService?) {
         self.service = service
@@ -77,9 +78,19 @@ class LabEditTableTableViewController: UITableViewController, UIAdaptivePresenta
         imgDisplay.image = img
      
     }
+    @IBAction func unwindFromSelect(unwindSegue: UIStoryboardSegue){
+        guard let source = unwindSegue.source as? LabSelectTestsTableViewController
+              
+        else {return}
+        let selectedTests: [Test] = source.selectedTests
+        listOfTests = selectedTests
+    }
     
+    @IBSegueAction func selectTestSegue(_ coder: NSCoder) -> LabSelectTestsTableViewController? {
+        var package: Package = service as! Package
+        return LabSelectTestsTableViewController(coder: coder, package: package)
+    }
     
-
 
     
     @IBAction func segmetedSelect(_ sender: UISegmentedControl) {
@@ -158,7 +169,7 @@ class LabEditTableTableViewController: UITableViewController, UIAdaptivePresenta
             service = Test(category: category!,name: name ?? "", price: price ?? 0.0 , description: description ?? "", instructions: instructions ?? "", forMedicalFacility: AppData.loggedInUser as! MedicalFacility, serviceType : selectedServiceType!, storageLink: "gs://fir-testing-512eb.appspot.com/testImages/immuno.jpeg" )
             // TODO: change service to logged in service
         } else if (selectedServiceType == .package) {
-            service = Package(expiryDate: expiryDateComponents, tests: [],name: name ?? "", price: price ?? 0.0 , description: description ?? "", instructions: instructions ?? "", forMedicalFacility: AppData.loggedInUser as! MedicalFacility, serviceType : selectedServiceType!, storageLink: "gs://fir-testing-512eb.appspot.com/testImages/immuno.jpeg" )
+            service = Package(expiryDate: expiryDateComponents, tests: listOfTests,name: name ?? "", price: price ?? 0.0 , description: description ?? "", instructions: instructions ?? "", forMedicalFacility: AppData.loggedInUser as! MedicalFacility, serviceType : selectedServiceType!, storageLink: "gs://fir-testing-512eb.appspot.com/testImages/immuno.jpeg" )
             _=uploadImageToFirebase()
         }
         
