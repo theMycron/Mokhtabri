@@ -1,4 +1,4 @@
-<img width="420" alt="image" src="https://github.com/theMycron/Mokhtabri/assets/134844972/a55d825f-0c0e-40ba-8586-358e0d9632fb"># Mokhtabri
+# Mokhtabri
 iOS app that allows users to find hospitals or labs and book packages online.
 
 This app was made by:
@@ -15,6 +15,8 @@ The project was designed to run on iPhone 14 Pro and iPad Pro 12.9-inch.
 Sample data will be loaded if no AppData was found. The sample data includes a number of patients, bookings, hospitals, and labs, with tests for some facilities and some packages. The sample packages have some inaccurate data (the tests listed in the image are different from the tests stored for the package) because of time constraints, but the sample data as a whole should resemble real-world usage of the app.
 
 The KingFisher library was used in this project to support loading and caching images into local storage.
+Firebase Storage was used for storing facility and service images.
+Firebase Auth was used for authenticating user emails and passwords.
 
 ## Login Credentials
 - Admin
@@ -28,6 +30,12 @@ The KingFisher library was used in this project to support loading and caching i
    - Password: 12345678
 - Sample Patient (Noora)
    - Email: nooraw376@gmail.com
+   - Password: 12345678
+- Sample Patient (Fatema)
+   - Email: fateman376@gmail.com
+   - Password: 12345678
+- Sample Patient (Fatema)
+   - Email: hamoodhaboob@gmail.com
    - Password: 12345678
 
 
@@ -51,7 +59,8 @@ The following is a list of developers and their features, along with any changes
 - The category now is a textbox
 - The edit page now has a segmented control to change between test and package
 ## Fatema Naser
-### View labs / tests (including Search, Sort, Filter)  
+### View labs / tests (including Search, Sort, Filter)
+- Added sort by price
 ### Settings Page
 
 ## Maryam Aleskafi
