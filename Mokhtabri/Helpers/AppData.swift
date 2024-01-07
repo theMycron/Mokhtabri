@@ -286,29 +286,33 @@ class AppData {
     
     
     static func loadSampleData(){
-        //  if bookings.isEmpty {
-            bookings = sampleBookings
-            listOfBookingsLab = sampleBookings
-           listOfBookingsPatient = sampleBookings
-          //  services = listOfTests
+        // ensure that no data is already present
+        guard bookings.isEmpty,
+              facilities.isEmpty,
+              patients.isEmpty,
+              tests.isEmpty,
+              packages.isEmpty
+        else {return}
+        listOfBookingsLab = sampleBookings
+        listOfBookingsPatient = sampleBookings
+        
+        facilities = hospitals + labs
+        bookings = sampleBookings
+        tests = sampleTests
+        packages = samplePackages
+        patients = [patient1,patient2,pat3]
+        loadServicesImages(){
             
-            facilities = hospitals + labs
-            tests = sampleTests
-            packages = samplePackages
-            patients = [patient1,patient2,pat3]
-            loadServicesImages(){
-                
-            }
-            loadHospitalPhotos()
-      //  }
+        }
+        loadHospitalPhotos()
+        
     }
     static func loadHospitalPhotos(){
         let group = DispatchGroup()
         
         for f in facilities{
             group.enter()
-            KingfisherManager.shared.retrieveImage(with: f.imageDownloadURL ?? URL(string: "https://firebasestorage.googleapis.com:443/v0/b/fir-testing-512eb.appspot.com/o/facilityImages%2Fbahrain_medical_laboratory_manama.jpg?alt=media&token=da4dd4ae-a3b1-49c1-b976-2defdc135524")!){
-                result in  
+            KingfisherManager.shared.retrieveImage(with: f.imageDownloadURL ?? URL(string: "https://firebasestorage.googleapis.com/v0/b/fir-testing-512eb.appspot.com/o/testImages%2F504276.png?alt=media&token=cb30478e-345b-4de7-b2bd-aecdb7e7765d")!){result in
                 switch result {
                 case .success(let value):
                     f.photo = value.image

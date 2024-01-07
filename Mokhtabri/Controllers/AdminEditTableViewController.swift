@@ -9,6 +9,7 @@ import UIKit
 import FirebaseStorage
 import Kingfisher
 import FirebaseAuth
+import Firebase
 
 class AdminEditTableViewController: UITableViewController, UIImagePickerControllerDelegate & UINavigationControllerDelegate {
 
@@ -227,16 +228,26 @@ class AdminEditTableViewController: UITableViewController, UIImagePickerControll
             if (password != facility.password) {
                 currentUser?.updatePassword(to: password) {error in
                     if error != nil {
-                        print("Error while updating user email: \(String(describing: error))")
+                        print("Error while updating user password: \(String(describing: error))")
                     }
                 }
             }
+            
             // update email
-            // TODO: reauthenticate first
             if username != currentUser?.email {
-                currentUser?.updateEmail(to: username) {error in
+                let credentials = EmailAuthProvider.credential(withEmail: facility.username, password: facility.password)
+                currentUser?.reauthenticate(with: credentials) {(result,error)  in
                     if error != nil {
-                        print("Error while updating user email: \(String(describing: error))")
+                        print("Error while reauthenticating user: \(String(describing: error))")
+                    } else {
+                        if result != nil {
+                            // this sends an email verification to the user to confirm updating the email.
+                            currentUser?.sendEmailVerification(beforeUpdatingEmail: username) {error in
+                                if error != nil {
+                                    print("Error while updating user email: \(String(describing: error))")
+                                }
+                            }
+                        }
                     }
                 }
             }
