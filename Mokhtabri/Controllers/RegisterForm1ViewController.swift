@@ -41,13 +41,7 @@
         
         @IBOutlet weak var genderSegmentedControl: UISegmentedControl!
         @IBOutlet weak var datePicker: UIDatePicker!
-        
-        //declare user defaults
-        let defaults = UserDefaults.standard
-        
-        
-        
-      
+   
 
         func showInvalidEmailAlert() {
             let alertController = UIAlertController(title: "Invalid Email Format",
@@ -221,18 +215,13 @@
                     
                     //if user is not created, display the error.
                     print("Error \(String(describing: error?.localizedDescription))")
-                    //set the user as false inside user defaults
-                    self.defaults.set(false, forKey: "Logged In")
+                   
                    
                     
                     return
 
                 }
                 
-                
-                
-                //set the user as logged in inside user defaults
-                self.defaults.set(true, forKey: "Logged In")
                 
                 //redirect
                 let mainSB = UIStoryboard(name: "Main", bundle: nil)
@@ -261,10 +250,6 @@
            
            let dateComponents = datePickerToDateComponents(datePicker)
 
-
-            //let def = UserDefaults.standard
-            //defaults.set(selectedGender, forKey: "Selected Gender")
-           
            // Create a patient user object
            let patientUser = Patient(firstName: firstname.text!, lastName:lastname.text!, cpr: cpr.text!, gender: selectedGender, dateOfBirth: dateComponents, username: email.text!, password: password.text!)
                
