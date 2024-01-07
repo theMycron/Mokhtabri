@@ -81,8 +81,8 @@ class LabEditTableTableViewController: UITableViewController, UIAdaptivePresenta
     // when returning from select tests
     @IBAction func unwindFromSelect(unwindSegue: UIStoryboardSegue){
         guard let source = unwindSegue.source as? LabSelectTestsTableViewController
-              
         else {return}
+        madeChanges()
         let selectedTests: [Test] = source.selectedTests
         listOfTests = selectedTests
     }
