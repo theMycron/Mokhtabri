@@ -192,6 +192,7 @@ class AdminEditTableViewController: UITableViewController, UIImagePickerControll
         }
         // check if email already in use
         if let usedEmail = AppData.getUserFromEmail(email: username)?.username  {
+            // dont mind if it is the same as the facility's current email
             if (usedEmail != facility?.username) {
                 displayError(title: "Email In Use", message: "The email you entered is being used by another user. Please try a different email.")
                 return false
@@ -220,10 +221,30 @@ class AdminEditTableViewController: UITableViewController, UIImagePickerControll
         // if editing an existing facility, save id to replace it later
         if let facility = facility {
             oldId = facility.uuid
+            
+            // update password if it was changed
+            let currentUser = Auth.auth().currentUser
+            if (password != facility.password) {
+                currentUser?.updatePassword(to: password) {error in
+                    if error != nil {
+                        print("Error while updating user email: \(String(describing: error))")
+                    }
+                }
+            }
+            // update email
+            // TODO: reauthenticate first
+            if username != currentUser?.email {
+                currentUser?.updateEmail(to: username) {error in
+                    if error != nil {
+                        print("Error while updating user email: \(String(describing: error))")
+                    }
+                }
+            }
         }
         facility = MedicalFacility(name: name, phone: phone, city: city, website: website, alwaysOpen: alwaysopen, type: type, openingTime: openingTime, closingTime: closingTime, image: facility?.imageDownloadURL, username: username, password: password)
         if let oldId = oldId {
             facility!.uuid = oldId // replace new uuid with old one if editing to ensure they are the same facility
+            
         } else {
             //if this is a new facility, add to firebase
             Auth.auth().createUser(withEmail: username, password: password) { (authResult, error) in

@@ -169,12 +169,12 @@ class AdminViewTableViewController: UITableViewController, UISearchResultsUpdati
     // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
+            let facility = displayedFacilities[indexPath.section]
             tableView.beginUpdates()
             // Delete the row from the data source
             displayedFacilities.remove(at: indexPath.section)
             tableView.deleteSections([indexPath.section], with: .fade)
             tableView.endUpdates()
-            let facility = displayedFacilities[indexPath.section]
             _=AppData.deleteUser(user: facility)
             AppData.saveData()
         }
