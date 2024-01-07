@@ -286,7 +286,7 @@ class AppData {
     
     
     static func loadSampleData(){
-        if bookings.isEmpty {
+        //  if bookings.isEmpty {
             bookings = sampleBookings
             listOfBookingsLab = sampleBookings
            listOfBookingsPatient = sampleBookings
@@ -299,10 +299,30 @@ class AppData {
             loadServicesImages(){
                 
             }
+            loadHospitalPhotos()
+      //  }
+    }
+    static func loadHospitalPhotos(){
+        let group = DispatchGroup()
+        
+        for f in facilities{
+            group.enter()
+            KingfisherManager.shared.retrieveImage(with: f.imageDownloadURL ?? URL(string: "https://firebasestorage.googleapis.com:443/v0/b/fir-testing-512eb.appspot.com/o/facilityImages%2Fbahrain_medical_laboratory_manama.jpg?alt=media&token=da4dd4ae-a3b1-49c1-b976-2defdc135524")!){
+                result in  
+                switch result {
+                case .success(let value):
+                    f.photo = value.image
+                case .failure(let error):
+                    print("error downloading")
+                    f.photo = nil
+                }
+                group.leave()
+            }
+        }
+        group.notify(queue: .main){
             
         }
     }
-    
     static func loadServicesImages(completion: @escaping () -> Void) {
         var services : [MedicalService] = []
         for s in tests {
