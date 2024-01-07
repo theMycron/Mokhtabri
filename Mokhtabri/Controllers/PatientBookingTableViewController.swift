@@ -187,7 +187,9 @@ class PatientBookingTableViewController: UITableViewController, UISearchResultsU
                 }
                 AppData.saveData()
                 self.categorizeBookings()
+                tableView.beginUpdates()
                 tableView.deleteRows(at: [indexPath], with: .fade)
+                tableView.endUpdates()
             }
             }
         }
