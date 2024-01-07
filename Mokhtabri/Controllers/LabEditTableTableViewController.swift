@@ -55,6 +55,11 @@ class LabEditTableTableViewController: UITableViewController, UIAdaptivePresenta
         txtDescription.text = description
         txtDescription.text = service.serviceDescription
         txtInstruction.text = service.instructions
+        let s1 = AppData.loadPicture(medic: service)
+        guard let img = s1.photo else {
+            return
+        }
+        imgDisplay.image = img
         
         if service is Test{
             let test: Test = service as! Test
@@ -63,19 +68,21 @@ class LabEditTableTableViewController: UITableViewController, UIAdaptivePresenta
         }
         if service is Package{
             let package: Package = service as! Package
+//            print(package.storageLink)
+           
+//             guard let img = s1.photo else {
+//                 return
+//             }
+//             imgDisplay.image = img
             if let expiryDateComponents = package.expiryDate {
                let date = Calendar.current.date(from: expiryDateComponents)
                 DateExpiry.date = date ?? date!
-             //   getImageFromFirebase()
+             getImageFromFirebase()
                 segmentedControl.selectedSegmentIndex = 1
             }
             
         }
-        
-        guard let img = service.photo else {
-            return
-        }
-        imgDisplay.image = img
+
      
     }
     @IBAction func unwindFromSelect(unwindSegue: UIStoryboardSegue){
@@ -87,7 +94,7 @@ class LabEditTableTableViewController: UITableViewController, UIAdaptivePresenta
     }
     
     @IBSegueAction func selectTestSegue(_ coder: NSCoder) -> LabSelectTestsTableViewController? {
-        var package: Package = service as! Package
+        let package: Package? = service as? Package
         return LabSelectTestsTableViewController(coder: coder, package: package)
     }
     
@@ -270,12 +277,11 @@ class LabEditTableTableViewController: UITableViewController, UIAdaptivePresenta
                    case .success(let url):
                        if (self.service is Package) {
                            let package = self.service as! Package
-                           package.imageDownloadURL = url
+                           print("url")
+                           package.storageLink = url
+                    
                            // update service in appdata
                            AppData.editService(service: package)
-                           AppData.loadServicesImages {
-                               
-                           }
                        }
                    }
                 })

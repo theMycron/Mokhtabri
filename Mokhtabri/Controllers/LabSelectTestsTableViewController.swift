@@ -100,14 +100,12 @@ class LabSelectTestsTableViewController: UITableViewController, UIAdaptivePresen
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard package != nil else {return}
         selectedRows.insert(indexPath.row)
         selectedTests.append(displayedTests[indexPath.row])
         
     }
     
     override func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
-        guard package != nil else {return}
         selectedRows.remove(indexPath.row)
         selectedTests.remove(at: selectedTests.firstIndex(of: displayedTests[indexPath.row])!)
     }

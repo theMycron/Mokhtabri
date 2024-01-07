@@ -123,13 +123,21 @@ class AppData {
                 tests.remove(at: serviceIndex)
                 tests.insert(test, at: serviceIndex)
                 saveData()
+                loadServicesImages(){
+                    
+                }
             }
         } else if (service is Package) {
             let package = service as! Package
             if let serviceIndex = packages.firstIndex(of: package) {
+            //    print(service.storageLink)
+                
                 packages.remove(at: serviceIndex)
                 packages.insert(package, at: serviceIndex)
                 saveData()
+                loadServicesImages(){
+                    
+                }
             }
         }
     }
@@ -301,6 +309,27 @@ class AppData {
             }
             loadHospitalPhotos()
       //  }
+    }
+    
+    static func loadPicture(medic: MedicalService) -> MedicalService{
+        let group = DispatchGroup()
+        group.enter()
+        KingfisherManager.shared.retrieveImage(with: medic.storageLink!) { result in
+            switch result {
+            case .success(let value):
+                medic.photo = value.image
+            
+            case .failure(let error):
+                print("Error downloading image: \(error.localizedDescription)")
+                medic.photo = nil
+            }
+            group.leave()
+            
+        }
+        group.notify(queue: .main){
+            
+        }
+        return medic
     }
     static func loadHospitalPhotos(){
         let group = DispatchGroup()
