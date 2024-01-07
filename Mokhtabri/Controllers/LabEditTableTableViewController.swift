@@ -66,7 +66,7 @@ class LabEditTableTableViewController: UITableViewController, UIAdaptivePresenta
             if let expiryDateComponents = package.expiryDate {
                let date = Calendar.current.date(from: expiryDateComponents)
                 DateExpiry.date = date ?? date!
-                getImageFromFirebase()
+             //   getImageFromFirebase()
                 segmentedControl.selectedSegmentIndex = 1
             }
             
@@ -273,6 +273,9 @@ class LabEditTableTableViewController: UITableViewController, UIAdaptivePresenta
                            package.imageDownloadURL = url
                            // update service in appdata
                            AppData.editService(service: package)
+                           AppData.loadServicesImages {
+                               
+                           }
                        }
                    }
                 })
@@ -311,6 +314,7 @@ class LabEditTableTableViewController: UITableViewController, UIAdaptivePresenta
         alert.addAction(libraryAction)
         alert.addAction(cancelAction)
         self.present(alert, animated: true)
+        
     }
     
     func imagePicker(sourceType: UIImagePickerController.SourceType) -> UIImagePickerController {

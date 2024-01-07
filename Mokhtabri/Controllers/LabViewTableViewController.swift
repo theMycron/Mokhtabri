@@ -142,11 +142,12 @@ class LabViewTableViewController: UITableViewController, UISearchResultsUpdating
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             tableView.beginUpdates()
+            let service = displayedServices[indexPath.section]
             // Delete the row from the data source
             displayedServices.remove(at: indexPath.section)
             tableView.deleteSections([indexPath.section], with: .fade)
             tableView.endUpdates()
-            let service = displayedServices[indexPath.section]
+
             _=AppData.deleteService(service: service)
             AppData.saveData()
         }
