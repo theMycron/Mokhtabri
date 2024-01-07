@@ -8,6 +8,9 @@
 import UIKit
 
 class SettingsTableViewController: UITableViewController{
+    var loggedInUser: User? = AppData.loggedInUser
+    var patientLog: Patient?
+    
     // declaration
     
     @IBOutlet weak var lblProfile: UILabel!
@@ -25,8 +28,15 @@ class SettingsTableViewController: UITableViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        FindPatient()
     }
 
+    func FindPatient() {
+        guard let loggedInUser = loggedInUser else {
+            return
+        }
+        patientLog = AppData.patients.first{$0.username == loggedInUser.username}
+    }
     // MARK: - Table view data source
     
     override func numberOfSections(in tableView: UITableView) -> Int {
