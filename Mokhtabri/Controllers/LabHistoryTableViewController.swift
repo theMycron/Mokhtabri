@@ -271,6 +271,7 @@ class LabHistoryTableViewController: UITableViewController, UISearchBarDelegate,
                         
                         AppData.listOfBookingsPatient[index1].status = .Cancelled}
                 }
+                AppData.saveData()
                 self.categorizeBookings()
                 tableView.deleteRows(at: [indexPath], with: .fade)
             }

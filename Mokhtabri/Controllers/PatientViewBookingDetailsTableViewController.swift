@@ -89,15 +89,34 @@ class PatientViewBookingDetailsTableViewController: UITableViewController {
     
     @IBAction func cancelClicked(_ sender: Any) {
         confirmation(title: "Confirm Cancellation", message: "Do you want to confirm the cancellation of your \(booking?.ofMedicalService.name ?? "") booking?"){
-            self.booking?.status = .Cancelled
+            guard let booking = self.booking else{
+                return
+            }
+            booking.status = .Cancelled
             for bookin in AppData.bookings {
                 if bookin.id == self.booking?.id{
                     bookin.status = .Cancelled
                 }
             }
             self.checkBtn()
-            self.status.text = "\(self.booking?.status ?? .Cancelled)"
+            self.status.text = "\(booking.status)"
+            
+            for bookin in AppData.listOfBookingsLab{
+                if bookin.id == booking.id{
+                    bookin.status = .Cancelled
+                }
+            }
+            
+            for bookin in AppData.listOfBookingsPatient{
+                if bookin.id == booking.id{
+                    bookin.status = .Cancelled
+                }
+            }
+            AppData.saveData()
         }
+        
+
+    
     }
     
     func checkBtn(){

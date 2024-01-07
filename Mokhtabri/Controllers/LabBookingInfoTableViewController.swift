@@ -145,6 +145,7 @@ class LabBookingInfoTableViewController: UITableViewController {
         if let index = AppData.listOfBookingsPatient.firstIndex(where: { $0.id == cbooking.id }) {
             AppData.listOfBookingsPatient[index].status = .Completed
         }
+        AppData.saveData()
     }
 
     func updateStatus2() {
@@ -164,6 +165,7 @@ class LabBookingInfoTableViewController: UITableViewController {
         if let index = AppData.listOfBookingsPatient.firstIndex(where: { $0.id == cbooking.id }) {
             AppData.listOfBookingsPatient[index].status = .Cancelled
         }
+        AppData.saveData()
     }
     
     

@@ -414,6 +414,7 @@
 			isa = PBXGroup;
 			children = (
 				882DEA262B35E2B200E46594 /* NavViewController.swift */,
+				F2239F3C2B310D0900D38282 /* PatientBookTableViewController.swift */,
 				8DE802CA2B2DF11B007328FF /* PatientUpdateProfileTableViewController.swift */,
 				F2F60A1D2B271CD0005B74C6 /* LabBookingInfoTableViewController.swift */,
 				F2F60A1B2B27186A005B74C6 /* SettingsTableViewController.swift */,
@@ -425,7 +426,6 @@
 				F23FB2192B2F2BF300B3F5E2 /* PatientBookingTableViewController.swift */,
 				F23FB21D2B2F374200B3F5E2 /* PatientViewBookingDetailsTableViewController.swift */,
 				8844CE2D2B2F795E009366DF /* RegisterForm1ViewController.swift */,
-				F2239F3C2B310D0900D38282 /* PatientBookTableViewController.swift */,
 				D6FD0EF22B31AF4A00BBCBDC /* PatientHomeTableViewController.swift */,
 				D6FD0EF42B31AFA500BBCBDC /* PatientHospitalSelectTableViewController.swift */,
 				DF17C63F2B341950007BFBF1 /* LabViewTableViewController.swift */,
