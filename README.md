@@ -59,10 +59,11 @@ The following is a list of developers and their features, along with any changes
 - The category now is a textbox
 - The edit page now has a segmented control to change between test and package
 ## Fatema Naser
-### View labs / tests (including Search, Sort, Filter)
-- Added sort by price
-### Settings Page
-
+### Patient Home 
+- the way the data is arranged in cells changed, added only relevant data to the cell.
+### Patient settings 
+- Changed fields that can be updated
+- Added few extra alerts for the validation of data changed ( passwords and profile data)
 ## Maryam Aleskafi
 
 ### Login (All Users)
