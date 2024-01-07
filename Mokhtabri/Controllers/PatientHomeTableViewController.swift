@@ -9,7 +9,12 @@ import UIKit
 
 class PatientHomeTableViewController: UITableViewController,UISearchBarDelegate, UISearchResultsUpdating {
     
-    
+    // Property to keep track of the selected segment index
+    var selectedSegmentIndex: Int = 0 {
+        didSet {
+            tableView.reloadData()
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -18,21 +23,24 @@ class PatientHomeTableViewController: UITableViewController,UISearchBarDelegate,
         AppData.loadServicesImages() {
             
         }
+        
+        // declaring a sort button and calling the choosing the sort identifier when button is clicked
         let sortButton = UIBarButtonItem(title: "Sort", style: .plain, target: self, action: #selector(showSortOptions))
         self.navigationItem.rightBarButtonItem = sortButton
     }
     
     @objc func showSortOptions() {
+        
         let alert = UIAlertController(title: "Sort Options", message: "Select sort order", preferredStyle: .actionSheet)
         
-        // Option for no sorting
+        // None option
         alert.addAction(UIAlertAction(title: "None", style: .default, handler: { (action) in
-            // Perform no sorting, reload the original data
+            // reloads the original data
             self.reCategorize()
             self.tableView.reloadData()
         }))
         
-        // Option for alphabetical sorting
+        // A - Z
         alert.addAction(UIAlertAction(title: "A - Z", style: .default, handler: { (action) in
             // Sort the data alphabetically
             self.sortDataAlphabetically()
@@ -40,7 +48,7 @@ class PatientHomeTableViewController: UITableViewController,UISearchBarDelegate,
         }))
         
         // Option for canceling the action sheet
-        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        alert.addAction(UIAlertAction(title: "Done", style: .cancel, handler: nil))
         
         // For the ipad
         if let popoverController = alert.popoverPresentationController {
@@ -55,13 +63,17 @@ class PatientHomeTableViewController: UITableViewController,UISearchBarDelegate,
     func sortDataAlphabetically() {
         // Add your sorting logic here based on the selectedSegmentIndex
         switch selectedSegmentIndex {
-        case 0: // Sort hospitals
+        // Sort hospitals
+        case 0:
             hospitals.sort(by: { $0.name < $1.name })
-        case 1: // Sort labs
+        // Sort labs
+        case 1:
             labs.sort(by: { $0.name < $1.name })
-        case 2: // Sort tests
+        // Sort tests
+        case 2:
             tests.sort(by: { $0.name < $1.name })
-        case 3: // Sort packages
+            // Sort packages
+        case 3:
             packages.sort(by: { $0.name < $1.name })
         default:
             break
@@ -97,7 +109,6 @@ class PatientHomeTableViewController: UITableViewController,UISearchBarDelegate,
                 $0.name.lowercased().contains(term) || $0.forMedicalFacility.name.lowercased().contains(term)}
             case 4: packages = packages.filter{$0.name.lowercased().contains(term) || $0.forMedicalFacility.name.lowercased().contains(term)}
                 
-                
             default: break
             }
             }
@@ -106,7 +117,7 @@ class PatientHomeTableViewController: UITableViewController,UISearchBarDelegate,
         }
     
     func reCategorize(){
-         labs = AppData.facilities.filter{$0.type == FacilityType.lab}
+        labs = AppData.facilities.filter{$0.type == FacilityType.lab}
         hospitals = AppData.facilities.filter{$0.type == FacilityType.hospital}
         tests = AppData.tests
         packages = AppData.packages
@@ -119,8 +130,7 @@ class PatientHomeTableViewController: UITableViewController,UISearchBarDelegate,
     
     
     @IBOutlet weak var Filter2: UISegmentedControl!    
-    // declaring elements
-    
+
     // search bar
     fileprivate func embedSearch(){
         navigationItem.searchController = UISearchController()
@@ -183,16 +193,26 @@ class PatientHomeTableViewController: UITableViewController,UISearchBarDelegate,
         }
     }
 
+    // number of rows
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        // hospital segment
         if Filter2.selectedSegmentIndex == 1 {
             return hospitals.count
-        } else if Filter2.selectedSegmentIndex == 2 {
+        } 
+        // labs segment
+        else if Filter2.selectedSegmentIndex == 2 {
             return labs.count
-        } else if Filter2.selectedSegmentIndex == 3 {
+        } 
+        // tests segment
+        else if Filter2.selectedSegmentIndex == 3 {
             return tests.count
-        } else if Filter2.selectedSegmentIndex == 4 {
+        }
+        // packages segment
+        else if Filter2.selectedSegmentIndex == 4 {
             return packages.count
-        }else {
+        }
+        // all segment
+        else {
             if section == 0 {
                 return hospitals.count
             } else if section == 1 {
@@ -247,7 +267,8 @@ class PatientHomeTableViewController: UITableViewController,UISearchBarDelegate,
       
             
             return cell
-        } // for packages
+        } 
+        // for packages
         else if selectedSegmentIndex == 4 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "PatientBooking", for: indexPath) as! HomeViewPTTableViewCell
             
@@ -260,7 +281,9 @@ class PatientHomeTableViewController: UITableViewController,UISearchBarDelegate,
             }
             cell.img.image = img
             return cell
-        } else {
+        } 
+        // for ALL
+        else {
             if indexPath.section == 0 {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "HospitCell", for: indexPath) as! PatientHospitalViewTableViewCell
                 
@@ -325,9 +348,9 @@ class PatientHomeTableViewController: UITableViewController,UISearchBarDelegate,
                         return cell
                     }
                     let formatter = DateFormatter()
-                    formatter.dateFormat = "HH:mm" // 24-hour format
+                    // 24-hour format
+                    formatter.dateFormat = "HH:mm"
 
-                    // Assuming 'hour', 'min', 'chour', and 'cmin' are integers
                     let calendar = Calendar.current
 
                     // Create opening time Date
@@ -359,43 +382,40 @@ class PatientHomeTableViewController: UITableViewController,UISearchBarDelegate,
     
     }
     
+    // preparing fo the segue (moving data)
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-
         
-        
-        
-        if let destination = segue.destination as?
-            PatientHospitalSelectTableViewController, let selectedRow = tableView.indexPathForSelectedRow {
-
-            if Filter2.selectedSegmentIndex == 0 {
-                if selectedRow.section == 0 {
-                    destination.selectedHospital = hospitals[selectedRow.row]
-               } else {
-                   destination.selectedHospital = labs[selectedRow.row]
-               }
-            } else if Filter2.selectedSegmentIndex == 1 {
-                destination.selectedHospital = hospitals[selectedRow.row]
-            } else {
-                destination.selectedHospital = labs[selectedRow.row]
-            } 
-        } else if let destination = segue.destination as? PatientBookTableViewController, let selected = tableView.indexPathForSelectedRow {
-            if Filter2.selectedSegmentIndex == 0 {
-                 if selected.section == 2 {
-                    destination.sampleTest = tests[selected.row]
-                } else {
-                    destination.sampleTest = packages[selected.row]
-                }
-
-            } else if Filter2.selectedSegmentIndex == 3 {
-                destination.sampleTest = tests[selected.row]
-            }
-            else {
-                destination.sampleTest = packages[selected.row]
-            }
+        // Handles when hospital/lab is selected
+        if let destination = segue.destination as? PatientHospitalSelectTableViewController,
+           let selectedRow = tableView.indexPathForSelectedRow {
             
+            // Checks the selected filter and passes the relevant facility
+            switch Filter2.selectedSegmentIndex {
+            // for All
+            case 0:
+                destination.selectedHospital = (selectedRow.section == 0) ? hospitals[selectedRow.row] : labs[selectedRow.row]
+            // for hospitals
+            case 1:
+                destination.selectedHospital = hospitals[selectedRow.row]
+            // for labs
+            default:
+                destination.selectedHospital = labs[selectedRow.row]
+            }
+        }
+        // for test or package
+        else if let destination = segue.destination as? PatientBookTableViewController,
+                 let selected = tableView.indexPathForSelectedRow {
+            
+            // Takes along the relevant tests/packages
+            if Filter2.selectedSegmentIndex == 0 && selected.section == 2 {
+                destination.sampleTest = tests[selected.row]
+            } else {
+                destination.sampleTest = (Filter2.selectedSegmentIndex == 3) ? tests[selected.row] : packages[selected.row]
+            }
         }
     }
-    
+
+    // titles for sections
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         if Filter2.selectedSegmentIndex == 0 {
             if section == 0 {
@@ -416,13 +436,6 @@ class PatientHomeTableViewController: UITableViewController,UISearchBarDelegate,
 
     }
     
-    // Property to keep track of the selected segment index
-    var selectedSegmentIndex: Int = 0 {
-        didSet {
-            tableView.reloadData()
-        }
-    }
-
     @IBAction func segmentedValueChanged(_ sender: UISegmentedControl) {
         switch sender.selectedSegmentIndex {
         case 0:
