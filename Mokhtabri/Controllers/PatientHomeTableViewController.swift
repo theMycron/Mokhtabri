@@ -15,45 +15,68 @@ class PatientHomeTableViewController: UITableViewController,UISearchBarDelegate,
         super.viewDidLoad()
         embedSearch()
         AppData.loadHospitalPhotos()
-     //   filterTests()
-      //  filterPackages()
         AppData.loadServicesImages() {
             
         }
-        //filterLabs()
-        //filterHospital()
+        let sortButton = UIBarButtonItem(title: "Sort", style: .plain, target: self, action: #selector(showSortOptions))
+        self.navigationItem.rightBarButtonItem = sortButton
     }
     
-  /*  guard let term = searchController.searchBar.text?.lowercased() else {
-        reloadOriginalData()
-        return
-    }
-    if term.isEmpty {
-        reloadOriginalData()
-    } else {
-        switch selectedSegmentIndex {
-        case 0:
-            activeBookings = activeBookings.filter{
-                $0.forPatient.name.lowercased().contains(term) || $0.ofMedicalService.name.lowercased().contains(term)
-            }
-            
-        case 1:                 completedBookings = completedBookings.filter{
-            $0.forPatient.name.lowercased().contains(term) || $0.ofMedicalService.name.lowercased().contains(term)
+    @objc func showSortOptions() {
+        let alert = UIAlertController(title: "Sort Options", message: "Select sort order", preferredStyle: .actionSheet)
+        
+        // Option for no sorting
+        alert.addAction(UIAlertAction(title: "None", style: .default, handler: { (action) in
+            // Perform no sorting, reload the original data
+            self.reCategorize()
+            self.tableView.reloadData()
+        }))
+        
+        // Option for alphabetical sorting
+        alert.addAction(UIAlertAction(title: "A - Z", style: .default, handler: { (action) in
+            // Sort the data alphabetically
+            self.sortDataAlphabetically()
+            self.tableView.reloadData()
+        }))
+        
+        // Option for canceling the action sheet
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        
+        // For the ipad
+        if let popoverController = alert.popoverPresentationController {
+            popoverController.barButtonItem = self.navigationItem.rightBarButtonItem
         }
-        case 2: cancelledBookings = cancelledBookings.filter{
-            $0.forPatient.name.lowercased().contains(term) || $0.ofMedicalService.name.lowercased().contains(term)
-        }            default:
+        
+        // Present the action sheet
+        self.present(alert, animated: true)
+    }
+
+    
+    func sortDataAlphabetically() {
+        // Add your sorting logic here based on the selectedSegmentIndex
+        switch selectedSegmentIndex {
+        case 0: // Sort hospitals
+            hospitals.sort(by: { $0.name < $1.name })
+        case 1: // Sort labs
+            labs.sort(by: { $0.name < $1.name })
+        case 2: // Sort tests
+            tests.sort(by: { $0.name < $1.name })
+        case 3: // Sort packages
+            packages.sort(by: { $0.name < $1.name })
+        default:
             break
         }
     }
-    tableView.reloadData()*/
+
     
     func updateSearchResults(for searchController: UISearchController) {
+        // if there's data
         guard let term = searchController.searchBar.text?.lowercased() else {
             reCategorize()
             tableView.reloadData()
             return
         }
+        // if its empty, nothing happens
         if term.isEmpty {
             reCategorize()
             tableView.reloadData()
@@ -72,7 +95,7 @@ class PatientHomeTableViewController: UITableViewController,UISearchBarDelegate,
             }
             case 3: tests = tests.filter{
                 $0.name.lowercased().contains(term) || $0.forMedicalFacility.name.lowercased().contains(term)}
-            case 4:                 packages = packages.filter{$0.name.lowercased().contains(term) || $0.forMedicalFacility.name.lowercased().contains(term)}
+            case 4: packages = packages.filter{$0.name.lowercased().contains(term) || $0.forMedicalFacility.name.lowercased().contains(term)}
                 
                 
             default: break
