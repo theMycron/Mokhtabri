@@ -10,6 +10,7 @@ import UIKit
 class PatientBookingTableViewController: UITableViewController, UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
         guard let term = searchController.searchBar.text?.lowercased() else {
+            //embed search
             reloadOriginalData()
             return
         }
@@ -58,12 +59,6 @@ class PatientBookingTableViewController: UITableViewController, UISearchResultsU
             return
         }
         loggedInUser = user
-        //AppData.loadServicesImages(AppData)
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
 
     // MARK: - Table view data source
@@ -119,10 +114,6 @@ class PatientBookingTableViewController: UITableViewController, UISearchResultsU
         if let img = booking.ofMedicalService.photo {
             cell.img.image = img
         }
-        //gonna fix in a minute
-       // if(booking.ofMedicalService.)
-
-        // Configure the cell...
 
         return cell
     }
@@ -188,7 +179,11 @@ class PatientBookingTableViewController: UITableViewController, UISearchResultsU
                     self.listOfBookings.remove(at: indexInAppData)
                 }
                 if let index = AppData.listOfBookingsLab.firstIndex(where: {$0.id == bookingToRemove.id}){
-                    AppData.listOfBookingsLab[index].status = .Cancelled
+                    
+                    if AppData.listOfBookingsLab[index].status == .Active{
+                        AppData.listOfBookingsLab[index].status = .Cancelled
+                    }
+
                 }
                 self.categorizeBookings()
                 tableView.deleteRows(at: [indexPath], with: .fade)

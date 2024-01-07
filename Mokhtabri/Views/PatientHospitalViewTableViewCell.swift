@@ -12,6 +12,7 @@ class PatientHospitalViewTableViewCell: UITableViewCell {
     
     @IBOutlet weak var HospitalName: UILabel!
     
+    @IBOutlet weak var photo: UIImageView!
     @IBOutlet weak var openingTime: UILabel!
     @IBOutlet weak var location: UILabel!
     override func awakeFromNib() {

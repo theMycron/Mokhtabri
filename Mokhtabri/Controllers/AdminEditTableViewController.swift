@@ -8,6 +8,8 @@
 import UIKit
 import FirebaseStorage
 import Kingfisher
+import FirebaseAuth
+import Firebase
 
 class AdminEditTableViewController: UITableViewController, UIImagePickerControllerDelegate & UINavigationControllerDelegate {
 
@@ -109,7 +111,7 @@ class AdminEditTableViewController: UITableViewController, UIImagePickerControll
         validateImage()
         // validate fields and save
         // do not continue if there was an invalid input
-        
+        proceedWithImage()
     }
     
     func proceedWithImage() {
@@ -191,6 +193,7 @@ class AdminEditTableViewController: UITableViewController, UIImagePickerControll
         }
         // check if email already in use
         if let usedEmail = AppData.getUserFromEmail(email: username)?.username  {
+            // dont mind if it is the same as the facility's current email
             if (usedEmail != facility?.username) {
                 displayError(title: "Email In Use", message: "The email you entered is being used by another user. Please try a different email.")
                 return false
@@ -219,12 +222,51 @@ class AdminEditTableViewController: UITableViewController, UIImagePickerControll
         // if editing an existing facility, save id to replace it later
         if let facility = facility {
             oldId = facility.uuid
+            
+            // update password if it was changed
+            let currentUser = Auth.auth().currentUser
+            if (password != facility.password) {
+                currentUser?.updatePassword(to: password) {error in
+                    if error != nil {
+                        print("Error while updating user password: \(String(describing: error))")
+                    }
+                }
+            }
+            
+            // update email
+            if username != currentUser?.email {
+                let credentials = EmailAuthProvider.credential(withEmail: facility.username, password: facility.password)
+                currentUser?.reauthenticate(with: credentials) {(result,error)  in
+                    if error != nil {
+                        print("Error while reauthenticating user: \(String(describing: error))")
+                    } else {
+                        if result != nil {
+                            // this sends an email verification to the user to confirm updating the email.
+                            currentUser?.sendEmailVerification(beforeUpdatingEmail: username) {error in
+                                if error != nil {
+                                    print("Error while updating user email: \(String(describing: error))")
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
         facility = MedicalFacility(name: name, phone: phone, city: city, website: website, alwaysOpen: alwaysopen, type: type, openingTime: openingTime, closingTime: closingTime, image: facility?.imageDownloadURL, username: username, password: password)
         if let oldId = oldId {
             facility!.uuid = oldId // replace new uuid with old one if editing to ensure they are the same facility
+            
+        } else {
+            //if this is a new facility, add to firebase
+            Auth.auth().createUser(withEmail: username, password: password) { (authResult, error) in
+                //check the auth result to make sure that the user is created
+                guard let _ = authResult?.user, error == nil else{
+                    //if user is not created, display the error.
+                    print("Error \(String(describing: error?.localizedDescription))")
+                    return
+                }
+            }
         }
-        
         
         // upload image
         if !uploadImageToFirebase() {
@@ -286,6 +328,7 @@ class AdminEditTableViewController: UITableViewController, UIImagePickerControll
     
     func showImagePickerOptions() {
         let alert = UIAlertController(title: "Select Image", message: "Select image from library or capture from camera", preferredStyle: .actionSheet)
+        // camera causes a crash using simulator, disabled now
         let cameraAction = UIAlertAction(title: "Camera", style: .default) { [weak self] (action) in
             guard let self = self else {return}
             let cameraPicker = self.imagePicker(sourceType: .camera)

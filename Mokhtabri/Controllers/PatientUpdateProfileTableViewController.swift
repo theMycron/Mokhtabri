@@ -6,41 +6,56 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 class PatientUpdateProfileTableViewController: UITableViewController {
+    // variables
+    var loggedInUser: User? = AppData.loggedInUser
+    var patientLog: Patient?
+    var check = false;
     
     //declaring elements
     @IBOutlet weak var usernameField: UITextField!
     @IBOutlet weak var firstnameField: UITextField!
     @IBOutlet weak var lastnameFIeld: UITextField!
-    @IBOutlet weak var phoneField: UITextField!
-    @IBOutlet weak var emailField: UITextField!
     
+
     // declare var
     var p = AppData.patient1
+    var userName = ""
+    var fn = ""
+    var ln = ""
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        usernameField.text = p.username
+        // find the patient
+        FindPatient()
+        // update the data
+        update()
+    }
+    
+    func FindPatient() {
+        guard let loggedInUser = loggedInUser else {
+            return
+        }
+        patientLog = AppData.patients.first{$0.username == loggedInUser.username}
+    }
+    
+    func update() {
+        usernameField.text = patientLog?.username
         usernameField.textColor = UIColor.black
-        firstnameField.text = p.firstName
+        firstnameField.text = patientLog?.firstName
         firstnameField.textColor = UIColor.black
-        lastnameFIeld.text = p.lastName
+        lastnameFIeld.text = patientLog?.lastName
         lastnameFIeld.textColor = UIColor.black
-
-        phoneField.textColor = UIColor.black
-        emailField.textColor = UIColor.black
         
         usernameField.clearsOnBeginEditing = false
         firstnameField.clearsOnBeginEditing = false
         lastnameFIeld.clearsOnBeginEditing = false
-        phoneField.clearsOnBeginEditing = false
-        emailField.clearsOnBeginEditing = false
-
     }
 
     // MARK: - Table view data source
-
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 1
@@ -48,97 +63,85 @@ class PatientUpdateProfileTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 5
+        return 3
     }
     
     @IBAction func UpdateBtn(_ sender: Any) {
-        confirmation(title: "Update Account", message: "Are you sure you want to update your data?") {
-            
-            let updatedUsername = self.usernameField.text
-            let updatedFirstname = self.firstnameField.text
-            let updatedLastname = self.lastnameFIeld.text
-            let updatedPhone = self.phoneField.text
-            let updatedEmail = self.emailField.text
-            
-            // Check for nil or empty strings if necessary, depending on your validation requirements
-            guard let username = updatedUsername, !username.isEmpty,
-                  let firstname = updatedFirstname, !firstname.isEmpty,
-                  let lastname = updatedLastname, !lastname.isEmpty,
-                  let phone = updatedPhone, !phone.isEmpty,
-                  let email = updatedEmail, !email.isEmpty else {
-                let errorAlert = UIAlertController(title: "Error", message: "Please don't leave any fields blank.", preferredStyle: .alert)
-                errorAlert.addAction(UIAlertAction(title: "Dismiss", style: .default))
-                self.present(errorAlert, animated: true)
-                return
+        if isDataChanged() {
+            check = self.checkData()
+            if check {
+                confirmation(title: "Update Account", message: "Are you sure you want to update your data?") {                    self.updateProfile()
+                    AppData.saveData()
+                }
             }
-            self.p.username = username
-            self.p.firstName = firstname
-            self.p.lastName = lastname
-            
-            // confirmation alert
-            let confirmAlert = UIAlertController(title: "Confirmation", message: "Data changed successfully", preferredStyle: .alert)
-            confirmAlert.addAction(UIAlertAction(title: "Dismiss", style: .default) { [weak self] _ in
-                self?.performSegue(withIdentifier: "Settings", sender: nil)
-            })
+        } else {
+            errorAlert(title: "No Changes", message: "No changes detected in your profile.")
+        }
+    }
 
+    func isDataChanged() -> Bool {
+        guard let patientLog = patientLog else { return false }
 
+        // Fetch current field values
+        let currentUserName = usernameField.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
+        let currentFirstName = firstnameField.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
+        let currentLastName = lastnameFIeld.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
+
+        // Compare with existing data
+        return currentUserName != patientLog.username || currentFirstName != patientLog.firstName || currentLastName != patientLog.lastName
+    }
+
+    
+    func updateProfile() {
+        Auth.auth().currentUser?.updateEmail(to: self.userName) { error in
+            if let error = error {
+                self.errorAlert(title: "Update Failed", message: "Failed to update email: \(error.localizedDescription)")
+            } else {
+                self.patientLog?.firstName = self.fn
+                self.patientLog?.lastName = self.ln
+                AppData.saveData()
+                self.errorAlert(title: "Update Successful", message: "Data Changed Successfully.")
+            }
         }
     }
     
-    
-    /*
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
+    func checkData() -> Bool {
+        // take data from the fields
+        userName = usernameField.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
+        fn = firstnameField.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
+        ln = lastnameFIeld.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
+        
+        // for email format
+        let emailFormat = "[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}"
+        let valid = NSPredicate(format: "SELF MATCHES %@", emailFormat)
+        
+        // check if fields are empty
+        if userName.isEmpty || fn.isEmpty || ln.isEmpty {
+            errorAlert(title: "Error", message: "Please don't leave any data empty")
+            return false
+        }
 
-        // Configure the cell...
+        if !valid.evaluate(with: userName) {
+            errorAlert(title: "Error", message: "Please enter a valid email")
+            return false
+        }
 
-        return cell
-    }
-    */
+        // check if email is changed and already in use
+        if userName != loggedInUser?.username {
+            if AppData.getUserFromEmail(email: userName) != nil {
+                errorAlert(title: "Error", message: "Email is already in use")
+                return false
+            }
+        }
+        
+        // validate names
+        if fn.count < 2 || ln.count < 2 {
+            errorAlert(title: "Error", message: "Please enter a valid name")
+            return false
+        }
 
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
         return true
     }
-    */
 
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

@@ -1,4 +1,5 @@
 import Foundation
+import UIKit
 
 class MedicalFacility: User {
     var defaultFirebaseImageFilename: String {
@@ -18,6 +19,7 @@ class MedicalFacility: User {
 //    var medicalService: MedicalService
 //    var bookings: [Booking]
     var imageDownloadURL: URL?
+    var photo : UIImage?
     
     override var description: String {
         return """

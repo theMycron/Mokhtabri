@@ -42,7 +42,7 @@ class Package: MedicalService {
         case expiryDate, tests, image
     }
     
-    init(expiryDate: DateComponents, tests: [Test], name: String, price: Float, description: String, instructions: String, forMedicalFacility: MedicalFacility, serviceType: ServiceType, imageDownloadURL: URL? = nil, storageLink: String) {
+    init(expiryDate: DateComponents, tests: [Test], name: String, price: Float, description: String, instructions: String, forMedicalFacility: MedicalFacility, serviceType: ServiceType, imageDownloadURL: URL? = nil, storageLink: URL?) {
 
         self.expiryDate = expiryDate
         self.tests = tests

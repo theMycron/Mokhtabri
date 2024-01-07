@@ -46,6 +46,7 @@
 		883968A42B2CA090008911FB /* FirebaseAppCheck in Frameworks */ = {isa = PBXBuildFile; productRef = 883968A32B2CA090008911FB /* FirebaseAppCheck */; };
 		883968A72B2CA428008911FB /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 883968A62B2CA428008911FB /* FirebaseAuth */; };
 		8844CE2E2B2F795E009366DF /* RegisterForm1ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8844CE2D2B2F795E009366DF /* RegisterForm1ViewController.swift */; };
+		8D464CC82B49D89F002111D4 /* ChangePasswordTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D464CC72B49D89F002111D4 /* ChangePasswordTableViewController.swift */; };
 		8D8192172B496047006EA015 /* HomeViewPTTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D8192162B496047006EA015 /* HomeViewPTTableViewCell.swift */; };
 		8DE802CB2B2DF11B007328FF /* PatientUpdateProfileTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DE802CA2B2DF11B007328FF /* PatientUpdateProfileTableViewController.swift */; };
 		B137B0EA2B351BB40065260E /* LabEditTableTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B137B0E92B351BB40065260E /* LabEditTableTableViewController.swift */; };
@@ -167,6 +168,7 @@
 		F23FB21A2B2F2BF300B3F5E2 /* PatientBookingTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F23FB2192B2F2BF300B3F5E2 /* PatientBookingTableViewController.swift */; };
 		F23FB21C2B2F2D4700B3F5E2 /* PatientBookingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F23FB21B2B2F2D4700B3F5E2 /* PatientBookingTableViewCell.swift */; };
 		F23FB21E2B2F374200B3F5E2 /* PatientViewBookingDetailsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F23FB21D2B2F374200B3F5E2 /* PatientViewBookingDetailsTableViewController.swift */; };
+		F299377E2B4ADF1B002F8C8D /* HospitalDetailsPrototypeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F299377D2B4ADF1B002F8C8D /* HospitalDetailsPrototypeTableViewCell.swift */; };
 		F2F60A1C2B27186A005B74C6 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2F60A1B2B27186A005B74C6 /* SettingsTableViewController.swift */; };
 		F2F60A1E2B271CD0005B74C6 /* LabBookingInfoTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2F60A1D2B271CD0005B74C6 /* LabBookingInfoTableViewController.swift */; };
 		F2F60A222B27A83D005B74C6 /* PatientInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2F60A212B27A83D005B74C6 /* PatientInfoTableViewCell.swift */; };
@@ -208,6 +210,7 @@
 		882DEA262B35E2B200E46594 /* NavViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NavViewController.swift; path = Mokhtabri/Storyboards/NavViewController.swift; sourceTree = SOURCE_ROOT; };
 		883968982B2CA03E008911FB /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		8844CE2D2B2F795E009366DF /* RegisterForm1ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterForm1ViewController.swift; sourceTree = "<group>"; };
+		8D464CC72B49D89F002111D4 /* ChangePasswordTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordTableViewController.swift; sourceTree = "<group>"; };
 		8D8192162B496047006EA015 /* HomeViewPTTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewPTTableViewCell.swift; sourceTree = "<group>"; };
 		8DE802CA2B2DF11B007328FF /* PatientUpdateProfileTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientUpdateProfileTableViewController.swift; sourceTree = "<group>"; };
 		B137B0E92B351BB40065260E /* LabEditTableTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabEditTableTableViewController.swift; sourceTree = "<group>"; };
@@ -225,6 +228,7 @@
 		F23FB2192B2F2BF300B3F5E2 /* PatientBookingTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientBookingTableViewController.swift; sourceTree = "<group>"; };
 		F23FB21B2B2F2D4700B3F5E2 /* PatientBookingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientBookingTableViewCell.swift; sourceTree = "<group>"; };
 		F23FB21D2B2F374200B3F5E2 /* PatientViewBookingDetailsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientViewBookingDetailsTableViewController.swift; sourceTree = "<group>"; };
+		F299377D2B4ADF1B002F8C8D /* HospitalDetailsPrototypeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HospitalDetailsPrototypeTableViewCell.swift; sourceTree = "<group>"; };
 		F2F60A1B2B27186A005B74C6 /* SettingsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
 		F2F60A1D2B271CD0005B74C6 /* LabBookingInfoTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LabBookingInfoTableViewController.swift; path = Mokhtabri/Controllers/LabBookingInfoTableViewController.swift; sourceTree = SOURCE_ROOT; };
 		F2F60A212B27A83D005B74C6 /* PatientInfoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PatientInfoTableViewCell.swift; path = Mokhtabri/Views/PatientInfoTableViewCell.swift; sourceTree = SOURCE_ROOT; };
@@ -366,6 +370,7 @@
 				DF2F1F7C2B395EB600C97E40 /* LabViewTableViewCell.swift */,
 				DFD20CAC2B415A2D009A7048 /* LabSelectTestTableViewCell.swift */,
 				8D8192162B496047006EA015 /* HomeViewPTTableViewCell.swift */,
+				F299377D2B4ADF1B002F8C8D /* HospitalDetailsPrototypeTableViewCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -426,6 +431,7 @@
 				DF17C63F2B341950007BFBF1 /* LabViewTableViewController.swift */,
 				B137B0E92B351BB40065260E /* LabEditTableTableViewController.swift */,
 				DFD20CAA2B415915009A7048 /* LabSelectTestsTableViewController.swift */,
+				8D464CC72B49D89F002111D4 /* ChangePasswordTableViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -691,6 +697,7 @@
 				DF2F1F7D2B395EB600C97E40 /* LabViewTableViewCell.swift in Sources */,
 				DFD20CAB2B415915009A7048 /* LabSelectTestsTableViewController.swift in Sources */,
 				D6FD0EF32B31AF4A00BBCBDC /* PatientHomeTableViewController.swift in Sources */,
+				8D464CC82B49D89F002111D4 /* ChangePasswordTableViewController.swift in Sources */,
 				44214DE02B26CA4D000DAA0A /* LabBookingTableViewCell.swift in Sources */,
 				446C06742B1C92E3006A6A5E /* Patient.swift in Sources */,
 				D6FD0EFB2B31B7E300BBCBDC /* PatientViewInfoTableViewCell.swift in Sources */,
@@ -706,6 +713,7 @@
 				442AB0FE2B27195E00C05BA6 /* Persistence.swift in Sources */,
 				F2239F3D2B310D0900D38282 /* PatientBookTableViewController.swift in Sources */,
 				8844CE2E2B2F795E009366DF /* RegisterForm1ViewController.swift in Sources */,
+				F299377E2B4ADF1B002F8C8D /* HospitalDetailsPrototypeTableViewCell.swift in Sources */,
 				F23FB21A2B2F2BF300B3F5E2 /* PatientBookingTableViewController.swift in Sources */,
 				446112352B1DABB0002F815C /* AdminViewTableViewController.swift in Sources */,
 				882DEA272B35E2B200E46594 /* NavViewController.swift in Sources */,
@@ -860,7 +868,7 @@
 				INFOPLIST_KEY_UIStatusBarStyle = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -890,7 +898,7 @@
 				INFOPLIST_KEY_UIStatusBarStyle = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

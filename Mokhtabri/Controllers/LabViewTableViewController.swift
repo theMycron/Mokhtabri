@@ -8,7 +8,6 @@
 import UIKit
 
 class LabViewTableViewController: UITableViewController, UISearchResultsUpdating, UISearchBarDelegate {
-   //yousif to do
     var loggedInFacillity = AppData.loggedInUser as! MedicalFacility
     
     var displayedServices: [MedicalService] = []
@@ -20,7 +19,7 @@ class LabViewTableViewController: UITableViewController, UISearchResultsUpdating
         
         AppData.loadData()
         
-        displayedServices = AppData.tests.filter{$0.forMedicalFacility == loggedInFacillity} + AppData.packages.filter{$0.forMedicalFacility == loggedInFacillity}
+        displayedServices = AppData.tests.filter{$0.forMedicalFacility.name == loggedInFacillity.name} + AppData.packages.filter{$0.forMedicalFacility.name == loggedInFacillity.name}
         
         tableView.reloadData()
         
@@ -141,12 +140,13 @@ class LabViewTableViewController: UITableViewController, UISearchResultsUpdating
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
+           let  service = displayedServices[indexPath.section]
             tableView.beginUpdates()
             // Delete the row from the data source
             displayedServices.remove(at: indexPath.section)
             tableView.deleteSections([indexPath.section], with: .fade)
             tableView.endUpdates()
-            let service = displayedServices[indexPath.section]
+
             _=AppData.deleteService(service: service)
             AppData.saveData()
         }

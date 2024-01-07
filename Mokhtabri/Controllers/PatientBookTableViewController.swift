@@ -8,10 +8,13 @@
 import UIKit
 
 class PatientBookTableViewController: UITableViewController {
+    // declaring variables
     var loggedInPatient: Patient?
     @IBOutlet weak var image: UIImageView!
     var sampleTest : MedicalService?
     
+    
+    // declaring outlets
     @IBOutlet weak var btn: UIBarButtonItem!
     @IBOutlet weak var hospitalName: UILabel!
     
@@ -30,11 +33,6 @@ class PatientBookTableViewController: UITableViewController {
             return
         }
         loggedInPatient =  AppData.patients.filter{$0.username == AppData.loggedInUser?.username}[0]
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
 
     // MARK: - Table view data source
@@ -49,6 +47,7 @@ class PatientBookTableViewController: UITableViewController {
         return 6
     }
     
+    // updates data
     func updateView(){
         guard let sampleTest = sampleTest else{
             return
@@ -69,6 +68,7 @@ class PatientBookTableViewController: UITableViewController {
         image.image = img1
     }
 
+    // handles the booking
     @IBAction func bookClicked(_ sender: Any) {
         guard let sampleTest = sampleTest else {
             return
@@ -86,13 +86,13 @@ class PatientBookTableViewController: UITableViewController {
                 AppData.bookings.append(newBooking)
                 AppData.listOfBookingsLab.append(newBooking)
                 AppData.listOfBookingsPatient.append(newBooking)
+                AppData.saveData()
             }
         }else{
             confirmation(title: "Invalid", message: "Please select Valid Date"){
                 
             }
         }
-
     }
     
     func updateDes(){

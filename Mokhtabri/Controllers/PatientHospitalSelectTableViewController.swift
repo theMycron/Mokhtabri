@@ -11,31 +11,35 @@ class PatientHospitalSelectTableViewController: UITableViewController {
     
     @IBAction func segmentClick(_ sender: UISegmentedControl) {
         selectedIndex = sender.selectedSegmentIndex
-       // loadData()
+       loadData()
         tableView.reloadData()    }
     
-    func filter(){
 
-    }
     
     @IBOutlet weak var segmentedControl: UISegmentedControl!
     // declare variables
     var selectedHospital: MedicalFacility?
     var listOfTests: [MedicalService] = AppData.services
     var selectedIndex = 0
-    var tests : [Test] = []
-    var packages: [Package] = []
+    var tests : [Test] = AppData.tests
+    var packages: [Package] = AppData.packages
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let destination = segue.destination as? PatientBookTableViewController, let selectedRow = tableView.indexPathForSelectedRow{
-            destination.sampleTest = listOfTests[selectedRow.row]
+           // destination.sampleTest = listOfTests[selectedRow.row]
+            if selectedIndex == 0{
+                destination.sampleTest = tests[selectedRow.row]
+            }else{
+                destination.sampleTest = packages[selectedRow.row]
+            }
         }
     }
     override func viewDidLoad() {
-        loadData()
+       loadData()
         super.viewDidLoad()
         tableView.delegate = self
     }
     
+    // row height
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.section == 0 {
             if indexPath.row == 0 {
@@ -72,40 +76,33 @@ class PatientHospitalSelectTableViewController: UITableViewController {
         
     }
     
+    // filters data based on the selected hospital
     func loadData() {
-        
-        //let listOfAllTests = AppData.services
         guard let hospital = selectedHospital else {
             return
         }
         
-     /*   for test in listOfTests {
-            if test.forMedicalFacility.name == hospital.name {
-            listOfTests.append(test)
-            }
-        }*/
-        
-        for service in listOfTests {
-            if service is Package && service.forMedicalFacility == hospital{
-                packages.append(service as! Package)
-            } else if service is Test && service.forMedicalFacility == hospital {
-                tests.append(service as! Test)
-            }
+        tests = tests.filter{
+            $0.forMedicalFacility.name == hospital.name
         }
         
-        
+        packages = packages.filter{
+            $0.forMedicalFacility.name == hospital.name
+        }
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if selectedIndex == 0{
             if indexPath.section == 1{
-                let cell = tableView.dequeueReusableCell(withIdentifier: "PatientBooking", for: indexPath) as! PatientBookingTableViewCell
+                let cell = tableView.dequeueReusableCell(withIdentifier: "PatientBooking", for: indexPath) as! HospitalDetailsPrototypeTableViewCell
 
                 cell.TestName.text = tests[indexPath.row].name
                 cell.price.text = "\(tests[indexPath.row].price) BHD"
                 cell.hospitalName.text = "\(tests[indexPath.row].forMedicalFacility.name)"
-
-                
+                guard let img = tests[indexPath.row].photo else{
+                    return cell
+                }
+                cell.img.image = img
         
                 return cell
             }
@@ -132,20 +129,25 @@ class PatientHospitalSelectTableViewController: UITableViewController {
                     return cell
                 } else {
                     let cell = tableView.dequeueReusableCell(withIdentifier: "imagecell", for: indexPath) as! imgTableViewCell
-                    cell.img.image = UIImage(named: "AlHilal")
-                    cell.img.frame = CGRect(x: 76, y: 0, width: 201, height: 158)
+                    guard let img = selectedHospital?.photo else {
+                        return cell
+                    }
+                    cell.img.image = img
                     return cell
                 }
             }
 
         } else {
             if indexPath.section == 1{
-                let cell = tableView.dequeueReusableCell(withIdentifier: "PatientBooking", for: indexPath) as! PatientBookingTableViewCell
+                let cell = tableView.dequeueReusableCell(withIdentifier: "PatientBooking", for: indexPath) as! HospitalDetailsPrototypeTableViewCell
 
                 cell.TestName.text = packages[indexPath.row].name
                 cell.price.text = "\(packages[indexPath.row].price) BHD"
                 cell.hospitalName.text = "\(packages[indexPath.row].forMedicalFacility.name)"
-
+                guard let img = packages[indexPath.row].photo else{
+                    return cell
+                }
+                cell.img.image = img
                 
         
                 return cell
@@ -173,8 +175,10 @@ class PatientHospitalSelectTableViewController: UITableViewController {
                     return cell
                 } else {
                     let cell = tableView.dequeueReusableCell(withIdentifier: "imagecell", for: indexPath) as! imgTableViewCell
-                    cell.img.image = UIImage(named: "AlHilal")
-                    cell.img.frame = CGRect(x: 76, y: 0, width: 201, height: 158)
+                    guard let img = selectedHospital?.photo else {
+                        return cell
+                    }
+                    cell.img.image = img
                     return cell
                 }
             }

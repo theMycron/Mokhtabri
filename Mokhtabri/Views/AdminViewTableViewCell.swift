@@ -31,7 +31,12 @@ class AdminViewTableViewCell: UITableViewCell {
         // downsample image to save resources
         let size: CGSize = CGSize(width: imgDisplay.bounds.size.width*2 , height: imgDisplay.bounds.size.height*2)
         let processor: ImageProcessor = DownsamplingImageProcessor(size: size)
-        imgDisplay.kf.setImage(with: facility.imageDownloadURL, options: [.processor(processor), .cacheOriginalImage])
+        if (facility.imageDownloadURL != nil) {
+            imgDisplay.kf.setImage(with: facility.imageDownloadURL, options: [.processor(processor), .cacheOriginalImage])
+        } else {
+            // if facility has no image, set a default image
+            imgDisplay.kf.setImage(with: URL(string: "https://firebasestorage.googleapis.com/v0/b/fir-testing-512eb.appspot.com/o/testImages%2F504276.png?alt=media&token=cb30478e-345b-4de7-b2bd-aecdb7e7765d"), options: [.processor(processor)])
+        }
     }
     
     override func awakeFromNib() {

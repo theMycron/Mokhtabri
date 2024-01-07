@@ -28,4 +28,12 @@ extension UIViewController {
             self.view.window?.makeKeyAndVisible()
         })
     }
+    
+    func errorAlert(title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let dismissAction = UIAlertAction(title: "Dismiss", style: .default)
+        alert.addAction(dismissAction)
+        present(alert, animated: true)
+    }
+
 }

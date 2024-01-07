@@ -4,7 +4,7 @@ import UIKit
 class MedicalService: Codable, Equatable, Comparable, CustomStringConvertible {
     var defaultFirebaseImageFilename: String {
         // format filename with lowercased letters and underscores instead of spaces
-        return "serviceImages/\(name.lowercased().replacingOccurrences(of: " ", with: "_")).jpg"
+        return "serviceImages/\(forMedicalFacility.name.lowercased().replacingOccurrences(of: " ", with: "_"))_\(name.lowercased().replacingOccurrences(of: " ", with: "_")).jpg"
     }
     var id: UUID
     var name: String
@@ -33,14 +33,14 @@ class MedicalService: Codable, Equatable, Comparable, CustomStringConvertible {
         case package = "Package"
     }
     //var imageDownloadURL: URL?
-    var storageLink: String
+    var storageLink: URL?
 
     enum CodingKeys: Codable, CodingKey {
         case id, name, price, description, instructions, forMedicalFacility, image, serviceType,storageLink // Include 'image' in the CodingKeys
         
     }
     
-    init(name: String, price: Float, description: String, instructions: String, forMedicalFacility: MedicalFacility, serviceType: ServiceType, image: URL? = nil, storageLink: String) {
+    init(name: String, price: Float, description: String, instructions: String, forMedicalFacility: MedicalFacility, serviceType: ServiceType, image: URL? = nil, storageLink: URL?) {
 
         self.id = UUID()
         self.name = name
@@ -84,7 +84,7 @@ class MedicalService: Codable, Equatable, Comparable, CustomStringConvertible {
         self.serviceType = ServiceType(rawValue: try container.decode(String.self, forKey: .serviceType)) ?? .test
         
 
-        self.storageLink = try container.decode(String.self, forKey: .storageLink)
+        self.storageLink = try container.decode(URL.self, forKey: .storageLink)
     }
     
     
