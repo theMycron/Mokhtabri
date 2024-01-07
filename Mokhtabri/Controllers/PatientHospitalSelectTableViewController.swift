@@ -6,7 +6,6 @@
 //
 
 import UIKit
-//check line 157 && 114
 
 class PatientHospitalSelectTableViewController: UITableViewController {
     
@@ -40,6 +39,7 @@ class PatientHospitalSelectTableViewController: UITableViewController {
         tableView.delegate = self
     }
     
+    // row height
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.section == 0 {
             if indexPath.row == 0 {
@@ -76,18 +76,11 @@ class PatientHospitalSelectTableViewController: UITableViewController {
         
     }
     
+    // filters data based on the selected hospital
     func loadData() {
-        
-        //let listOfAllTests = AppData.services
         guard let hospital = selectedHospital else {
             return
         }
-        
-     /*   for test in listOfTests {
-            if test.forMedicalFacility.name == hospital.name {
-            listOfTests.append(test)
-            }
-        }*/
         
         tests = tests.filter{
             $0.forMedicalFacility.name == hospital.name
@@ -96,7 +89,6 @@ class PatientHospitalSelectTableViewController: UITableViewController {
         packages = packages.filter{
             $0.forMedicalFacility.name == hospital.name
         }
-        
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
