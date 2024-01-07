@@ -188,7 +188,11 @@ class PatientBookingTableViewController: UITableViewController, UISearchResultsU
                     self.listOfBookings.remove(at: indexInAppData)
                 }
                 if let index = AppData.listOfBookingsLab.firstIndex(where: {$0.id == bookingToRemove.id}){
-                    AppData.listOfBookingsLab[index].status = .Cancelled
+                    
+                    if AppData.listOfBookingsLab[index].status == .Active{
+                        AppData.listOfBookingsLab[index].status = .Cancelled
+                    }
+
                 }
                 self.categorizeBookings()
                 tableView.deleteRows(at: [indexPath], with: .fade)

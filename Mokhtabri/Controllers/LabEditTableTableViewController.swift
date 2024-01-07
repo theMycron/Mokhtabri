@@ -166,10 +166,10 @@ class LabEditTableTableViewController: UITableViewController, UIAdaptivePresenta
             oldId = service.id
         }
         if (selectedServiceType == .test) {
-            service = Test(category: category!,name: name ?? "", price: price ?? 0.0 , description: description ?? "", instructions: instructions ?? "", forMedicalFacility: AppData.loggedInUser as! MedicalFacility, serviceType : selectedServiceType!, storageLink: "gs://fir-testing-512eb.appspot.com/testImages/immuno.jpeg" )
+            service = Test(category: category!,name: name ?? "", price: price ?? 0.0 , description: description ?? "", instructions: instructions ?? "", forMedicalFacility: AppData.loggedInUser as! MedicalFacility, serviceType : selectedServiceType!, storageLink: URL(string: "https://firebasestorage.googleapis.com/v0/b/fir-testing-512eb.appspot.com/o/testImages%2Frbc-alsalam.jpeg?alt=media&token=71a9c05b-52fb-4b26-a2f9-b78c2604bca1") )
             // TODO: change service to logged in service
         } else if (selectedServiceType == .package) {
-            service = Package(expiryDate: expiryDateComponents, tests: listOfTests,name: name ?? "", price: price ?? 0.0 , description: description ?? "", instructions: instructions ?? "", forMedicalFacility: AppData.loggedInUser as! MedicalFacility, serviceType : selectedServiceType!, storageLink: "gs://fir-testing-512eb.appspot.com/testImages/immuno.jpeg" )
+            service = Package(expiryDate: expiryDateComponents, tests: listOfTests,name: name ?? "", price: price ?? 0.0 , description: description ?? "", instructions: instructions ?? "", forMedicalFacility: AppData.loggedInUser as! MedicalFacility, serviceType : selectedServiceType!, storageLink: URL(string: "https://firebasestorage.googleapis.com/v0/b/fir-testing-512eb.appspot.com/o/testImages%2Frbc-alsalam.jpeg?alt=media&token=71a9c05b-52fb-4b26-a2f9-b78c2604bca1")!)
             _=uploadImageToFirebase()
         }
         

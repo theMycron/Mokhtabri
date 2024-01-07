@@ -268,7 +268,11 @@ class LabHistoryTableViewController: UITableViewController, UISearchBarDelegate,
                 if let index1 = AppData.listOfBookingsPatient.firstIndex(where: {
                     $0.id == bookingToRemove.id
                 }){
-                    AppData.listOfBookingsPatient[index1].status = .Cancelled
+                    
+                    if AppData.listOfBookingsPatient[index1].status == .Active{
+                        
+                        
+                        AppData.listOfBookingsPatient[index1].status = .Cancelled}
                 }
                 self.categorizeBookings()
                 tableView.deleteRows(at: [indexPath], with: .fade)
