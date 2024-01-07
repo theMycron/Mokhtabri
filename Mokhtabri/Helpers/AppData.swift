@@ -15,12 +15,14 @@ class AppData {
     static var admin: [User] = [User(username: "admin@gmail.com", password: "12345678", userType: .admin)]
     static var facilities: [MedicalFacility] = []
     static var services: [MedicalService] = []
-    static var tests: [Test] = [test1,test2,test3,test5,test6,test7,test8,test9,test10]
-    static var packages: [Package] = [Pack3,Pack4,test4]
+    static var tests: [Test] = []
+    static var sampleTests: [Test] = [test1,test2,test3,test5,test6,test7,test8,test9,test10]
+    static var packages: [Package] = []
+    static var samplePackages: [Package] = [Pack3,Pack4,test4]
     static var bookings: [Booking] = []
     static var categories: [Category] = []
     // with sample data
-    static var patients: [Patient] = [patient1, patient2, pat3]
+    static var patients: [Patient] = []
     static var listOfTests = [test1,test2,test3,test4,test5,test6,Pack3,Pack4]
     static var hospitals = [alhilal,alsalam,royal]
     static var labs: [MedicalFacility] = [BML, expMed, gulfLab, manara]
@@ -276,15 +278,17 @@ class AppData {
     
     
     
-    static func load(){
+    static func loadSampleData(){
         if bookings.isEmpty {
             bookings = sampleBookings
             listOfBookingsLab = sampleBookings
            listOfBookingsPatient = sampleBookings
           //  services = listOfTests
             
-            facilities = hospitals
-            patients = [patient1]
+            facilities = hospitals + labs
+            tests = sampleTests
+            packages = samplePackages
+            patients = [patient1,patient2,pat3]
             loadServicesImages(){
                 
             }

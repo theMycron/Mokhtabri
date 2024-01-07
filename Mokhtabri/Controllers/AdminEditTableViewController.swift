@@ -109,7 +109,7 @@ class AdminEditTableViewController: UITableViewController, UIImagePickerControll
         validateImage()
         // validate fields and save
         // do not continue if there was an invalid input
-        
+        proceedWithImage()
     }
     
     func proceedWithImage() {

@@ -9,6 +9,8 @@ import UIKit
 
 class PatientHomeTableViewController: UITableViewController,UISearchBarDelegate, UISearchResultsUpdating {
     
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         embedSearch()
@@ -51,8 +53,8 @@ class PatientHomeTableViewController: UITableViewController,UISearchBarDelegate,
     //sample data
     var facility:  [MedicalFacility] = AppData.facilities
     var services: [MedicalService] = AppData.services
-    var labs: [MedicalFacility] = AppData.labs
-    var hospitals: [MedicalFacility] = AppData.hospitals
+    var labs: [MedicalFacility] = AppData.facilities.filter{$0.type == FacilityType.lab}
+    var hospitals: [MedicalFacility] = AppData.facilities.filter{$0.type == FacilityType.hospital}
     var tests: [Test] = AppData.tests
     func filterTests() {
         for service in services {
@@ -153,7 +155,10 @@ class PatientHomeTableViewController: UITableViewController,UISearchBarDelegate,
                     return cell
                 }
                 cell.openingTime.text = "From \(hour):00 - \(chour):00"
+                cell.photo.kf.setImage(with: lab.imageDownloadURL)
+                
             }
+            
             
             return cell
         } // for packages
@@ -185,6 +190,7 @@ class PatientHomeTableViewController: UITableViewController,UISearchBarDelegate,
                         return cell
                     }
                     cell.openingTime.text = "From \(hour):00 - \(chour):00"
+                    cell.photo.kf.setImage(with: hospital.imageDownloadURL)
                 }
                 
                 return cell

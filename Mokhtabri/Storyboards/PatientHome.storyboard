@@ -296,6 +296,7 @@
                                     <outlet property="HospitalName" destination="Ona-hD-q8H" id="KCJ-Zh-kMF"/>
                                     <outlet property="location" destination="V3J-Vh-k08" id="JIQ-9A-yzY"/>
                                     <outlet property="openingTime" destination="Jq3-Qw-vBQ" id="hJ9-bW-AGO"/>
+                                    <outlet property="photo" destination="whY-62-Y0P" id="Pzm-qG-IA8"/>
                                     <segue destination="VN1-Il-3Jm" kind="show" id="nCe-d1-ovo"/>
                                 </connections>
                             </tableViewCell>
@@ -568,7 +569,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="VQJ-Bt-x7Z"/>
+        <segue reference="zhV-r1-C5h"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="house.fill" catalog="system" width="128" height="104"/>
