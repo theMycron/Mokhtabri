@@ -15,7 +15,6 @@ class PatientUpdateProfileTableViewController: UITableViewController {
     var check = false;
     
     //declaring elements
-    @IBOutlet weak var usernameField: UITextField!
     @IBOutlet weak var firstnameField: UITextField!
     @IBOutlet weak var lastnameFIeld: UITextField!
     
@@ -43,14 +42,11 @@ class PatientUpdateProfileTableViewController: UITableViewController {
     }
     
     func update() {
-        usernameField.text = patientLog?.username
-        usernameField.textColor = UIColor.black
         firstnameField.text = patientLog?.firstName
         firstnameField.textColor = UIColor.black
         lastnameFIeld.text = patientLog?.lastName
         lastnameFIeld.textColor = UIColor.black
         
-        usernameField.clearsOnBeginEditing = false
         firstnameField.clearsOnBeginEditing = false
         lastnameFIeld.clearsOnBeginEditing = false
     }
@@ -63,14 +59,20 @@ class PatientUpdateProfileTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 3
+        return 2
     }
     
     @IBAction func UpdateBtn(_ sender: Any) {
         if isDataChanged() {
             check = self.checkData()
             if check {
-                confirmation(title: "Update Account", message: "Are you sure you want to update your data?") {                    self.updateProfile()
+                confirmation(title: "Update Account", message: "Are you sure you want to update your data?") {
+                    guard let patientLog = self.patientLog else {
+                        return
+                    }
+                    patientLog.firstName = self.fn
+                    patientLog.lastName = self.ln
+                    AppData.editUser(user: patientLog)
                     AppData.saveData()
                 }
             }
@@ -83,55 +85,24 @@ class PatientUpdateProfileTableViewController: UITableViewController {
         guard let patientLog = patientLog else { return false }
 
         // Fetch current field values
-        let currentUserName = usernameField.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
         let currentFirstName = firstnameField.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
         let currentLastName = lastnameFIeld.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
 
         // Compare with existing data
-        return currentUserName != patientLog.username || currentFirstName != patientLog.firstName || currentLastName != patientLog.lastName
+        return currentFirstName != patientLog.firstName || currentLastName != patientLog.lastName
     }
 
     
-    func updateProfile() {
-        Auth.auth().currentUser?.updateEmail(to: self.userName) { error in
-            if let error = error {
-                self.errorAlert(title: "Update Failed", message: "Failed to update email: \(error.localizedDescription)")
-            } else {
-                self.patientLog?.firstName = self.fn
-                self.patientLog?.lastName = self.ln
-                AppData.saveData()
-                self.errorAlert(title: "Update Successful", message: "Data Changed Successfully.")
-            }
-        }
-    }
-    
     func checkData() -> Bool {
         // take data from the fields
-        userName = usernameField.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
         fn = firstnameField.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
         ln = lastnameFIeld.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
         
-        // for email format
-        let emailFormat = "[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}"
-        let valid = NSPredicate(format: "SELF MATCHES %@", emailFormat)
-        
+
         // check if fields are empty
         if userName.isEmpty || fn.isEmpty || ln.isEmpty {
             errorAlert(title: "Error", message: "Please don't leave any data empty")
             return false
-        }
-
-        if !valid.evaluate(with: userName) {
-            errorAlert(title: "Error", message: "Please enter a valid email")
-            return false
-        }
-
-        // check if email is changed and already in use
-        if userName != loggedInUser?.username {
-            if AppData.getUserFromEmail(email: userName) != nil {
-                errorAlert(title: "Error", message: "Email is already in use")
-                return false
-            }
         }
         
         // validate names

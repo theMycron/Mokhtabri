@@ -46,28 +46,14 @@ class SettingsTableViewController: UITableViewController{
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 6
+        return 5
     }
 
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // Deselect the row after tapping
         tableView.deselectRow(at: indexPath, animated: true)
-        
-        if indexPath.row == 5 {
-            // Show an alert
-            confirmation(title: "Delete Account", message: "Are you sure you want to delete your account?") { [weak self] in
-                let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                guard let viewController = storyboard.instantiateViewController(withIdentifier: "login") as? LoginViewController else {
-                    return
-                }
-                viewController.modalPresentationStyle = .fullScreen
-                self?.present(viewController, animated: true) {
-                    // hide the settings view
-                    self?.navigationController?.viewControllers = [viewController]
-                }
-            }
-        }
+
     }
     
     // for the navigation bar to appear
