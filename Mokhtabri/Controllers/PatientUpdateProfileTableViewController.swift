@@ -100,7 +100,7 @@ class PatientUpdateProfileTableViewController: UITableViewController {
         
 
         // check if fields are empty
-        if userName.isEmpty || fn.isEmpty || ln.isEmpty {
+        if fn.isEmpty || ln.isEmpty {
             errorAlert(title: "Error", message: "Please don't leave any data empty")
             return false
         }
