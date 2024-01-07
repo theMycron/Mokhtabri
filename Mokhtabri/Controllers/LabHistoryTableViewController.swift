@@ -10,7 +10,7 @@ import UIKit
 class LabHistoryTableViewController: UITableViewController, UISearchBarDelegate, UISearchResultsUpdating {
     var loggedInUser: User?
     func updateSearchResults(for searchController: UISearchController) {
-        // let scope = searchController.searchBar.selectedScopeButtonIndex
+        //based on name and medical service name
         guard let term = searchController.searchBar.text?.lowercased() else {
             reloadOriginalData()
             return
@@ -130,9 +130,7 @@ class LabHistoryTableViewController: UITableViewController, UISearchBarDelegate,
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "PatientViewCell", for: indexPath) as! LabBookingTableViewCell
         
-        // Configure the cell...
-        // Assuming your cell has labels named 'patientNameLabel' and 'bookingDateLabel'
-        // let booking = bookings[indexPath.row]
+        //based on the segemnts
         let booking: Booking
         switch selectedSegmentIndex {
         case 0: booking = activeBookings[indexPath.row]
@@ -143,14 +141,13 @@ class LabHistoryTableViewController: UITableViewController, UISearchBarDelegate,
         let patientName = "\(booking.forPatient.firstName) \(booking.forPatient.lastName)"
         let bookingDate = booking.bookingDate
         
-        // Configure your cell's labels with the booking information
+     
         cell.name.text = booking.ofMedicalService.name
         cell.patient.text = patientName
         if let year = bookingDate.year, let month = bookingDate.month, let day = bookingDate.day {
             cell.bookingDate.text = "Booking date: \(year)-\(month)-\(day)"
         } else {
-            // Handle the case where one or more components are nil (optional)
-            cell.bookingDate.text = "Booking date: N/A" // Or any other suitable placeholder
+            cell.bookingDate.text = "Booking date: N/A"
         }
         guard let img = booking.ofMedicalService.photo else{
             return cell
@@ -174,7 +171,7 @@ class LabHistoryTableViewController: UITableViewController, UISearchBarDelegate,
         if (section == 2  || section == 0){
             return 10
         }else{
-            return 44 // Adjust the height as needed
+            return 44
         }}
     
    
@@ -223,9 +220,9 @@ class LabHistoryTableViewController: UITableViewController, UISearchBarDelegate,
         guard let loggedInUser = loggedInUser else{
             return
         }
-        activeBookings = bookings.filter { $0.status == .Active && $0.ofMedicalService.forMedicalFacility == loggedInUser} // Replace .active with your actual status value for active bookings
-        completedBookings = bookings.filter { $0.status == .Completed && $0.ofMedicalService.forMedicalFacility == loggedInUser } // Replace .completed with your actual status value for completed bookings
-        cancelledBookings = bookings.filter { $0.status == .Cancelled && $0.ofMedicalService.forMedicalFacility == loggedInUser} // Replace .cancelled with your actual status value for cancelled bookings
+        activeBookings = bookings.filter { $0.status == .Active && $0.ofMedicalService.forMedicalFacility == loggedInUser}
+        completedBookings = bookings.filter { $0.status == .Completed && $0.ofMedicalService.forMedicalFacility == loggedInUser }
+        cancelledBookings = bookings.filter { $0.status == .Cancelled && $0.ofMedicalService.forMedicalFacility == loggedInUser}
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -258,7 +255,7 @@ class LabHistoryTableViewController: UITableViewController, UISearchBarDelegate,
                     bookingToRemove = self.cancelledBookings[indexPath.row]
                     self.cancelledBookings.remove(at: indexPath.row)
                 default:
-                    return // Or handle default case appropriately
+                    return
                 }
                 // Find the booking in AppData.bookings
                 if let indexInAppData = AppData.listOfBookingsLab.firstIndex(where: { $0.id == bookingToRemove.id }) {

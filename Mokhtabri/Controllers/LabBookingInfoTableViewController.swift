@@ -33,13 +33,14 @@ class LabBookingInfoTableViewController: UITableViewController {
        }
 
     @IBAction func btnPress(_ sender: Any) {
-        // Create the alert controller
+        //call the confirmation
         confirmation(title: "Confirm Completion", message: "do you want to confirm the completion of \(cbooking?.ofMedicalService.name ?? "") test/package"){
             self.updateStatus()
         }
     }
     
     @IBAction func cancelBtn(_ sender: Any) {
+        //call the cancellation
         confirmation(title: "Confirm Cancellation", message: "do you want to confirm the cancellation of \(cbooking?.ofMedicalService.name ?? "") test/package"){
             self.updateStatus2()
         }
@@ -63,7 +64,8 @@ class LabBookingInfoTableViewController: UITableViewController {
     func updateData(){
 
         //take away optionals
-        guard let price = cbooking?.ofMedicalService.price, let status = cbooking?.status,let patientF = cbooking?.forPatient.firstName, let patientL = cbooking?.forPatient.lastName, let openb = cbooking?.ofMedicalService.forMedicalFacility.alwaysOpen, let iden = cbooking?.forPatient.cpr, let city = cbooking?.ofMedicalService.forMedicalFacility.city, let date = cbooking?.bookingDate, let info = cbooking?.ofMedicalService.instructions else {
+        //make sure theres data
+        guard let price = cbooking?.ofMedicalService.price, let status = cbooking?.status,let patientF = cbooking?.forPatient.firstName, let patientL = cbooking?.forPatient.lastName, let openb = cbooking?.ofMedicalService.forMedicalFacility.alwaysOpen, _ = cbooking?.forPatient.cpr, let city = cbooking?.ofMedicalService.forMedicalFacility.city, let date = cbooking?.bookingDate, let info = cbooking?.ofMedicalService.instructions else {
             return
         }
         
@@ -103,6 +105,8 @@ class LabBookingInfoTableViewController: UITableViewController {
         if let priceString = format.string(from: NSNumber(value: price)) {
             priceLabel.text = "\(priceString)"
         }
+        
+        //image is loaded on booking
         guard let img = cbooking?.ofMedicalService.photo else{
             return
         }
@@ -153,7 +157,7 @@ class LabBookingInfoTableViewController: UITableViewController {
         if let index = AppData.bookings.firstIndex(where: { $0.id == cbooking.id }) {
             AppData.bookings[index].status = .Cancelled
         }
-        
+        //cancels it in both lab and patient
         if let index = AppData.listOfBookingsLab.firstIndex(where: { $0.id == cbooking.id }) {
             AppData.listOfBookingsLab[index].status = .Cancelled
         }
