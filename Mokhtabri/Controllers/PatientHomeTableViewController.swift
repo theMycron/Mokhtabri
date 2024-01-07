@@ -73,6 +73,9 @@ class PatientHomeTableViewController: UITableViewController,UISearchBarDelegate,
     func sortDataByPrice(ascending: Bool) {
         switch selectedSegmentIndex {
             // for tests
+        case 0:
+            tests.sort(by: { ascending ? $0.price < $1.price : $0.price > $1.price })
+            packages.sort(by: { ascending ? $0.price < $1.price : $0.price > $1.price })
         case 3:
             tests.sort(by: { ascending ? $0.price < $1.price : $0.price > $1.price })
             // for packages
