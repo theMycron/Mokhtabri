@@ -47,6 +47,17 @@ class PatientHomeTableViewController: UITableViewController,UISearchBarDelegate,
             self.tableView.reloadData()
         }))
         
+        alert.addAction(UIAlertAction(title: "Price Low to High", style: .default, handler: { (action) in
+             self.sortDataByPrice(ascending: true)
+             self.tableView.reloadData()
+         }))
+
+         // Price High to Low
+         alert.addAction(UIAlertAction(title: "Price High to Low", style: .default, handler: { (action) in
+             self.sortDataByPrice(ascending: false)
+             self.tableView.reloadData()
+         }))
+        
         // Option for canceling the action sheet
         alert.addAction(UIAlertAction(title: "Done", style: .cancel, handler: nil))
         
@@ -58,27 +69,48 @@ class PatientHomeTableViewController: UITableViewController,UISearchBarDelegate,
         // Present the action sheet
         self.present(alert, animated: true)
     }
-
     
-    func sortDataAlphabetically() {
-        // Add your sorting logic here based on the selectedSegmentIndex
+    func sortDataByPrice(ascending: Bool) {
         switch selectedSegmentIndex {
-        // Sort hospitals
-        case 0:
-            hospitals.sort(by: { $0.name < $1.name })
-        // Sort labs
-        case 1:
-            labs.sort(by: { $0.name < $1.name })
-        // Sort tests
-        case 2:
-            tests.sort(by: { $0.name < $1.name })
-            // Sort packages
+            // for tests
         case 3:
-            packages.sort(by: { $0.name < $1.name })
+            tests.sort(by: { ascending ? $0.price < $1.price : $0.price > $1.price })
+            // for packages
+        case 4:
+            packages.sort(by: { ascending ? $0.price < $1.price : $0.price > $1.price })
         default:
             break
         }
     }
+
+
+    
+    func sortDataAlphabetically() {
+        switch selectedSegmentIndex {
+            // for all
+        case 0:
+            hospitals.sort(by: { $0.name < $1.name })
+            labs.sort(by: { $0.name < $1.name })
+            tests.sort(by: { $0.name < $1.name })
+            packages.sort(by: { $0.name < $1.name })
+            // for hospitals
+        case 1:
+            hospitals.sort(by: { $0.name < $1.name })
+            // for labs
+        case 2:
+            labs.sort(by: { $0.name < $1.name })
+            //for tests
+        case 3:
+            tests.sort(by: { $0.name < $1.name })
+            // for packages
+        case 4:
+            packages.sort(by: { $0.name < $1.name })
+        default:
+            break
+        }
+        tableView.reloadData()
+    }
+
 
     
     func updateSearchResults(for searchController: UISearchController) {
