@@ -24,11 +24,70 @@ class PatientHomeTableViewController: UITableViewController,UISearchBarDelegate,
         //filterHospital()
     }
     
+  /*  guard let term = searchController.searchBar.text?.lowercased() else {
+        reloadOriginalData()
+        return
+    }
+    if term.isEmpty {
+        reloadOriginalData()
+    } else {
+        switch selectedSegmentIndex {
+        case 0:
+            activeBookings = activeBookings.filter{
+                $0.forPatient.name.lowercased().contains(term) || $0.ofMedicalService.name.lowercased().contains(term)
+            }
+            
+        case 1:                 completedBookings = completedBookings.filter{
+            $0.forPatient.name.lowercased().contains(term) || $0.ofMedicalService.name.lowercased().contains(term)
+        }
+        case 2: cancelledBookings = cancelledBookings.filter{
+            $0.forPatient.name.lowercased().contains(term) || $0.ofMedicalService.name.lowercased().contains(term)
+        }            default:
+            break
+        }
+    }
+    tableView.reloadData()*/
     
     func updateSearchResults(for searchController: UISearchController) {
+        guard let term = searchController.searchBar.text?.lowercased() else {
+            reCategorize()
+            tableView.reloadData()
+            return
+        }
+        if term.isEmpty {
+            reCategorize()
+            tableView.reloadData()
+        } else {
+            switch selectedSegmentIndex {
+            case 0: tests = tests.filter{
+                $0.name.lowercased().contains(term) || $0.forMedicalFacility.name.lowercased().contains(term)}
+                packages = packages.filter{$0.name.lowercased().contains(term) || $0.forMedicalFacility.name.lowercased().contains(term)}
+                hospitals = hospitals.filter{$0.name.lowercased().contains(term) || $0.city.lowercased().contains(term)}
+                labs = labs.filter{
+                    $0.name.lowercased().contains(term) || $0.city.lowercased().contains(term)
+                }
+            case 1:   hospitals = hospitals.filter{$0.name.lowercased().contains(term) || $0.city.lowercased().contains(term)}
+            case 2:                 labs = labs.filter{
+                $0.name.lowercased().contains(term) || $0.city.lowercased().contains(term)
+            }
+            case 3: tests = tests.filter{
+                $0.name.lowercased().contains(term) || $0.forMedicalFacility.name.lowercased().contains(term)}
+            case 4:                 packages = packages.filter{$0.name.lowercased().contains(term) || $0.forMedicalFacility.name.lowercased().contains(term)}
+                
+                
+            default: break
+            }
+            }
         
+        tableView.reloadData()
+        }
+    
+    func reCategorize(){
+         labs = AppData.facilities.filter{$0.type == FacilityType.lab}
+        hospitals = AppData.facilities.filter{$0.type == FacilityType.hospital}
+        tests = AppData.tests
+        packages = AppData.packages
     }
-
     
     @IBAction func segmentClick2(_ sender: UISegmentedControl) {
         selectedSegmentIndex = sender.selectedSegmentIndex
