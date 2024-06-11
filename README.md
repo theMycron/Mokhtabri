@@ -9,6 +9,8 @@ This app was made by:
 - 202101800 Maryam Aleskafi
 - 202103422 Noora Qasim
 
+<img width="509" alt="Labs page" src="https://github.com/theMycron/Mokhtabri/assets/134844972/b81c23b7-a090-456c-a408-480c4585735e">
+
 # Setting up the Project
 The project was designed to run on iPhone 14 Pro and iPad Pro 12.9-inch.
 
@@ -37,6 +39,15 @@ Firebase Auth was used for authenticating user emails and passwords.
 - Sample Patient (Fatema)
    - Email: hamoodhaboob@gmail.com
    - Password: 12345678
+
+# Screenshots
+
+<img width="509" alt="Screenshot 2024-06-10 at 11 52 29ΓÇ»PM" src="https://github.com/theMycron/Mokhtabri/assets/134844972/f1985ff8-288c-4987-b612-84d2f46a4041">
+<img width="509" alt="Screenshot 2024-06-10 at 11 56 33ΓÇ»PM" src="https://github.com/theMycron/Mokhtabri/assets/134844972/5e2b50a3-f177-4e37-b802-3b8c5e5009bc">
+<img width="509" alt="Screenshot 2024-06-10 at 11 57 19ΓÇ»PM" src="https://github.com/theMycron/Mokhtabri/assets/134844972/613e5007-98be-4b38-aa10-4ccbce9dea7a">
+<img width="509" alt="Screenshot 2024-06-11 at 12 03 47ΓÇ»AM" src="https://github.com/theMycron/Mokhtabri/assets/134844972/292336ce-eb10-4faf-80ce-7eb82180221a">
+<img width="509" alt="Screenshot 2024-06-11 at 12 03 55ΓÇ»AM" src="https://github.com/theMycron/Mokhtabri/assets/134844972/259e38fd-4825-455a-a1a8-e24b0de5c250">
+<img width="509" alt="Screenshot 2024-06-11 at 12 05 34ΓÇ»AM" src="https://github.com/theMycron/Mokhtabri/assets/134844972/81ca4a7d-05e2-4bf6-a7cd-0d8fbb71bb2a">
 
 
 # List of Features and Changes from Prototype
